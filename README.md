@@ -20,20 +20,23 @@ The classification structure is preserved.
 
 ## Screen output
 
-`
-#  3607
-[International]
-#  3608
- + http://www.discoverthenetworks.org/group.asp 200
-#  3609
- X http://www.frontpagemag.com/
-`
+`>  3607`
+
+`[International]`
+
+`>  3608`
+
+` + http://www.discoverthenetworks.org/group.asp 200`
+
+`>  3609`
+
+` X http://www.frontpagemag.com/`
 
 Above three entries in the bookmark file are shown:
 
-# indicates the id in the bookmark input file
+**>** indicates the id in the bookmark input file
 
-+ indicates site responded (200 code here)
+**+** indicates what site responded (200 code here)
 
-X means site is unreachable
+**X** means site is unreachable
 

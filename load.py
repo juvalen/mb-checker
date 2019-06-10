@@ -21,7 +21,7 @@ fileHTTPError = open(FILEHTTPERROR,"w")
 fileReachable = open(FILEREACHABLE,"w")
 
 for dict in bookmark_data:
-    print "#  " + str(dict["id"])
+    print ">  " + str(dict["id"])
     if "url" in dict:
 # Try here to access that URL
 #        print " U " + str(dict["url"])
@@ -29,22 +29,22 @@ for dict in bookmark_data:
             webUrl = urllib2.urlopen(str(dict["url"]))
         except urllib2.HTTPError:
             print " X " + str(dict["url"]) 
-            fileHTTPError.write(lastTitle) 
-            fileHTTPError.write(str(dict["url"]))
+            fileHTTPError.write(lastTitle + "\n")
+            fileHTTPError.write(str(dict["url"]) + "\n")
         except urllib2.URLError:
-            print " X " + str(dict["url"]) 
-            fileURLError.write(lastTitle) 
-            fileURLError.write(str(dict["url"]))
+            print " X " + str(dict["url"] + "\n") 
+            fileURLError.write(lastTitle + "\n") 
+            fileURLError.write(str(dict["url"]) + "\n")
         else:
             result = webUrl.getcode()
             print " + " + webUrl.url + " " + str(result)
-            fileReachable.write(str(dict["url"]))
+            fileReachable.write(str(dict["url"]) + "\n")
             webUrl.close()
 # It is only a bookmark folder
     else:
         lastTitle = "[" + dict["title"] + "]"
-        print lastTitle + "\n"
-        fileReachable.write(lastTitle) 
+        print  "\n" + lastTitle
+        fileReachable.write("\n" + lastTitle) 
 # Bookmark is just a folder
 
 fileError.close()
