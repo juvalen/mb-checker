@@ -3,7 +3,8 @@ import os
 import urllib2
 
 INPUTFILE = "./chrome_bookmarks.json"
-FILEERROR = "output/error.log"
+FILEURLERROR = "output/URLerror.log"
+FILEHTTPERROR = "output/HTTPerror.log"
 FILEREACHABLE = "output/reachable.log"
 
 input_filename = open(INPUTFILE, "r")
@@ -15,7 +16,8 @@ elements = len(bookmark_data)
 print "Checking" + str(elements) + "entries in bookmark data"
 
 # Defining output files
-fileError = open(FILEERROR,"w")
+fileURLError = open(FILEURLERROR,"w")
+fileHTTPError = open(FILEHTTPERROR,"w")
 fileReachable = open(FILEREACHABLE,"w")
 
 for dict in bookmark_data:
@@ -27,8 +29,12 @@ for dict in bookmark_data:
             webUrl = urllib2.urlopen(str(dict["url"]))
         except urllib2.HTTPError:
             print " X " + str(dict["url"]) 
-            fileError.write(lastTitle) 
-            fileError.write(str(dict["url"]))
+            fileHTTPError.write(lastTitle) 
+            fileHTTPError.write(str(dict["url"]))
+        except urllib2.URLError:
+            print " X " + str(dict["url"]) 
+            fileURLError.write(lastTitle) 
+            fileURLError.write(str(dict["url"]))
         else:
             result = webUrl.getcode()
             print " + " + webUrl.url + " " + str(result)
@@ -37,6 +43,9 @@ for dict in bookmark_data:
 # It is only a bookmark folder
     else:
         lastTitle = "[" + dict["title"] + "]"
-        print lastTitle
+        print lastTitle + "\n"
         fileReachable.write(lastTitle) 
 # Bookmark is just a folder
+
+fileError.close()
+fileReachable.close()
