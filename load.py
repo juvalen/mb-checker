@@ -25,8 +25,9 @@ for dict in bookmark_data:
 # Try here to access that URL
         url = dict["url"]
         try:
-            req = requests.get(url)
-        except requests.exceptions.RequestException:
+            req = requests.get(url, timeout=10)
+# Attends all & timeout
+        except:
             print(" X ", str(url), end="")
             fileError.write(str(url) + "\n")
         else:
