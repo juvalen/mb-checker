@@ -92,38 +92,6 @@
 	"parentId": "3576",
 	"title": "Azu"
 },{
-	"id": 3588,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 0,
-	"parentId": "3587",
-	"title": "Sofas en Madrid de Fama modelo Hugo",
-	"url": "http://sofaslasrozas.com/sofas-de-tela/sofa-de-tela-modelo-hugo-fama-16.html"
-},{
-	"id": 3589,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 1,
-	"parentId": "3587",
-	"title": "Muebles baratos online, tienda de sofás baratos y venta de dormitorios -",
-	"url": "http://ventamueblesonline.es/"
-},{
-	"id": 3590,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 2,
-	"parentId": "3587",
-	"title": "Sofa cama - Sofas - Salones - Kenay Home",
-	"url": "http://kenayhome.com/6977-lambet-sofa-cama.html"
-},{
-	"id": 3591,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 3,
-	"parentId": "3587",
-	"title": "Sofá cama Luna de HOME",
-	"url": "http://www.latiendahome.com/sofa-cama-luna-de-home-1688.html?P=sofasteladynamiccontextual&opId=YToyOntpOjE7czo0OiIxODM5IjtpOjM2O3M6NDoiMTgzMyI7fQ==&gclid=CMKdmPf-4dACFQ5sGwodUmQFeg"
-},{
 	"id": 3592,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.779Z",
@@ -957,6 +925,14 @@
 	"parentId": "3634",
 	"title": "Arriba",
 	"url": "http://www.arriba-lfu.com/"
+},{
+	"id": 3695,
+	"dateAddedLocal": "11/2/2017, 11:54:20 AM",
+	"dateAddedUTC": "2017-11-02T10:54:20.000Z",
+	"index": 60,
+	"parentId": "3634",
+	"title": "Por Andalucía Libre - Revista Digital Crítica",
+	"url": "https://porandalucialibre.es/"
 },{
 	"id": 3696,
 	"dateAddedLocal": "11/2/2017, 11:54:20 AM",
@@ -4954,10 +4930,33 @@
 	"title": "Mai Thaicenter, indice",
 	"url": "http://www.mai-thaicenter.com/"
 },{
+	"id": 4472,
+	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
+	"dateAddedUTC": "2019-04-12T07:20:58.827Z",
+	"index": 28,
+	"parentId": "3801",
+	"title": "Marachain"
+},{
+	"id": 4473,
+	"dateAddedLocal": "12/31/2018, 4:15:58 PM",
+	"dateAddedUTC": "2018-12-31T15:15:58.000Z",
+	"index": 0,
+	"parentId": "4472",
+	"title": "MARAChain | Secure Exchange of Digital Documents",
+	"url": "https://www.marachain.eu/"
+},{
+	"id": 4474,
+	"dateAddedLocal": "12/31/2018, 4:50:27 PM",
+	"dateAddedUTC": "2018-12-31T15:50:27.000Z",
+	"index": 1,
+	"parentId": "4472",
+	"title": "MARAChain | Secure Exchange of Digital Documents",
+	"url": "https://www.marachain.eu/#contact"
+},{
 	"id": 4195,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.812Z",
-	"index": 28,
+	"index": 29,
 	"parentId": "3801",
 	"title": "Mascotas"
 },{
@@ -5068,7 +5067,7 @@
 	"id": 4209,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.812Z",
-	"index": 29,
+	"index": 30,
 	"parentId": "3801",
 	"title": "Medicontigo"
 },{
@@ -5091,7 +5090,7 @@
 	"id": 4212,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.812Z",
-	"index": 30,
+	"index": 31,
 	"parentId": "3801",
 	"title": "NODO"
 },{
@@ -5287,7 +5286,7 @@
 	"id": 4237,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.814Z",
-	"index": 31,
+	"index": 32,
 	"parentId": "3801",
 	"title": "Olimpia"
 },{
@@ -5378,7 +5377,7 @@
 	"id": 4249,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.814Z",
-	"index": 32,
+	"index": 33,
 	"parentId": "3801",
 	"title": "Piedra"
 },{
@@ -5417,7 +5416,7 @@
 	"id": 4254,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.814Z",
-	"index": 33,
+	"index": 34,
 	"parentId": "3801",
 	"title": "Pilas"
 },{
@@ -5495,7 +5494,7 @@
 	"id": 4264,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.815Z",
-	"index": 34,
+	"index": 35,
 	"parentId": "3801",
 	"title": "Q2"
 },{
@@ -5526,7 +5525,7 @@
 	"id": 4268,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.815Z",
-	"index": 35,
+	"index": 36,
 	"parentId": "3801",
 	"title": "Rimming"
 },{
@@ -5677,7 +5676,7 @@
 	"id": 4287,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.816Z",
-	"index": 36,
+	"index": 37,
 	"parentId": "3801",
 	"title": "SOC"
 },{
@@ -5732,7 +5731,7 @@
 	"id": 4294,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.817Z",
-	"index": 37,
+	"index": 38,
 	"parentId": "3801",
 	"title": "SOx"
 },{
@@ -5771,7 +5770,7 @@
 	"id": 4299,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.817Z",
-	"index": 38,
+	"index": 39,
 	"parentId": "3801",
 	"title": "SINIVIH"
 },{
@@ -5826,7 +5825,7 @@
 	"id": 4306,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.817Z",
-	"index": 39,
+	"index": 40,
 	"parentId": "3801",
 	"title": "S&C"
 },{
@@ -5982,7 +5981,7 @@
 	"id": 4326,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.818Z",
-	"index": 40,
+	"index": 41,
 	"parentId": "3801",
 	"title": "SUM"
 },{
@@ -6432,7 +6431,7 @@
 	"id": 4383,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.821Z",
-	"index": 41,
+	"index": 42,
 	"parentId": "3801",
 	"title": "tinajas"
 },{
@@ -6463,7 +6462,7 @@
 	"id": 4387,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.821Z",
-	"index": 42,
+	"index": 43,
 	"parentId": "3801",
 	"title": "Torre-->Caserio"
 },{
@@ -6936,7 +6935,7 @@
 	"id": 4447,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.826Z",
-	"index": 43,
+	"index": 44,
 	"parentId": "3801",
 	"title": "TMA"
 },{
@@ -6975,7 +6974,7 @@
 	"id": 4452,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.826Z",
-	"index": 44,
+	"index": 45,
 	"parentId": "3801",
 	"title": "UCMTA"
 },{
@@ -7114,7 +7113,7 @@
 	"id": 4470,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.827Z",
-	"index": 45,
+	"index": 46,
 	"parentId": "3801",
 	"title": "Vida"
 },{
@@ -7125,29 +7124,6 @@
 	"parentId": "4470",
 	"title": "El falso atractivo de la teoría de la Selección de grupos | Blogs El Espectador",
 	"url": "http://blogs.elespectador.com/actualidad/catrecillo/falso-atractivo-la-teoria-la-seleccion-grupos/amp"
-},{
-	"id": 4472,
-	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
-	"dateAddedUTC": "2019-04-12T07:20:58.827Z",
-	"index": 46,
-	"parentId": "3801",
-	"title": "Marachain"
-},{
-	"id": 4473,
-	"dateAddedLocal": "12/31/2018, 4:15:58 PM",
-	"dateAddedUTC": "2018-12-31T15:15:58.000Z",
-	"index": 0,
-	"parentId": "4472",
-	"title": "MARAChain | Secure Exchange of Digital Documents",
-	"url": "https://www.marachain.eu/"
-},{
-	"id": 4474,
-	"dateAddedLocal": "12/31/2018, 4:50:27 PM",
-	"dateAddedUTC": "2018-12-31T15:50:27.000Z",
-	"index": 1,
-	"parentId": "4472",
-	"title": "MARAChain | Secure Exchange of Digital Documents",
-	"url": "https://www.marachain.eu/#contact"
 },{
 	"id": 4475,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
@@ -17698,6 +17674,30 @@
 	"parentId": "5772",
 	"title": "API Integration in Python – Part 1 – Real Python",
 	"url": "https://realpython.com/api-integration-in-python/"
+},{
+	"id": 7349,
+	"dateAddedLocal": "6/10/2019, 9:11:56 AM",
+	"dateAddedUTC": "2019-06-10T07:11:56.322Z",
+	"index": 10,
+	"parentId": "5772",
+	"title": "Python 2 VS Python 3 - Version Differences & Which You Should Learn",
+	"url": "https://coderseye.com/python-2-vs-python-3-version-differences"
+},{
+	"id": 7350,
+	"dateAddedLocal": "6/10/2019, 9:21:52 AM",
+	"dateAddedUTC": "2019-06-10T07:21:52.583Z",
+	"index": 11,
+	"parentId": "5772",
+	"title": "19.2. json — JSON encoder and decoder — Python 3.5.7 documentation",
+	"url": "https://docs.python.org/3.5/library/json.html#json.load"
+},{
+	"id": 7351,
+	"dateAddedLocal": "6/10/2019, 3:08:26 PM",
+	"dateAddedUTC": "2019-06-10T13:08:26.840Z",
+	"index": 12,
+	"parentId": "5772",
+	"title": "20.6. urllib2 — extensible library for opening URLs — Python 2.7.16 documentation",
+	"url": "https://docs.python.org/2.7/library/urllib2.html"
 },{
 	"id": 5785,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",

@@ -36,11 +36,11 @@ The classification structure is preserved.
 
 `>  3608`
 
-` + http://www.discoverthenetworks.org/group.asp 200`
+ ` + http://www.discoverthenetworks.org/group.asp 200`
 
 `>  3609`
 
-` X http://www.frontpagemag.com/`
+ ` X http://www.frontpagemag.com/`
 
 Above three entries in the bookmark file are shown:
 

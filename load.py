@@ -1,5 +1,6 @@
 import json
 import os
+import urllib
 import urllib2
 
 INPUTFILE = "./chrome_bookmarks.json"
@@ -33,14 +34,11 @@ for dict in bookmark_data:
             print " X " + str(dict["url"]) 
             fileHTTPError.write(lastTitle + "\n")
             fileHTTPError.write(str(dict["url"]) + "\n")
-        except urllib2.URLError:
-            print " X " + str(dict["url"] + "\n") 
+        except urllib2.URLError, e:
+            reason = str(e.reason)
+            print " X " + str(dict["url"]) + " " + reason + "\n"
             fileURLError.write(lastTitle + "\n") 
-            fileURLError.write(str(dict["url"]) + "\n")
-        except urllib2.CertificateError:
-            print " X " + str(dict["url"] + "\n") 
-            fileCertificate.write(lastTitle + "\n") 
-            fileCertificate.write(str(dict["url"]) + "\n")
+            fileURLError.write(str(dict["url"]) + " " + reason + "\n")
         else:
             result = webUrl.getcode()
             print " + " + webUrl.url + " " + str(result)
@@ -49,9 +47,8 @@ for dict in bookmark_data:
 # It is only a bookmark folder
     else:
         lastTitle = "[" + dict["title"] + "]"
-        print  "\n" + lastTitle
-        fileReachable.write("\n" + lastTitle) 
-# Bookmark is just a folder
+        print  lastTitle
+        fileReachable.write(lastTitle) 
 
 fileError.close()
 fileReachable.close()
