@@ -8,6 +8,16 @@ Having *urllib2* module installed:
 
 `pip install urllib2`
 
+## Usage
+
+Clone this repository into a directory
+
+Export your bookmarks in **json** format to a file named `chrome_bookmarks.json` in same directory
+
+Run `python2 load.py`
+
+let it finish and result files will appear in _output_ directory
+
 ## Input file
 File has to be exported from Chrome using Export History/Bookmarks plugin to a file with JSON extension and name `chrome_bookmarks.json`
 

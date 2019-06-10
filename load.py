@@ -6,6 +6,7 @@ INPUTFILE = "./chrome_bookmarks.json"
 FILEURLERROR = "output/URLerror.log"
 FILEHTTPERROR = "output/HTTPerror.log"
 FILEREACHABLE = "output/reachable.log"
+FILECERTIFICATE = "output/CertificateError"
 
 input_filename = open(INPUTFILE, "r")
 bookmark_data = json.load(input_filename)
@@ -19,6 +20,7 @@ print "Checking" + str(elements) + "entries in bookmark data"
 fileURLError = open(FILEURLERROR,"w")
 fileHTTPError = open(FILEHTTPERROR,"w")
 fileReachable = open(FILEREACHABLE,"w")
+fileCertificate = open(FILECERTIFICATE,"w")
 
 for dict in bookmark_data:
     print ">  " + str(dict["id"])
@@ -35,6 +37,10 @@ for dict in bookmark_data:
             print " X " + str(dict["url"] + "\n") 
             fileURLError.write(lastTitle + "\n") 
             fileURLError.write(str(dict["url"]) + "\n")
+        except urllib2.CertificateError:
+            print " X " + str(dict["url"] + "\n") 
+            fileCertificate.write(lastTitle + "\n") 
+            fileCertificate.write(str(dict["url"]) + "\n")
         else:
             result = webUrl.getcode()
             print " + " + webUrl.url + " " + str(result)
