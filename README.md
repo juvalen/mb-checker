@@ -1,5 +1,5 @@
 # Bookmark cleansing
-I have been gathering and classifying bookmarks for more than 20 years. Some out of those bookmarks -a few thousand- actually outdated. When this python script is fed with a Chrome bookmark file it crawls it and tries to reach each one. As a result it generates a file with all the 404 http errors and another with the successfull ones.
+I have been gathering and classifying bookmarks for more than 20 years. From time to time I hit some outdated bookmark. In order to have that file updated there is this script. When this python script is fed with a Chrome bookmark file it crawls it and tries to reach each bookmark. As a result it generates files with different kind of errors and another file with the successfull ones.
 
 ## Requirements
 python 2
@@ -40,13 +40,19 @@ The classification structure is preserved.
 
 `>  3609`
 
- ` X http://www.frontpagemag.com/`
+ ` H http://www.frontpagemag.com/`
 
-Above three entries in the bookmark file are shown:
+`>  3695`
+
+ `X https://porandalucialibre.es/ [Errno 111] Connection refused`
+
+Above log for four bookmark entries are shown:
 
 **>** indicates the id in the bookmark input file
 
 **+** indicates what site responded (200 code here)
 
-**X** means site is unreachable
+**H** means site has some HTTP error
+
+**X** means page not found
 
