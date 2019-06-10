@@ -4,7 +4,7 @@ I have been gathering and classifying bookmarks for more than 20 years. From tim
 ## Requirements
 python 3
 
-Having *urllib2* module installed:
+Having *requests* module installed:
 
 `pip install requests`
 
@@ -44,7 +44,7 @@ The classification structure is preserved.
 
 `>  3695`
 
- `X https://porandalucialibre.es/ [Errno 111] Connection refused`
+ ` X https://porandalucialibre.es/ [Errno 111] Connection refused`
 
 Above log for four bookmark entries are shown:
 
@@ -54,5 +54,5 @@ Above log for four bookmark entries are shown:
 
 **H** means site has some HTTP error
 
-**X** means page not found
+**X** means content unaccessible
 

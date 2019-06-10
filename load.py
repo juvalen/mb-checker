@@ -3,9 +3,8 @@ import os
 import requests
 
 INPUTFILE = "./chrome_bookmarks.json"
-FILEURLERROR = "output/URLerror.log"
-FILEHTTPERROR = "output/HTTPerror.log"
-FILEREACHABLE = "output/reachable.log"
+FILEURLERROR = "output/URLerror.json"
+FILEOK = "output/OK.json"
 
 input_filename = open(INPUTFILE, "r")
 bookmark_data = json.load(input_filename)
@@ -13,40 +12,35 @@ input_filename.close()
 
 # Compute number of elements, including categories and end nodes
 elements = len(bookmark_data)
-print("Checking" + str(elements) + "entries in bookmark data")
+print("Checking ", str(elements), " entries in bookmark data")
 
 # Defining output files
 fileURLError = open(FILEURLERROR,"w")
-fileHTTPError = open(FILEHTTPERROR,"w")
-fileReachable = open(FILEREACHABLE,"w")
+fileOK = open(FILEOK,"w")
 
 for dict in bookmark_data:
-    print(">  " + str(dict["id"]))
+    id = str(dict["id"])
+    print(">  ", id)
     if "url" in dict:
 # Try here to access that URL
-        print(' + ', dict["url"], end=" ")
+        url = dict["url"]
         try:
-            req = requests.get(dict["url"])
-        except req.HTTPError:
-            print(" H " + str(dict["url"]))
-            fileHTTPError.write(lastTitle + "\n")
-            fileHTTPError.write(str(dict["url"]) + "\n")
-        except req.URLError:
-            print(" X " + str(dict["url"]) + "\n")
-            fileURLError.write(lastTitle + "\n") 
-            fileURLError.write(str(dict["url"]) + "\n")
-        except req.ConnectionRefusedError:
-            print(" U " + str(dict["url"]) + "\n")
-            fileReachable.write(lastTitle + "\n") 
-            fileReachable.write(str(dict["url"]) + "\n")
+            req = requests.get(url)
+        except requests.exceptions.RequestException:
+            print(" X ", str(url), end="")
+            fileURLError.write(str(url) + "\n")
         else:
+            print(" + ", str(url), end=" ")
             status = req.status_code
             print(str(status))
+            fileOK.write(str(url) + "\n")
 # When it is only a bookmark folder
     else:
-        lastTitle = "[" + dict["title"] + "]"
+        title = dict["title"]
+        lastTitle = "[" + title + "]"
         print(lastTitle)
-        fileReachable.write(lastTitle) 
+        fileURLError.write(lastTitle + "\n") 
+        fileOK.write(lastTitle + "\n") 
 
 fileError.close()
 fileReachable.close()
