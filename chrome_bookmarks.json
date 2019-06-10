@@ -61,18 +61,10 @@
 	"title": "Comidas por encargo » El Puchero de mamá",
 	"url": "http://elpucherodemama.com/"
 },{
-	"id": 3584,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 6,
-	"parentId": "3577",
-	"title": "Lorena Lleó Gavara en Madrid - OVB Allfinanz España S.A.",
-	"url": "http://www.ovb.es/empresa-ovb-espana/delegaciones-ovb/lorena-lleo-gavara-en-madrid.html"
-},{
 	"id": 3585,
 	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
 	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 7,
+	"index": 6,
 	"parentId": "3577",
 	"title": "Advertising Campaigns with Social Media Influencers. SocialPubli.com",
 	"url": "https://socialpubli.com/"
@@ -80,10 +72,34 @@
 	"id": 3586,
 	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
 	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 8,
+	"index": 7,
 	"parentId": "3577",
 	"title": "Factoo - Nuevas formas de trabajar",
 	"url": "https://factoo.es/"
+},{
+	"id": 7342,
+	"dateAddedLocal": "6/9/2019, 9:35:13 PM",
+	"dateAddedUTC": "2019-06-09T19:35:13.587Z",
+	"index": 8,
+	"parentId": "3577",
+	"title": "Los Freelances están en Malt",
+	"url": "https://www.malt.es/"
+},{
+	"id": 7344,
+	"dateAddedLocal": "6/9/2019, 9:44:03 PM",
+	"dateAddedUTC": "2019-06-09T19:44:03.767Z",
+	"index": 9,
+	"parentId": "3577",
+	"title": "Mis proyectos | Freelancer",
+	"url": "https://m.freelancer.es/my-projects"
+},{
+	"id": 7352,
+	"dateAddedLocal": "6/10/2019, 4:39:32 PM",
+	"dateAddedUTC": "2019-06-10T14:39:32.303Z",
+	"index": 10,
+	"parentId": "3577",
+	"title": "TARJETA PROFESIONAL DE LA CONSTRUCCION - TPC Electricidad",
+	"url": "https://www.curso-tpc.es/cursos-tpc/tpc-electricidad/"
 },{
 	"id": 3587,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
@@ -91,38 +107,6 @@
 	"index": 1,
 	"parentId": "3576",
 	"title": "Azu"
-},{
-	"id": 3588,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 0,
-	"parentId": "3587",
-	"title": "Sofas en Madrid de Fama modelo Hugo",
-	"url": "http://sofaslasrozas.com/sofas-de-tela/sofa-de-tela-modelo-hugo-fama-16.html"
-},{
-	"id": 3589,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 1,
-	"parentId": "3587",
-	"title": "Muebles baratos online, tienda de sofás baratos y venta de dormitorios -",
-	"url": "http://ventamueblesonline.es/"
-},{
-	"id": 3590,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 2,
-	"parentId": "3587",
-	"title": "Sofa cama - Sofas - Salones - Kenay Home",
-	"url": "http://kenayhome.com/6977-lambet-sofa-cama.html"
-},{
-	"id": 3591,
-	"dateAddedLocal": "11/2/2017, 11:54:14 AM",
-	"dateAddedUTC": "2017-11-02T10:54:14.000Z",
-	"index": 3,
-	"parentId": "3587",
-	"title": "Sofá cama Luna de HOME",
-	"url": "http://www.latiendahome.com/sofa-cama-luna-de-home-1688.html?P=sofasteladynamiccontextual&opId=YToyOntpOjE7czo0OiIxODM5IjtpOjM2O3M6NDoiMTgzMyI7fQ==&gclid=CMKdmPf-4dACFQ5sGwodUmQFeg"
 },{
 	"id": 3592,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
@@ -1878,29 +1862,6 @@
 	"title": "[ Iberia Empleo ]",
 	"url": "https://portal.iberia.es/iberiaEmpleo/#"
 },{
-	"id": 7343,
-	"dateAddedLocal": "6/9/2019, 9:35:40 PM",
-	"dateAddedUTC": "2019-06-09T19:35:40.766Z",
-	"index": 18,
-	"parentId": "3576",
-	"title": "Freelance"
-},{
-	"id": 7342,
-	"dateAddedLocal": "6/9/2019, 9:35:13 PM",
-	"dateAddedUTC": "2019-06-09T19:35:13.587Z",
-	"index": 0,
-	"parentId": "7343",
-	"title": "Los Freelances están en Malt",
-	"url": "https://www.malt.es/"
-},{
-	"id": 7344,
-	"dateAddedLocal": "6/9/2019, 9:44:03 PM",
-	"dateAddedUTC": "2019-06-09T19:44:03.767Z",
-	"index": 1,
-	"parentId": "7343",
-	"title": "Mis proyectos | Freelancer",
-	"url": "https://m.freelancer.es/my-projects"
-},{
 	"id": 3801,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.791Z",
@@ -2058,18 +2019,10 @@
 	"title": "Hotel Bendinat, Portal Nous, Mallorca, hotel Bendinat mit Charakter, Hotel Bendinat Majorca in Portal Nous, Hotel Bendinat Hotel",
 	"url": "http://www.hotelbendinat.es/home/default.aspx"
 },{
-	"id": 3821,
-	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
-	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 12,
-	"parentId": "3808",
-	"title": "Hotel H10 Punta Negra | Mallorca",
-	"url": "http://hoteles.hotelopia.es/hotel-h10-punta-negra_mallorca.html"
-},{
 	"id": 3822,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 13,
+	"index": 12,
 	"parentId": "3808",
 	"title": ": : : CARPAS JAIMA : : : Jaimas Arabes - Carpa tipo haima",
 	"url": "http://www.jaimas.net/"
@@ -2077,7 +2030,7 @@
 	"id": 3823,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 14,
+	"index": 13,
 	"parentId": "3808",
 	"title": "Hotel H10 Gran Tinerfe | Tenerife",
 	"url": "http://hoteles.hotelopia.es/hotel-h10-gran-tinerfe_tenerife.html"
@@ -2085,7 +2038,7 @@
 	"id": 3824,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 15,
+	"index": 14,
 	"parentId": "3808",
 	"title": "Hotel Occidental Grand Fuerteventura - Pajara - España",
 	"url": "http://www.splendia.com/es/hotel/?hotel_id=33552#map"
@@ -2093,7 +2046,7 @@
 	"id": 3825,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 16,
+	"index": 15,
 	"parentId": "3808",
 	"title": "Discover the Basics of How to Build a Pergola",
 	"url": "http://www.home-improvement-and-financing.com/how-to-build-a-pergola.html"
@@ -2101,7 +2054,7 @@
 	"id": 3826,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 17,
+	"index": 16,
 	"parentId": "3808",
 	"title": "Jadrolinija Coastal Ferry Schedule",
 	"url": "http://www.croatiatraveller.com/ferries/coastal_ferries.htm"
@@ -2109,7 +2062,7 @@
 	"id": 3827,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 18,
+	"index": 17,
 	"parentId": "3808",
 	"title": "Hoteles Económicos - Busca y reserva tu hotel en Hotelopia",
 	"url": "http://www.hotelopia.es/search.jsp?indiceGP=0"
@@ -2117,7 +2070,7 @@
 	"id": 3828,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 19,
+	"index": 18,
 	"parentId": "3808",
 	"title": "Vuelo + Hotel en Rumbo",
 	"url": "http://www.rumbo.es/dynamic/vuelos/flightHotelSpider.do"
@@ -2125,7 +2078,7 @@
 	"id": 3829,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.793Z",
-	"index": 20,
+	"index": 19,
 	"parentId": "3808",
 	"title": "tinajas"
 },{
@@ -2156,7 +2109,7 @@
 	"id": 3833,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.794Z",
-	"index": 21,
+	"index": 20,
 	"parentId": "3808",
 	"title": "traviesas"
 },{
@@ -2192,18 +2145,10 @@
 	"title": "Pilas/maceteros de piedra o marmor antiguas/ ruedas de carros/ suelo de barro / molinos",
 	"url": "http://www.habitamos.com/post/3147638/pilasmaceteros_de_piedra_o_marmor_antiguas_ruedas"
 },{
-	"id": 3838,
-	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
-	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 22,
-	"parentId": "3808",
-	"title": ".:: INSTITUTO GABRIEL SIMON ::.",
-	"url": "http://www.dr-simon.net/"
-},{
 	"id": 3839,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 23,
+	"index": 21,
 	"parentId": "3808",
 	"title": "JCCM: Servicio de Salud de Castilla-La Mancha",
 	"url": "http://sescam.jccm.es/web/recursoshumanos/consolidacionEmpleo/index.htm"
@@ -2211,7 +2156,7 @@
 	"id": 3840,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 24,
+	"index": 22,
 	"parentId": "3808",
 	"title": "SATSE SINDICATO DE ENFERMERÍA",
 	"url": "http://www.satse.es/"
@@ -2219,7 +2164,7 @@
 	"id": 3841,
 	"dateAddedLocal": "11/2/2017, 11:54:27 AM",
 	"dateAddedUTC": "2017-11-02T10:54:27.000Z",
-	"index": 25,
+	"index": 23,
 	"parentId": "3808",
 	"title": "Hau Kola Tipi - Indian tents and accesories",
 	"url": "http://tipi-tent.com/index.html"
@@ -2227,7 +2172,7 @@
 	"id": 3842,
 	"dateAddedLocal": "11/2/2017, 11:54:28 AM",
 	"dateAddedUTC": "2017-11-02T10:54:28.000Z",
-	"index": 26,
+	"index": 24,
 	"parentId": "3808",
 	"title": "Discover the Basics of How to Build a Pergola",
 	"url": "http://www.home-improvement-and-financing.com/how-to-build-a-pergola.html"
@@ -2235,7 +2180,7 @@
 	"id": 3843,
 	"dateAddedLocal": "11/2/2017, 11:54:28 AM",
 	"dateAddedUTC": "2017-11-02T10:54:28.000Z",
-	"index": 27,
+	"index": 25,
 	"parentId": "3808",
 	"title": "INSALUD, consolidación",
 	"url": "http://www.ingesa.msc.es/"
@@ -2243,7 +2188,7 @@
 	"id": 3844,
 	"dateAddedLocal": "11/2/2017, 11:54:28 AM",
 	"dateAddedUTC": "2017-11-02T10:54:28.000Z",
-	"index": 28,
+	"index": 26,
 	"parentId": "3808",
 	"title": "FORRAJE VERDE HIDROPONICO",
 	"url": "http://pastohidroponico.blogspot.com.es/"
@@ -4962,10 +4907,33 @@
 	"title": "Mai Thaicenter, indice",
 	"url": "http://www.mai-thaicenter.com/"
 },{
+	"id": 4472,
+	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
+	"dateAddedUTC": "2019-04-12T07:20:58.827Z",
+	"index": 28,
+	"parentId": "3801",
+	"title": "Marachain"
+},{
+	"id": 4473,
+	"dateAddedLocal": "12/31/2018, 4:15:58 PM",
+	"dateAddedUTC": "2018-12-31T15:15:58.000Z",
+	"index": 0,
+	"parentId": "4472",
+	"title": "MARAChain | Secure Exchange of Digital Documents",
+	"url": "https://www.marachain.eu/"
+},{
+	"id": 4474,
+	"dateAddedLocal": "12/31/2018, 4:50:27 PM",
+	"dateAddedUTC": "2018-12-31T15:50:27.000Z",
+	"index": 1,
+	"parentId": "4472",
+	"title": "MARAChain | Secure Exchange of Digital Documents",
+	"url": "https://www.marachain.eu/#contact"
+},{
 	"id": 4195,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.812Z",
-	"index": 28,
+	"index": 29,
 	"parentId": "3801",
 	"title": "Mascotas"
 },{
@@ -5076,7 +5044,7 @@
 	"id": 4209,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.812Z",
-	"index": 29,
+	"index": 30,
 	"parentId": "3801",
 	"title": "Medicontigo"
 },{
@@ -5099,7 +5067,7 @@
 	"id": 4212,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.812Z",
-	"index": 30,
+	"index": 31,
 	"parentId": "3801",
 	"title": "NODO"
 },{
@@ -5295,7 +5263,7 @@
 	"id": 4237,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.814Z",
-	"index": 31,
+	"index": 32,
 	"parentId": "3801",
 	"title": "Olimpia"
 },{
@@ -5386,7 +5354,7 @@
 	"id": 4249,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.814Z",
-	"index": 32,
+	"index": 33,
 	"parentId": "3801",
 	"title": "Piedra"
 },{
@@ -5425,7 +5393,7 @@
 	"id": 4254,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.814Z",
-	"index": 33,
+	"index": 34,
 	"parentId": "3801",
 	"title": "Pilas"
 },{
@@ -5503,7 +5471,7 @@
 	"id": 4264,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.815Z",
-	"index": 34,
+	"index": 35,
 	"parentId": "3801",
 	"title": "Q2"
 },{
@@ -5534,7 +5502,7 @@
 	"id": 4268,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.815Z",
-	"index": 35,
+	"index": 36,
 	"parentId": "3801",
 	"title": "Rimming"
 },{
@@ -5685,7 +5653,7 @@
 	"id": 4287,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.816Z",
-	"index": 36,
+	"index": 37,
 	"parentId": "3801",
 	"title": "SOC"
 },{
@@ -5740,7 +5708,7 @@
 	"id": 4294,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.817Z",
-	"index": 37,
+	"index": 38,
 	"parentId": "3801",
 	"title": "SOx"
 },{
@@ -5779,7 +5747,7 @@
 	"id": 4299,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.817Z",
-	"index": 38,
+	"index": 39,
 	"parentId": "3801",
 	"title": "SINIVIH"
 },{
@@ -5834,7 +5802,7 @@
 	"id": 4306,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.817Z",
-	"index": 39,
+	"index": 40,
 	"parentId": "3801",
 	"title": "S&C"
 },{
@@ -5990,7 +5958,7 @@
 	"id": 4326,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.818Z",
-	"index": 40,
+	"index": 41,
 	"parentId": "3801",
 	"title": "SUM"
 },{
@@ -6440,7 +6408,7 @@
 	"id": 4383,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.821Z",
-	"index": 41,
+	"index": 42,
 	"parentId": "3801",
 	"title": "tinajas"
 },{
@@ -6471,7 +6439,7 @@
 	"id": 4387,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.821Z",
-	"index": 42,
+	"index": 43,
 	"parentId": "3801",
 	"title": "Torre-->Caserio"
 },{
@@ -6944,7 +6912,7 @@
 	"id": 4447,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.826Z",
-	"index": 43,
+	"index": 44,
 	"parentId": "3801",
 	"title": "TMA"
 },{
@@ -6983,7 +6951,7 @@
 	"id": 4452,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.826Z",
-	"index": 44,
+	"index": 45,
 	"parentId": "3801",
 	"title": "UCMTA"
 },{
@@ -7122,7 +7090,7 @@
 	"id": 4470,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
 	"dateAddedUTC": "2019-04-12T07:20:58.827Z",
-	"index": 45,
+	"index": 46,
 	"parentId": "3801",
 	"title": "Vida"
 },{
@@ -7133,29 +7101,6 @@
 	"parentId": "4470",
 	"title": "El falso atractivo de la teoría de la Selección de grupos | Blogs El Espectador",
 	"url": "http://blogs.elespectador.com/actualidad/catrecillo/falso-atractivo-la-teoria-la-seleccion-grupos/amp"
-},{
-	"id": 4472,
-	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
-	"dateAddedUTC": "2019-04-12T07:20:58.827Z",
-	"index": 46,
-	"parentId": "3801",
-	"title": "Marachain"
-},{
-	"id": 4473,
-	"dateAddedLocal": "12/31/2018, 4:15:58 PM",
-	"dateAddedUTC": "2018-12-31T15:15:58.000Z",
-	"index": 0,
-	"parentId": "4472",
-	"title": "MARAChain | Secure Exchange of Digital Documents",
-	"url": "https://www.marachain.eu/"
-},{
-	"id": 4474,
-	"dateAddedLocal": "12/31/2018, 4:50:27 PM",
-	"dateAddedUTC": "2018-12-31T15:50:27.000Z",
-	"index": 1,
-	"parentId": "4472",
-	"title": "MARAChain | Secure Exchange of Digital Documents",
-	"url": "https://www.marachain.eu/#contact"
 },{
 	"id": 4475,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",
@@ -17706,6 +17651,38 @@
 	"parentId": "5772",
 	"title": "API Integration in Python – Part 1 – Real Python",
 	"url": "https://realpython.com/api-integration-in-python/"
+},{
+	"id": 7349,
+	"dateAddedLocal": "6/10/2019, 9:11:56 AM",
+	"dateAddedUTC": "2019-06-10T07:11:56.322Z",
+	"index": 10,
+	"parentId": "5772",
+	"title": "Python 2 VS Python 3 - Version Differences & Which You Should Learn",
+	"url": "https://coderseye.com/python-2-vs-python-3-version-differences"
+},{
+	"id": 7350,
+	"dateAddedLocal": "6/10/2019, 9:21:52 AM",
+	"dateAddedUTC": "2019-06-10T07:21:52.583Z",
+	"index": 11,
+	"parentId": "5772",
+	"title": "19.2. json — JSON encoder and decoder — Python 3.5.7 documentation",
+	"url": "https://docs.python.org/3.5/library/json.html#json.load"
+},{
+	"id": 7351,
+	"dateAddedLocal": "6/10/2019, 3:08:26 PM",
+	"dateAddedUTC": "2019-06-10T13:08:26.840Z",
+	"index": 12,
+	"parentId": "5772",
+	"title": "20.6. urllib2 — extensible library for opening URLs — Python 2.7.16 documentation",
+	"url": "https://docs.python.org/2.7/library/urllib2.html"
+},{
+	"id": 7353,
+	"dateAddedLocal": "6/10/2019, 4:47:29 PM",
+	"dateAddedUTC": "2019-06-10T14:47:29.231Z",
+	"index": 13,
+	"parentId": "5772",
+	"title": "How to find Python List Installed Modules and Version using pip?",
+	"url": "https://www.csestack.org/python-list-installed-modules-versions-pip/"
 },{
 	"id": 5785,
 	"dateAddedLocal": "4/12/2019, 9:20:58 AM",

@@ -21,9 +21,7 @@ for dict in bookmark_data:
 # Try here to access that URL
         print(' ->', dict["url"], end=": ")
         req = requests.get(dict["url"])
-#        print(' ->', req.url, end=": ")
         print(req.status_code)
 # It is only a bookmark folder
     else:
         print(':', dict["title"])
-# Bookmark is just a folder
