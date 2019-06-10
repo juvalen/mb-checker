@@ -3,7 +3,7 @@ import os
 import requests
 
 INPUTFILE = "./chrome_bookmarks.json"
-FILEURLERROR = "output/URLerror.json"
+FILEERROR = "output/error.json"
 FILEOK = "output/OK.json"
 
 input_filename = open(INPUTFILE, "r")
@@ -15,7 +15,7 @@ elements = len(bookmark_data)
 print("Checking ", str(elements), " entries in bookmark data")
 
 # Defining output files
-fileURLError = open(FILEURLERROR,"w")
+fileError = open(FILEERROR,"w")
 fileOK = open(FILEOK,"w")
 
 for dict in bookmark_data:
@@ -28,7 +28,7 @@ for dict in bookmark_data:
             req = requests.get(url)
         except requests.exceptions.RequestException:
             print(" X ", str(url), end="")
-            fileURLError.write(str(url) + "\n")
+            fileError.write(str(url) + "\n")
         else:
             print(" + ", str(url), end=" ")
             status = req.status_code
@@ -39,7 +39,7 @@ for dict in bookmark_data:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
-        fileURLError.write(lastTitle + "\n") 
+        fileError.write(lastTitle + "\n") 
         fileOK.write(lastTitle + "\n") 
 
 fileError.close()
