@@ -25,7 +25,7 @@ for dict in bookmark_data:
 # Try here to access that URL
         url = dict["url"]
         try:
-            req = requests.get(url, timeout=10)
+            req = requests.head(url, timeout=10)
 # Attends all & timeout
         except:
             print(" X ", str(url))
@@ -34,7 +34,10 @@ for dict in bookmark_data:
             print(" + ", str(url), end=" ")
             status = req.status_code
             print(str(status))
-            fileOK.write(str(url) + "\n")
+            if status >= 400:
+                fileError.write(str(url) + " " + str(status) + "\n")
+            else:
+                fileOK.write(str(url) + "\n")
 # When it is only a bookmark folder
     else:
         title = dict["title"]
