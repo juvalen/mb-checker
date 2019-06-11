@@ -20,7 +20,7 @@ fileOK = open(FILEOK,"w")
 
 for dict in bookmark_data:
     id = str(dict["id"])
-    print(">  ", id)
+    print(">>>", id)
     if "url" in dict:
 # Try here to access that URL
         url = dict["url"]
@@ -28,7 +28,7 @@ for dict in bookmark_data:
             req = requests.get(url, timeout=10)
 # Attends all & timeout
         except:
-            print(" X ", str(url), end="")
+            print(" X ", str(url))
             fileError.write(str(url) + "\n")
         else:
             print(" + ", str(url), end=" ")
@@ -44,4 +44,4 @@ for dict in bookmark_data:
         fileOK.write(lastTitle + "\n") 
 
 fileError.close()
-fileReachable.close()
+fileOK.close()
