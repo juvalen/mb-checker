@@ -9,12 +9,13 @@ import os
 import requests
 
 DIRNAME = "output"
-INPUTFILE = "./chrome_bookmarks.json"
-FILEERROR = "output/error.log"
-FILEOK = "output/OK.log"
-FILE404 = "output/404.log"
+INFILE = "./chrome_bookmarks.json"
+FILEERROR = "output/error.url"
+OUTFILE = "output/OK.json"
+FILE404 = "output/404.url"
 
-input_filename = open(INPUTFILE, "r")
+# Read source bookmark file
+input_filename = open(INFILE, "r")
 bookmark_data = json.load(input_filename)
 input_filename.close()
 
@@ -31,7 +32,7 @@ except FileExistsError:
 
 # Defining output files
 fileError = open(FILEERROR,"w")
-fileOK = open(FILEOK,"w")
+fileOK = open(OUTFILE,"w")
 file404 = open(FILE404,"w")
 
 for dict in bookmark_data:
@@ -54,14 +55,16 @@ for dict in bookmark_data:
                 file404.write(str(url) + "\n")
             else:
 ### Original json entries should be pasted here
-                fileOK.write(str(url) + "\n")
+                fileOK.write(str(dict) + "\n")
 # When it is only a bookmark folder
 ### Original json entries should be pasted here
     else:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
-        fileOK.write(lastTitle + "\n") 
+        fileOK.write(str(dict) + "\n")
 
 fileError.close()
 fileOK.close()
+file404.close()
+
