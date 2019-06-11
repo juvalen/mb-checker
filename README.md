@@ -36,21 +36,18 @@ The classification structure is preserved.
 
 ## Sample screen output
 
-`>>> 6195`
+```
+>>> 6195
+[WiMax]
+>>> 6196
++  http://www.wimax.com/education/wimax/wimax_overview 302
+>>> 6197
+X  http://www.iec.org/online/tutorials/ofdm/index.html
+```
 
-`[WiMax]`
+Above, log entries for a folder and two bookmark are shown:
 
-`>>> 6196`
-
- `+  http://www.wimax.com/education/wimax/wimax_overview 302`
-
-`>>> 6197`
-
- `X  http://www.iec.org/online/tutorials/ofdm/index.html`
-
-Above log for two bookmark entries are shown:
-
-**>>>** indicates the id in the bookmark input file
+**>>>** indicates the internal id in the bookmark input file
 
 **+** indicates what site responded (302 code in this sample)
 
