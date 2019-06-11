@@ -39,13 +39,14 @@ for dict in bookmark_data:
             if status == 404:
                 file404.write(str(url) + "\n")
             else:
+### Original json entries should be pasted here
                 fileOK.write(str(url) + "\n")
 # When it is only a bookmark folder
+### Original json entries should be pasted here
     else:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
-        fileError.write(lastTitle + "\n") 
         fileOK.write(lastTitle + "\n") 
 
 fileError.close()
