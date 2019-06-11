@@ -5,6 +5,7 @@ import requests
 INPUTFILE = "./chrome_bookmarks.json"
 FILEERROR = "output/error.json"
 FILEOK = "output/OK.json"
+FILE404 = "output/404.json"
 
 input_filename = open(INPUTFILE, "r")
 bookmark_data = json.load(input_filename)
@@ -17,6 +18,7 @@ print("Checking ", str(elements), " entries in bookmark data")
 # Defining output files
 fileError = open(FILEERROR,"w")
 fileOK = open(FILEOK,"w")
+file404 = open(FILE404,"w")
 
 for dict in bookmark_data:
     id = str(dict["id"])
@@ -34,8 +36,8 @@ for dict in bookmark_data:
             print(" + ", str(url), end=" ")
             status = req.status_code
             print(str(status))
-            if status >= 400:
-                fileError.write(str(url) + " " + str(status) + "\n")
+            if status == 404:
+                file404.write(str(url) + "\n")
             else:
                 fileOK.write(str(url) + "\n")
 # When it is only a bookmark folder

@@ -1,5 +1,7 @@
 # Bookmark cleansing
-I have been gathering and classifying bookmarks for more than 20 years. From time to time I hit some outdated bookmark. In order to have that file updated there is this script. When this python script is fed with a Chrome bookmark file it crawls it and tries to reach each bookmark. As a result it generates files with different kind of errors and another file with the successfull ones.
+I have been gathering and classifying bookmarks for more than 20 years. From time to time I hit some outdated bookmark. In order to have that file updated there is this script. When this python script is fed with a Chrome bookmark file it crawls it and tries to reach each bookmark. As a result it filters original bookmark file, clasifying its entries into files by different kind of errors and also the successfull ones.
+
+Due to the unsteady nature of Internet traffic, results have not been as reliable as to think about complete automation. So far, original bookmark file is splitted into several bookmark files depending on the error found to be manually examined and removed. For the time being.
 
 ## Requirements
 python 3
@@ -22,37 +24,33 @@ let it finish and result files will appear in _output_ directory
 File has to be exported from Chrome using Export History/Bookmarks plugin to a file with JSON extension and name `chrome_bookmarks.json`
 
 ## Output files
-After processing, valid bookmark files are copied to `filtered.json`.
+After processing, valid bookmark files are copied to `OK.json`.
 
 Those bookmarks rejected due to a 404 http error are copied to `404.json`.
 
+Those subject to some different network errors are put into `error.json`.
+
 The classification structure is preserved.
 
-## Screen output
+## Sample screen output
 
-`>  3607`
+`>>> 6195`
 
-`[International]`
+`[WiMax]`
 
-`>  3608`
+`>>> 6196`
 
- ` + http://www.discoverthenetworks.org/group.asp 200`
+ `+  http://www.wimax.com/education/wimax/wimax_overview 302`
 
-`>  3609`
+`>>> 6197`
 
- ` H http://www.frontpagemag.com/`
+ `X  http://www.iec.org/online/tutorials/ofdm/index.html`
 
-`>  3695`
+Above log for two bookmark entries are shown:
 
- ` X https://porandalucialibre.es/ [Errno 111] Connection refused`
+**>>>** indicates the id in the bookmark input file
 
-Above log for four bookmark entries are shown:
-
-**>** indicates the id in the bookmark input file
-
-**+** indicates what site responded (200 code here)
-
-**H** means site has some HTTP error
+**+** indicates what site responded (302 code here)
 
 **X** means content unaccessible
 
