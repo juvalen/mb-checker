@@ -2,10 +2,11 @@ import json
 import os
 import requests
 
+DIRNAME = "output"
 INPUTFILE = "./chrome_bookmarks.json"
-FILEERROR = "output/error.json"
-FILEOK = "output/OK.json"
-FILE404 = "output/404.json"
+FILEERROR = "output/error.log"
+FILEOK = "output/OK.log"
+FILE404 = "output/404.log"
 
 input_filename = open(INPUTFILE, "r")
 bookmark_data = json.load(input_filename)
@@ -14,6 +15,13 @@ input_filename.close()
 # Compute number of elements, including categories and end nodes
 elements = len(bookmark_data)
 print("Checking ", str(elements), " entries in bookmark data")
+
+# Create output/ directory if not exists
+try:
+    os.mkdir(DIRNAME)
+    print("Directory" , DIRNAME , "created ") 
+except FileExistsError:
+    print("Directory " , DIRNAME , " preserved")
 
 # Defining output files
 fileError = open(FILEERROR,"w")

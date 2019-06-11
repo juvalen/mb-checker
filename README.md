@@ -24,11 +24,13 @@ let it finish and result files will appear in _output_ directory
 File has to be exported from Chrome using Export History/Bookmarks plugin to a file with JSON extension and name `chrome_bookmarks.json`
 
 ## Output files
-After processing, valid bookmark files are copied to `OK.json`.
+Script crawls the bookmark file and uses **requests.head** to access the site. It is set a 10" timeout. It retrieves the http return code.
 
-Those bookmarks rejected due to a 404 http error are copied to `404.json`.
+After processing, valid bookmark files are fed to `OK.json`.
 
-Those subject to some different network errors are put into `error.json`.
+Those bookmarks rejected due to a 404 http error are fed to `404.json`.
+
+Those subject to some different network errors are fed to `error.json`.
 
 The classification structure is preserved.
 
