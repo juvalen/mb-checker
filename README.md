@@ -72,5 +72,5 @@ This project is licensed under the MIT License
 
 * Mario & Iñaqui who are back to programming
 
-* Antonio hosting
+* Antonio's hosting
 
