@@ -14,14 +14,14 @@ input_filename.close()
 
 # Compute number of elements, including categories and end nodes
 elements = len(bookmark_data)
-print("Checking ", str(elements), " entries in bookmark data")
+print("Checking", str(elements), "entries in bookmark data")
 
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
     print("Directory" , DIRNAME , "created ") 
 except FileExistsError:
-    print("Directory " , DIRNAME , " preserved")
+    print("Directory" , DIRNAME , "preserved")
 
 # Defining output files
 fileError = open(FILEERROR,"w")
