@@ -1,3 +1,9 @@
+# Name: load.py
+# Date: June 2019
+# Function: goes trough a bookmark file checking the status of each URL
+# Input: bookmark file in json format
+# Output: new text and json files including those URLs according with their status
+
 import json
 import os
 import requests

@@ -18,7 +18,7 @@ Export your bookmarks in **json** format to a file named `chrome_bookmarks.json`
 
 Run `python3 load.py`
 
-let it finish and result files will appear in _output_ directory
+Allow it finish and result files will appear in _output_ directory
 
 ## Input file
 File has to be exported from Chrome using Export History/Bookmarks plugin to a file with JSON extension and name `chrome_bookmarks.json`
@@ -52,13 +52,17 @@ Above log for two bookmark entries are shown:
 
 **>>>** indicates the id in the bookmark input file
 
-**+** indicates what site responded (302 code here)
+**+** indicates what site responded (302 code in this sample)
 
 **X** means content unaccessible
 
 # Author
 
 * **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
+
+# License
+
+This project is licensed under the MIT License 
 
 # Acknowledgments
 
