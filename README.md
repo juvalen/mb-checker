@@ -56,3 +56,13 @@ Above log for two bookmark entries are shown:
 
 **X** means content unaccessible
 
+# Author
+
+* **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
+
+# Acknowledgments
+
+* Joefrey who prodded me to write open source code
+
+* Mario & Iñaqui who are back to programming
+
