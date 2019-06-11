@@ -37,7 +37,11 @@ After processing there will be these files in the _output_ directory:
 
 * those subject to some sundry network errors in `error.url`.
 
-`OK.json` file can be imported back to browser.
+`OK.json` has to be converted to html before importing it back. For that https://github.com/andreax79/json2html-bookmarks.git can be used.
+
+File can be imported back to browser.
+
+To tr
 
 ## Sample screen dump
 

@@ -4,9 +4,23 @@
 # Input: bookmark file in json format
 # Output: new text and json files including those URLs according with their status
 
-import json
 import os
-import requests
+
+try:
+    import requests
+except:
+    sys.stderr.write("%s: Please install the required module 'requests'.\n" % sys.argv[0])
+    sys.exit(1)
+
+try:
+    import json
+except:
+    # Python < 2.6
+    try:
+        import simplejson as json
+    except:
+        sys.stderr.write("%s: Please install the required module 'simplejson'.\n" % sys.argv[0])
+        sys.exit(1)
 
 DIRNAME = "output"
 INFILE = "./chrome_bookmarks.json"
