@@ -21,7 +21,11 @@ Export your bookmarks in **json** format to a file named `chrome_bookmarks.json`
 
 Run `python3 load.py`
 
-Allow it finish and result files will appear in _output_ directory
+Allow it finish and result files will appear in _output_ directory.Then proceed to convert that file to html:
+
+`json2html output/OK.json output/OK.html`
+
+and import that **html** file to the browser.
 
 ## Input file
 File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a file with JSON extension and name `chrome_bookmarks.json`

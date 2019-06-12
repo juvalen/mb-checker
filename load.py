@@ -72,26 +72,33 @@ for dict in bookmark_data:
             if status == 404:
                 file404.write(str(url) + "\n")
             else:
-### Original json entries should be pasted here
-                dquotes = dquotes.replace('\"', '')
-                dquotes = dquotes.replace("{'", '{"')
-                dquotes = dquotes.replace(" '", ' "')
-                dquotes = dquotes.replace("':", '":')
-                dquotes = dquotes.replace("',", '",')
-                dquotes = dquotes.replace("'}", '"}')
+# Original json entries pasted here
+# This part is really painstaking
+                dquotes = str(eval(dquotes))
+                #dquotes = dquotes.replace('\\x', '\\u00')
+                dquotes = dquotes.replace('\\"', '')
+                #dquotes = dquotes.replace("{'", '{"')
+                #dquotes = dquotes.replace(" '", ' "')
+                #dquotes = dquotes.replace("':", '":')
+                #dquotes = dquotes.replace("',", '",')
+                #dquotes = dquotes.replace("'}", '"}')
                 fileOK.write(str(dquotes) + ",\n")
 # When it is only a bookmark folder
-### Original json entries should be pasted here
+# Original json entries be pasted here
     else:
-        title = dict["title"]
-        lastTitle = "[" + title + "]"
+        chapter = dict["title"]
+        lastTitle = "[" + chapter + "]"
         print(lastTitle)
-        dquotes = dquotes.replace('\"', '')
-        dquotes = dquotes.replace("{'", '{"')
-        dquotes = dquotes.replace(" '", ' "')
-        dquotes = dquotes.replace("':", '":')
-        dquotes = dquotes.replace("',", '",')
-        dquotes = dquotes.replace("'}", '"}')
+# This part is really painstaking
+        dquotes = str(eval(dquotes))
+        #dquotes = dquotes.replace('\\x', '\\u00')
+        dquotes = dquotes.replace('\\"', '')
+        #dquotes = dquotes.replace("\\'", "'")
+        #dquotes = dquotes.replace("{'", '{"')
+        #dquotes = dquotes.replace(" '", ' "')
+        #dquotes = dquotes.replace("':", '":')
+        #dquotes = dquotes.replace("',", '",')
+        #dquotes = dquotes.replace("'}", '"}')
         fileOK.write(str(dquotes) + ",\n")
 
 fileOK.write("]")
