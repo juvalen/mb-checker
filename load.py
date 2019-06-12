@@ -72,12 +72,15 @@ for dict in bookmark_data:
     #print(" U ", dateAddedUTC)
     #print(" I ", index)
     #print(" P ", parentId)
-    print(" T ", title)
 # if there is something in url
     if url:
+        print(" T ", title)
 # Try here to access that URL
         try:
-            folder = parent[parentId]
+            try:
+                folder = parent[parentId]
+            except:
+                folder = "1"
             print(" > [", folder, "] ", url)
             req = requests.head(url, timeout=10)
 # Attends all & timeout

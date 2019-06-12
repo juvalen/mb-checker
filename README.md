@@ -57,7 +57,6 @@ To tr
  > [ e-book ]  http://en.wikipedia.org/wiki/Comparison_of_e-book_formats#EPUB
  +  301
 @@@@@@@@@@@@ 3602
- T  Empresas
 [Empresas]
 @@@@@@@@@@@@ 3619
  T  La Segunda Fundación
