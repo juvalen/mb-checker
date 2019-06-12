@@ -103,7 +103,7 @@ for dict in bookmark_data:
                 fileOK.write('    "dateAddedUTC" : "' + dateAddedUTC + '",\n')
                 fileOK.write('    "index" : ' + index + ',\n')
                 fileOK.write('    "parentId" : ' + parentId + ',\n')
-                fileOK.write('    "title" : "' + title + '"\n')
+                fileOK.write('    "title" : "' + title + ',"\n')
                 fileOK.write('    "url" : "' + url + '"\n')
                 fileOK.write('},\n')
 # When it is only a bookmark folder
