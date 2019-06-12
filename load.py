@@ -53,7 +53,8 @@ file404 = open(FILE404,"w")
 fileOK.write("[")
 
 for dict in bookmark_data:
-    id = str(dict["id"])
+    dquotes = str(ast.literal_eval(str(dict)))
+    id = dict["id"]
     print(">>>", id)
     if "url" in dict:
 # Try here to access that URL
@@ -72,20 +73,24 @@ for dict in bookmark_data:
                 file404.write(str(url) + "\n")
             else:
 ### Original json entries should be pasted here
-                outstr = str(dict)
-                outstr = outstr.replace("'", '"')
-                fileOK.write(outstr + ",\n")
-                #fileOK.write(str(dict) + ",\n")
+                dquotes = dquotes.replace("{'", '{"')
+                dquotes = dquotes.replace(" '", ' "')
+                dquotes = dquotes.replace("':", '":')
+                dquotes = dquotes.replace("',", '",')
+                dquotes = dquotes.replace("'}", '"}')
+                fileOK.write(str(dquotes) + ",\n")
 # When it is only a bookmark folder
 ### Original json entries should be pasted here
     else:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
-        outstr = str(dict)
-        outstr = outstr.replace("'", '"')
-        fileOK.write(outstr + ",\n")
-        #fileOK.write(str(dict) + ",\n")
+        dquotes = dquotes.replace("{'", '{"')
+        dquotes = dquotes.replace(" '", ' "')
+        dquotes = dquotes.replace("':", '":')
+        dquotes = dquotes.replace("',", '",')
+        dquotes = dquotes.replace("'}", '"}')
+        fileOK.write(str(dquotes) + ",\n")
 
 fileOK.write("]")
 
