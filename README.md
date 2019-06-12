@@ -63,7 +63,7 @@ To tr
 @@@@@@@@@@@@ 3619
  T  La Segunda Fundación
  > [ International ]  http://www.lasegundafundacion.com/index.php
- 4 
+404 
 @@@@@@@@@@@@ 3929
  T  An Ark | Trustfree Bitcoin Marketplace
  > [ tech ]  https://anark.it/
@@ -80,7 +80,7 @@ Above, log entries for a folder and four bookmark are shown:
 
 **+** returned 301 code in this sample thus full bookmark entry copied to __output/OK.json__
 
-**4** indicates site returned 404 and URL added to __output/404.url__
+**404** indicates site returned 404 and URL added to __output/404.url__
 
 **XXX** means site unaccessible, so URL was copied to __output/error.url__
 

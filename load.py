@@ -90,7 +90,7 @@ for dict in bookmark_data:
         else:
             status = req.status_code
             if status == 404:
-                print(" 4 ")
+                print("404")
                 file404.write(url + "\n")
             else:
                 print(" + ", status)
