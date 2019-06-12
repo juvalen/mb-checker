@@ -50,58 +50,88 @@ fileError = open(FILEERROR,"w")
 fileOK = open(OUTFILE,"w")
 file404 = open(FILE404,"w")
 
-fileOK.write("[")
+fileOK.write("[\n")
 
+count = 0
 for dict in bookmark_data:
-    dquotes = str(dict)
-    id = dict["id"]
-    print(">>>", id)
-    if "url" in dict:
-# Try here to access that URL
+# Shredding dict into variables
+    id = str(dict["id"])
+    dateAddedLocal = str(dict["dateAddedLocal"])
+    dateAddedUTC = str(dict["dateAddedUTC"])
+    index = str(dict["index"])
+    parentId = dict["parentId"]
+    title = str(dict["title"])
+    try:
         url = dict["url"]
+    except:
+        url = ""
+# Tweak title here
+#
+    print("@@@@@@@@@", id)
+    #print(" L ", dateAddedLocal)
+    #print(" U ", dateAddedUTC)
+    #print(" I ", index)
+    #print(" P ", parentId)
+    print(" T ", title)
+# if there is something in url
+    if url:
+# Try here to access that URL
         try:
+            folder = parent[parentId]
+            print(" > [", folder, "] ", url)
             req = requests.head(url, timeout=10)
 # Attends all & timeout
         except:
-            print(" X ", str(url))
-            fileError.write(str(url) + "\n")
+            print("XXX")
+            fileError.write(url + "\n")
         else:
-            print(" + ", str(url), end=" ")
             status = req.status_code
-            print(str(status))
             if status == 404:
-                file404.write(str(url) + "\n")
+                print(" 4 ")
+                file404.write(url + "\n")
             else:
+                print(" + ", status)
 # Original json entries pasted here
-# This part is really painstaking
-                dquotes = str(eval(dquotes))
-                #dquotes = dquotes.replace('\\x', '\\u00')
-                dquotes = dquotes.replace('\\"', '')
-                #dquotes = dquotes.replace("{'", '{"')
-                #dquotes = dquotes.replace(" '", ' "')
-                #dquotes = dquotes.replace("':", '":')
-                #dquotes = dquotes.replace("',", '",')
-                #dquotes = dquotes.replace("'}", '"}')
-                fileOK.write(str(dquotes) + ",\n")
+# Approach from scratch
+# Write to file
+                fileOK.write('{\n')
+                fileOK.write('    "id" = "' + id + '",\n')
+                fileOK.write('    "dateAddedLocal" = "' + dateAddedLocal + '",\n')
+                fileOK.write('    "dateAddedUTC" = "' + dateAddedUTC + '",\n')
+                fileOK.write('    "index" = "' + index + '",\n')
+                fileOK.write('    "parentId" = "' + parentId + '",\n')
+                fileOK.write('    "title" = "' + title + '"\n')
+                fileOK.write('    "url" = "' + url + '"\n')
+                fileOK.write('},\n')
 # When it is only a bookmark folder
 # Original json entries be pasted here
     else:
-        chapter = dict["title"]
-        lastTitle = "[" + chapter + "]"
+        lastTitle = "[" + title + "]"
         print(lastTitle)
-# This part is really painstaking
-        dquotes = str(eval(dquotes))
+# Create parent dictionary
+        parent = {}
+        parent[id] = title
+# Write to file
+        fileOK.write('{\n')
+        fileOK.write('    "id" = "' + id + '",\n')
+        fileOK.write('    "dateAddedLocal" = "' + dateAddedLocal + '",\n')
+        fileOK.write('    "dateAddedUTC" = "' + dateAddedUTC + '",\n')
+        fileOK.write('    "index" = "' + index + '",\n')
+        fileOK.write('    "parentId" = "' + parentId + '",\n')
+        fileOK.write('    "title" = "' + title + '"\n')
+        fileOK.write('},\n')
+        #dquotes = str(eval(dquotes))
         #dquotes = dquotes.replace('\\x', '\\u00')
-        dquotes = dquotes.replace('\\"', '')
+        #dquotes = dquotes.replace('\\"', '')
         #dquotes = dquotes.replace("\\'", "'")
         #dquotes = dquotes.replace("{'", '{"')
         #dquotes = dquotes.replace(" '", ' "')
         #dquotes = dquotes.replace("':", '":')
         #dquotes = dquotes.replace("',", '",')
         #dquotes = dquotes.replace("'}", '"}')
-        fileOK.write(str(dquotes) + ",\n")
+    count += 1
 
-fileOK.write("]")
+fileOK.write("]\n")
 
 fileError.close()
 fileOK.close()
