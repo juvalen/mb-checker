@@ -53,7 +53,7 @@ file404 = open(FILE404,"w")
 fileOK.write("[")
 
 for dict in bookmark_data:
-    dquotes = str(ast.literal_eval(str(dict)))
+    dquotes = str(dict)
     id = dict["id"]
     print(">>>", id)
     if "url" in dict:
@@ -73,6 +73,7 @@ for dict in bookmark_data:
                 file404.write(str(url) + "\n")
             else:
 ### Original json entries should be pasted here
+                dquotes = dquotes.replace('\"', '')
                 dquotes = dquotes.replace("{'", '{"')
                 dquotes = dquotes.replace(" '", ' "')
                 dquotes = dquotes.replace("':", '":')
@@ -85,6 +86,7 @@ for dict in bookmark_data:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
+        dquotes = dquotes.replace('\"', '')
         dquotes = dquotes.replace("{'", '{"')
         dquotes = dquotes.replace(" '", ' "')
         dquotes = dquotes.replace("':", '":')
