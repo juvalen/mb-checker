@@ -50,7 +50,7 @@ fileError = open(FILEERROR,"w")
 fileOK = open(OUTFILE,"w")
 file404 = open(FILE404,"w")
 
-fileOK.write("[\n")
+fileOK.write("[")
 
 count = 0
 for dict in bookmark_data:
@@ -98,13 +98,13 @@ for dict in bookmark_data:
 # Approach from scratch
 # Write to file
                 fileOK.write('{\n')
-                fileOK.write('    "id" : ' + id + ',\n')
-                fileOK.write('    "dateAddedLocal" : "' + dateAddedLocal + '",\n')
-                fileOK.write('    "dateAddedUTC" : "' + dateAddedUTC + '",\n')
-                fileOK.write('    "index" : ' + index + ',\n')
-                fileOK.write('    "parentId" : ' + parentId + ',\n')
-                fileOK.write('    "title" : "' + title + ',"\n')
-                fileOK.write('    "url" : "' + url + '"\n')
+                fileOK.write('    "id": ' + id + ',\n')
+                fileOK.write('    "dateAddedLocal": "' + dateAddedLocal + '",\n')
+                fileOK.write('    "dateAddedUTC": "' + dateAddedUTC + '",\n')
+                fileOK.write('    "index": ' + index + ',\n')
+                fileOK.write('    "parentId": ' + parentId + ',\n')
+                fileOK.write('    "title": "' + title + '",\n')
+                fileOK.write('    "url": "' + url + '"\n')
                 fileOK.write('},\n')
 # When it is only a bookmark folder
 # Original json entries be pasted here
@@ -116,16 +116,17 @@ for dict in bookmark_data:
         parent[id] = title
 # Write to file
         fileOK.write('{\n')
-        fileOK.write('    "id" : "' + id + '",\n')
-        fileOK.write('    "dateAddedLocal" : "' + dateAddedLocal + '",\n')
-        fileOK.write('    "dateAddedUTC" : "' + dateAddedUTC + '",\n')
-        fileOK.write('    "index" : "' + index + '",\n')
-        fileOK.write('    "parentId" : "' + parentId + '",\n')
-        fileOK.write('    "title" : "' + title + '"\n')
-        fileOK.write('},\n')
+        fileOK.write('    "id": ' + id + ',\n')
+        fileOK.write('    "dateAddedLocal": "' + dateAddedLocal + '",\n')
+        fileOK.write('    "dateAddedUTC": "' + dateAddedUTC + '",\n')
+        fileOK.write('    "index": ' + index + ',\n')
+        fileOK.write('    "parentId": ' + parentId + ',\n')
+        fileOK.write('    "title": "' + title + '"\n')
+        if count<elements:
+            fileOK.write('},\n')
+        else:
+            fileOK.write('}]\n')
     count += 1
-
-fileOK.write("]\n")
 
 fileError.close()
 fileOK.close()
