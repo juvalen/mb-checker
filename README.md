@@ -23,9 +23,11 @@ Run `python3 load.py`
 
 Allow it finish and result files will appear in _output_ directory.Then proceed to convert that file to html:
 
-`json2html output/OK.json output/OK.html`
+Run `json2html output/OK.json output/OK.html`
 
 and import that **html** file to the browser.
+
+**The Title field of the bookmark could be defaced by non-ASCII characters or escape sequences found in the original.**
 
 ## Input file
 File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a file with JSON extension and name `chrome_bookmarks.json`
@@ -50,21 +52,37 @@ To tr
 ## Sample screen dump
 
 ```
->>> 6195
-[WiMax]
->>> 6196
- +  http://www.wimax.com/education/wimax/wimax_overview 302
->>> 6197
- X  http://www.iec.org/online/tutorials/ofdm/index.html
+@@@@@@@@@@@@ 3600
+ T  Comparison of e-book formats - Wikipedia, the free encyclopedia
+ > [ e-book ]  http://en.wikipedia.org/wiki/Comparison_of_e-book_formats#EPUB
+ +  301
+@@@@@@@@@@@@ 3602
+[Empresas]
+@@@@@@@@@@@@ 3619
+ T  La Segunda Fundación
+ > [ International ]  http://www.lasegundafundacion.com/index.php
+ 4 
+@@@@@@@@@@@@ 3929
+ T  An Ark | Trustfree Bitcoin Marketplace
+ > [ tech ]  https://anark.it/
+XXX
 ```
 
-Above, log entries for a folder and two bookmark are shown:
+Above, log entries for a folder and four bookmark are shown:
 
-**>>>** indicates the internal id in the bookmark input file
+**@@@@@@@@@@@@** indicates the internal id in the bookmark original file
 
-**+** indicates what site responded (with 302 code in this sample)
+**T** original bookmark title
 
-**X** means sites unaccessible
+**>** URL being reached
+
+**+** returned 301 code in this sample thus full bookmark entry copied to __output/OK.json__
+
+**4** indicates site returned 404 and URL added to __output/404.url__
+
+**XXX** means site unaccessible, so URL was copied to __output/error.url__
+
+**[tag]** that entry is just a folder name
 
 # Author
 
