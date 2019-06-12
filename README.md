@@ -71,7 +71,7 @@ XXX
 
 Above, log entries for a folder and four bookmark are shown:
 
-**@@@@@@@@@@@@** indicates the internal id in the bookmark input file
+**@@@@@@@@@@@@** indicates the internal id in the bookmark original file
 
 **T** original bookmark title
 

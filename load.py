@@ -67,7 +67,7 @@ for dict in bookmark_data:
         url = ""
 # Tweak title here
 #
-    print("@@@@@@@@@", id)
+    print("@@@@@@@@@@@@", id)
     #print(" L ", dateAddedLocal)
     #print(" U ", dateAddedUTC)
     #print(" I ", index)
@@ -120,15 +120,6 @@ for dict in bookmark_data:
         fileOK.write('    "parentId" = "' + parentId + '",\n')
         fileOK.write('    "title" = "' + title + '"\n')
         fileOK.write('},\n')
-        #dquotes = str(eval(dquotes))
-        #dquotes = dquotes.replace('\\x', '\\u00')
-        #dquotes = dquotes.replace('\\"', '')
-        #dquotes = dquotes.replace("\\'", "'")
-        #dquotes = dquotes.replace("{'", '{"')
-        #dquotes = dquotes.replace(" '", ' "')
-        #dquotes = dquotes.replace("':", '":')
-        #dquotes = dquotes.replace("',", '",')
-        #dquotes = dquotes.replace("'}", '"}')
     count += 1
 
 fileOK.write("]\n")
