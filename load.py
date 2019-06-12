@@ -24,8 +24,8 @@ except:
 
 DIRNAME = "output"
 INFILE = "./chrome_bookmarks.json"
-FILEERROR = "output/error.url"
 OUTFILE = "output/OK.json"
+FILEERROR = "output/error.url"
 FILE404 = "output/404.url"
 
 # Read source bookmark file
