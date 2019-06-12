@@ -5,6 +5,7 @@
 # Output: new text and json files including those URLs according with their status
 
 import os
+import ast
 
 try:
     import requests
@@ -22,11 +23,11 @@ except:
         sys.stderr.write("%s: Please install the required module 'simplejson'.\n" % sys.argv[0])
         sys.exit(1)
 
-DIRNAME = "output"
-INFILE = "./chrome_bookmarks.json"
-OUTFILE = "output/OK.json"
-FILEERROR = "output/error.url"
-FILE404 = "output/404.url"
+DIRNAME = "output/"
+INFILE = DIRNAME + "chrome_bookmarks.json"
+OUTFILE = DIRNAME + "OK.json"
+FILEERROR = DIRNAME + "error.url"
+FILE404 = DIRNAME + "404.url"
 
 # Read source bookmark file
 input_filename = open(INFILE, "r")
@@ -71,14 +72,20 @@ for dict in bookmark_data:
                 file404.write(str(url) + "\n")
             else:
 ### Original json entries should be pasted here
-                fileOK.write(str(dict) + ",\n")
+                outstr = str(dict)
+                outstr = outstr.replace("'", '"')
+                fileOK.write(outstr + ",\n")
+                #fileOK.write(str(dict) + ",\n")
 # When it is only a bookmark folder
 ### Original json entries should be pasted here
     else:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
-        fileOK.write(str(dict) + ",\n")
+        outstr = str(dict)
+        outstr = outstr.replace("'", '"')
+        fileOK.write(outstr + ",\n")
+        #fileOK.write(str(dict) + ",\n")
 
 fileOK.write("]")
 
