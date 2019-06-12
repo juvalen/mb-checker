@@ -15,12 +15,12 @@ def getStatus(ourl):
     res = conn.getresponse()
     return res.status
 
-def processResponse(response,url):
-    print response, url
+def processResponse(response, url):
+    print(response, url)
     processedOne()
 
-def processError(error,url):
-    print "error", url#, error
+def processError(error, url):
+    print("error", url, error)
     processedOne()
 
 def processedOne():

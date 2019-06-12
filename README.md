@@ -13,6 +13,8 @@ Due to the unsteady nature of Internet traffic, results achieved have not been a
 
 * *requests* module installed: `pip install requests`
 
+* _twisted_ module installed: `sudo apt install python-twisted`
+
 ## Usage
 
 Clone this repository into a directory
