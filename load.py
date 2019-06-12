@@ -49,6 +49,8 @@ fileError = open(FILEERROR,"w")
 fileOK = open(OUTFILE,"w")
 file404 = open(FILE404,"w")
 
+fileOK.write("[")
+
 for dict in bookmark_data:
     id = str(dict["id"])
     print(">>>", id)
@@ -69,14 +71,16 @@ for dict in bookmark_data:
                 file404.write(str(url) + "\n")
             else:
 ### Original json entries should be pasted here
-                fileOK.write(str(dict) + "\n")
+                fileOK.write(str(dict) + ",\n")
 # When it is only a bookmark folder
 ### Original json entries should be pasted here
     else:
         title = dict["title"]
         lastTitle = "[" + title + "]"
         print(lastTitle)
-        fileOK.write(str(dict) + "\n")
+        fileOK.write(str(dict) + ",\n")
+
+fileOK.write("]")
 
 fileError.close()
 fileOK.close()
