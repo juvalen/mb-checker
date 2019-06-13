@@ -68,7 +68,7 @@ File can be imported back to browser.
 XXX
 ```
 
-Above, log entries for a folder and four bookmark are shown:
+Above, log entries for a folder and four bookmarks are shown:
 
 **@@@@@@@@@@@@** indicates the internal id in the bookmark original file
 
