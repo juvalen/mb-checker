@@ -29,6 +29,9 @@ OUTFILE = DIRNAME + "OK.json"
 FILEERROR = DIRNAME + "error.url"
 FILE404 = DIRNAME + "404.url"
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 # Read source bookmark file
 input_filename = open(INFILE, "r")
 bookmark_data = json.load(input_filename)
@@ -86,12 +89,12 @@ for dict in bookmark_data:
             req = requests.head(url, timeout=10)
 # Attends all & timeout
         except:
-            print("XXX")
+            print(RED + "XXX" + NC)
             fileError.write(url + "\n")
         else:
             status = req.status_code
             if status == 404:
-                print("404")
+                print(RED + "404" + NC)
                 file404.write(url + "\n")
             else:
                 print(" + ", status)
@@ -123,11 +126,11 @@ for dict in bookmark_data:
         fileOK.write('    "index": ' + index + ',\n')
         fileOK.write('    "parentId": ' + parentId + ',\n')
         fileOK.write('    "title": "' + title + '"\n')
+        count += 1
         if count<elements:
             fileOK.write('},\n')
         else:
             fileOK.write('}]\n')
-    count += 1
 
 fileError.close()
 fileOK.close()
