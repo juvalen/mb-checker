@@ -55,7 +55,7 @@ file404 = open(FILE404,"w")
 
 fileOK.write("[")
 
-count = 0
+count = 1
 for dict in bookmark_data:
 # Shredding dict into variables
     id = str(dict["id"])
@@ -109,7 +109,10 @@ for dict in bookmark_data:
                 fileOK.write('    "parentId": ' + parentId + ',\n')
                 fileOK.write('    "title": "' + title + '",\n')
                 fileOK.write('    "url": "' + url + '"\n')
-                fileOK.write('},\n')
+                if count<elements:
+                    fileOK.write('},\n')
+                else:
+                    fileOK.write('}]\n')
 # When it is only a bookmark folder
 # Original json entries be pasted here
     else:
@@ -126,12 +129,13 @@ for dict in bookmark_data:
         fileOK.write('    "index": ' + index + ',\n')
         fileOK.write('    "parentId": ' + parentId + ',\n')
         fileOK.write('    "title": "' + title + '"\n')
-        count += 1
         if count<elements:
             fileOK.write('},\n')
         else:
             fileOK.write('}]\n')
+    count += 1
 
+print("Elements" + str(elements), "Count" + str(count))
 fileError.close()
 fileOK.close()
 file404.close()
