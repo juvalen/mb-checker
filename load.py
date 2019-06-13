@@ -135,7 +135,6 @@ for dict in bookmark_data:
             fileOK.write('}]\n')
     count += 1
 
-print("Elements" + str(elements), "Count" + str(count))
 fileError.close()
 fileOK.close()
 file404.close()
