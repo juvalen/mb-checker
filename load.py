@@ -60,12 +60,13 @@ for dict in bookmark_data:
     dateAddedUTC = str(dict["dateAddedUTC"])
     index = str(dict["index"])
     parentId = dict["parentId"]
-    title = str(dict["title"])
+    string = str(dict["title"])
     try:
         url = dict["url"]
     except:
         url = ""
 # Tweak title here
+    title = string.replace('"', '')
 #
     print("@@@@@@@@@@@@", id)
     #print(" L ", dateAddedLocal)

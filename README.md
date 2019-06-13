@@ -11,7 +11,7 @@ Due to the unsteady nature of Internet traffic, results achieved have not been a
 
 * python 3
 
-* *requests* module installed: `pip install requests`
+* *requests* module installed: `python3 -m pip install requests`
 
 * _twisted_ module installed: `sudo apt install python-twisted`
 
@@ -48,8 +48,6 @@ After processing there will be these files in the _output_ directory:
 `OK.json` has to be converted to html before importing it back. For that https://github.com/andreax79/json2html-bookmarks.git can be used.
 
 File can be imported back to browser.
-
-To tr
 
 ## Sample screen dump
 
