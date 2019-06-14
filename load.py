@@ -139,7 +139,8 @@ for dict in bookmark_data:
         urlOK.write(url + '\n')
     count += 1
 
-urlError.close()
 jsonOK.close()
+urlError.close()
 url404.close()
+urlOK.close()
 
