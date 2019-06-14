@@ -28,6 +28,7 @@ INFILE = DIRNAME + "chrome_bookmarks.json"
 OUTFILE = DIRNAME + "OK.json"
 FILEERROR = DIRNAME + "error.url"
 FILE404 = DIRNAME + "404.url"
+FILEOK = DIRNAME + "OK.url"
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -45,12 +46,13 @@ print("Checking", str(elements), "entries in bookmark data")
 try:
     os.mkdir(DIRNAME)
     print("Directory" , DIRNAME , "created ") 
-except FileExistsError:
+except:
     print("Directory" , DIRNAME , "preserved")
 
 # Defining output files
 fileError = open(FILEERROR,"w")
 fileOK = open(OUTFILE,"w")
+listOK = open(FILEOK,"w")
 file404 = open(FILE404,"w")
 
 fileOK.write("[")
@@ -113,6 +115,7 @@ for dict in bookmark_data:
                     fileOK.write('},\n')
                 else:
                     fileOK.write('}]\n')
+                listOK.write(url + '\n')
 # When it is only a bookmark folder
 # Original json entries be pasted here
     else:
@@ -133,6 +136,7 @@ for dict in bookmark_data:
             fileOK.write('},\n')
         else:
             fileOK.write('}]\n')
+        listOK.write(url + '\n')
     count += 1
 
 fileError.close()

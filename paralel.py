@@ -1,6 +1,6 @@
 from twisted.internet import reactor, threads
-from urlparse import urlparse
-import httplib
+from urllib.parse import urlparse
+import http.client
 import itertools
 
 
@@ -33,7 +33,7 @@ def addTask(url):
     req.addErrback(processError, url)   
 
 added=0
-for url in open('urllist.txt'):
+for url in open('OK.url'):
     added+=1
     addTask(url.strip())
 
