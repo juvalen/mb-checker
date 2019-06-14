@@ -24,16 +24,17 @@ except:
         sys.exit(1)
 
 DIRNAME = "output/"
-INFILE = DIRNAME + "chrome_bookmarks.json"
-OUTFILE = DIRNAME + "OK.json"
-FILEERROR = DIRNAME + "error.url"
-FILE404 = DIRNAME + "404.url"
+JSONIN = DIRNAME + "chrome_bookmarks.json"
+JSONOK = DIRNAME + "OK.json"
+URLERROR = DIRNAME + "error.url"
+URL404 = DIRNAME + "404.url"
+URLOK = DIRNAME + "OK.url"
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # Read source bookmark file
-input_filename = open(INFILE, "r")
+input_filename = open(JSONIN, "r")
 bookmark_data = json.load(input_filename)
 input_filename.close()
 
@@ -45,15 +46,16 @@ print("Checking", str(elements), "entries in bookmark data")
 try:
     os.mkdir(DIRNAME)
     print("Directory" , DIRNAME , "created ") 
-except FileExistsError:
+except:
     print("Directory" , DIRNAME , "preserved")
 
 # Defining output files
-fileError = open(FILEERROR,"w")
-fileOK = open(OUTFILE,"w")
-file404 = open(FILE404,"w")
+urlError = open(URLERROR,"w")
+jsonOK = open(JSONOK,"w")
+urlOK = open(URLOK,"w")
+url404 = open(URL404,"w")
 
-fileOK.write("[")
+jsonOK.write("[")
 
 count = 1
 for dict in bookmark_data:
@@ -90,29 +92,30 @@ for dict in bookmark_data:
 # Attends all & timeout
         except:
             print(RED + "XXX" + NC)
-            fileError.write(url + "\n")
+            urlError.write(url + "\n")
         else:
             status = req.status_code
             if status == 404:
                 print(RED + "404" + NC)
-                file404.write(url + "\n")
+                url404.write(url + "\n")
             else:
                 print(" + ", status)
 # Original json entries pasted here
 # Approach from scratch
 # Write to file
-                fileOK.write('{\n')
-                fileOK.write('    "id": ' + id + ',\n')
-                fileOK.write('    "dateAddedLocal": "' + dateAddedLocal + '",\n')
-                fileOK.write('    "dateAddedUTC": "' + dateAddedUTC + '",\n')
-                fileOK.write('    "index": ' + index + ',\n')
-                fileOK.write('    "parentId": ' + parentId + ',\n')
-                fileOK.write('    "title": "' + title + '",\n')
-                fileOK.write('    "url": "' + url + '"\n')
+                jsonOK.write('{\n')
+                jsonOK.write('    "id": ' + id + ',\n')
+                jsonOK.write('    "dateAddedLocal": "' + dateAddedLocal + '",\n')
+                jsonOK.write('    "dateAddedUTC": "' + dateAddedUTC + '",\n')
+                jsonOK.write('    "index": ' + index + ',\n')
+                jsonOK.write('    "parentId": ' + parentId + ',\n')
+                jsonOK.write('    "title": "' + title + '",\n')
+                jsonOK.write('    "url": "' + url + '"\n')
                 if count<elements:
-                    fileOK.write('},\n')
+                    jsonOK.write('},\n')
                 else:
-                    fileOK.write('}]\n')
+                    jsonOK.write('}]\n')
+                urlOK.write(url + '\n')
 # When it is only a bookmark folder
 # Original json entries be pasted here
     else:
@@ -122,20 +125,22 @@ for dict in bookmark_data:
         parent = {}
         parent[id] = title
 # Write to file
-        fileOK.write('{\n')
-        fileOK.write('    "id": ' + id + ',\n')
-        fileOK.write('    "dateAddedLocal": "' + dateAddedLocal + '",\n')
-        fileOK.write('    "dateAddedUTC": "' + dateAddedUTC + '",\n')
-        fileOK.write('    "index": ' + index + ',\n')
-        fileOK.write('    "parentId": ' + parentId + ',\n')
-        fileOK.write('    "title": "' + title + '"\n')
+        jsonOK.write('{\n')
+        jsonOK.write('    "id": ' + id + ',\n')
+        jsonOK.write('    "dateAddedLocal": "' + dateAddedLocal + '",\n')
+        jsonOK.write('    "dateAddedUTC": "' + dateAddedUTC + '",\n')
+        jsonOK.write('    "index": ' + index + ',\n')
+        jsonOK.write('    "parentId": ' + parentId + ',\n')
+        jsonOK.write('    "title": "' + title + '"\n')
         if count<elements:
-            fileOK.write('},\n')
+            jsonOK.write('},\n')
         else:
-            fileOK.write('}]\n')
+            jsonOK.write('}]\n')
+        urlOK.write(url + '\n')
     count += 1
 
-fileError.close()
-fileOK.close()
-file404.close()
+jsonOK.close()
+urlError.close()
+url404.close()
+urlOK.close()
 

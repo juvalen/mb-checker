@@ -2,3 +2,7 @@ output/*
 *.swp
 *.log
 *.html
+*.gz
+*.tar
+Twisted*
+twisted*
