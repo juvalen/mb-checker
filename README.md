@@ -23,6 +23,18 @@ Export your bookmarks in **json** format to a file named `chrome_bookmarks.json`
 
 Run `python3 load.py`
 
+It generates four files:
+
+* **error.url**: list of not accessible URLs
+
+* **404.url**: list of 404 URLs
+
+* **OK.url**: list of successfull URLs
+
+* **OK.json**: original json bookmarks purged
+
+So error.url & 404.url && OK.url must contain all original URLs.
+
 Allow it finish and result files will appear in _output_ directory.Then proceed to convert that file to html:
 
 Run `json2html output/OK.json output/OK.html`
