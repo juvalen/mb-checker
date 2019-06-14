@@ -57,8 +57,10 @@ try:
 except:
     print("Directory" , DIRNAME , "preserved")
 
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+RED = '\033[31m'
+GREEN = '\033[32m'
+BLUE = '\033[34m'
+NC = '\033[0m' # No Color
 
 # Read source bookmark file
 with open(JSONIN, "r") as f:
@@ -88,12 +90,34 @@ def preorder(tree, depth):
             else:
                 type = tree[i]["type"]
                 if type == "url":
+                    id = tree[i]["id"]
+                    date_added = tree[i]["date_added"]
+                    string = tree[i]["name"]
+                    title = string.replace('"', '')
                     url = tree[i]["url"]
-                    print("    >>> " + url)
+                    print(">>> " + url)
+# reach URL #
+                    print("  T ", name)
+                    try:
+                        req = requests.head(url, timeout=10)
+                    except:
+                        print(RED + "  XXX ", end=" ")
+                        urlError.write(url + "\n")
+                        print(NC)
+                    else:
+                        status = req.status_code
+                        if status == 404:
+                            print(RED + "  404 ", end=" ")
+                            url404.write(url + "\n")
+                            print(NC)
+                        else:
+                            print(" ", status)
+# /reach URL #
+# Never reaches following lines
                 elif type == "folder":
-                    print("    [" + name + "]")
+                    print(GREEN + "  Empty folder" + NC)
                 else:
-                    print("    ???")
+                    print(BLUE + "    ???" + NC)
             
 #checksum = Bookmarks['checksum']
 #roots = Bookmarks['roots']

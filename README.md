@@ -19,7 +19,7 @@ Due to the unsteady nature of Internet traffic, results achieved have not been a
 
 Clone this repository into a directory
 
-Copy **Bookmarks** file in which Chrome stores bookmarks in json format to this directory
+Copy **Bookmarks** file in which Chrome stores bookmarks in json format to directory _output_ under this.
 
 Run `python3 load.py`
 
@@ -64,37 +64,40 @@ File can be imported back to browser.
 ## Sample screen dump
 
 ```
-@@@@@@@@@@@@ 3600
- T  Comparison of e-book formats - Wikipedia, the free encyclopedia
- > [ e-book ]  http://en.wikipedia.org/wiki/Comparison_of_e-book_formats#EPUB
- +  301
-@@@@@@@@@@@@ 3602
-[Empresas]
-@@@@@@@@@@@@ 3619
- T  La Segunda Fundación
- > [ International ]  http://www.lasegundafundacion.com/index.php
-404 
-@@@@@@@@@@@@ 3929
- T  An Ark | Trustfree Bitcoin Marketplace
- > [ tech ]  https://anark.it/
-XXX
+[2] Poesia (6)
+>>> http://www.diccionariodesinonimos.es/
+  T  Diccionario de Sinónimos
+  406+
+>>> http://www.poemas-del-alma.com/mario-benedetti.htm
+  T  Mario Benedetti - Poemas de Mario Benedetti
+  301+
+>>> http://vademecum-poetico.blogspot.com.es/2009/10/acentuacion-ritmica-versal-ii-el.html
+  T  VADEMECUM POETICO: ACENTUACIÓN RÍTMICA VERSAL: (II) EL ENDECASÍLABO
+  302+
+>>> http://www.poesi.as/index43.htm
+  T  Fábula de Polifemo y Galatea
+  200+
+>>> http://www.nxtcrypto.org/
+  T  Nxt • Next Generation of Cryptocurrency • NxtCoin • Nextcoin
+  404
+>>> http://www.phpeasystep.com/phptu/3.html
+  T  PHP Limit upload file size
+  XXX
 ```
 
 Above, log entries for a folder and four bookmarks are shown:
 
-**@@@@@@@@@@@@** indicates the internal id in the bookmark original file
+**[depth] Folder name (entries)**  indicates the folder, depth and number of entries
+
+**>>>** URL being reached
 
 **T** original bookmark title
 
-**>** URL being reached
-
-**+** returned 301 code in this sample thus full bookmark entry copied to __output/OK.json__
+**NNN+** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__
 
 **404** indicates site returned 404 and URL added to __output/404.url__
 
 **XXX** means site unaccessible, so URL was copied to __output/error.url__
-
-**[tag]** that entry is just a folder name
 
 # Author
 
