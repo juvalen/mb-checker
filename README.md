@@ -19,7 +19,7 @@ Due to the unsteady nature of Internet traffic, results achieved have not been a
 
 Clone this repository into a directory
 
-Export your bookmarks in **json** format to a file named `chrome_bookmarks.json` in same directory
+Copy **Bookmarks** file in which Chrome stores bookmarks in json format to this directory
 
 Run `python3 load.py`
 
@@ -33,7 +33,7 @@ It generates four files:
 
 * **OK.json**: original json bookmarks purged
 
-So error.url & 404.url && OK.url must contain all original URLs.
+So error.url & 404.url && OK.url will contain all original URLs altogether.
 
 Allow it finish and result files will appear in _output_ directory.Then proceed to convert that file to html:
 
