@@ -66,17 +66,21 @@ NC = '\033[0m' # No Color
 with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
+#checksum = Bookmarks['checksum']
+#roots = Bookmarks['roots']
+#version = Bookmarks['version']
+
 # Define output files
 jsonOK = open(JSONOUT,"w")
 urlError = open(URLERROR,"w")
 urlOK = open(URLOK,"w")
 url404 = open(URL404,"w")
 
+# Recurrent function
 def preorder(tree, depth):
     depth += 1
     if tree:
         width = len(tree)
-        #print("Checking", str(width), "entries in bookmark data at depth", depth)
         for i in range(width):
             name = tree[i]["name"]
             try:
@@ -96,33 +100,25 @@ def preorder(tree, depth):
                     title = string.replace('"', '')
                     url = tree[i]["url"]
                     print(">>> " + url)
-# reach URL #
                     print("  T ", name)
                     try:
                         req = requests.head(url, timeout=10)
                     except:
-                        print(RED + "  XXX ", end=" ")
+                        print(RED + "  XXX " + NC)
                         urlError.write(url + "\n")
-                        print(NC)
                     else:
                         status = req.status_code
                         if status == 404:
-                            print(RED + "  404 ", end=" ")
+                            print(RED + "  404 " + NC)
                             url404.write(url + "\n")
-                            print(NC)
                         else:
-                            print(" ", status)
-# /reach URL #
-# Never reaches following lines
+                            print(" ", status, '+')
+                            urlOK.write(url + "\n")
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NC)
                 else:
                     print(BLUE + "    ???" + NC)
             
-#checksum = Bookmarks['checksum']
-#roots = Bookmarks['roots']
-#version = Bookmarks['version']
-
 nodes = Bookmarks['roots']['bookmark_bar']['children']
 preorder(nodes, 0)
 
