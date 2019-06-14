@@ -13,8 +13,6 @@ Due to the unsteady nature of Internet traffic, results achieved have not been a
 
 * *requests* module installed: `python3 -m pip install requests`
 
-* _twisted_ module installed: `sudo apt install python-twisted`
-
 ## Usage
 
 Clone this repository into a directory
@@ -79,10 +77,10 @@ File can be imported back to browser.
   200+
 >>> http://www.nxtcrypto.org/
   T  Nxt • Next Generation of Cryptocurrency • NxtCoin • Nextcoin
-  404
+  404 2933
 >>> http://www.phpeasystep.com/phptu/3.html
   T  PHP Limit upload file size
-  XXX
+  XXX 5346
 ```
 
 Above, log entries for a folder and four bookmarks are shown:
@@ -93,11 +91,11 @@ Above, log entries for a folder and four bookmarks are shown:
 
 **T** original bookmark title
 
-**NNN+** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__
+**NNN +** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__
 
-**404** indicates site returned 404 and URL added to __output/404.url__
+**404 Id** indicates site returned 404 and URL added to __output/404.url__ and entry Id to be removed
 
-**XXX** means site unaccessible, so URL was copied to __output/error.url__
+**XXX Id** means site unaccessible, so URL was copied to __output/error.url__ and entry Id to be removed
 
 # Author
 

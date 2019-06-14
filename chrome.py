@@ -66,6 +66,24 @@ NC = '\033[0m' # No Color
 with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
+# Copy Bookmark list to Filtered list
+
+############## delete from list
+#for i, o in enumerate(obj_list):
+#    if o.attr == known_value:
+#        del obj_list[i]
+#        break
+#
+############## remove() method
+# x = open_list.pop(min_index) 
+# node_list.remove(x)
+#
+# try:
+#     node_list.remove(x)
+# except:
+#     pass
+#
+
 #checksum = Bookmarks['checksum']
 #roots = Bookmarks['roots']
 #version = Bookmarks['version']
@@ -95,6 +113,7 @@ def preorder(tree, depth):
                 type = tree[i]["type"]
                 if type == "url":
                     id = tree[i]["id"]
+# pop the list element
                     date_added = tree[i]["date_added"]
                     string = tree[i]["name"]
                     title = string.replace('"', '')
@@ -104,25 +123,28 @@ def preorder(tree, depth):
                     try:
                         req = requests.head(url, timeout=10)
                     except:
-                        print(RED + "  XXX " + NC)
+                        print(RED + "  XXX " + id + NC)
                         urlError.write(url + "\n")
+# Remove from Filtered list also
                     else:
                         status = req.status_code
                         if status == 404:
-                            print(RED + "  404 " + NC)
+                            print(RED + "  404 " + id + NC)
                             url404.write(url + "\n")
+# Remove from Filtered list also
                         else:
                             print(" ", status, '+')
                             urlOK.write(url + "\n")
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NC)
                 else:
-                    print(BLUE + "    ???" + NC)
+                    print(BLUE + "   ???" + id + NC)
             
 nodes = Bookmarks['roots']['bookmark_bar']['children']
 preorder(nodes, 0)
 
 url404.close()
+# Write Filtered list to disk
 urlOK.close()
 urlError.close()
 jsonOK.close()
