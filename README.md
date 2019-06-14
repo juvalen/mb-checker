@@ -5,7 +5,7 @@ After one has been gathering and classifying bookmarks for more than 20 years on
 
 Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each bookmark. As a result it generates a *cleaner* bookmark file, plus additional files including the failing URLs.
 
-Due to the unsteady nature of Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for valuable ones. This for the time being.
+Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for valuable ones. This for the time being.
 
 ## Requirements
 

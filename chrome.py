@@ -45,7 +45,7 @@ from pprint import pprint
 
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
-JSONOUT = DIRNAME + "OK.json"
+JSONOUT = DIRNAME + "Filtered.json"
 URLERROR = DIRNAME + "error.url"
 URL404 = DIRNAME + "404.url"
 URLOK = DIRNAME + "OK.url"
@@ -67,6 +67,7 @@ with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
 # Copy Bookmark list to Filtered list
+Filtered = Bookmarks.copy()
 
 ############## delete from list
 #for i, o in enumerate(obj_list):
@@ -89,7 +90,6 @@ with open(JSONIN, "r") as f:
 #version = Bookmarks['version']
 
 # Define output files
-jsonOK = open(JSONOUT,"w")
 urlError = open(URLERROR,"w")
 urlOK = open(URLOK,"w")
 url404 = open(URL404,"w")
@@ -113,7 +113,7 @@ def preorder(tree, depth):
                 type = tree[i]["type"]
                 if type == "url":
                     id = tree[i]["id"]
-# pop the list element
+# list element is i, to be deleted
                     date_added = tree[i]["date_added"]
                     string = tree[i]["name"]
                     title = string.replace('"', '')
@@ -125,13 +125,15 @@ def preorder(tree, depth):
                     except:
                         print(RED + "  XXX " + id + NC)
                         urlError.write(url + "\n")
-# Remove from Filtered list also
+# Remove from Filtered list also ???
+                        #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                     else:
                         status = req.status_code
                         if status == 404:
                             print(RED + "  404 " + id + NC)
                             url404.write(url + "\n")
-# Remove from Filtered list also
+# Remove from Filtered list also ???
+                            #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                         else:
                             print(" ", status, '+')
                             urlOK.write(url + "\n")
@@ -145,7 +147,8 @@ preorder(nodes, 0)
 
 url404.close()
 # Write Filtered list to disk
+with open(JSONOUT, 'w') as fout:
+    json.dump(Filtered , fout)
 urlOK.close()
 urlError.close()
-jsonOK.close()
 
