@@ -85,10 +85,19 @@ def preorder(tree, depth):
                 branches = 0
             if branches > 0:
                 preorder(subtree, depth)
+            else:
+                type = tree[i]["type"]
+                if type == "url":
+                    url = tree[i]["url"]
+                    print("    >>> " + url)
+                elif type == "folder":
+                    print("    [" + name + "]")
+                else:
+                    print("    ???")
             
-checksum = Bookmarks['checksum']
-roots = Bookmarks['roots']
-version = Bookmarks['version']
+#checksum = Bookmarks['checksum']
+#roots = Bookmarks['roots']
+#version = Bookmarks['version']
 
 nodes = Bookmarks['roots']['bookmark_bar']['children']
 preorder(nodes, 0)
