@@ -10,7 +10,7 @@ reactor.suggestThreadPoolSize(concurrent)
 
 def getStatus(ourl):
     url = urlparse(ourl)
-    conn = httplib.HTTPConnection(url.netloc)   
+    conn = http.client.HTTPConnection(url.netloc)   
     conn.request("HEAD", url.path)
     res = conn.getresponse()
     return res.status
@@ -24,7 +24,8 @@ def processError(error, url):
     processedOne()
 
 def processedOne():
-    if finished.next()==added:
+    #if finished.next()==added:
+    if next(finished)==added:
         reactor.stop()
 
 def addTask(url):
@@ -33,7 +34,7 @@ def addTask(url):
     req.addErrback(processError, url)   
 
 added=0
-for url in open('OK.url'):
+for url in open('output/OK.url'):
     added+=1
     addTask(url.strip())
 
