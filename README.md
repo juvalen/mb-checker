@@ -19,7 +19,7 @@ Clone this repository into a directory
 
 Copy **Bookmarks** file in which Chrome stores bookmarks in json format to directory _output_ under this.
 
-Run `python3 load.py`
+Run `python3 chrome.py`
 
 It generates four files:
 
@@ -29,17 +29,13 @@ It generates four files:
 
 * **OK.url**: list of successfull URLs
 
-* **OK.json**: original json bookmarks purged
+* **Filtered.json**: original json bookmarks purged
 
 So error.url & 404.url && OK.url will contain all original URLs altogether.
 
-Allow it finish and result files will appear in _output_ directory.Then proceed to convert that file to html:
+Allow it finish and result files will appear in _output_ directory. Replace original **Bookmarks** file with **Filtered.json**.
 
-Run `json2html output/OK.json output/OK.html`
-
-and import that **html** file to the browser.
-
-**The Title field of the bookmark could be defaced by non-ASCII characters or escape sequences found in the original.**
+**The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original.**
 
 ## Input file
 File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a file with JSON extension and name `chrome_bookmarks.json`
