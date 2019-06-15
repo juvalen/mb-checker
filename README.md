@@ -17,7 +17,7 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Clone this repository into a directory
 
-Copy **Bookmarks** file in which Chrome stores bookmarks in json format to directory _output_ under this.
+Copy **Bookmarks** file in which Chrome stores bookmarks in json format to subdirectory _output_ under this. In Ubuntu it is in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 Run `python3 chrome.py`
 

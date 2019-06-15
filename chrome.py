@@ -9,7 +9,17 @@
 #     "roots": {
 #        "bookmark_bar": {
 #           "children": [ {
+#              "date_added": "13187860085000000",
+#                             ...
+#           }, {
+#                             ...
+#           }],
 #              "children": [ {
+#                 "date_added": "13134043672000000",
+#                             ...
+#              }, {
+#                             ...
+#              }],
 #                 "children": [ {
 #                             ...
 #                 }, {
@@ -26,8 +36,18 @@
 #                 'id': '6500',
 #                 'name': 'Tuxedo',
 #                 'type': 'folder'}
-#              } ]
-#           } ]
+#              } ],
+#              "date_added": "13199527258977344",
+#              "date_modified": "13200493908840013",
+#              "id": "7107",
+#              "name": "unfiled",
+#              "type": "folder"
+#           } ],
+#           "date_added": "13198974830896033",
+#           "date_modified": "13200494087851454",
+#           "id": "1",
+#           "name": "Bookmarks bar",
+#           "type": "folder"
 #        }
 #        "other": {
 #        }
@@ -69,22 +89,6 @@ with open(JSONIN, "r") as f:
 # Copy Bookmark list to Filtered list
 Filtered = Bookmarks.copy()
 
-############## delete from list
-#for i, o in enumerate(obj_list):
-#    if o.attr == known_value:
-#        del obj_list[i]
-#        break
-#
-############## remove() method
-# x = open_list.pop(min_index) 
-# node_list.remove(x)
-#
-# try:
-#     node_list.remove(x)
-# except:
-#     pass
-#
-
 #checksum = Bookmarks['checksum']
 #roots = Bookmarks['roots']
 #version = Bookmarks['version']
@@ -113,7 +117,7 @@ def preorder(tree, depth):
                 type = tree[i]["type"]
                 if type == "url":
                     id = tree[i]["id"]
-# list element is i, to be deleted
+# list element being checked is i
                     date_added = tree[i]["date_added"]
                     string = tree[i]["name"]
                     title = string.replace('"', '')
@@ -123,17 +127,25 @@ def preorder(tree, depth):
                     try:
                         req = requests.head(url, timeout=10)
                     except:
-                        print(RED + "  XXX " + id + NONE)
+                        print(RED + "  XXX " + id)
                         urlError.write(url + "\n")
 # Remove from Filtered list also ???
-                        #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                        #item = tree.pop(i)
+                        #pprint(item)
+                        pprint(tree[i])
+#Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                        print(NONE, end="")
                     else:
                         status = req.status_code
                         if status == 404:
-                            print(RED + "  404 " + id + NONE)
+                            print(RED + "  404 " + id)
                             url404.write(url + "\n")
 # Remove from Filtered list also ???
-                            #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                            #item = tree.pop(i)
+                            #pprint(item)
+                            pprint(tree[i])
+#Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                            print(NONE, end="")
                         else:
                             print(" ", status, '+')
                             urlOK.write(url + "\n")
