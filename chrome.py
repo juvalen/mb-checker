@@ -60,7 +60,7 @@ except:
 RED = '\033[31m'
 GREEN = '\033[32m'
 BLUE = '\033[34m'
-NC = '\033[0m' # No Color
+NONE = '\033[0m' # No Color
 
 # Read source bookmark file
 with open(JSONIN, "r") as f:
@@ -123,14 +123,14 @@ def preorder(tree, depth):
                     try:
                         req = requests.head(url, timeout=10)
                     except:
-                        print(RED + "  XXX " + id + NC)
+                        print(RED + "  XXX " + id + NONE)
                         urlError.write(url + "\n")
 # Remove from Filtered list also ???
                         #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                     else:
                         status = req.status_code
                         if status == 404:
-                            print(RED + "  404 " + id + NC)
+                            print(RED + "  404 " + id + NONE)
                             url404.write(url + "\n")
 # Remove from Filtered list also ???
                             #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
@@ -138,9 +138,9 @@ def preorder(tree, depth):
                             print(" ", status, '+')
                             urlOK.write(url + "\n")
                 elif type == "folder":
-                    print(GREEN + "  Empty folder" + NC)
+                    print(GREEN + "  Empty folder" + NONE)
                 else:
-                    print(BLUE + "   ???" + id + NC)
+                    print(BLUE + "   ???" + id + NONE)
             
 nodes = Bookmarks['roots']['bookmark_bar']['children']
 preorder(nodes, 0)
