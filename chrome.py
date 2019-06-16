@@ -106,7 +106,8 @@ def preorder(tree, depth):
     depth += 1
     if tree:
         width = len(tree)
-        for i in range(width):
+        i = 0
+        while i < width:
             name = tree[i]["name"]
             try:
                 branches = len(tree[i]["children"])
@@ -126,48 +127,43 @@ def preorder(tree, depth):
                     title = string.replace('"', '')
                     url = tree[i]["url"]
                     print(">>> " + url)
-                    print("  T ", name)
+                    print("  N ", name)
                     try:
                         req = requests.head(url, timeout=10)
                     except:
-                        print(RED + "  XXX " + id)
+                        print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
-# Remove from Filtered list also ???
+# Remove tree[i] from Filtered list, also could use del tree[i]
                         #item = tree.pop(i)
-                        #pprint(item)
-                        pprint(tree[i])
-#Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                        item = tree[i]; #del tree[i]
+                        pprint(item);
                         print(NONE, end="")
-                        del tree[i]
                     else:
                         status = req.status_code
                         if status == 404:
-                            print(RED + "  404 " + id)
+                            print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
-# Remove from Filtered list also ???
+# Remove tree[i] from Filtered list, also could use del tree[i]
                             #item = tree.pop(i)
-                            #pprint(item)
-                            pprint(tree[i])
-#Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                            item = tree[i]; #del tree[i]
+                            pprint(item);
                             print(NONE, end="")
-                            del tree[i]
                         elif status >= 500:
-                            print(RED + "  500 " + id)
+                            print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
-# Remove from Filtered list also ???
+# Remove tree[i] from Filtered list, also could use del tree[i]
                             #item = tree.pop(i)
-                            #pprint(item)
-                            pprint(tree[i])
-#Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                            item = tree[i]; #del tree[i]
+                            pprint(item);
                             print(NONE, end="")
-                            del tree[i]
                         else:
-                            print(" ", status, '+')
+                            print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
                 else:
                     print(BLUE + "   ???" + id + NONE)
+            i += 1
             
 nodes = Bookmarks['roots']['bookmark_bar']['children']
 preorder(nodes, 0)
