@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Name: chrome.py
 # Date: June 2019
 # Function: Parses original chrome Bookmarks file
@@ -160,7 +161,7 @@ preorder(nodes, 0)
 url404.close()
 # Write Filtered list to disk
 with open(JSONOUT, 'w') as fout:
-    json.dump(Filtered , fout)
+    json.dump(Filtered , fout, sort_keys=True, indent=4, separators=(',', ': '))
 urlOK.close()
 urlError.close()
 
