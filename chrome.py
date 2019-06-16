@@ -69,6 +69,7 @@ JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
 URLERROR = DIRNAME + "error.url"
 URL404 = DIRNAME + "404.url"
+URL500 = DIRNAME + "500.url"
 URLOK = DIRNAME + "OK.url"
 
 # Create output/ directory if not exists
@@ -98,6 +99,7 @@ Filtered = Bookmarks.copy()
 urlError = open(URLERROR,"w")
 urlOK = open(URLOK,"w")
 url404 = open(URL404,"w")
+url500 = open(URL500,"w")
 
 # Recurrent function
 def preorder(tree, depth):
@@ -136,6 +138,7 @@ def preorder(tree, depth):
                         pprint(tree[i])
 #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                         print(NONE, end="")
+                        del tree[i]
                     else:
                         status = req.status_code
                         if status == 404:
@@ -147,6 +150,17 @@ def preorder(tree, depth):
                             pprint(tree[i])
 #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                             print(NONE, end="")
+                            del tree[i]
+                        elif status >= 500:
+                            print(RED + "  500 " + id)
+                            url500.write(url + "\n")
+# Remove from Filtered list also ???
+                            #item = tree.pop(i)
+                            #pprint(item)
+                            pprint(tree[i])
+#Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
+                            print(NONE, end="")
+                            del tree[i]
                         else:
                             print(" ", status, '+')
                             urlOK.write(url + "\n")
@@ -159,6 +173,7 @@ nodes = Bookmarks['roots']['bookmark_bar']['children']
 preorder(nodes, 0)
 
 url404.close()
+url500.close()
 # Write Filtered list to disk
 with open(JSONOUT, 'w') as fout:
     json.dump(Filtered , fout, sort_keys=True, indent=4, separators=(',', ': '))

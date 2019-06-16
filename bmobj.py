@@ -160,6 +160,7 @@ def preorder(tree, depth):
 #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                         pprint(tree[i])
                         print(NONE, end="")
+                        tree.remove(i)
                     else:
                         status = req.status_code
                         if status == 404:
@@ -171,6 +172,7 @@ def preorder(tree, depth):
                             #pprint(item)
 #Filtered['roots']['bookmark_bar']['children'].remove(tree[i])
                             print(NONE, end="")
+                            tree.remove(i)
                         else:
                             print(" ", status, '+')
                             urlOK.write(url + "\n")
