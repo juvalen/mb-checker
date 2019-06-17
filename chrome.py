@@ -64,6 +64,8 @@ import requests
 import json
 from pprint import pprint
 
+DELETEFOLDER = 0
+
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
@@ -123,8 +125,8 @@ def preorder(tree, depth):
                     id = item["id"]
 # list element being checked is i
                     date_added = item["date_added"]
-                    string = item["name"]
-                    title = string.replace('"', '')
+                    #string = item["name"]
+                    #title = string.replace('"', '')
                     url = item["url"]
                     print(">>> " + url)
                     print("  N ", name)
@@ -133,8 +135,7 @@ def preorder(tree, depth):
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
-# Remove tree[i] from Filtered list, also could use del tree[i]
-                        pprint(item);
+                        #pprint(item);
                         del item
                         print(NONE, end="")
                     else:
@@ -142,15 +143,13 @@ def preorder(tree, depth):
                         if status == 404:
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
-# Remove tree[i] from Filtered list, also could use del tree[i]
-                            pprint(item);
+                            #pprint(item);
                             del item
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
-# Remove tree[i] from Filtered list, also could use del tree[i]
-                            pprint(item);
+                            #pprint(item);
                             del item
                             print(NONE, end="")
                         else:
@@ -158,6 +157,7 @@ def preorder(tree, depth):
                             urlOK.write(url + "\n")
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
+                    if DELETEFOLDER: del item
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1

@@ -21,11 +21,13 @@ Copy **Bookmarks** file in which Chrome stores bookmarks in json format to subdi
 
 Run `python3 chrome.py`
 
-It generates four files:
+It generates 5 files in _output_ directory:
 
 * **error.url**: list of not accessible URLs
 
 * **404.url**: list of 404 URLs
+
+* **500.url**: list of 500+ URLs
 
 * **OK.url**: list of successfull URLs
 
@@ -35,7 +37,7 @@ So error.url & 404.url && OK.url will contain all original URLs altogether.
 
 Allow it finish and result files will appear in _output_ directory. Replace original **Bookmarks** file with **Filtered.json**.
 
-**The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original.**
+**The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
 
 ## Input file
 File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a file with JSON extension and name `chrome_bookmarks.json`
@@ -61,7 +63,7 @@ File can be imported back to browser.
 [2] Poesia (6)
 >>> http://www.diccionariodesinonimos.es/
   T  Diccionario de Sinónimos
-  406+
+  404 4481 #3
 >>> http://www.poemas-del-alma.com/mario-benedetti.htm
   T  Mario Benedetti - Poemas de Mario Benedetti
   301+
@@ -73,10 +75,10 @@ File can be imported back to browser.
   200+
 >>> http://www.nxtcrypto.org/
   T  Nxt • Next Generation of Cryptocurrency • NxtCoin • Nextcoin
-  404 2933
+  500 2933 #5
 >>> http://www.phpeasystep.com/phptu/3.html
   T  PHP Limit upload file size
-  XXX 5346
+  XXX 5346 #3
 ```
 
 Above, log entries for a folder and four bookmarks are shown:
@@ -89,9 +91,11 @@ Above, log entries for a folder and four bookmarks are shown:
 
 **NNN +** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__
 
-**404 Id** indicates site returned 404 and URL added to __output/404.url__ and entry Id to be removed
+**404 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id to be removed and list sequence #
 
-**XXX Id** means site unaccessible, so URL was copied to __output/error.url__ and entry Id to be removed
+**500 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id to be removed and list sequence #
+
+**XXX Id #3** means site unaccessible, so URL was copied to __output/error.url__, entry Id to be removed and list sequence #
 
 # Author
 
