@@ -10,7 +10,7 @@
 #     "roots": {
 #        "bookmark_bar": {
 #           "children": [ {
-#              "date_added": "13187860085000000",
+#              "date_added": "13187860084000000",
 #                             ...
 #           }, {
 #                             ...
@@ -34,7 +34,7 @@
 #                 } ],
 #                 'date_added': '13199527258944339',
 #                 'date_modified': '0',
-#                 'id': '6500',
+#                 'id': '6540',
 #                 'name': 'Tuxedo',
 #                 'type': 'folder'}
 #              } ],
@@ -91,7 +91,7 @@ with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
 # Copy Bookmark list to Filtered list
-Filtered = Bookmarks.copy()
+#Filtered = Bookmarks.copy()
 
 #checksum = Bookmarks['checksum']
 #roots = Bookmarks['roots']
@@ -121,8 +121,8 @@ def preorder(tree, depth):
                 preorder(subtree, depth)
             else:
                 type = item["type"]
+                id = item["id"]
                 if type == "url":
-                    id = item["id"]
 # list element being checked is i
                     date_added = item["date_added"]
                     #string = item["name"]
@@ -135,7 +135,6 @@ def preorder(tree, depth):
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
-                        #pprint(item);
                         del item
                         print(NONE, end="")
                     else:
@@ -143,13 +142,11 @@ def preorder(tree, depth):
                         if status == 404:
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
-                            #pprint(item);
                             del item
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
-                            #pprint(item);
                             del item
                             print(NONE, end="")
                         else:
@@ -161,15 +158,16 @@ def preorder(tree, depth):
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
-            
-nodes = Bookmarks['roots']['bookmark_bar']['children']
-preorder(nodes, 0)
+    return tree
+        
+original = Bookmarks['roots']['bookmark_bar']['children']
+nodes = preorder(original, 0)
+filtered = {
+    "roots": { "bookmark_bar": { "children": nodes }},
+    "version": 1
+}
 
-url404.close()
-url500.close()
-# Write Filtered list to disk
+# Write filtered list *nodes* to disk
 with open(JSONOUT, 'w') as fout:
-    json.dump(Filtered , fout, sort_keys=True, indent=4, separators=(',', ': '))
-urlOK.close()
-urlError.close()
+    json.dump(filtered , fout, sort_keys=True, indent=4, separators=(',', ': '))
 

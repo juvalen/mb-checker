@@ -3,7 +3,7 @@ This is a simple command line utility to weed your good old bookmark file.
 
 After one has been gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.
 
-Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each bookmark. As a result it generates a *cleaner* bookmark file, plus additional files including the failing URLs.
+Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each bookmark. All successfull bookmarks will be copied to a _cleaner_ file, plus additional files classifying the failing URLs.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for valuable ones. This for the time being.
 
@@ -17,11 +17,11 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Clone this repository into a directory
 
-Copy **Bookmarks** file in which Chrome stores bookmarks in json format to subdirectory _output_ under this. In Ubuntu it is in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
+Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _data_ under this. Bookmark file is in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_ in Ubuntu.
 
 Run `python3 chrome.py`
 
-It generates 5 files in _output_ directory:
+It generates 5 files in _data_ subdirectory:
 
 * **error.url**: list of not accessible URLs
 
@@ -31,11 +31,11 @@ It generates 5 files in _output_ directory:
 
 * **OK.url**: list of successfull URLs
 
-* **Filtered.json**: original json bookmarks purged
+* **Filtered.json**: resulting json bookmarks with stale entries removed
 
 So error.url & 404.url && OK.url will contain all original URLs altogether.
 
-Allow it finish and result files will appear in _output_ directory. Replace original **Bookmarks** file with **Filtered.json**.
+Allow it finish and result files will appear in _data_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
 **The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
 
@@ -45,7 +45,7 @@ File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a
 ## Output files
 Script crawls the bookmark file and uses **requests.head** to access the site. It is set a 10" timeout. It retrieves the http return code.
 
-After processing there will be these files in the _output_ directory:
+After processing there will be these files in the _data_ subdirectory:
 
 * valid bookmarks files in `OK.json`
 
