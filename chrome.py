@@ -69,6 +69,7 @@ DELETEFOLDER = 0
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
+NODEOUT = DIRNAME + "Nodes.json"
 URLERROR = DIRNAME + "error.url"
 URL404 = DIRNAME + "404.url"
 URL500 = DIRNAME + "500.url"
@@ -162,6 +163,9 @@ def preorder(tree, depth):
         
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
+# Print nodes for validation
+with open(NODEOUT, 'w') as fnode:
+    json.dump(nodes , fnode, sort_keys=True, indent=4, separators=(',', ': '))
 # Timestamps just copied from a former instance
 # JSON structure
 other = {
@@ -172,6 +176,7 @@ other = {
     "name": "Other bookmarks",
     "type": "folder"
 }
+
 synced = {
     "children": [  ],
     "date_added": "13198974830951420",
@@ -180,20 +185,19 @@ synced = {
     "name": "Mobile bookmarks",
     "type": "folder"
 }
-children = [ ]
-children.append(nodes)
-children.append({'other': other})
-children.append({'synced': synced})
 
-bookmarks_bar = {"children": children}
-roots = {
-    "bookmark_bar": bookmarks_bar,
-    "date_added": "13198974830896033",
-    "date_modified": "13200494087851454",
-    "id": "1",
-    "name": "Bookmarks bar",
-    "type": "folder"
+bookmarks_bar = {"children": nodes,
+                 "date_added": "13198974830896033",
+                 "date_modified": "13200494087851454",
+                 "id": "1",
+                 "name": "Bookmarks bar",
+                 "type": "folder"
 }
+
+roots = {'bookmark_bar': bookmarks_bar,
+         'other': other,
+         'synced': synced}
+
 filtered = {
     "roots": roots,
     "version": 1
