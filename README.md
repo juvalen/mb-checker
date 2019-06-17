@@ -39,6 +39,10 @@ Allow it finish and result files will appear in _data_ subdirectory. Replace ori
 
 **The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
 
+```
+Always backup original data !
+```
+
 ## Input file
 File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a file with JSON extension and name `chrome_bookmarks.json`
 
@@ -66,13 +70,13 @@ File can be imported back to browser.
   404 4481 #3
 >>> http://www.poemas-del-alma.com/mario-benedetti.htm
   T  Mario Benedetti - Poemas de Mario Benedetti
-  301+
+  301 + 11
 >>> http://vademecum-poetico.blogspot.com.es/2009/10/acentuacion-ritmica-versal-ii-el.html
   T  VADEMECUM POETICO: ACENTUACIÓN RÍTMICA VERSAL: (II) EL ENDECASÍLABO
-  302+
+  302 + 8
 >>> http://www.poesi.as/index43.htm
   T  Fábula de Polifemo y Galatea
-  200+
+  200 + 2
 >>> http://www.nxtcrypto.org/
   T  Nxt • Next Generation of Cryptocurrency • NxtCoin • Nextcoin
   500 2933 #5
@@ -89,7 +93,7 @@ Above, log entries for a folder and four bookmarks are shown:
 
 **T** original bookmark title
 
-**NNN +** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__
+**NNN + #11** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__, entry Id to be preserved and list sequence #
 
 **404 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id to be removed and list sequence #
 
