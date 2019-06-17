@@ -107,25 +107,25 @@ def preorder(tree, depth):
     if tree:
         width = len(tree)
         i = 0
-        while i < width:
-            name = tree[i]["name"]
+        for item in tree:
+            name = item["name"]
             try:
-                branches = len(tree[i]["children"])
-                subtree = tree[i]["children"]
+                branches = len(item["children"])
+                subtree = item["children"]
                 print("[" + str(depth) + "] " + name + " (" + str(branches) + ")")
             except:
                 branches = 0
             if branches > 0:
                 preorder(subtree, depth)
             else:
-                type = tree[i]["type"]
+                type = item["type"]
                 if type == "url":
-                    id = tree[i]["id"]
+                    id = item["id"]
 # list element being checked is i
-                    date_added = tree[i]["date_added"]
-                    string = tree[i]["name"]
+                    date_added = item["date_added"]
+                    string = item["name"]
                     title = string.replace('"', '')
-                    url = tree[i]["url"]
+                    url = item["url"]
                     print(">>> " + url)
                     print("  N ", name)
                     try:
@@ -134,9 +134,8 @@ def preorder(tree, depth):
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
 # Remove tree[i] from Filtered list, also could use del tree[i]
-                        #item = tree.pop(i)
-                        item = tree[i]; #del tree[i]
                         pprint(item);
+                        del item
                         print(NONE, end="")
                     else:
                         status = req.status_code
@@ -144,17 +143,15 @@ def preorder(tree, depth):
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
 # Remove tree[i] from Filtered list, also could use del tree[i]
-                            #item = tree.pop(i)
-                            item = tree[i]; #del tree[i]
                             pprint(item);
+                            del item
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
 # Remove tree[i] from Filtered list, also could use del tree[i]
-                            #item = tree.pop(i)
-                            item = tree[i]; #del tree[i]
                             pprint(item);
+                            del item
                             print(NONE, end="")
                         else:
                             print(" ", status, '+' + " #" + str(i))
