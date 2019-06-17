@@ -6,5 +6,5 @@ Files in output folder:
  - OK.url: remaining URLs having some sort of response
  - Filtered.json: JSON file containing Chrome format bookmark file once filtered
 
-You can copy Filtered.json back to Bookmark file. Don't forget to make a backup first.
+You can copy Filtered.json back to Bookmark file. Don't forget to backup it first.
 

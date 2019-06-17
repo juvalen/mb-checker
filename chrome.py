@@ -47,7 +47,7 @@
 #           "date_added": "13198974830896033",
 #           "date_modified": "13200494087851454",
 #           "id": "1",
-#           "name": "Bookmarks bar",
+#           "name": "Bookmark bar",
 #           "type": "folder"
 #        }
 #        "other": {
@@ -162,12 +162,44 @@ def preorder(tree, depth):
         
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
+# Timestamps just copied from a former instance
+# JSON structure
+other = {
+    "children": [  ],
+    "date_added": "13198974830951405",
+    "date_modified": "13200950919336220",
+    "id": "2",
+    "name": "Other bookmarks",
+    "type": "folder"
+}
+synced = {
+    "children": [  ],
+    "date_added": "13198974830951420",
+    "date_modified": "0",
+    "id": "3",
+    "name": "Mobile bookmarks",
+    "type": "folder"
+}
+children = [ ]
+children.append(nodes)
+children.append({'other': other})
+children.append({'synced': synced})
+
+bookmarks_bar = {"children": children}
+roots = {
+    "bookmark_bar": bookmarks_bar,
+    "date_added": "13198974830896033",
+    "date_modified": "13200494087851454",
+    "id": "1",
+    "name": "Bookmarks bar",
+    "type": "folder"
+}
 filtered = {
-    "roots": { "bookmark_bar": { "children": nodes }},
+    "roots": roots,
     "version": 1
 }
 
-# Write filtered list *nodes* to disk
+# Write json list *filtered* to disk
 with open(JSONOUT, 'w') as fout:
     json.dump(filtered , fout, sort_keys=True, indent=4, separators=(',', ': '))
 

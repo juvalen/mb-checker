@@ -93,13 +93,13 @@ Above, log entries for a folder and four bookmarks are shown:
 
 **T** original bookmark title
 
-**NNN + #11** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__, entry Id to be preserved and list sequence #
+**NNN + #11** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__, entry Id to be preserved and list sequence # displayed
 
-**404 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id to be removed and list sequence #
+**404 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
 
-**500 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id to be removed and list sequence #
+**500 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
 
-**XXX Id #3** means site unaccessible, so URL was copied to __output/error.url__, entry Id to be removed and list sequence #
+**XXX Id #3** means site unaccessible, so URL was copied to __output/error.url__, entry Id removed and list sequence # displayed
 
 # Author
 
