@@ -92,13 +92,6 @@ NONE = '\033[0m' # No Color
 with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
-# Copy Bookmark list to Filtered list
-#Filtered = Bookmarks.copy()
-
-#checksum = Bookmarks['checksum']
-#roots = Bookmarks['roots']
-#version = Bookmarks['version']
-
 # Define output files
 urlError = open(URLERROR,"w")
 urlOK = open(URLOK,"w")
@@ -109,6 +102,7 @@ url500 = open(URL500,"w")
 def preorder(tree, depth):
     depth += 1
     if tree:
+        mytree = tree[:]
         width = len(tree)
         i = 0
         for item in tree:
@@ -137,30 +131,30 @@ def preorder(tree, depth):
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
-                        del item
+                        del mytree[i]; i -= 1
                         print(NONE, end="")
                     else:
                         status = req.status_code
                         if status == 404:
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
-                            del item
+                            del mytree[i]; i -= 1
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
-                            del item
+                            del mytree[i]; i -= 1
                             print(NONE, end="")
                         else:
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
-                    if DELETEFOLDER: del item
+                    if DELETEFOLDER: del mytree[i]; i -= 1
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
-    return tree
+    return mytree
         
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
