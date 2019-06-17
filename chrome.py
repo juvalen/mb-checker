@@ -2,6 +2,7 @@
 # Name: chrome.py
 # Date: June 2019
 # Function: Parses original chrome Bookmarks file
+#           Tries to reach each URL and removes it on error
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        Bookmarks file structure:
