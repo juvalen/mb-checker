@@ -104,7 +104,7 @@ def preorder(tree, depth):
     if tree:
         mytree = tree[:]
         width = len(tree)
-        i = 0
+        i = d = 0
         for item in tree:
             name = item["name"]
             try:
@@ -131,36 +131,41 @@ def preorder(tree, depth):
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
-                        del mytree[i]; i -= 1
+                        ret = mytree.pop(d); d -= 1
+                        print(BLUE, ret, NONE)
                         print(NONE, end="")
                     else:
                         status = req.status_code
                         if status == 404:
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
-                            del mytree[i]; i -= 1
+                            ret = mytree.pop(d); d -= 1
+                            #print(BLUE, ret, NONE)
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
-                            del mytree[i]; i -= 1
+                            ret = mytree.pop(d); d -= 1
+                            #print(BLUE, ret, NONE)
                             print(NONE, end="")
                         else:
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
-                    if DELETEFOLDER: del mytree[i]; i -= 1
+                    if DELETEFOLDER: del mytree[d]; d -= 1
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
+            d += 1
+            print(i, d)
     return mytree
         
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
 # Print nodes for validation
-with open(NODEOUT, 'w') as fnode:
-    json.dump(nodes , fnode, sort_keys=True, indent=4, separators=(',', ': '))
+#with open(NODEOUT, 'w') as fnode:
+#    json.dump(nodes , fnode, sort_keys=True, indent=4, separators=(',', ': '))
 # Timestamps just copied from a former instance
 # JSON structure
 other = {
