@@ -132,7 +132,7 @@ def preorder(tree, depth):
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
                         ret = mytree.pop(d); d -= 1
-                        print(BLUE, ret, NONE)
+                        print(BLUE, ret)
                         print(NONE, end="")
                     else:
                         status = req.status_code
@@ -140,22 +140,23 @@ def preorder(tree, depth):
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
                             ret = mytree.pop(d); d -= 1
-                            #print(BLUE, ret, NONE)
+                            print(BLUE, ret)
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
                             ret = mytree.pop(d); d -= 1
-                            #print(BLUE, ret, NONE)
+                            print(BLUE, ret)
                             print(NONE, end="")
                         else:
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
-                    print(GREEN + "  Empty folder" + NONE)
-                    if DELETEFOLDER: del mytree[d]; d -= 1
+                    print(GREEN + "  Empty folder" + NONE + "\n")
+                    if DELETEFOLDER:
+                        ret = mytree.pop(d); d -= 1
                 else:
-                    print(BLUE + "   ???" + id + NONE)
+                    print(BLUE + "   ???" + id + NONE + "\n")
             i += 1
             d += 1
             print(i, d)
