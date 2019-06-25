@@ -17,7 +17,7 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Clone this repository into a directory
 
-Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _data_ under this. Bookmark file is in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_ in Ubuntu.
+Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _data_ under this.
 
 Run `python3 chrome.py`
 
@@ -44,22 +44,22 @@ Always backup original data !
 ```
 
 ## Input file
-File has to be exported from Chrome using _Export History/Bookmarks_ plugin to a file with JSON extension and name `chrome_bookmarks.json`
+Copy original chrome bookmark file, which may be found in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
 Script crawls the bookmark file and uses **requests.head** to access the site. It is set a 10" timeout. It retrieves the http return code.
 
 After processing there will be these files in the _data_ subdirectory:
 
-* valid bookmarks files in `OK.json`
+* valid entry list in `OK.url`
 
 * rejected entries due to a 404 http error in `404.url`.
 
+* rejected entries due to a 5xx http error in `500.url`.
+
 * those subject to some sundry network errors in `error.url`.
 
-`OK.json` has to be converted to html before importing it back. For that https://github.com/andreax79/json2html-bookmarks.git can be used.
-
-File can be imported back to browser.
+* Valid bookmarks in `Filtered.json`, which can overwrite original `Bookmarks`.
 
 ## Sample screen dump
 
@@ -67,7 +67,7 @@ File can be imported back to browser.
 [2] Poesia (6)
 >>> http://www.diccionariodesinonimos.es/
   T  Diccionario de Sinónimos
-  404 4481 #3
+  404 4481 #13
 >>> http://www.poemas-del-alma.com/mario-benedetti.htm
   T  Mario Benedetti - Poemas de Mario Benedetti
   301 + 11
@@ -87,17 +87,17 @@ File can be imported back to browser.
 
 Above, log entries for a folder and four bookmarks are shown:
 
-**[depth] Folder name (entries)**  indicates the folder, depth and number of entries
+**[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**>>>** URL being reached
+**>>>** URL under scrutiny
 
 **T** original bookmark title
 
-**NNN + #11** added entry and returned code (301 in this sample), bookmark entry copied to __output/OK.json__, entry Id to be preserved and list sequence # displayed
+**NNN + #11** returned code (301 in this sample, so bookmark entry is copied to __output/OK.url__ and bookmark preserved to `Filtered.json`) and list sequence # displayed
 
-**404 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
+**404 Id #13** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
 
-**500 Id #5** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
+**500 Id #5** indicates site returned 500 and URL added to __output/500.url__, entry Id removed and list sequence # displayed
 
 **XXX Id #3** means site unaccessible, so URL was copied to __output/error.url__, entry Id removed and list sequence # displayed
 
