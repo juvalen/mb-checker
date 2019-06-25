@@ -102,7 +102,6 @@ url500 = open(URL500,"w")
 def preorder(tree, depth):
     depth += 1
     if tree:
-        mytree = tree[:]
         width = len(tree)
         i = d = 0
         for item in tree:
@@ -114,8 +113,9 @@ def preorder(tree, depth):
             except:
                 branches = 0
             if branches > 0:
-                mytree = preorder(subtree, depth)
+                newtree = preorder(subtree, depth)
             else:
+                newtree = tree[:]
                 type = item["type"]
                 id = item["id"]
                 if type == "url":
@@ -131,22 +131,22 @@ def preorder(tree, depth):
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
-                        ret = mytree.pop(d); d -= 1
-                        print(BLUE, ret)
+                        ret = tree.pop(d); d -= 1
+                        #print(BLUE, ret)
                         print(NONE, end="")
                     else:
                         status = req.status_code
                         if status == 404:
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
-                            ret = mytree.pop(d); d -= 1
-                            print(BLUE, ret)
+                            ret = tree.pop(d); d -= 1
+                            #print(BLUE, ret)
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
-                            ret = mytree.pop(d); d -= 1
-                            print(BLUE, ret)
+                            ret = tree.pop(d); d -= 1
+                            #print(BLUE, ret)
                             print(NONE, end="")
                         else:
                             print(" ", status, '+' + " #" + str(i))
@@ -154,13 +154,13 @@ def preorder(tree, depth):
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE + "\n")
                     if DELETEFOLDER:
-                        ret = mytree.pop(d); d -= 1
+                        ret = tree.pop(d); d -= 1
                 else:
                     print(BLUE + "   ???" + id + NONE + "\n")
             i += 1
             d += 1
             print(i, d)
-    return mytree
+    return tree
         
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
