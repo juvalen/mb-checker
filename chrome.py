@@ -70,7 +70,7 @@ DELETEFOLDER = 0
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
-NODEOUT = DIRNAME + "Nodes.json"
+#NODEOUT = DIRNAME + "Nodes.json"
 URLERROR = DIRNAME + "error.url"
 URL404 = DIRNAME + "404.url"
 URL500 = DIRNAME + "500.url"
@@ -114,7 +114,7 @@ def preorder(tree, depth):
             except:
                 branches = 0
             if branches > 0:
-                preorder(subtree, depth)
+                mytree = preorder(subtree, depth)
             else:
                 type = item["type"]
                 id = item["id"]
