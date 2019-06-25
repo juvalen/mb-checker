@@ -113,9 +113,10 @@ def preorder(tree, depth):
             except:
                 branches = 0
             if branches > 0:
-                newtree = preorder(subtree, depth)
+                #newtree = preorder(subtree, depth)
+                preorder(subtree, depth)
             else:
-                newtree = tree[:]
+                #newtree = tree[:]
                 type = item["type"]
                 id = item["id"]
                 if type == "url":
