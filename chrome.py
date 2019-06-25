@@ -113,10 +113,8 @@ def preorder(tree, depth):
             except:
                 branches = 0
             if branches > 0:
-                #newtree = preorder(subtree, depth)
                 preorder(subtree, depth)
             else:
-                #newtree = tree[:]
                 type = item["type"]
                 id = item["id"]
                 if type == "url":
@@ -133,7 +131,6 @@ def preorder(tree, depth):
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlError.write(url + "\n")
                         ret = tree.pop(d); d -= 1
-                        #print(BLUE, ret)
                         print(NONE, end="")
                     else:
                         status = req.status_code
@@ -141,13 +138,11 @@ def preorder(tree, depth):
                             print(RED + "  404 " + id + " #" + str(i))
                             url404.write(url + "\n")
                             ret = tree.pop(d); d -= 1
-                            #print(BLUE, ret)
                             print(NONE, end="")
                         elif status >= 500:
                             print(RED + "  500 " + id + " #" + str(i))
                             url500.write(url + "\n")
                             ret = tree.pop(d); d -= 1
-                            #print(BLUE, ret)
                             print(NONE, end="")
                         else:
                             print(" ", status, '+' + " #" + str(i))
@@ -160,16 +155,12 @@ def preorder(tree, depth):
                     print(BLUE + "   ???" + id + NONE + "\n")
             i += 1
             d += 1
-            print(i, d)
     return tree
         
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
-# Print nodes for validation
-#with open(NODEOUT, 'w') as fnode:
-#    json.dump(nodes , fnode, sort_keys=True, indent=4, separators=(',', ': '))
-# Timestamps just copied from a former instance
 # JSON structure
+# checksum entry still to be computed, but little information is available
 other = {
     "children": [  ],
     "date_added": "13198974830951405",
