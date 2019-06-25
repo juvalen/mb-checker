@@ -33,9 +33,9 @@ It generates 5 files in _data_ subdirectory:
 
 * **Filtered.json**: resulting json bookmarks with stale entries removed
 
-So error.url & 404.url && OK.url will contain all original URLs altogether.
+So error.url & 404.url && 500.url && OK.url altogether will contain all original bookmark entries.
 
-Allow it finish and result files will appear in _data_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
+Allow it finish and all result files will appear in _data_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
 **The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
 
@@ -47,9 +47,9 @@ Always backup original data !
 Copy original chrome bookmark file, which may be found in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
-Script crawls the bookmark file and uses **requests.head** to access the site. It is set a 10" timeout. It retrieves the http return code.
+Script crawls the bookmark file and uses **requests.head** method to access the site. It is set a 10" timeout. It retrieves the http return code.
 
-After processing there will be these files in the _data_ subdirectory:
+After processing all these files will be found in the _data_ subdirectory:
 
 * valid entry list in `OK.url`
 
