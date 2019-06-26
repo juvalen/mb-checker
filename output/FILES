@@ -1,5 +1,9 @@
-Files in output folder:
- - Bookmarks: copy here your source Bookmark file
+Files in this folder:
+
+Input
+ - Bookmarks: place here a copy of source Bookmark file
+
+Output
  - error.url: list of URLs that can't be reached (corresponding to XXX on screen dump)
  - 500.url: list of URLs getting response code 5xx (corresponding to 500 on screen dump)
  - 404.url: list of URLs getting response code 404 (corresponding to 404 on screen dump)
