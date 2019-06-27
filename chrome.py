@@ -120,8 +120,6 @@ def preorder(tree, depth):
                 if type == "url":
 # list element being checked is i
                     date_added = item["date_added"]
-                    #string = item["name"]
-                    #title = string.replace('"', '')
                     url = item["url"]
                     print(">>> " + url)
                     print("  N ", name)
@@ -192,6 +190,7 @@ roots = {'bookmark_bar': bookmarks_bar,
          'synced': synced}
 
 filtered = {
+    "checksum": "00000000000000000000000000000000",
     "roots": roots,
     "version": 1
 }
