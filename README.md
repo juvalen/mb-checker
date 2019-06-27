@@ -101,6 +101,10 @@ Above, log entries for a folder and four bookmarks are shown:
 
 **XXX Id #3** means site unaccessible, so URL was copied to __output/error.url__, entry Id removed and list sequence # displayed
 
+# Status
+
+Fully operational
+
 # Author
 
 * **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
