@@ -158,7 +158,6 @@ def preorder(tree, depth):
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
 # JSON structure
-# checksum entry still to be computed, but little information is available
 other = {
     "children": [  ],
     "date_added": "13198974830951405",
@@ -189,6 +188,7 @@ roots = {'bookmark_bar': bookmarks_bar,
          'other': other,
          'synced': synced}
 
+# checksum entry is updated by Brave upon loading
 filtered = {
     "checksum": "00000000000000000000000000000000",
     "roots": roots,
