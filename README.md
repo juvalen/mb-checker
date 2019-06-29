@@ -1,4 +1,4 @@
-# Bookmark cleansing R1
+# Bookmark cleansing R1.2.
 This is a simple command line utility to weed your good old bookmark file.
 
 After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.

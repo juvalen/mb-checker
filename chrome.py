@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # Name: chrome.py
+# Version: R1.2.
 # Date: June 2019
 # Function: Parses original chrome Bookmarks file
 #           Tries to reach each URL and removes it on error
@@ -59,7 +60,7 @@
 #    "version": 1
 #  }
 #
-# Output: 
+# Output:
 
 import requests
 import json
@@ -79,7 +80,7 @@ URLOK = DIRNAME + "OK.url"
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "created ") 
+    print("Directory" , DIRNAME , "created ")
 except:
     print("Directory" , DIRNAME , "preserved")
 
@@ -154,7 +155,7 @@ def preorder(tree, depth):
             i += 1
             d += 1
     return tree
-        
+
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
 # JSON structure
