@@ -117,7 +117,7 @@ This project is licensed under the MIT License
 
 * Joefrey who put me up to play in the open source arena
 
-* Mario & Iñaqui who are back to programming
+* Mario & Iñaki who are back to programming
 
 * Antonio's hosting
 
