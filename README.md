@@ -40,11 +40,11 @@ Allow it finish and all result files will appear in _data_ subdirectory. Replace
 **The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
 
 ```
-Always backup original data !
+First backup original data !
 ```
 
 ## Input file
-Copy original chrome bookmark file, which may be found in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
+Copy original chrome bookmark file, which may be found for Brave browser in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
 Script crawls the bookmark file and uses **requests.head** method to access the site. It is set a 10" timeout. It retrieves the http return code.
@@ -85,7 +85,7 @@ After processing all these files will be found in the _data_ subdirectory:
   XXX 5346 #3
 ```
 
-Above, log entries for a folder and four bookmarks are shown:
+Above, log entries for a folder and six bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
