@@ -3,7 +3,7 @@ This is a simple command line utility to weed your good old bookmark file.
 
 After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.
 
-Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ file, plus additional files classifying the failing URLs.
+Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ file, plus additional files classifying the broken URLs.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
@@ -33,7 +33,7 @@ It generates 5 files in _output_ subdirectory:
 
 * **Filtered.json**: resulting json bookmarks with stale entries removed
 
-So error.url & 404.url && 500.url && OK.url altogether will contain all original bookmark entries.
+Thus error.url & 404.url & 500.url & OK.url altogether will contain all original bookmark entries.
 
 Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
@@ -47,7 +47,7 @@ First backup original data !
 Copy original chrome bookmark file, which may be found for Brave browser in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
-Script crawls the bookmark file and uses **requests.head** method to access the site. It is set a 10" timeout. It retrieves the http return code.
+Script crawls the bookmark file and uses **requests.head** method to access each site. It is set a 10" timeout. It retrieves the http return code.
 
 After processing all these files will be found in the _output_ subdirectory:
 
@@ -59,7 +59,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 * those subject to some sundry network errors in `error.url`.
 
-* Valid bookmarks in `Filtered.json`, which can overwrite original `Bookmarks`.
+* Valid bookmarks in `Filtered.json`, to replace original `Bookmarks`.
 
 ## Sample screen dump
 
