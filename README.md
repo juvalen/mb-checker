@@ -17,7 +17,7 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Clone this repository into a directory
 
-Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _data_ under this.
+Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
 
 Run `python3 chrome.py`
 
