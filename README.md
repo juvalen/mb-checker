@@ -21,7 +21,7 @@ Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a sub
 
 Run `python3 chrome.py`
 
-It generates 5 files in _data_ subdirectory:
+It generates 5 files in _output_ subdirectory:
 
 * **error.url**: list of not accessible URLs
 
@@ -35,7 +35,7 @@ It generates 5 files in _data_ subdirectory:
 
 So error.url & 404.url && 500.url && OK.url altogether will contain all original bookmark entries.
 
-Allow it finish and all result files will appear in _data_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
+Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
 **The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
 
@@ -49,7 +49,7 @@ Copy original chrome bookmark file, which may be found for Brave browser in Ubun
 ## Output files
 Script crawls the bookmark file and uses **requests.head** method to access the site. It is set a 10" timeout. It retrieves the http return code.
 
-After processing all these files will be found in the _data_ subdirectory:
+After processing all these files will be found in the _output_ subdirectory:
 
 * valid entry list in `OK.url`
 
