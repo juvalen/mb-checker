@@ -74,7 +74,7 @@ from threading import Thread
 import http.client, sys
 import queue
 
-concurrent = 32
+concurrent = 2
 
 DELETEFOLDER = 0
 DIRNAME = "output/"
@@ -150,6 +150,27 @@ for i in range(0, nparams-1):
     print("Created", errorName[i])
 
 # Threading functions
+def doWork():
+    while True:
+        url = q.get()
+        status, url = getStatus(url)
+        #doSomethingWithResult(status, url)
+        q.task_done()
+
+def getStatus(ourl):
+    try:
+        req = requests.head(ourl, timeout=10)
+        status = str(req.status_code)
+        return status, ourl
+    except:
+        return "XXX", ourl
+
+# Start the paralel queue
+q = queue.Queue(concurrent * 2)
+for i in range(concurrent):
+    t = Thread(target=doWork)
+    t.daemon = True
+    t.start()
 
 # Recurrent function
 def preorder(tree, depth):
@@ -178,14 +199,20 @@ def preorder(tree, depth):
                     print("  N ", name)
                     try:
 # To paralelize
-                        req = requests.head(url, timeout=10)
+# Send request to queue
+                        q.put(url.strip())
+                        q.join()
+# Read request from queue
+                        status, url = getStatus(url)
+# Old sequential
+                        #req = requests.head(url, timeout=10)
+                        #status = str(req.status_code)
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
                         ret = tree.pop(d); d -= 1
                         print(NONE, end="")
                     else:
-                        status = str(req.status_code)
                         found = 0
                         for j, code in enumerate(errorWatch):
                             if status == code:

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from threading import Thread
 import http.client, sys
 import queue
