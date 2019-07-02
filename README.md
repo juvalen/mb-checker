@@ -1,4 +1,4 @@
-# Bookmark cleansing R1.2.
+# Bookmark cleansing R1.30
 This is a simple command line utility to weed your good old bookmark file.
 
 After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.
@@ -6,6 +6,8 @@ After being gathering and classifying bookmarks for more than 20 years one may h
 Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ file, plus additional files classifying the broken URLs.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
+
+It takes as parameters all the http return codes to be filtered out.
 
 ## Requirements
 
@@ -19,21 +21,23 @@ Clone this repository into a directory
 
 Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
 
-Run `python3 chrome.py`
+Run `./chrome.py 301 404 406`
 
-It generates 5 files in _output_ subdirectory:
+This will generate 5 files in _output_ subdirectory:
 
-* **error.url**: list of not accessible URLs
-
-* **404.url**: list of 404 URLs
-
-* **500.url**: list of 500+ URLs
+* **XXX.url**: list of inaccessible URLs
 
 * **OK.url**: list of successfull URLs
 
+* **301.url**: list of 301 URLs
+
+* **302.url**: list of 302 URLs
+
+* **404.url**: list of 404 URLs
+
 * **Filtered.json**: resulting json bookmarks with stale entries removed
 
-Thus error.url & 404.url & 500.url & OK.url altogether will contain all original bookmark entries.
+Thus XXX.url & OK.url & 302.url & 302.url & 404.url altogether will contain all original bookmark entries.
 
 Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
@@ -53,39 +57,39 @@ After processing all these files will be found in the _output_ subdirectory:
 
 * valid entry list in `OK.url`
 
-* rejected entries due to a 404 http error in `404.url`.
+* all https status codes spedified will be rejected and entries logged in `<code>.url`.
 
-* rejected entries due to a 5xx http error in `500.url`.
-
-* those subject to some sundry network errors in `error.url`.
+* those subject to some sundry network errors in `XXX.url`.
 
 * Valid bookmarks in `Filtered.json`, to replace original `Bookmarks`.
 
 ## Sample screen dump
 
 ```
+$ ./chrome.py 301 404 406
+...
 [2] Poesia (6)
 >>> http://www.diccionariodesinonimos.es/
   T  Diccionario de Sinónimos
   404 4481 #13
 >>> http://www.poemas-del-alma.com/mario-benedetti.htm
   T  Mario Benedetti - Poemas de Mario Benedetti
-  301 + 11
+  301 1925 #11
 >>> http://vademecum-poetico.blogspot.com.es/2009/10/acentuacion-ritmica-versal-ii-el.html
   T  VADEMECUM POETICO: ACENTUACIÓN RÍTMICA VERSAL: (II) EL ENDECASÍLABO
-  302 + 8
+  302 + #8
 >>> http://www.poesi.as/index43.htm
   T  Fábula de Polifemo y Galatea
-  200 + 2
->>> http://www.nxtcrypto.org/
-  T  Nxt • Next Generation of Cryptocurrency • NxtCoin • Nextcoin
-  500 2933 #5
+  200 + #2
+>>> http://www.foundalis.com/res/bps/bpidx.htm
+  N  Index of Bongard Problems
+  406 2973 #2
 >>> http://www.phpeasystep.com/phptu/3.html
   T  PHP Limit upload file size
   XXX 5346 #3
 ```
 
-Above, log entries for a folder and six bookmarks are shown:
+Above, log entries for a folder and six processed bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
@@ -93,13 +97,15 @@ Above, log entries for a folder and six bookmarks are shown:
 
 **T** original bookmark title
 
-**NNN + #11** returned code (301 in this sample, so bookmark entry is copied to __output/OK.url__ and bookmark preserved to `Filtered.json`) and list sequence # displayed
+**NNN + #11** returned status (200 & 302 in this sample run, indicates bookmark entry is copied to __output/OK.url__ and bookmark preserved to `Filtered.json`) and list sequence # displayed
 
-**404 Id #13** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
+**301 1925 11** indicates site returned 301 and URL added to __output/301.url__, entry Id removed and list sequence # displayed
 
-**500 Id #5** indicates site returned 500 and URL added to __output/500.url__, entry Id removed and list sequence # displayed
+**406 2973 #2** indicates site returned 406 and URL added to __output/406.url__, entry Id removed and list sequence # displayed
 
-**XXX Id #3** means site unaccessible, so URL was copied to __output/error.url__, entry Id removed and list sequence # displayed
+**404 4481 #13** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
+
+**XXX 5346 #3** means site unaccessible, so URL was copied to __output/XXX.url__, entry Id removed and list sequence # displayed
 
 # Status
 

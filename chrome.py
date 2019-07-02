@@ -1,9 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Name: chrome.py
-# Version: R1.2.
-# Date: June 2019
+# Version: R1.30
+# Date: July 2019
 # Function: Parses original chrome Bookmarks file
 #           Tries to reach each URL and removes it on error
+#           Accepts return codes as parameters. chrome.py must be called as executable:
+#           $ ./chrome.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        Bookmarks file structure:
@@ -65,17 +67,29 @@
 import requests
 import json
 from pprint import pprint
+import sys
 
 DELETEFOLDER = 0
-
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
-#NODEOUT = DIRNAME + "Nodes.json"
-URLERROR = DIRNAME + "error.url"
-URL404 = DIRNAME + "404.url"
-URL500 = DIRNAME + "500.url"
+URLXXX = DIRNAME + "XXX.url"
 URLOK = DIRNAME + "OK.url"
+
+# Read input parameters and create corresponding files
+params = sys.argv
+nparams = len(sys.argv)
+errorWatch = []
+errorNum = []
+fileName = []
+for param in params:
+    errorWatch.append(param)
+    errorNum.append("URL" + param)
+    fileName.append(DIRNAME + param + '.url')
+
+pprint(errorWatch)
+pprint(errorNum)
+pprint(fileName)
 
 # Create output/ directory if not exists
 try:
@@ -94,10 +108,10 @@ with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
 # Define output files
-urlError = open(URLERROR,"w")
+urlXXX = open(URLXXX,"w")
 urlOK = open(URLOK,"w")
-url404 = open(URL404,"w")
-url500 = open(URL500,"w")
+for i in range(1, nparams):
+    errorNum[i] = open(fileName[i], "w")
 
 # Recurrent function
 def preorder(tree, depth):
@@ -128,22 +142,20 @@ def preorder(tree, depth):
                         req = requests.head(url, timeout=10)
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
-                        urlError.write(url + "\n")
+                        urlXXX.write(url + "\n")
                         ret = tree.pop(d); d -= 1
                         print(NONE, end="")
                     else:
-                        status = req.status_code
-                        if status == 404:
-                            print(RED + "  404 " + id + " #" + str(i))
-                            url404.write(url + "\n")
-                            ret = tree.pop(d); d -= 1
-                            print(NONE, end="")
-                        elif status >= 500:
-                            print(RED + "  500 " + id + " #" + str(i))
-                            url500.write(url + "\n")
-                            ret = tree.pop(d); d -= 1
-                            print(NONE, end="")
-                        else:
+                        status = str(req.status_code)
+                        found = 0
+                        for i, code in enumerate(errorWatch):
+                            if status == code:
+                                found = 1
+                                print(RED + "  " + status + " " + id + " #" + str(i))
+                                errorNum[i].write(url + "\n")
+                                ret = tree.pop(d); d -= 1
+                                print(NONE, end="")
+                        if not found:
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
