@@ -7,13 +7,17 @@ Feed this python script with a Chrome bookmark file and a list of http return co
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
-Now runs paralel.
+Now runs paralel with queues.
 
 ## Requirements
 
 * python 3
 
 * *requests* module installed: `python3 -m pip install requests`
+
+* *queue* module installed: `python3 -m pip install queue`
+
+* *threading* module installed: `python3 -m pip install threading`
 
 ## Usage
 
