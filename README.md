@@ -119,6 +119,8 @@ Fully operational
 
 Specify wildcards in http return codes so as **5xx** would filter 500, 501, 502...
 
+Paralelize
+
 ## Author
 
 * **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
