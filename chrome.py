@@ -78,17 +78,17 @@ URLOK = DIRNAME + "OK.url"
 
 # Read input parameters and create corresponding files
 params = sys.argv[1:]
-nparams = len(sys.argv)-1
+nparams = len(sys.argv)
 errorWatch = []
-errorNum = []
-fileName = []
+errorName = []
+errorFile = []
 for param in params:
     if param.isdigit():
         iparam = int(param)
         if iparam > 99 and iparam < 1000:
             errorWatch.append(param)
-            errorNum.append("URL" + param)
-            fileName.append(DIRNAME + param + '.url')
+            errorName.append("URL" + param)
+            errorFile.append(DIRNAME + param + '.url')
         else:
             print("Error: return code", param, "is out of bounds [100..999]\n")
             sys.exit()
@@ -96,9 +96,9 @@ for param in params:
         print("Error: return code", param, "is not and integer\n")
         sys.exit()
 
-pprint(errorWatch)
-pprint(errorNum)
-pprint(fileName)
+print("Watch", errorWatch)
+print("Num", errorName)
+print("File", errorFile)
 
 # Create output/ directory if not exists
 try:
@@ -119,8 +119,9 @@ with open(JSONIN, "r") as f:
 # Define output files
 urlXXX = open(URLXXX,"w")
 urlOK = open(URLOK,"w")
-for i in range(1, nparams):
-    errorNum[i] = open(fileName[i], "w")
+for i in range(0, nparams-1):
+    errorName[i] = open(errorFile[i], "w")
+    print("Created", errorName[i])
 
 # Recurrent function
 def preorder(tree, depth):
@@ -161,18 +162,18 @@ def preorder(tree, depth):
                             if status == code:
                                 found = 1
                                 print(RED + "  " + status + " " + id + " #" + str(i))
-                                errorNum[j].write(url + "\n")
+                                errorName[j].write(url + "\n")
                                 ret = tree.pop(d); d -= 1
                                 print(NONE, end="")
                         if not found:
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
-                    print(GREEN + "  Empty folder" + NONE + "\n")
+                    print(GREEN + "  Empty folder" + NONE)
                     if DELETEFOLDER:
                         ret = tree.pop(d); d -= 1
                 else:
-                    print(BLUE + "   ???" + id + NONE + "\n")
+                    print(BLUE + "   ???" + id + NONE)
             i += 1
             d += 1
     return tree

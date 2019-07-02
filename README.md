@@ -109,7 +109,7 @@ Above, log entries for a folder and six processed bookmarks are shown:
 
 * R1.31 checks for valid http return codes
 
-* R1.30 takes as parameters all the http return codes to be filtered out to respective files.
+* R1.30 takes as parameters all the http return codes to be filtered out to files named as return codes.
 
 ## Status
 
