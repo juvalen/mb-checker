@@ -21,7 +21,7 @@ Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a sub
 
 Run `./chrome.py 301 404 406`
 
-This will generate 5 files in _output_ subdirectory:
+This will generate 6 files in _output_ subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
