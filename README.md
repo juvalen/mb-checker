@@ -107,8 +107,9 @@ Above, log entries for a folder and six processed bookmarks are shown:
 
 ## Change log
 
-R1.31 checks for valid http return codes
-R1.30 takes as parameters all the http return codes to be filtered out to respective files.
+* R1.31 checks for valid http return codes
+
+* R1.30 takes as parameters all the http return codes to be filtered out to respective files.
 
 ## Status
 
@@ -116,7 +117,7 @@ Fully operational
 
 ## TODO
 
-Specify wildcards in http return codes so as **5xx** will filter 500, 501, 502...
+Specify wildcards in http return codes so as **5xx** would filter 500, 501, 502...
 
 ## Author
 
