@@ -3,5 +3,6 @@
 *.html
 *.gz
 *.tar
+*.png
 Twisted*
 twisted*
