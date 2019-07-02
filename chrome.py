@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 # Name: chrome.py
-# Version: R1.30
+# Version: R1.32
 # Date: July 2019
 # Function: Parses original chrome Bookmarks file
 #           Tries to reach each URL and removes it on error
 #           Accepts return codes as parameters. chrome.py must be called as executable:
+#           $ ./chrome.py --help
 #           $ ./chrome.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -82,6 +83,24 @@ nparams = len(sys.argv)
 errorWatch = []
 errorName = []
 errorFile = []
+if params[0] == '--help':
+    print("""
+Usage:
+    ./chrome.py <code1> <code2> <code3>
+
+Parameters:
+    http return <code> that will trigger not adding its URL to filtered file and writing its address to '<code>.url'. Code range [100..999].
+
+Files:
+    Input 'Bookmark' file
+    Output will be written to 'output/'. These file will be created:
+     - Filtered.json (purged file)
+     - XXX.url (network errors)
+     - OK.url (all passed)
+     - One <code>.url file for each parameter
+    """)
+    sys.exit()
+
 for param in params:
     if param.isdigit():
         iparam = int(param)
@@ -165,7 +184,7 @@ def preorder(tree, depth):
                                 errorName[j].write(url + "\n")
                                 ret = tree.pop(d); d -= 1
                                 print(NONE, end="")
-                        if not found:
+                        if not found: # looked for code not in list
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":
