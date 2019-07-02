@@ -3,11 +3,9 @@ This is a simple command line utility to weed your good old bookmark file.
 
 After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.
 
-Feed this python script with a Chrome bookmark file and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ file, plus additional files classifying the broken URLs.
+Feed this python script with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ file, plus additional files containing the URLs with the specified return codes.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
-
-It takes as parameters all the http return codes to be filtered out.
 
 ## Requirements
 
@@ -31,13 +29,13 @@ This will generate 5 files in _output_ subdirectory:
 
 * **301.url**: list of 301 URLs
 
-* **302.url**: list of 302 URLs
-
 * **404.url**: list of 404 URLs
+
+* **406.url**: list of 406 URLs
 
 * **Filtered.json**: resulting json bookmarks with stale entries removed
 
-Thus XXX.url & OK.url & 302.url & 302.url & 404.url altogether will contain all original bookmark entries.
+Thus XXX.url & OK.url & 301.url & 404.url & 406.url altogether will contain all original bookmark entries.
 
 Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
@@ -101,25 +99,33 @@ Above, log entries for a folder and six processed bookmarks are shown:
 
 **301 1925 11** indicates site returned 301 and URL added to __output/301.url__, entry Id removed and list sequence # displayed
 
-**406 2973 #2** indicates site returned 406 and URL added to __output/406.url__, entry Id removed and list sequence # displayed
-
 **404 4481 #13** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
+
+**406 2973 #2** indicates site returned 406 and URL added to __output/406.url__, entry Id removed and list sequence # displayed
 
 **XXX 5346 #3** means site unaccessible, so URL was copied to __output/XXX.url__, entry Id removed and list sequence # displayed
 
-# Status
+## Change log
+
+R1.30 takes as parameters all the http return codes to be filtered out to respective files.
+
+## Status
 
 Fully operational
 
-# Author
+## TODO
+
+Specify wildcards in http return codes so as **5xx** will filter 500, 501, 502...
+
+## Author
 
 * **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
 
-# License
+## License
 
 This project is licensed under the MIT License 
 
-# Acknowledgments
+## Acknowledgments
 
 * Joefrey who put me up to play in the open source arena
 
