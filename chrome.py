@@ -77,15 +77,24 @@ URLXXX = DIRNAME + "XXX.url"
 URLOK = DIRNAME + "OK.url"
 
 # Read input parameters and create corresponding files
-params = sys.argv
-nparams = len(sys.argv)
+params = sys.argv[1:]
+nparams = len(sys.argv)-1
 errorWatch = []
 errorNum = []
 fileName = []
 for param in params:
-    errorWatch.append(param)
-    errorNum.append("URL" + param)
-    fileName.append(DIRNAME + param + '.url')
+    if param.isdigit():
+        iparam = int(param)
+        if iparam > 99 and iparam < 1000:
+            errorWatch.append(param)
+            errorNum.append("URL" + param)
+            fileName.append(DIRNAME + param + '.url')
+        else:
+            print("Error: return code", param, "is out of bounds [100..999]\n")
+            sys.exit()
+    else:
+        print("Error: return code", param, "is not and integer\n")
+        sys.exit()
 
 pprint(errorWatch)
 pprint(errorNum)
@@ -148,11 +157,11 @@ def preorder(tree, depth):
                     else:
                         status = str(req.status_code)
                         found = 0
-                        for i, code in enumerate(errorWatch):
+                        for j, code in enumerate(errorWatch):
                             if status == code:
                                 found = 1
                                 print(RED + "  " + status + " " + id + " #" + str(i))
-                                errorNum[i].write(url + "\n")
+                                errorNum[j].write(url + "\n")
                                 ret = tree.pop(d); d -= 1
                                 print(NONE, end="")
                         if not found:
