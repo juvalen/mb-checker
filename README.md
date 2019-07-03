@@ -9,6 +9,12 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Now runs paralel with queues.
 
+ - workers reach URLs and store result
+ - queue deliver tasks
+ - main loop pushed to queue
+
+Pending to be reformatted to json
+
 ## Requirements
 
 * python 3

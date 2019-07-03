@@ -66,13 +66,10 @@
 #
 # Output:
 
-import requests
 import json
 from pprint import pprint
 import sys
-from threading import Thread
 import http.client, sys
-import queue
 from que import *
 
 concurrent = 2

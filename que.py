@@ -4,10 +4,9 @@
 # Date: July 2019
 # Function: Includes threading with queue
 #
+import requests
 from threading import Thread
 import queue
-import requests
-
 concurrent = 2
 
 # Threading functions
