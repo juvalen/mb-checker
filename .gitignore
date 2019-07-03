@@ -4,5 +4,6 @@
 *.gz
 *.tar
 *.png
+*.lst
 Twisted*
 twisted*
