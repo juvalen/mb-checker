@@ -93,11 +93,11 @@ Parameters:
 
 Files:
     Input 'Bookmark' file
-    Output will be written to 'output/'. These file will be created:
+    Output will be written to 'output/'. These files will be created:
      - Filtered.json (purged file)
      - XXX.url (network errors)
      - OK.url (all passed)
-     - One <code>.url file for each parameter
+     - One <code>.url file per parameter
     """)
     sys.exit()
 
