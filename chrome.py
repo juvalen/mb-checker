@@ -83,8 +83,9 @@ nparams = len(sys.argv)
 errorWatch = []
 errorName = []
 errorFile = []
-if params[0] == '--help':
-    print("""
+if nparams > 1:
+    if params[0] == '--help':
+        print("""
 Usage:
     ./chrome.py <code1> <code2> <code3>
 
@@ -98,6 +99,12 @@ Files:
      - XXX.url (network errors)
      - OK.url (all passed)
      - One <code>.url file per parameter
+        """)
+        sys.exit()
+if nparams == 1:
+    print("""
+Usage: ./chrome.py <code1> <code2> <code3>
+       ./chrome.py --help
     """)
     sys.exit()
 
