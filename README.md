@@ -61,7 +61,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 * valid entry list in `OK.url`
 
-* all https status codes spedified will be rejected and entries logged in `<code>.url`.
+* all https status codes specified will be rejected and entries logged in `<code>.url`.
 
 * those subject to some sundry network errors in `XXX.url`.
 
