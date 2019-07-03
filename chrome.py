@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 # Name: chrome.py
-# Version: R1.32
+# Version: R2
 # Date: July 2019
 # Function: Parses original chrome Bookmarks file
 #           Tries to reach each URL and removes it on error
 #           Accepts return codes as parameters. chrome.py must be called as executable:
 #           $ ./chrome.py --help
 #           $ ./chrome.py 404 501 403
+#           Threaded
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        Bookmarks file structure:
@@ -69,6 +70,11 @@ import requests
 import json
 from pprint import pprint
 import sys
+from threading import Thread
+import http.client, sys
+import queue
+
+concurrent = 2
 
 DELETEFOLDER = 0
 DIRNAME = "output/"
@@ -83,9 +89,8 @@ nparams = len(sys.argv)
 errorWatch = []
 errorName = []
 errorFile = []
-if nparams > 1:
-    if params[0] == '--help':
-        print("""
+if params[0] == '--help':
+    print("""
 Usage:
     ./chrome.py <code1> <code2> <code3>
 
@@ -99,14 +104,10 @@ Files:
      - XXX.url (network errors)
      - OK.url (all passed)
      - One <code>.url file for each parameter
-        """)
-        sys.exit()
-elif nparams == 1:
-    print("""
-Usage: ./chrome.py <code1> <code2> <code3>
     """)
     sys.exit()
 
+# Parameter parsing
 for param in params:
     if param.isdigit():
         iparam = int(param)
@@ -141,12 +142,35 @@ NONE = '\033[0m' # No Color
 with open(JSONIN, "r") as f:
     Bookmarks = json.load(f)
 
-# Define output files
+# Create output files
 urlXXX = open(URLXXX,"w")
 urlOK = open(URLOK,"w")
 for i in range(0, nparams-1):
     errorName[i] = open(errorFile[i], "w")
     print("Created", errorName[i])
+
+# Threading functions
+def doWork():
+    while True:
+        url = q.get()
+        status, url = getStatus(url)
+        #doSomethingWithResult(status, url)
+        q.task_done()
+
+def getStatus(ourl):
+    try:
+        req = requests.head(ourl, timeout=10)
+        status = str(req.status_code)
+        return status, ourl
+    except:
+        return "XXX", ourl
+
+# Start the paralel queue
+q = queue.Queue(concurrent * 2)
+for i in range(concurrent):
+    t = Thread(target=doWork)
+    t.daemon = True
+    t.start()
 
 # Recurrent function
 def preorder(tree, depth):
@@ -175,14 +199,20 @@ def preorder(tree, depth):
                     print("  N ", name)
                     try:
 # To paralelize
-                        req = requests.head(url, timeout=10)
+# Send request to queue
+                        q.put(url.strip())
+                        q.join()
+# Read request from queue
+                        status, url = getStatus(url)
+# Old sequential
+                        #req = requests.head(url, timeout=10)
+                        #status = str(req.status_code)
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
                         ret = tree.pop(d); d -= 1
                         print(NONE, end="")
                     else:
-                        status = str(req.status_code)
                         found = 0
                         for j, code in enumerate(errorWatch):
                             if status == code:
