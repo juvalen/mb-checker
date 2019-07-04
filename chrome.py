@@ -74,7 +74,7 @@ from que import *
 
 concurrent = 2
 
-DELETEFOLDER = 0
+DELETEFOLDER = 1
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
@@ -108,6 +108,7 @@ Files:
 elif nparams == 1:
         print("""
 Usage: ./chrome.py <code1> <code2> <code3>
+       ./chrome.py --help
         """)
         sys.exit()
 
