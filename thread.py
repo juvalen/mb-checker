@@ -202,7 +202,7 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-                    print("  N ", name)
+                    #print("  N ", name)
                     try:
 # To paralelize
 # Send request to queue

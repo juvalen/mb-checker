@@ -173,28 +173,25 @@ def preorder(tree, depth):
                 preorder(subtree, depth)
             else:
                 type = item["type"]
-                id = item["id"]
+                id = item["id"
                 if type == "url":
 # list element being checked is i
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-                    print("  N ", name)
-                    try:
+                    #print("  N ", name)
 # To paralelize
 # Send request to queue
-                        q.put(url.strip())
-                        q.join()
+                    q.put(url.strip())
+                    q.join()
 # Read request from queue
-                        status, url = getStatus(url)
+                    status, url = getStatus(url)
 # Old sequential
-                        #req = requests.head(url, timeout=10)
-                        #status = str(req.status_code)
-                    except:
-                        print(RED + "  XXX " + id + " #" + str(i))
+                    #req = requests.head(url, timeout=10)
+                    #status = str(req.status_code)
+                    if status == "XXX":
+                        print(" ", status, '+' + " #" + str(i))
                         urlXXX.write(url + "\n")
-                        ret = tree.pop(d); d -= 1
-                        print(NONE, end="")
                     else:
                         found = 0
                         for j, code in enumerate(errorWatch):
@@ -204,7 +201,7 @@ def preorder(tree, depth):
                                 errorName[j].write(url + "\n")
                                 ret = tree.pop(d); d -= 1
                                 print(NONE, end="")
-                        if not found: # looked for code not in list
+                        if not found: # looked for code not in list: entry is kept
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":

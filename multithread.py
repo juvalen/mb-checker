@@ -4,7 +4,7 @@ import http.client, sys
 import queue
 import requests
 
-concurrent = 32
+concurrent = 2
 
 def doWork():
     while True:
@@ -30,7 +30,7 @@ for i in range(concurrent):
     t.daemon = True
     t.start()
 try:
-    for url in open('output/OK.url'):
+    for url in open('output/OK.lst'):
         q.put(url.strip())
     q.join()
 except KeyboardInterrupt:

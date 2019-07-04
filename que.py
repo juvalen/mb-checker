@@ -7,7 +7,7 @@
 import requests
 from threading import Thread
 import queue
-concurrent = 2
+concurrent = 32
 
 # Threading functions
 def doWork():
@@ -23,7 +23,7 @@ def getStatus(ourl):
         status = str(req.status_code)
         return status, ourl
     except:
-        return "OOO", ourl
+        return "XXX", ourl
 
 # Start the paralel queue
 q = queue.Queue(concurrent * 2)
