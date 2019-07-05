@@ -98,7 +98,7 @@ Parameters:
 
 Files:
     Input 'Bookmark' file
-    Output will be written to 'output/'. These file will be created:
+    Output will be written to 'output/'. These files will be created:
      - Filtered.json (purged file)
      - XXX.url (network errors)
      - OK.url (all passed)
@@ -180,18 +180,11 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-                    #print("  N ", name)
-# To paralelize
-# Send request to queue
-                    q.put(url.strip())
-                    q.join()
-# Read request from queue
-                    status, url = getStatus(url)
-# Old sequential
-                    #req = requests.head(url, timeout=10)
-                    #status = str(req.status_code)
-                    if status == "XXX":
-                        print(" ", status, '+' + " #" + str(i))
+                    print("  N ", name)
+                    try:
+                        req = requests.head(url, timeout=10, proxies={'http':'','https':''})
+                    except:
+                        print(RED + "  XXX " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
                     else:
                         found = 0
