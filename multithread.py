@@ -4,7 +4,7 @@ import http.client, sys
 import queue
 import requests
 
-concurrent = 2
+concurrent = 8
 
 def doWork():
     while True:
