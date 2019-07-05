@@ -7,14 +7,17 @@
 import requests
 from threading import Thread
 import queue
-concurrent = 32
+DIRNAME = "output/"
+#URLFILTER = DIRNAME + "Filtered.url"
+
+concurrent = 8
 
 # Threading functions
 def doWork():
     while True:
         url = q.get()
         status, url = getStatus(url)
-        #doSomethingWithResult(status, url)
+        writeResult(status, url)
         q.task_done()
 
 def getStatus(ourl):
@@ -25,9 +28,14 @@ def getStatus(ourl):
     except:
         return "XXX", ourl
 
+def writeResult(status, ourl):
+    urlFilter.write(status + ' ' + ourl + '\n')
+    print(status + ' ' + ourl )
+
 # Start the paralel queue
 q = queue.Queue(concurrent * 2)
 for i in range(concurrent):
     t = Thread(target=doWork)
     t.daemon = True
     t.start()
+

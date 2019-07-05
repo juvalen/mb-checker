@@ -1,19 +1,18 @@
-# Bookmark cleansing R2
+# Bookmark cleansing R3
 This is a simple command line utility to weed your good old bookmark file.
 
 After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.
 
-Feed this python script with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional named as the specified return code.
+Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional named as the specified return code.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
-Now runs paralel with queues.
-
+There is one script that crawls all entries included in the bookmarks and generates a list with the status code of each entry.
  - workers reach URLs and store result
  - queue deliver tasks
  - main loop pushed to queue
 
-Pending to be reformatted to json
+A second script takes that output plus the source bookmark file plus a list of offending return codes and removes those bookmarks which returned that codes.
 
 ## Requirements
 
@@ -31,13 +30,15 @@ Clone this repository into a directory
 
 Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
 
-Run `./chrome.py 301 404 406`
+1. Run `./scanJSON.py`
+
+2. Run then `./buildJSON 301 404 406`
 
 This will generate 6 files in _output_ subdirectory:
 
-* **XXX.url**: list of inaccessible URLs
+* **Filtered.url**: list of return code and URL for each entry
 
-* **OK.url**: list of successfull URLs
+* **XXX.url**: list of inaccessible URLs
 
 * **301.url**: list of 301 URLs
 
@@ -46,8 +47,6 @@ This will generate 6 files in _output_ subdirectory:
 * **406.url**: list of 406 URLs
 
 * **Filtered.json**: resulting json bookmarks with stale entries removed
-
-Thus XXX.url & OK.url & 301.url & 404.url & 406.url altogether will contain all original bookmark entries.
 
 Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 

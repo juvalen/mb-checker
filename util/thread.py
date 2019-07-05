@@ -93,7 +93,7 @@ if nparams > 1:
     if params[0] == '--help':
         print("""
 Usage:
-    ./chrome.py <code1> <code2> <code3>
+    ./thread.py <code1> <code2> <code3>
 
 Parameters:
     http return <code> that will trigger not adding its URL to filtered file and writing its address to '<code>.url'. Code range [100..999].
@@ -127,10 +127,6 @@ for param in params:
     else:
         print("Error: return code", param, "is not and integer\n")
         sys.exit()
-
-#print("Watch", errorWatch)
-#print("Num", errorName)
-#print("File", errorFile)
 
 # Create output/ directory if not exists
 try:
