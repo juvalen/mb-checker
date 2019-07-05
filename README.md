@@ -64,7 +64,7 @@ Script crawls the bookmark file and uses **requests.head** method to access each
 
 After processing all these files will be found in the _output_ subdirectory:
 
-* valid entry list in `OK.url`
+* return code and entry list in `Filtered.url`
 
 * all https status codes specified will be rejected and entries logged in `<code>.url`.
 
