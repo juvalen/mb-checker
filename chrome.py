@@ -175,7 +175,7 @@ def preorder(tree, depth):
                     print(">>> " + url)
                     print("  N ", name)
                     try:
-                        req = requests.head(url, timeout=10)
+                        req = requests.head(url, timeout=10, proxies={'http':'','https':''})
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
