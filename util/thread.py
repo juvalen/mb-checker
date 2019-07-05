@@ -66,15 +66,17 @@
 #
 # Output:
 
+import requests
 import json
 from pprint import pprint
 import sys
+from threading import Thread
 import http.client, sys
-from que import *
+import queue
 
 concurrent = 2
 
-DELETEFOLDER = 1
+DELETEFOLDER = 0
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
@@ -91,26 +93,25 @@ if nparams > 1:
     if params[0] == '--help':
         print("""
 Usage:
-    ./chrome.py <code1> <code2> <code3>
+    ./thread.py <code1> <code2> <code3>
 
 Parameters:
     http return <code> that will trigger not adding its URL to filtered file and writing its address to '<code>.url'. Code range [100..999].
 
 Files:
     Input 'Bookmark' file
-    Output will be written to 'output/'. These files will be created:
+    Output will be written to 'output/'. These file will be created:
      - Filtered.json (purged file)
      - XXX.url (network errors)
      - OK.url (all passed)
-     - One <code>.url file per parameter
+     - One <code>.url file for each parameter
         """)
         sys.exit()
-if nparams == 1:
-    print("""
+elif nparams == 1:
+        print("""
 Usage: ./chrome.py <code1> <code2> <code3>
-       ./chrome.py --help
-    """)
-    sys.exit()
+        """)
+        sys.exit()
 
 # Parameter parsing
 for param in params:
@@ -126,10 +127,6 @@ for param in params:
     else:
         print("Error: return code", param, "is not and integer\n")
         sys.exit()
-
-#print("Watch", errorWatch)
-#print("Num", errorName)
-#print("File", errorFile)
 
 # Create output/ directory if not exists
 try:
@@ -154,7 +151,28 @@ for i in range(0, nparams-1):
     errorName[i] = open(errorFile[i], "w")
     print("Created", errorName[i])
 
-import que
+# Threading functions
+def doWork():
+    while True:
+        url = q.get()
+        status, url = getStatus(url)
+        #doSomethingWithResult(status, url)
+        q.task_done()
+
+def getStatus(ourl):
+    try:
+        req = requests.head(ourl, timeout=10, proxies={'http':'','https':''})
+        status = str(req.status_code)
+        return status, ourl
+    except:
+        return "XXX", ourl
+
+# Start the paralel queue
+q = queue.Queue(concurrent * 2)
+for i in range(concurrent):
+    t = Thread(target=doWork)
+    t.daemon = True
+    t.start()
 
 # Recurrent function
 def preorder(tree, depth):
@@ -180,12 +198,22 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-                    print("  N ", name)
+                    #print("  N ", name)
                     try:
-                        req = requests.head(url, timeout=10, proxies={'http':'','https':''})
+# To paralelize
+# Send request to queue
+                        q.put(url.strip())
+                        q.join()
+# Read request from queue
+                        status, url = getStatus(url)
+# Old sequential
+                        #req = requests.head(url, timeout=10)
+                        #status = str(req.status_code)
                     except:
                         print(RED + "  XXX " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
+                        ret = tree.pop(d); d -= 1
+                        print(NONE, end="")
                     else:
                         found = 0
                         for j, code in enumerate(errorWatch):
@@ -195,7 +223,7 @@ def preorder(tree, depth):
                                 errorName[j].write(url + "\n")
                                 ret = tree.pop(d); d -= 1
                                 print(NONE, end="")
-                        if not found: # looked for code not in list: entry is kept
+                        if not found: # looked for code not in list
                             print(" ", status, '+' + " #" + str(i))
                             urlOK.write(url + "\n")
                 elif type == "folder":

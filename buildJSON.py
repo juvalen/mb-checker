@@ -1,13 +1,10 @@
 #!/usr/bin/python3
-# Name: chrome.py
+# Name: buildJSON.py
 # Version: R2
 # Date: July 2019
-# Function: Parses original chrome Bookmarks file
-#           Tries to reach each URL and removes it on error
-#           Accepts return codes as parameters. chrome.py must be called as executable:
-#           $ ./chrome.py --help
-#           $ ./chrome.py 404 501 403
-#           Threaded
+# Function: Reads Filtered.url and Bookmarks and removes URLs not in
+#           Filtered.url to Filtered.json
+#           $ ./buildJSON.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        Bookmarks file structure:
@@ -66,49 +63,51 @@
 #
 # Output:
 
+DELETEFOLDER = 0
+DIRNAME = "output/"
+URLIN = DIRNAME + "Filtered.url"
+URLXXX = DIRNAME + "XXX.url"
+BOOK = DIRNAME + "Bookmarks"
+JSONOUT = DIRNAME + "Filtered.json"
+
 import json
 from pprint import pprint
 import sys
 import http.client, sys
 from que import *
 
-concurrent = 2
-
-DELETEFOLDER = 1
-DIRNAME = "output/"
-JSONIN = DIRNAME + "Bookmarks"
-JSONOUT = DIRNAME + "Filtered.json"
-URLXXX = DIRNAME + "XXX.url"
-URLOK = DIRNAME + "OK.url"
-
 # Read input parameters and create corresponding files
 params = sys.argv[1:]
 nparams = len(sys.argv)
+
 errorWatch = []
-errorName = []
+errorVarName = []
 errorFile = []
 if nparams > 1:
     if params[0] == '--help':
         print("""
 Usage:
-    ./chrome.py <code1> <code2> <code3>
+    ./buildJSON.py <code1> <code2> <code3>
 
 Parameters:
-    http return <code> that will trigger not adding its URL to filtered file and writing its address to '<code>.url'. Code range [100..999].
+    http return <code> to be removed from filtered file . Code range [100..999].
 
 Files:
-    Input 'Bookmark' file
-    Output will be written to 'output/'. These files will be created:
-     - Filtered.json (purged file)
-     - XXX.url (network errors)
-     - OK.url (all passed)
-     - One <code>.url file per parameter
+    Input 'output/Filtered.url' and 'output/Bookmarks'
+    Output will be written to 'output/Filtered.json'
+        """)
+        sys.exit()
+    elif  not  params[0].isdigit():
+        print("""
+Error: code is not a valid number
+
+See ./buildJSON.py --help
         """)
         sys.exit()
 if nparams == 1:
     print("""
-Usage: ./chrome.py <code1> <code2> <code3>
-       ./chrome.py --help
+Usage: ./buildJSON.py <code1> <code2> <code3>
+       ./buildJSON.py --help
     """)
     sys.exit()
 
@@ -118,7 +117,7 @@ for param in params:
         iparam = int(param)
         if iparam > 99 and iparam < 1000:
             errorWatch.append(param)
-            errorName.append("URL" + param)
+            errorVarName.append("URL" + param)
             errorFile.append(DIRNAME + param + '.url')
         else:
             print("Error: return code", param, "is out of bounds [100..999]\n")
@@ -127,16 +126,13 @@ for param in params:
         print("Error: return code", param, "is not and integer\n")
         sys.exit()
 
-#print("Watch", errorWatch)
-#print("Num", errorName)
-#print("File", errorFile)
-
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "created ")
+    print("Directory" , DIRNAME , "didin't exist. Existing.")
+    sys.exit()
 except:
-    print("Directory" , DIRNAME , "preserved")
+    print("Directory" , DIRNAME , "Preserved.")
 
 RED = '\033[31m'
 GREEN = '\033[32m'
@@ -144,19 +140,34 @@ BLUE = '\033[34m'
 NONE = '\033[0m' # No Color
 
 # Read source bookmark file
-with open(JSONIN, "r") as f:
+with open(BOOK, "r") as f:
     Bookmarks = json.load(f)
+f.close
+# Read filtered bookmark list
+code = []
+entry = []
+nline = 0
+f = open(URLIN, "r")
+line = f.readline()
+while line:
+    nline += 1
+    status, url = line.split(" ")
+    url = url.strip('\n')
+    code.append(status)
+    entry.append(url)
+    line = f.readline()
+f.close
 
 # Create output files
 urlXXX = open(URLXXX,"w")
-urlOK = open(URLOK,"w")
 for i in range(0, nparams-1):
-    errorName[i] = open(errorFile[i], "w")
-    print("Created", errorName[i])
+    errorVarName[i] = open(errorFile[i], "w")
+    print("Created", errorFile[i])
 
-import que
+#Create dictionay of URLs
+dictURL = dict((e, i) for i, e in enumerate(entry))
 
-# Recurrent function
+# Traverse the json tree and remove entries depending on its code in Filtered.url
 def preorder(tree, depth):
     depth += 1
     if tree:
@@ -180,24 +191,27 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-                    print("  N ", name)
-                    try:
-                        req = requests.head(url, timeout=10, proxies={'http':'','https':''})
-                    except:
-                        print(RED + "  XXX " + id + " #" + str(i))
+                    #print("  N ", name)
+# Check status code of that URL in Filtered.url
+# Check status code of that URL in Filtered.url
+                    ind = dictURL[url]
+                    status = code[ind]
+                    if status == "XXX":
+                        print(RED + "  " + status + " " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
-                    else:
-                        found = 0
-                        for j, code in enumerate(errorWatch):
-                            if status == code:
-                                found = 1
-                                print(RED + "  " + status + " " + id + " #" + str(i))
-                                errorName[j].write(url + "\n")
-                                ret = tree.pop(d); d -= 1
-                                print(NONE, end="")
-                        if not found: # looked for code not in list: entry is kept
-                            print(" ", status, '+' + " #" + str(i))
-                            urlOK.write(url + "\n")
+                        ret = tree.pop(d); d -= 1
+                        print(NONE, end="")
+                    elif status in errorWatch:
+                        pos = errorWatch.index(status)
+                        f = errorVarName[pos]
+                        print(RED + "  " + status + " " + id + " #" + str(i))
+                        f.write(url + "\n")
+                        ret = tree.pop(d); d -= 1
+                        print(NONE, end="")
+                    else: # looked for code not in list, entry remains
+                        print(" ", status, '+' + " #" + str(i))
+# Check status code of that URL in Filtered.url
+# Check status code of that URL in Filtered.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
                     if DELETEFOLDER:
