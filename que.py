@@ -19,7 +19,7 @@ def doWork():
 
 def getStatus(ourl):
     try:
-        req = requests.head(ourl, timeout=10)
+        req = requests.head(ourl, timeout=10, proxies={'http':'','https':''})
         status = str(req.status_code)
         return status, ourl
     except:
