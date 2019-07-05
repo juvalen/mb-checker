@@ -174,7 +174,7 @@ def preorder(tree, depth):
                 preorder(subtree, depth)
             else:
                 type = item["type"]
-                id = item["id"
+                id = item["id"]
                 if type == "url":
 # list element being checked is i
                     date_added = item["date_added"]
