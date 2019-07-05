@@ -160,6 +160,9 @@ f.close
 
 # Create output files
 urlXXX = open(URLXXX,"w")
+for i in range(0, nparams-1):
+    errorVarName[i] = open(errorFile[i], "w")
+    print("Created", errorFile[i])
 
 #Create dictionay of URLs
 dictURL = dict((e, i) for i, e in enumerate(entry))
@@ -199,8 +202,10 @@ def preorder(tree, depth):
                         ret = tree.pop(d); d -= 1
                         print(NONE, end="")
                     elif status in errorWatch:
+                        pos = errorWatch.index(status)
+                        f = errorVarName[pos]
                         print(RED + "  " + status + " " + id + " #" + str(i))
-                        errorVarName[j].write(url + "\n")
+                        f.write(url + "\n")
                         ret = tree.pop(d); d -= 1
                         print(NONE, end="")
                     else: # looked for code not in list, entry remains
