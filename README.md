@@ -30,11 +30,11 @@ Clone this repository into a directory
 
 Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
 
-1. Run `./scanJSON.py`
+1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks
 
-2. Run then `./buildJSON 301 404 406`
+2. Run then `./buildJSON 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
 
-This will generate 6 files in _output_ subdirectory:
+This two sample commands will generate 6 files in _output_ subdirectory:
 
 * **Filtered.url**: list of return code and URL for each entry
 
@@ -68,55 +68,35 @@ After processing all these files will be found in the _output_ subdirectory:
 
 * all https status codes specified will be rejected and entries logged in `<code>.url`.
 
-* those subject to some sundry network errors in `XXX.url`.
+* entries failing due to sundry network errors in `XXX.url`.
 
-* Valid bookmarks in `Filtered.json`, to replace original `Bookmarks`.
+* valid bookmarks in `Filtered.json`, to replace original `Bookmarks`.
 
 ## Sample screen dump
 
 ```
-$ ./chrome.py 301 404 406
+$ ./scanJSON.py
+$ ./buildJSON.py 301 404 406
 ...
-[2] Poesia (6)
->>> http://www.diccionariodesinonimos.es/
-  T  Diccionario de Sinónimos
-  404 4481 #13
->>> http://www.poemas-del-alma.com/mario-benedetti.htm
-  T  Mario Benedetti - Poemas de Mario Benedetti
-  301 1925 #11
->>> http://vademecum-poetico.blogspot.com.es/2009/10/acentuacion-ritmica-versal-ii-el.html
-  T  VADEMECUM POETICO: ACENTUACIÓN RÍTMICA VERSAL: (II) EL ENDECASÍLABO
-  302 + #8
->>> http://www.poesi.as/index43.htm
-  T  Fábula de Polifemo y Galatea
-  200 + #2
->>> http://www.foundalis.com/res/bps/bpidx.htm
-  N  Index of Bongard Problems
-  406 2973 #2
->>> http://www.phpeasystep.com/phptu/3.html
-  T  PHP Limit upload file size
-  XXX 5346 #3
+[3] MongoDB (21)
+200 https://www.tutorialspoint.com/mongodb/index.htm
+301 http://php.net/manual/en/mongo.tutorial.php
+302 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/
+XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
+...
 ```
 
 Above, log entries for a folder and six processed bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**>>>** URL under scrutiny
-
-**T** original bookmark title
-
-**NNN + #11** returned status (200 & 302 in this sample run, indicates bookmark entry is copied to __output/OK.url__ and bookmark preserved to `Filtered.json`) and list sequence # displayed
-
-**301 1925 11** indicates site returned 301 and URL added to __output/301.url__, entry Id removed and list sequence # displayed
-
-**404 4481 #13** indicates site returned 404 and URL added to __output/404.url__, entry Id removed and list sequence # displayed
-
-**406 2973 #2** indicates site returned 406 and URL added to __output/406.url__, entry Id removed and list sequence # displayed
-
-**XXX 5346 #3** means site unaccessible, so URL was copied to __output/XXX.url__, entry Id removed and list sequence # displayed
+**code url** returned status (XXX, 200, 301 & 302 in this sample run) and URL (XXX entries are always removed, no need to specify it)
 
 ## Change log
+
+* R3 runs in two steps: scan and build
+
+* R2 parallelization efforts
 
 * R1.31 checks for valid http return codes
 
@@ -129,8 +109,6 @@ Fully operational
 ## TODO
 
 Specify wildcards in http return codes so as **5xx** would filter 500, 501, 502...
-
-Paralelize
 
 ## Author
 

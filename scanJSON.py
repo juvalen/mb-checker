@@ -136,7 +136,7 @@ def preorder(tree, depth):
                 if type == "url":
 # list element being checked
                     url = item["url"]
-                    print(">>> " + url)
+                    #print(">>> " + url)
 # To paralelize
 # Send request to queue
                     que.q.put(url.strip())

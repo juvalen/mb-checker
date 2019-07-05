@@ -10,7 +10,7 @@ import queue
 DIRNAME = "output/"
 #URLFILTER = DIRNAME + "Filtered.url"
 
-concurrent = 8
+concurrent = 16
 
 # Threading functions
 def doWork():
