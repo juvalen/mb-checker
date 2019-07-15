@@ -76,21 +76,32 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ```
 $ ./scanJSON.py
-$ ./buildJSON.py 301 404 406
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
 301 http://php.net/manual/en/mongo.tutorial.php
+301 http://www.mongodb.org/display/DOCS/Querying
 302 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
+$ ./buildJSON.py 404
+...
+[3] MongoDB (21)
+>>> http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart
+  301 + #1
+>>> http://www.mongodb.org/display/DOCS/Querying
+  301 + #2
+>>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/
+  302 + #3
+>>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
+  XXX 1257 #4
 ```
 
-Above, log entries for a folder and six processed bookmarks are shown:
+Above, log entries for a folder and four processed bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**code url** returned status (XXX, 200, 301 & 302 in this sample run) and URL (XXX entries are always removed, no need to specify it)
+**code url** returned status (XXX, 301 & 302 in this sample run) and URL. XXX entries incluse entry id and are always removed, no need to specify it.
 
 ## Change log
 
