@@ -101,7 +101,7 @@ Above, log entries for a folder and four processed bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**code url** returned status (XXX, 301 & 302 in this sample run) and URL. XXX lines include network errors include entry id and are always removed, no need to specify it.
+**code url** returned status (XXX, 301 & 302 in this sample run) and URL. XXX code is caused by network errors and entry id is shown. Those entries are always removed, there is no need to specify it.
 
 ## Change log
 
