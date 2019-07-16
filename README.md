@@ -74,6 +74,8 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
+Here script is requested to remove 404 errors:
+
 ```
 $ ./scanJSON.py
 ...
@@ -95,13 +97,16 @@ $ ./buildJSON.py 404
   302 + #3
 >>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
   XXX 1257 #4
+...
 ```
 
 Above, log entries for a folder and four processed bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**code url** returned status (XXX, 301 & 302 in this sample run) and URL. XXX code is caused by network errors and entry id is shown. Those entries are always removed, there is no need to specify it.
+**code url** returned status (XXX, 301 & 302 in this sample run), URL and entry #.
+
+404 and XXX lines are removed. XXX code is caused by network errors and entry id is shown. Those entries are always removed, there is no need to specify it.
 
 ## Change log
 
