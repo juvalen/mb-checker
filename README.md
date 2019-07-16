@@ -74,7 +74,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
-Here script is requested to remove 404 errors:
+Here scripts are used to remove 404 errors. First `scalJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` build the json structure of the bookmark, with which to replace bookmark file in use.
 
 ```
 $ ./scanJSON.py
