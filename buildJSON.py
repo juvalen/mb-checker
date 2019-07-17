@@ -63,7 +63,7 @@
 #
 # Output:
 
-DELETEFOLDER = 0
+DELETEFOLDER = 1
 DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"

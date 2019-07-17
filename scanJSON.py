@@ -63,7 +63,6 @@
 #
 # Output:
 
-DELETEFOLDER = 1
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
 URLFILTER = DIRNAME + "Filtered.url"
