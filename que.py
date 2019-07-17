@@ -8,7 +8,7 @@ import requests
 from threading import Thread
 import queue
 DIRNAME = "output/"
-#URLFILTER = DIRNAME + "Filtered.url"
+TIMEOUT = 5
 
 concurrent = 16
 
@@ -22,7 +22,7 @@ def doWork():
 
 def getStatus(ourl):
     try:
-        req = requests.head(ourl, timeout=10, proxies={'http':'','https':''})
+        req = requests.head(ourl, timeout=TIMEOUT, proxies={'http':'','https':''})
         status = str(req.status_code)
         return status, ourl
     except:

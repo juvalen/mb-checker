@@ -130,6 +130,8 @@ Specify wildcards in http return codes so as **5xx** would filter 500, 501, 502.
 
 * **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
 
+Send feedback if you wish.
+
 ## License
 
 This project is licensed under the MIT License 
