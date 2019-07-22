@@ -7,12 +7,13 @@ Feed this python scripts with a Chrome bookmark file and a list of http return c
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
-There is one script that crawls all entries included in the bookmarks and generates a list with the status code of each entry.
+There is one script that crawls all entries included in the bookmarks and queue request to worker that reach URLs in parallel:
+ - workers are created an listen to queue
+ - main loop pushes entries to queue
  - workers reach URLs and store result
- - queue deliver tasks
- - main loop pushed to queue
+ - workers write results to file
 
-A second script takes that output plus the source bookmark file plus a list of offending return codes and removes those bookmarks which returned that codes.
+A second script takes that file output plus the source bookmark plus a list of offending return codes and removes those bookmarks which returned that codes.
 
 ## Requirements
 
