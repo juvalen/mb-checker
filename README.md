@@ -1,7 +1,7 @@
 # Bookmark cleansing R3
 This is a simple command line utility to weed your good old bookmark file.
 
-After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when accessing them. In order to keep the bookmark list current I created this script.
+After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when confident of having them. In order to keep the bookmark list current I created this script.
 
 Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional named as the specified return code.
 
