@@ -1,19 +1,19 @@
 # Bookmark cleansing R3
 This is a simple command line utility to weed your good old bookmark file.
 
-After being gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when confident of having them. In order to keep the bookmark list current I created this script.
+After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when confident of having them. In order to keep the bookmark list current I created this script.
 
-Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional named as the specified return code.
+Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
-There is one script that crawls all entries included in the bookmarks and queue request to worker that reach URLs in parallel:
+There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel following these steps:
  - workers are created an listen to queue
  - main loop pushes entries to queue
  - workers reach URLs and store result
  - workers write results to file
 
-A second script takes that file output plus the source bookmark plus a list of offending return codes and removes those bookmarks which returned that codes.
+A second script has to be run takes that take file output plus the source bookmark plus a list of offending return codes and removes those bookmarks which returned that codes.
 
 ## Requirements
 
@@ -58,7 +58,7 @@ First backup original data !
 ```
 
 ## Input file
-Copy original chrome bookmark file, which may be found for Brave browser in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
+Place a copy of original chrome bookmark file, which may be found for Brave browser in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
 Script crawls the bookmark file and uses **requests.head** method to access each site. It is set a 10" timeout. It retrieves the http return code.
@@ -144,4 +144,4 @@ This project is licensed under the MIT License
 * Mario & Iñaki who are back to programming
 
 * Antonio's hosting
-
+o 
