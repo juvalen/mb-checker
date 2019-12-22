@@ -31,7 +31,7 @@ Clone this repository into a directory
 
 Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks, including bookmarks_bar, other and synced folders
+1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks, including bookmarks_bar, other and synced top folders
 
 2. Run then `./buildJSON.py 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
 
