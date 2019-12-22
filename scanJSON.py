@@ -107,10 +107,8 @@ except:
     print("Directory" , DIRNAME , "preserved")
 
 # Read source bookmark file
-with open(JSONIN, "r") as f:
+with open(JSONIN, "r", encoding='utf-8') as f:
     Bookmarks = json.load(f)
-# Open output file
-#urlFilter = open(URLFIL,"w")
 
 import que
 

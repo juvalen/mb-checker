@@ -264,5 +264,5 @@ filtered = {
 
 # Write json list *filtered* to disk
 with open(JSONOUT, 'w') as fout:
-    json.dump(filtered , fout, sort_keys=True, indent=4, separators=(',', ': '))
+    json.dump(filtered , fout, sort_keys=True, ensure_ascii=False, indent=4, separators=(',', ': '))
 
