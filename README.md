@@ -1,19 +1,19 @@
-# Bookmark cleansing R3
+# Bookmark cleansing R3.1
 This is a simple command line utility to weed your good old bookmark file.
 
-After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when confident of having them. In order to keep the bookmark list current I created this script.
+After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expenting them work. In order to keep the bookmark list current I created this script.
 
-Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through it and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
+Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
-There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel following these steps:
+There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these steps:
  - workers are created an listen to queue
  - main loop pushes entries to queue
  - workers reach URLs and store result
  - workers write results to file
 
-A second script has to be run takes that take file output plus the source bookmark plus a list of offending return codes and removes those bookmarks which returned that codes.
+A second script takes that file output plus a list of offending return codes and copies source bookmarks to a new file removing those affected.
 
 ## Requirements
 
@@ -29,15 +29,15 @@ A second script has to be run takes that take file output plus the source bookma
 
 Clone this repository into a directory
 
-Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
+Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks, including bookmarks_bar, other and synced top folders
+1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks. It includes bookmarks_bar, other and synced top folders
 
 2. Run then `./buildJSON.py 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
 
-This two sample commands will generate 6 files in _output_ subdirectory:
+This last sample commands will generate 6 files in _output_ subdirectory:
 
-* **Filtered.url**: list of return code and URL for each entry
+* **Filtered.url**: list of original URLs with their return code
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -51,17 +51,17 @@ This two sample commands will generate 6 files in _output_ subdirectory:
 
 Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
 
-**The Title field of the bookmark could be defaced by non-ASCII characters, extra quotes or escape sequences found in the original entry.**
+**Scripts deal with UTF-8 characters**
 
 ```
 First backup original data !
 ```
 
 ## Input file
-Place a copy of original chrome bookmark file, which may be found for Brave browser in Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
+Place a copy of original chrome bookmark file, which may be found for Brave browser for Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
-Script crawls the bookmark file and uses **requests.head** method to access each site. It is set a 10" timeout. It retrieves the http return code.
+Script crawls the bookmark file using **requests.head** method to access each site. It is set a 10" timeout. It retrieves the http return code.
 
 After processing all these files will be found in the _output_ subdirectory:
 
@@ -75,7 +75,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
-Here scripts are used to remove 404 errors. First `scalJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file, to replace current bookmark file in use.
+Here scripts are used to remove 404 errors. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file.
 
 ```
 $ ./scanJSON.py
@@ -144,4 +144,4 @@ This project is licensed under the MIT License
 * Mario & Iñaki who are back to programming
 
 * Antonio's hosting
-o 
+ 
