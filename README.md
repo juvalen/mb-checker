@@ -31,13 +31,13 @@ Clone this repository into a directory
 
 Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to produce Bar.url from Bookmarks
+1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks, including bookmarks_bar, other and synced folders
 
-2. Run then `./buildJSON 301 404 406` to produce Filtered.json from Bookmarks and Bar.url
+2. Run then `./buildJSON 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
 
 This two sample commands will generate 6 files in _output_ subdirectory:
 
-* **Bar.url**: list of return code and URL for each entry
+* **Filtered.url**: list of return code and URL for each entry
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -65,7 +65,7 @@ Script crawls the bookmark file and uses **requests.head** method to access each
 
 After processing all these files will be found in the _output_ subdirectory:
 
-* return code and entry list in `Bar.url`
+* return code and entry list in `Filtered.url`
 
 * all https status codes specified will be rejected and entries logged in `<code>.url`.
 

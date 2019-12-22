@@ -3,10 +3,13 @@
 # Version: R2
 # Date: July 2019
 # Function: Parses original chrome Bookmarks file
-#           Writes Bar.url file with (status url) in each line
-#           Runs threaded
+#           Writes in Filtered.url URLs from:
+#            - bookmarks_bar
+#            - other
+#            - synced
+#           tags
 #
-# Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
+# Input: bookmark file in ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        Bookmarks file structure:
 #  {
 #     "checksum": "79c9312bbeee61a5710117f00bc16ff8",
@@ -65,7 +68,7 @@
 
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
-URLFILTER = DIRNAME + "Bar.url"
+URLFILTER = DIRNAME + "Filtered.url"
 
 import json
 from pprint import pprint
@@ -88,7 +91,7 @@ Usage:
 
 Files:
     Input 'output/Bookmark' file
-    Output 'output/Bar.url' (status & url) in each line
+    Output 'output/Filtered.url' (status & url) in each line
         """)
         sys.exit()
     else:
@@ -142,4 +145,10 @@ def preorder(tree, depth):
 
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
+original = Bookmarks['roots']['other']['children']
+nodes = preorder(original, 0)
+original = Bookmarks['roots']['synced']['children']
+nodes = preorder(original, 0)
+
+# Closes error#.url files
 que.urlFilter.close()

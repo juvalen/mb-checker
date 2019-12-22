@@ -2,8 +2,8 @@
 # Name: buildJSON.py
 # Version: R2
 # Date: July 2019
-# Function: Reads Bar.url and Bookmarks and removes URLs not in
-#           Bar.url to Filtered.json
+# Function: Reads Filtered.url and Bookmarks and removes URLs not in
+#           Filtered.url to Filtered.json
 #           $ ./buildJSON.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -54,8 +54,36 @@
 #           "type": "folder"
 #        }
 #        "other": {
+#           "children": [
+#                    {
+#                       "date_added": "13154093727000000",
+#                       "guid": "fe8aac04-a71f-4645-b51e-dcfedddc855b",
+#                       "id": "326",
+#                       "name": "A Complete Guide to the MultiBit Bitcoin Wallet - Bitzuma",
+#                       "type": "url",
+#                       "url": "http://bitzuma.com/posts/a-complete-guide-to-the-multibit-bitcoin-wallet/"
+#                    } ],
+#           "date_added": "13198974830951405",
+#           "date_modified": "13200950919336220",
+#           "id": "2984",
+#           "name": "Other bookmarks",
+#           "type": "folder"
 #        }
 #        "synced": {
+#           "children": [
+#                    {
+#                       "date_added": "13154093728000000",
+#                       "guid": "49dc5d73-1001-4aed-a3d9-2fbc4cc39f62",
+#                       "id": "335",
+#                       "name": "(293,52EUR) RBEX buy and sell bitcoin",
+#                       "type": "url",
+#                       "url": "https://www.rbex.eu/"
+#                    } ],
+#           "date_added": "13198974830951420",
+#           "date_modified": "0",
+#           "id": "2985",
+#           "name": "Mobile bookmarks",
+#           "type": "folder"
 #        }
 #     }
 #    "version": 1
@@ -65,7 +93,7 @@
 
 DELETEFOLDER = 1
 DIRNAME = "output/"
-URLIN = DIRNAME + "Bar.url"
+URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"
 BOOK = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
@@ -93,7 +121,7 @@ Parameters:
     http return <code> to be removed from filtered file . Code range [100..999].
 
 Files:
-    Input 'output/Bar.url' and 'output/Bookmarks'
+    Input 'output/Filtered.url' and 'output/Bookmarks'
     Output will be written to 'output/Filtered.json'
         """)
         sys.exit()
@@ -167,7 +195,7 @@ for i in range(0, nparams-1):
 #Create dictionay of URLs
 dictURL = dict((e, i) for i, e in enumerate(entry))
 
-# Traverse the json tree and remove entries depending on its code in Bar.url
+# Traverse the json tree and remove entries depending on its code in Filtered.url
 def preorder(tree, depth):
     depth += 1
     if tree:
@@ -192,7 +220,7 @@ def preorder(tree, depth):
                     url = item["url"]
                     print(">>> " + url)
                     #print("  N ", name)
-# Check status code of that URL in Bar.url
+# Check status code of that URL in Filtered.url
                     ind = dictURL[url]
                     status = code[ind]
                     if status == "XXX":
@@ -209,7 +237,7 @@ def preorder(tree, depth):
                         print(NONE, end="")
                     else: # looked for code not in list, entry remains
                         print(" ", status, '+' + " #" + str(i))
-# Check status code of that URL in Bar.url
+# Check status code of that URL in Filtered.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
                     if DELETEFOLDER:
