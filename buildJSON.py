@@ -248,11 +248,11 @@ def preorder(tree, depth):
             d += 1
     return tree
 
-original = Bookmarks['roots']['bookmark_bar']['children']
-nodes = preorder(original, 0)
 # JSON structure
+original = Bookmarks['roots']['other']['children']
+nodes = preorder(original, 0)
 other = {
-    "children": [  ],
+    "children": nodes,
     "date_added": "13198974830951405",
     "date_modified": "13200950919336220",
     "id": "2",
@@ -260,8 +260,10 @@ other = {
     "type": "folder"
 }
 
+original = Bookmarks['roots']['synced']['children']
+nodes = preorder(original, 0)
 synced = {
-    "children": [  ],
+    "children": nodes,
     "date_added": "13198974830951420",
     "date_modified": "0",
     "id": "3",
@@ -269,6 +271,8 @@ synced = {
     "type": "folder"
 }
 
+original = Bookmarks['roots']['bookmark_bar']['children']
+nodes = preorder(original, 0)
 bookmarks_bar = {"children": nodes,
                  "date_added": "13198974830896033",
                  "date_modified": "13200494087851454",

@@ -33,7 +33,7 @@ Copy **Bookmarks** file in which Chrome stores bookmarks in json format to a sub
 
 1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks, including bookmarks_bar, other and synced folders
 
-2. Run then `./buildJSON 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
+2. Run then `./buildJSON.py 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
 
 This two sample commands will generate 6 files in _output_ subdirectory:
 
