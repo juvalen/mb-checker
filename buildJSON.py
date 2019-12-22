@@ -2,8 +2,8 @@
 # Name: buildJSON.py
 # Version: R2
 # Date: July 2019
-# Function: Reads Filtered.url and Bookmarks and removes URLs not in
-#           Filtered.url to Filtered.json
+# Function: Reads Bar.url and Bookmarks and removes URLs not in
+#           Bar.url to Filtered.json
 #           $ ./buildJSON.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -65,7 +65,7 @@
 
 DELETEFOLDER = 1
 DIRNAME = "output/"
-URLIN = DIRNAME + "Filtered.url"
+URLIN = DIRNAME + "Bar.url"
 URLXXX = DIRNAME + "XXX.url"
 BOOK = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Filtered.json"
@@ -93,7 +93,7 @@ Parameters:
     http return <code> to be removed from filtered file . Code range [100..999].
 
 Files:
-    Input 'output/Filtered.url' and 'output/Bookmarks'
+    Input 'output/Bar.url' and 'output/Bookmarks'
     Output will be written to 'output/Filtered.json'
         """)
         sys.exit()
@@ -167,7 +167,7 @@ for i in range(0, nparams-1):
 #Create dictionay of URLs
 dictURL = dict((e, i) for i, e in enumerate(entry))
 
-# Traverse the json tree and remove entries depending on its code in Filtered.url
+# Traverse the json tree and remove entries depending on its code in Bar.url
 def preorder(tree, depth):
     depth += 1
     if tree:
@@ -192,8 +192,7 @@ def preorder(tree, depth):
                     url = item["url"]
                     print(">>> " + url)
                     #print("  N ", name)
-# Check status code of that URL in Filtered.url
-# Check status code of that URL in Filtered.url
+# Check status code of that URL in Bar.url
                     ind = dictURL[url]
                     status = code[ind]
                     if status == "XXX":
@@ -210,8 +209,7 @@ def preorder(tree, depth):
                         print(NONE, end="")
                     else: # looked for code not in list, entry remains
                         print(" ", status, '+' + " #" + str(i))
-# Check status code of that URL in Filtered.url
-# Check status code of that URL in Filtered.url
+# Check status code of that URL in Bar.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
                     if DELETEFOLDER:

@@ -3,7 +3,7 @@
 # Version: R2
 # Date: July 2019
 # Function: Parses original chrome Bookmarks file
-#           Writes Filtered.url file with (status url) in each line
+#           Writes Bar.url file with (status url) in each line
 #           Runs threaded
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -65,7 +65,7 @@
 
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
-URLFILTER = DIRNAME + "Filtered.url"
+URLFILTER = DIRNAME + "Bar.url"
 
 import json
 from pprint import pprint
@@ -88,7 +88,7 @@ Usage:
 
 Files:
     Input 'output/Bookmark' file
-    Output 'output/Filtered.url' (status & url) in each line
+    Output 'output/Bar.url' (status & url) in each line
         """)
         sys.exit()
     else:
