@@ -33,7 +33,7 @@ Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory 
 
 1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks. It includes bookmarks_bar, other and synced top folders
 
-2. Run then `./buildJSON.py 301 404 406` to produce Filtered.json from Bookmarks and Filtered.url
+2. Run then `./buildJSON.py 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url
 
 This last sample commands will generate 6 files in _output_ subdirectory:
 
@@ -47,9 +47,9 @@ This last sample commands will generate 6 files in _output_ subdirectory:
 
 * **406.url**: list of 406 URLs
 
-* **Filtered.json**: resulting json bookmarks with stale entries removed
+* **Bookmarks.out**: resulting json bookmarks with stale entries removed
 
-Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Filtered.json**.
+Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Bookmarks.out**.
 
 **Scripts deal with UTF-8 characters**
 
@@ -71,7 +71,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 * entries failing due to sundry network errors in `XXX.url`.
 
-* valid bookmarks in `Filtered.json`, to replace original `Bookmarks`.
+* valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks`.
 
 ## Sample screen dump
 

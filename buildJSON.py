@@ -3,7 +3,7 @@
 # Version: R2
 # Date: July 2019
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
-#           Filtered.url to Filtered.json
+#           Filtered.url to Bookmarks.out
 #           $ ./buildJSON.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -96,7 +96,7 @@ DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"
 BOOK = DIRNAME + "Bookmarks"
-JSONOUT = DIRNAME + "Filtered.json"
+JSONOUT = DIRNAME + "Bookmarks.out"
 
 import json
 from pprint import pprint
@@ -121,8 +121,8 @@ Parameters:
     http return <code> to be removed from filtered file . Code range [100..999].
 
 Files:
-    Input 'output/Filtered.url' and 'output/Bookmarks'
-    Output will be written to 'output/Filtered.json'
+    Input files 'output/Filtered.url' and 'output/Bookmarks'
+    Output file will be written to 'output/Bookmarks.out'
         """)
         sys.exit()
     elif  not  params[0].isdigit():
