@@ -77,7 +77,7 @@ concurrent = 2
 DELETEFOLDER = 1
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
-JSONOUT = DIRNAME + "Filtered.json"
+JSONOUT = DIRNAME + "Bookmarks.out"
 URLXXX = DIRNAME + "XXX.url"
 URLOK = DIRNAME + "OK.url"
 
@@ -99,7 +99,7 @@ Parameters:
 Files:
     Input 'Bookmark' file
     Output will be written to 'output/'. These files will be created:
-     - Filtered.json (purged file)
+     - Bookmarks.out (purged file)
      - XXX.url (network errors)
      - OK.url (all passed)
      - One <code>.url file per parameter
