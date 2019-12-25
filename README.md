@@ -84,32 +84,36 @@ $ ./scanJSON.py
 200 https://www.tutorialspoint.com/mongodb/index.htm
 301 http://php.net/manual/en/mongo.tutorial.php
 301 http://www.mongodb.org/display/DOCS/Querying
-302 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/
+404 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 $ ./buildJSON.py 404
 ...
 [3] MongoDB (21)
+>>> https://www.tutorialspoint.com/mongodb/index.htm
+  200 + #0
 >>> http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart
   301 + #1
 >>> http://www.mongodb.org/display/DOCS/Querying
   301 + #2
->>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/
-  302 + #3
+>>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
+  404 + #3
 >>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
   XXX 1257 #4
 ...
 ```
 
-Above, log entries for a folder and four processed bookmarks are shown:
+Above, log entries for a folder and five processed bookmarks are shown:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**code url** returned status (XXX, 301 & 302 in this sample run), URL and entry #.
+**code url** returned status (XXX, 200, 301, 404 in this sample run) *+* and entry #.
 
-404 and XXX lines are removed. XXX code is caused by network errors and entry id is shown. Those entries are always removed, there is no need to specify it.
+404 and XXX entries are removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
 
 ## Change log
+
+* R3.1 Handles UTF-8 characters and processes also "other" & "synced" bookmark folders. Output file is now Bookmarks.out
 
 * R3 runs in two steps: scan and build
 
