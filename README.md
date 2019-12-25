@@ -75,7 +75,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
-Here scripts are used to remove 404 errors. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file.
+Here scripts are used to remove 404 errors. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301 & 404 here)
 
 ```
 $ ./scanJSON.py
@@ -87,27 +87,29 @@ $ ./scanJSON.py
 404 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
-$ ./buildJSON.py 404
+$ ./buildJSON.py 301 404
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm
   200 + #0
 >>> http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart
-  301 + #1
+  301 1344 #1
 >>> http://www.mongodb.org/display/DOCS/Querying
-  301 + #2
+  301 1345 #2
 >>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
-  404 + #3
+  404 1346 #3
 >>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
-  XXX 1257 #4
+  XXX 1347 #4
 ...
 ```
 
-Above, log entries for a folder and five processed bookmarks are shown:
+Above, log entries for a folder and five processed bookmarks are shown where four are filtered out:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**code url** returned status (XXX, 200, 301, 404 in this sample run) *+* and entry #.
+**>>> url**
+
+&nbsp;&nbsp;&nbsp;**return code** (XXX, 200, 301, 404 in this sample run), + if passed or entry id if rejected, and entry #.
 
 404 and XXX entries are removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
 
