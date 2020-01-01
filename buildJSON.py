@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R2
+# Version: R3.1
+# Author: jvalentinpastrana at gmail
 # Date: July 2019
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
 #           $ ./buildJSON.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-#        Bookmarks file structure:
+#        File structure:
 #  {
 #     "checksum": "79c9312bbeee61a5710117f00bc16ff8",
 #     "roots": {

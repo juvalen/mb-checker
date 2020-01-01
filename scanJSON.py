@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R2
+# Version: R3.1
+# Author: jvalentinpastrana at gmail
 # Date: July 2019
 # Function: Parses original chrome Bookmarks file
 #           Writes in Filtered.url URLs from:
@@ -10,7 +11,7 @@
 #           tags
 #
 # Input: bookmark file in ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-#        Bookmarks file structure:
+#        File structure:
 #  {
 #     "checksum": "79c9312bbeee61a5710117f00bc16ff8",
 #     "roots": {

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Name: que.py
-# Version: R2
+# Version: R3.1
+# Author: jvalentinpastrana at gmail
 # Date: July 2019
 # Function: Includes threading with queue
 #
