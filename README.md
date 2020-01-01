@@ -31,13 +31,11 @@ Clone this repository into a directory
 
 Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to produce Filtered.url from Bookmarks. It includes bookmarks_bar, other and synced top folders
+1. Run first `./scanJSON.py` to produce Filtered.url with a list of URLs and their return code from original Bookmarks. It includes bookmarks_bar, other and synced top folders
 
 2. Run then `./buildJSON.py 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url
 
-This last sample commands will generate 6 files in _output_ subdirectory:
-
-* **Filtered.url**: list of original URLs with their return code
+This last sample command will generate 5 files in _output_ subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -49,7 +47,7 @@ This last sample commands will generate 6 files in _output_ subdirectory:
 
 * **Bookmarks.out**: resulting json bookmarks with stale entries removed
 
-Allow it finish and all result files will appear in _output_ subdirectory. Replace original **Bookmarks** file with **Bookmarks.out**.
+Allow it finish and all result files will appear in _output_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
 **Scripts deal with UTF-8 characters**
 
@@ -61,7 +59,7 @@ First backup original data !
 Place a copy of original chrome bookmark file, which may be found for Brave browser for Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
-Script crawls the bookmark file using **requests.head** method to access each site. It is set a 10" timeout. It retrieves the http return code.
+Script crawls the bookmark file using **requests.head** method to access each site. It is hardcoded a 10" timeout. It retrieves the http return code.
 
 After processing all these files will be found in the _output_ subdirectory:
 
@@ -131,7 +129,7 @@ Fully operational
 
 ## TODO
 
-Specify wildcards in http return codes so as **5xx** would filter 500, 501, 502...
+Specify wildcards in http return codes as **5xx** so it would filter 500, 501, 502...
 
 ## Author
 
