@@ -2,7 +2,7 @@
 # Name: buildJSON.py
 # Version: R3.1
 # Author: jvalentinpastrana at gmail
-# Date: July 2019
+# Date: January 2020
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
 #           $ ./buildJSON.py 404 501 403

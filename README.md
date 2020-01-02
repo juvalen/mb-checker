@@ -31,9 +31,9 @@ Clone this repository into a directory
 
 Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to produce Filtered.url with a list of URLs and their return code from original Bookmarks. It includes bookmarks_bar, other and synced top folders
+1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py sets the number of paralel threads. Running this may take some time depending on the number of original bookmarks.
 
-2. Run then `./buildJSON.py 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url
+2. Run then `./buildJSON.py 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url. This can be run several times with disctinct return codes.
 
 This last sample command will generate 5 files in _output_ subdirectory:
 

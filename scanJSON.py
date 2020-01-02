@@ -2,7 +2,7 @@
 # Name: scanJSON.py
 # Version: R3.1
 # Author: jvalentinpastrana at gmail
-# Date: July 2019
+# Date: January 2020
 # Function: Parses original chrome Bookmarks file
 #           Writes in Filtered.url URLs from:
 #            - bookmarks_bar
