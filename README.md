@@ -109,7 +109,7 @@ Above, log entries for a folder and five processed bookmarks are shown where fou
 
 &nbsp;&nbsp;&nbsp;**return code** (XXX, 200, 301, 404 in this sample run), + if passed or entry id if rejected, and entry #.
 
-404 and XXX entries are removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
+301, 404 and XXX entries are removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
 
 ## Change log
 
