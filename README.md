@@ -73,7 +73,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
-Here scripts are used to remove 404 errors. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301 & 404 here)
+Here scripts are used to remove URLs returning 301 & 404 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301 & 404 here)
 
 ```
 $ ./scanJSON.py
@@ -109,7 +109,7 @@ Above, log entries for a folder and five processed bookmarks are shown where fou
 
 &nbsp;&nbsp;&nbsp;**return code** (XXX, 200, 301, 404 in this sample run), + if passed or entry id if rejected, and entry #.
 
-301, 404 and XXX entries are removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
+This sample run entails entries returning 301, 404 and XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
 
 ## Change log
 
@@ -129,7 +129,9 @@ Fully operational
 
 ## TODO
 
-Specify wildcards in http return codes as **5xx** so it would filter 500, 501, 502...
+Specify http return codes using regexps, as **5..** or __5*__ so it would filter 500, 501, 502...
+
+Gather other Chrome bookmark file locations for other Linux dictributions
 
 ## Author
 
