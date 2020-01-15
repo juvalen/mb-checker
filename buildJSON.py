@@ -158,7 +158,7 @@ for param in params:
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "didin't exist. Aborting.")
+    print("Directory" , DIRNAME , "didin't exist. Existing.")
     sys.exit()
 except:
     print("Directory" , DIRNAME , "Preserved.")
@@ -220,6 +220,7 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
+                    #print("  N ", name)
 # Check status code of that URL in Filtered.url
                     ind = dictURL[url]
                     status = code[ind]
