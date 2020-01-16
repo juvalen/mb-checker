@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R3.1
+# Version: R3.2
 # Author: jvalentinpastrana at gmail
 # Date: January 2020
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
+#           The strategy is to remove first duplicate URLs from Filtered list
+#           then remove URLs list items as they are processed,
+#           so duplicates entries won't be found and will be removed
 #           $ ./buildJSON.py 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -158,7 +161,7 @@ for param in params:
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "didin't exist. Existing.")
+    print("Directory" , DIRNAME , "didin't exist. Aborting.")
     sys.exit()
 except:
     print("Directory" , DIRNAME , "Preserved.")
@@ -168,11 +171,11 @@ GREEN = '\033[32m'
 BLUE = '\033[34m'
 NONE = '\033[0m' # No Color
 
-# Read source bookmark file
+# Read source Bookmark file
 with open(BOOK, "r") as f:
     Bookmarks = json.load(f)
 f.close
-# Read filtered bookmark list
+# Read Filtered.url to code & entry lists
 code = []
 entry = []
 nline = 0
@@ -220,7 +223,6 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-                    #print("  N ", name)
 # Check status code of that URL in Filtered.url
                     ind = dictURL[url]
                     status = code[ind]
@@ -238,6 +240,10 @@ def preorder(tree, depth):
                         print(NONE, end="")
                     else: # looked for code not in list, entry remains
                         print(" ", status, '+' + " #" + str(i))
+#
+                    del dictURL[ind]
+                    del code[ind]
+#
 # Check status code of that URL in Filtered.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
