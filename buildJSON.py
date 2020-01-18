@@ -211,6 +211,8 @@ def preorder(tree, depth):
         width = len(tree)
 # i: counter within folder
         i = d = 0
+# This iteration fails when element is popped
+# Tree should be copied to a new json
         for item in tree:
             name = item["name"]
             try:
@@ -230,32 +232,28 @@ def preorder(tree, depth):
                     url = item["url"]
                     print(">>> " + url)
 # Check status code of that URL in Filtered.url
-                    try:
-                      ind = dictURL[url]
-                      status = code[ind]
-                      if status == "XXX":
-                          print(RED + "  " + status + " " + id + " #" + str(i))
-                          urlXXX.write(url + "\n")
-                          ret = tree.pop(d); d -= 1
-                          print(NONE, end="")
-                      elif status in errorWatch:
-                          pos = errorWatch.index(status)
-                          f = errorVarName[pos]
-                          print(RED + "  " + status + " " + id + " #" + str(i))
-                          f.write(url + "\n")
-                          ret = tree.pop(d); d -= 1
-                          print(NONE, end="")
-                      else: # looked for code not in list, entry remains
-                          print(" ", status, '+' + " #" + str(i))
-# Remove element from dictURL & code lists
-                      #del dictURL[url]
-                      #del code[ind]
-                    except:
-                      print()
-                      #print(BLUE + "  " + "DDD" + " " + id + " #" + str(i))
-                      #urlDDD.write(url + "\n")
-                      #ret = tree.pop(d); d -= 1
-                      #print(NONE, end="")
+#try:
+#    ind = dictURL[url]
+#    ...
+#    remove from dictURL & code lists
+#except:
+#    it is duplicated, remove item from tree
+                    ind = dictURL[url]
+                    status = code[ind]
+                    if status == "XXX":
+                        print(RED + "  " + status + " " + id + " #" + str(i))
+                        urlXXX.write(url + "\n")
+                        ret = tree.pop(d); d -= 1
+                        print(NONE, end="")
+                    elif status in errorWatch:
+                        pos = errorWatch.index(status)
+                        f = errorVarName[pos]
+                        print(RED + "  " + status + " " + id + " #" + str(i))
+                        f.write(url + "\n")
+                        ret = tree.pop(d); d -= 1
+                        print(NONE, end="")
+                    else: # looked for code not in list, entry remains
+                        print(" ", status, '+' + " #" + str(i))
 # Check status code of that URL in Filtered.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
