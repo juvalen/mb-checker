@@ -212,6 +212,7 @@ def preorder(tree, depth):
                 branches = 0
             if branches > 0:
                 preorder(subtree, depth)
+                print()
             else:
                 type = item["type"]
                 id = item["id"]
