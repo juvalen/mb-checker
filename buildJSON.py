@@ -7,6 +7,7 @@
 #           Filtered.url to Bookmarks.out
 #           The strategy is to remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed in exception
+#           Iterating with while
 #           $ ./buildJSON.py -d 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -208,12 +209,13 @@ dictURL = dict((e, i) for i, e in enumerate(entry))
 def preorder(tree, depth):
     depth += 1
     if tree:
-        width = len(tree)
+        numitems = len(tree)
 # i: counter within folder
         i = d = 0
 # This iteration fails when element is popped
 # Tree should be copied to a new json
-        for item in tree:
+        while i < numitems:
+            item = tree[i]
             name = item["name"]
             try:
                 branches = len(item["children"])
@@ -243,14 +245,14 @@ def preorder(tree, depth):
                     if status == "XXX":
                         print(RED + "  " + status + " " + id + " #" + str(i))
                         urlXXX.write(url + "\n")
-                        ret = tree.pop(d); d -= 1
+                        ret = tree.pop(i); i -= 1; numitems -= 1
                         print(NONE, end="")
                     elif status in errorWatch:
                         pos = errorWatch.index(status)
                         f = errorVarName[pos]
                         print(RED + "  " + status + " " + id + " #" + str(i))
                         f.write(url + "\n")
-                        ret = tree.pop(d); d -= 1
+                        ret = tree.pop(i); i -= 1; numitems -= 1
                         print(NONE, end="")
                     else: # looked for code not in list, entry remains
                         print(" ", status, '+' + " #" + str(i))
@@ -258,11 +260,11 @@ def preorder(tree, depth):
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
                     if DELETEFOLDER:
-                        ret = tree.pop(d); d -= 1
+                        ret = tree.pop(i); i -= 1; numitems -= 1
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
-            d += 1
+            #d += 1
     return tree
 
 # JSON structure

@@ -137,11 +137,11 @@ def preorder(tree, depth):
                 if type == "url":
 # list element being checked
                     url = item["url"]
-                    #print(">>> " + url)
 # To paralelize
 # Send request to queue
                     que.q.put(url.strip())
     que.q.join()
+    print()
     return tree
 
 original = Bookmarks['roots']['bookmark_bar']['children']
