@@ -8,7 +8,7 @@
 #           The strategy is to remove first duplicate URLs from Filtered list
 #           then remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed
-#           $ ./buildJSON.py 404 501 403
+#           $ ./buildJSON.py -d 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        File structure:
@@ -99,6 +99,7 @@ DELETEFOLDER = 1
 DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"
+URLDDD = DIRNAME + "DDD.url"
 BOOK = DIRNAME + "Bookmarks"
 JSONOUT = DIRNAME + "Bookmarks.out"
 
@@ -191,10 +192,13 @@ while line:
 f.close
 
 # Create output files
+# For network error
 urlXXX = open(URLXXX,"w")
 for i in range(0, nparams-1):
     errorVarName[i] = open(errorFile[i], "w")
     print("Created", errorFile[i])
+# For duplicated bookmark
+urlDDD = open(URLDDD,"w")
 
 #Create dictionay of URLs
 dictURL = dict((e, i) for i, e in enumerate(entry))
@@ -224,26 +228,31 @@ def preorder(tree, depth):
                     url = item["url"]
                     print(">>> " + url)
 # Check status code of that URL in Filtered.url
-                    ind = dictURL[url]
-                    status = code[ind]
-                    if status == "XXX":
-                        print(RED + "  " + status + " " + id + " #" + str(i))
-                        urlXXX.write(url + "\n")
-                        ret = tree.pop(d); d -= 1
-                        print(NONE, end="")
-                    elif status in errorWatch:
-                        pos = errorWatch.index(status)
-                        f = errorVarName[pos]
-                        print(RED + "  " + status + " " + id + " #" + str(i))
-                        f.write(url + "\n")
-                        ret = tree.pop(d); d -= 1
-                        print(NONE, end="")
-                    else: # looked for code not in list, entry remains
-                        print(" ", status, '+' + " #" + str(i))
-#
-                    del dictURL[ind]
-                    del code[ind]
-#
+                    try:
+                      ind = dictURL[url]
+                      status = code[ind]
+                      if status == "XXX":
+                          print(RED + "  " + status + " " + id + " #" + str(i))
+                          urlXXX.write(url + "\n")
+                          ret = tree.pop(d); d -= 1
+                          print(NONE, end="")
+                      elif status in errorWatch:
+                          pos = errorWatch.index(status)
+                          f = errorVarName[pos]
+                          print(RED + "  " + status + " " + id + " #" + str(i))
+                          f.write(url + "\n")
+                          ret = tree.pop(d); d -= 1
+                          print(NONE, end="")
+                      else: # looked for code not in list, entry remains
+                          print(" ", status, '+' + " #" + str(i))
+# Remove element from dictURL & code lists
+                      del dictURL[url]
+                      del code[ind]
+                    except:
+                      print(BLUE + "  " + "DDD" + " " + id + " #" + str(i))
+                      urlDDD.write(url + "\n")
+                      ret = tree.pop(d); d -= 1
+                      print(NONE, end="")
 # Check status code of that URL in Filtered.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
