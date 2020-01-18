@@ -211,9 +211,7 @@ def preorder(tree, depth):
     if tree:
         numitems = len(tree)
 # i: counter within folder
-        i = d = 0
-# This iteration fails when element is popped
-# Tree should be copied to a new json
+        i = 0
         while i < numitems:
             item = tree[i]
             name = item["name"]
@@ -240,23 +238,33 @@ def preorder(tree, depth):
 #    remove from dictURL & code lists
 #except:
 #    it is duplicated, remove item from tree
-                    ind = dictURL[url]
-                    status = code[ind]
-                    if status == "XXX":
-                        print(RED + "  " + status + " " + id + " #" + str(i))
-                        urlXXX.write(url + "\n")
-                        ret = tree.pop(i); i -= 1; numitems -= 1
+                    try:
+                        ind = dictURL[url]
+                        status = code[ind]
+# Deleted, so next time won't be found => duplicated
+                        del dictURL[url]
+                        del code[ind]
+                        if status == "XXX":
+                            print(RED + "  " + status + " " + id + " #" + str(i))
+                            urlXXX.write(url + "\n")
+                            tree.pop(i); i -= 1; numitems -= 1
+                            print(NONE, end="")
+                        elif status in errorWatch:
+                            pos = errorWatch.index(status)
+                            f = errorVarName[pos]
+                            print(RED + "  " + status + " " + id + " #" + str(i))
+                            f.write(url + "\n")
+                            tree.pop(i); i -= 1; numitems -= 1
+                            print(NONE, end="")
+                        else: # looked for code not in list, entry remains
+                            print(" ", status, '+' + " #" + str(i))
+                    except:
+                        status = "DDD"
+                        print(BLUE + "  " + status + " " + id + " #" + str(i))
+                        urlDDD.write(url + "\n")
+                        tree.pop(i); i -= 1; numitems -= 1
                         print(NONE, end="")
-                    elif status in errorWatch:
-                        pos = errorWatch.index(status)
-                        f = errorVarName[pos]
-                        print(RED + "  " + status + " " + id + " #" + str(i))
-                        f.write(url + "\n")
-                        ret = tree.pop(i); i -= 1; numitems -= 1
-                        print(NONE, end="")
-                    else: # looked for code not in list, entry remains
-                        print(" ", status, '+' + " #" + str(i))
-# Check status code of that URL in Filtered.url
+#
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
                     if DELETEFOLDER:
@@ -264,7 +272,7 @@ def preorder(tree, depth):
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
-            #d += 1
+        print()
     return tree
 
 # JSON structure
