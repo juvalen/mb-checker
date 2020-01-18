@@ -5,9 +5,8 @@
 # Date: January 2020
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
-#           The strategy is to remove first duplicate URLs from Filtered list
-#           then remove URLs list items as they are processed,
-#           so duplicates entries won't be found and will be removed
+#           The strategy is to remove URLs list items as they are processed,
+#           so duplicates entries won't be found and will be removed in exception
 #           $ ./buildJSON.py -d 404 501 403
 #
 # Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
@@ -170,6 +169,7 @@ except:
 RED = '\033[31m'
 GREEN = '\033[32m'
 BLUE = '\033[34m'
+YELLOW = '\033[33m'
 NONE = '\033[0m' # No Color
 
 # Read source Bookmark file
@@ -197,6 +197,7 @@ urlXXX = open(URLXXX,"w")
 for i in range(0, nparams-1):
     errorVarName[i] = open(errorFile[i], "w")
     print("Created", errorFile[i])
+print()
 # For duplicated bookmark
 urlDDD = open(URLDDD,"w")
 
@@ -208,6 +209,7 @@ def preorder(tree, depth):
     depth += 1
     if tree:
         width = len(tree)
+# i: counter within folder
         i = d = 0
         for item in tree:
             name = item["name"]
@@ -246,13 +248,14 @@ def preorder(tree, depth):
                       else: # looked for code not in list, entry remains
                           print(" ", status, '+' + " #" + str(i))
 # Remove element from dictURL & code lists
-                      del dictURL[url]
-                      del code[ind]
+                      #del dictURL[url]
+                      #del code[ind]
                     except:
-                      print(BLUE + "  " + "DDD" + " " + id + " #" + str(i))
-                      urlDDD.write(url + "\n")
-                      ret = tree.pop(d); d -= 1
-                      print(NONE, end="")
+                      print()
+                      #print(BLUE + "  " + "DDD" + " " + id + " #" + str(i))
+                      #urlDDD.write(url + "\n")
+                      #ret = tree.pop(d); d -= 1
+                      #print(NONE, end="")
 # Check status code of that URL in Filtered.url
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
