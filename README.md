@@ -39,9 +39,11 @@ Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory 
 
 2. Run then `./buildJSON.py 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url. This can be run several times with disctinct return codes.
 
-This last sample command will generate 5 files in _output_ subdirectory:
+This last sample command will generate 6 files in _output_ subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
+
+* **DDD.url**: list of duplicated URLs
 
 * **301.url**: list of 301 URLs
 
@@ -49,7 +51,7 @@ This last sample command will generate 5 files in _output_ subdirectory:
 
 * **406.url**: list of 406 URLs
 
-* **Bookmarks.out**: resulting json bookmarks with stale entries removed
+* **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
 Allow it finish and all result files will appear in _output_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
