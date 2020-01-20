@@ -1,9 +1,11 @@
-# Bookmark cleansing R3.1
+# Bookmark cleansing R3.2
 This is a simple command line utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
 
 Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
+
+Duplicate bookmark entries will be removed.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
@@ -83,6 +85,7 @@ $ ./scanJSON.py
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
 301 http://php.net/manual/en/mongo.tutorial.php
+301 http://php.net/manual/en/mongo.tutorial.php
 301 http://www.mongodb.org/display/DOCS/Querying
 404 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
@@ -91,15 +94,19 @@ $ ./buildJSON.py 301 404
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm
-  200 + #0
+  200 +
 >>> http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart
-  301 1344 #1
+  301 1344
+>>> http://php.net/manual/en/mongo.tutorial.php
+  303 1345
 >>> http://www.mongodb.org/display/DOCS/Querying
-  301 1345 #2
+  301 1346
+>>> http://www.mongodb.org/display/DOCS/Querying
+  DDD 1347
 >>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
-  404 1346 #3
+  404 1348
 >>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
-  XXX 1347 #4
+  XXX 1349
 ...
 ```
 
@@ -109,7 +116,7 @@ Above, log entries for a folder and five processed bookmarks are shown where fou
 
 **>>> url**
 
-&nbsp;&nbsp;&nbsp;**return code** (XXX, 200, 301, 404 in this sample run), + if passed or entry id if rejected, and entry #.
+&nbsp;&nbsp;&nbsp;**return code** (XXX, 200, 301, 404 in this sample run), + if passed or entry id if rejected. DDD means a duplicated entry that is removed.
 
 This sample run entails entries returning 301, 404 and XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
 

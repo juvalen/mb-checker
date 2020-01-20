@@ -177,7 +177,7 @@ NONE = '\033[0m' # No Color
 with open(BOOK, "r") as f:
     Bookmarks = json.load(f)
 f.close
-# Read Filtered.url to code & entry lists
+# Read Filtered.url to entry & code lists
 code = []
 entry = []
 nline = 0
@@ -191,6 +191,8 @@ while line:
     entry.append(url)
     line = f.readline()
 f.close
+#Create dictionay of URLs from entry & code
+pairs = dict(zip(entry, code))
 
 # Create output files
 # For network error
@@ -201,9 +203,6 @@ for i in range(0, nparams-1):
 print()
 # For duplicated bookmark
 urlDDD = open(URLDDD,"w")
-
-#Create dictionay of URLs
-dictURL = dict((e, i) for i, e in enumerate(entry))
 
 # Traverse the json tree and remove entries depending on its code in Filtered.url
 def preorder(tree, depth):
@@ -231,36 +230,28 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
-# Check status code of that URL in Filtered.url
-#try:
-#    ind = dictURL[url]
-#    ...
-#    remove from dictURL & code lists
-#except:
-#    it is duplicated, remove item from tree
+# Check status code of that URL in pairs
                     try:
-                        ind = dictURL[url]
-                        status = code[ind]
+                        status = pairs[url]
 # Deleted, so next time won't be found => duplicated
-                        del dictURL[url]
-                        del code[ind]
+                        del pairs[url]
                         if status == "XXX":
-                            print(RED + "  " + status + " " + id + " #" + str(i))
+                            print(RED + "    " + status + " " + id)
                             urlXXX.write(url + "\n")
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
                         elif status in errorWatch:
                             pos = errorWatch.index(status)
                             f = errorVarName[pos]
-                            print(RED + "  " + status + " " + id + " #" + str(i))
+                            print(RED + "    " + status + " " + id)
                             f.write(url + "\n")
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
                         else: # looked for code not in list, entry remains
-                            print(" ", status, '+' + " #" + str(i))
+                            print("    " + status, '+')
                     except:
                         status = "DDD"
-                        print(BLUE + "  " + status + " " + id + " #" + str(i))
+                        print(BLUE + "    " + status + " " + id)
                         urlDDD.write(url + "\n")
                         tree.pop(i); i -= 1; numitems -= 1
                         print(NONE, end="")
