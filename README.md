@@ -85,28 +85,30 @@ $ ./scanJSON.py
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
 301 http://php.net/manual/en/mongo.tutorial.php
-301 http://php.net/manual/en/mongo.tutorial.php
-301 http://www.mongodb.org/display/DOCS/Querying
+200 http://www.mongodb.org/display/DOCS/Querying
+200 http://www.mongodb.org/display/DOCS/Querying
 404 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
+406 http://www.tokutek.com/
 ...
-$ ./buildJSON.py 301 404
+
+$ ./buildJSON.py 301 404 406
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm
-  200 +
->>> http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart
-  301 1344
+    200 +
 >>> http://php.net/manual/en/mongo.tutorial.php
-  303 1345
+    301 1345
 >>> http://www.mongodb.org/display/DOCS/Querying
-  301 1346
+    200 +
 >>> http://www.mongodb.org/display/DOCS/Querying
-  DDD 1347
+    DDD 1347
 >>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
-  404 1348
+    404 1348
 >>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
-  XXX 1349
+    XXX 1349
+>>> http://www.tokutek.com/
+    406 1350
 ...
 ```
 
@@ -116,13 +118,15 @@ Above, log entries for a folder and five processed bookmarks are shown where fou
 
 **>>> url**
 
-&nbsp;&nbsp;&nbsp;**return code** (XXX, 200, 301, 404 in this sample run), + if passed or entry id if rejected. DDD means a duplicated entry that is removed.
+&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved or entry id if rejected.
 
-This sample run entails entries returning 301, 404 and XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it.
+This sample run entails entries returning 301, 404, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that is removed.
 
 ## Change log
 
-* R3.1 Handles UTF-8 characters and processes also "other" & "synced" bookmark folders. Output file is now Bookmarks.out
+* R3.2 removes duplicated entries
+
+* R3.1 handles UTF-8 characters and processes also "other" & "synced" bookmark folders. Output file is now Bookmarks.out
 
 * R3 runs in two steps: scan and build
 
