@@ -141,7 +141,6 @@ def preorder(tree, depth):
 # Send request to queue
                     que.q.put(url.strip())
     que.q.join()
-    print()
     return tree
 
 original = Bookmarks['roots']['bookmark_bar']['children']
