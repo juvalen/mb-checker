@@ -5,7 +5,7 @@ After gathering and classifying bookmarks for more than 20 years one may hit dea
 
 Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
 
-Duplicate bookmark entries will be removed.
+Duplicate bookmark entries can be optionally removed.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
@@ -69,13 +69,15 @@ Script crawls the bookmark file using **requests.head** method to access each si
 
 After processing all these files will be found in the _output_ subdirectory:
 
-* return code and entry list in `Filtered.url`
+* entries failing due to sundry network errors in `XXX.url`.
+
+* duplicated entries in `DDD.url`. (if option d specified)
 
 * all https status codes specified will be rejected and entries logged in `<code>.url`.
 
-* entries failing due to sundry network errors in `XXX.url`.
-
 * valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks`.
+
+* return code and entry list in `Filtered.url`
 
 ## Sample screen dump
 
@@ -94,7 +96,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 406 http://www.tokutek.com/
 ...
 
-$ ./buildJSON.py 301 404 406
+$ ./buildJSON.py -d 301 404 406
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm
