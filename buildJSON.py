@@ -96,6 +96,7 @@
 # Output:
 
 DELETEFOLDER = 1
+DELETEDUPLICATES = 0
 DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"
@@ -111,35 +112,40 @@ from que import *
 
 # Read input parameters and create corresponding files
 params = sys.argv[1:]
-nparams = len(sys.argv)
+nparams = len(params)
 
 errorWatch = []
 errorVarName = []
 errorFile = []
-if nparams > 1:
+if nparams >= 1:
     if params[0] == '--help':
         print("""
 Usage:
-    ./buildJSON.py <code1> <code2> <code3>
+    ./buildJSON.py [-d] <code1> <code2> <code3>
 
 Parameters:
     http return <code> to be removed from filtered file . Code range [100..999].
+    -d to remove duplicates (first occurrence will remain)
 
 Files:
     Input files 'output/Filtered.url' and 'output/Bookmarks'
     Output file will be written to 'output/Bookmarks.out'
         """)
         sys.exit()
-    elif  not  params[0].isdigit():
+    elif params[0] == '-d':
+        DELETEDUPLICATES = 1
+        params.pop(0)
+        nparams -= 1
+    elif not params[0].isdigit():
         print("""
 Error: code is not a valid number
 
 See ./buildJSON.py --help
         """)
         sys.exit()
-if nparams == 1:
+if nparams == 0:
     print("""
-Usage: ./buildJSON.py <code1> <code2> <code3>
+Usage: ./buildJSON.py [-d] <code1> <code2> <code3>
        ./buildJSON.py --help
     """)
     sys.exit()
@@ -197,7 +203,7 @@ pairs = dict(zip(entry, code))
 # Create output files
 # For network error
 urlXXX = open(URLXXX,"w")
-for i in range(0, nparams-1):
+for i in range(0, nparams):
     errorVarName[i] = open(errorFile[i], "w")
     print("Created", errorFile[i])
 print()
@@ -235,7 +241,8 @@ def preorder(tree, depth):
                     try:
                         status = pairs[url]
 # Deleted, so next time won't be found => duplicated
-                        del pairs[url]
+                        if DELETEDUPLICATES == 1:
+                            del pairs[url]
                         if status == "XXX":
                             print(RED + "    " + status + " " + id)
                             urlXXX.write(url + "\n")
