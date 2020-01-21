@@ -257,7 +257,6 @@ def preorder(tree, depth):
                         else: # looked for code not in list, entry remains
                             print("    " + status, '+')
                     except:
-                        raise
                         status = "DDD"
                         print(BLUE + "    " + status + " " + id)
                         urlDDD.write(url + "\n")
