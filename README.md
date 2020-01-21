@@ -37,7 +37,7 @@ Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory 
 
 1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py sets the number of paralel threads. Running this may take some time depending on the number of original bookmarks.
 
-2. Run then `./buildJSON.py 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url. This can be run several times with disctinct return codes.
+2. Run then `./buildJSON.py -d 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option). This can be run several times with disctinct return codes.
 
 This last sample command will generate 6 files in _output_ subdirectory:
 
@@ -81,7 +81,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 301 & 404 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301 & 404 here)
+Here scripts are used to remove URLs returning 301 & 404 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
 
 ```
 $ ./scanJSON.py
@@ -124,7 +124,7 @@ Above, log entries for a folder and five processed bookmarks are shown where fou
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved or entry id if rejected.
 
-This sample run entails entries returning 301, 404, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that is removed.
+This sample run entails entries returning 301, 404, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed.
 
 ## Change log
 
@@ -148,7 +148,7 @@ Fully operational
 
 Specify http return codes using regexps, as **5..** or __5*__ so it would filter 500, 501, 502...
 
-Gather other Chrome bookmark file locations for other Linux dictributions
+Gather other Chrome bookmark file locations for other Linux distributions
 
 ## Author
 
