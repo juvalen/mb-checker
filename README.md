@@ -5,7 +5,7 @@ After gathering and classifying bookmarks for more than 20 years one may hit dea
 
 Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
 
-Duplicate bookmark entries can be optionally removed.
+Duplicated bookmark entries can be optionally removed.
 
 Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
 
@@ -17,7 +17,7 @@ There is one script that crawls all entries included in the bookmarks and queues
  - workers reach URLs and store result
  - workers write results to file
 
-A second script takes that file output plus a list of return codes to discard, and composes a new bookmarks new file, removing those returning that codes.
+A second script takes that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ Clone this repository into a directory
 
 Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py sets the number of paralel threads. Running this may take some time depending on the number of original bookmarks.
+1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. Running this script may take some time depending on the number of original bookmarks.
 
 2. Run then `./buildJSON.py -d 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option). This can be run several times with disctinct return codes.
 
@@ -124,11 +124,11 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved or entry id if rejected.
 
-This sample run entails entries returning 301, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed, showing its id.
+This sample run entails entries returning 301, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed, showing its id.
 
 ## Change log
 
-* R3.2 optionally removes duplicated entries
+* R3.2 remove duplicated entries option, first occurrence will remain
 
 * R3.1 handles UTF-8 characters and processes also "other" & "synced" bookmark folders. Output file is now Bookmarks.out
 
