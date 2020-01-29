@@ -11,61 +11,7 @@
 #           tags
 #
 # Input: bookmark file in ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-#        File structure:
-#  {
-#     "checksum": "79c9312bbeee61a5710117f00bc16ff8",
-#     "roots": {
-#        "bookmark_bar": {
-#           "children": [ {
-#              "date_added": "13187860084000000",
-#                             ...
-#           }, {
-#                             ...
-#           }],
-#              "children": [ {
-#                 "date_added": "13134043672000000",
-#                             ...
-#              }, {
-#                             ...
-#              }],
-#                 "children": [ {
-#                             ...
-#                 }, {
-#                    "date_added": "13154093672000000",
-#                    "id": "4092",
-#                    "name": "Servicio LG Electronics en Linea :: Drivers",
-#                    "type": "url",
-#                    "url": "http://es.lgservice.com/"
-#                 }, {
-#                             ...
-#                 } ],
-#                 'date_added': '13199527258944339',
-#                 'date_modified': '0',
-#                 'id': '6540',
-#                 'name': 'Tuxedo',
-#                 'type': 'folder'}
-#              } ],
-#              "date_added": "13199527258977344",
-#              "date_modified": "13200493908840013",
-#              "id": "7107",
-#              "name": "unfiled",
-#              "type": "folder"
-#           } ],
-#           "date_added": "13198974830896033",
-#           "date_modified": "13200494087851454",
-#           "id": "1",
-#           "name": "Bookmark bar",
-#           "type": "folder"
-#        }
-#        "other": {
-#        }
-#        "synced": {
-#        }
-#     }
-#    "version": 1
-#  }
-#
-# Output:
+#        See file structure in output/format
 
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
