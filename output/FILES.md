@@ -3,6 +3,8 @@
 ## Input
  - **Bookmarks**: Copy of source Bookmark file
 
+`Don't forget to backup this file first !`
+
 ## Output
  - **XXX.url**: listing of URLs that can't be reached (corresponding to XXX on screen dump)
  - **5xx.url**: listing of URLs getting response code 5xx (corresponding to 5xx on screen dump)
@@ -12,7 +14,5 @@
 
 You can copy Filtered.json back to Bookmark file.
 
-`Don't forget to backup original bookmark file first !`
-
 ## Reference
- - **format**: json bookmark file structure
+ - **format**: JSON bookmark file structure
