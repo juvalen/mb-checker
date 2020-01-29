@@ -15,4 +15,4 @@ You can copy Filtered.json back to Bookmark file.
 `Don't forget to backup original bookmark file first !`
 
 ## Reference
- - ++format**: json bookmark file structure
+ - **format**: json bookmark file structure
