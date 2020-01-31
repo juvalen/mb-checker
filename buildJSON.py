@@ -3,15 +3,22 @@
 # Version: R3.2
 # Author: jvalentinpastrana at gmail
 # Date: January 2020
+#
+# Usage: ./buildJSON [-d] <code1> <code2> <code3>...
+#
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
 #           The strategy is to remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed in exception
 #           Iterating with while
-#           $ ./buildJSON.py -d 404 501 403
 #
-# Input: bookmark file in ./.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-#        See file structure in output/format
+# Input: output/Bookmarks
+#        output/Filtered.url
+#
+# Output: XXX.url
+#         DDD.url
+#         <code>.url
+#         Bookmarks.out
 
 DELETEFOLDER = 1
 DELETEDUPLICATES = 0

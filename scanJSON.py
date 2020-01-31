@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R3.1
+# Version: R3.2
 # Author: jvalentinpastrana at gmail
 # Date: January 2020
+#
+# Usage: ./scanJSON.py
+#
 # Function: Parses original chrome Bookmarks file
 #           Writes in Filtered.url URLs from:
 #            - bookmarks_bar
@@ -10,8 +13,11 @@
 #            - synced
 #           tags
 #
-# Input: bookmark file in ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
+# Input: bookmark file in output/Bookmarks
+#        copied from ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
 #        See file structure in output/format
+#
+# Output: output/Filtered.url
 
 DIRNAME = "output/"
 JSONIN = DIRNAME + "Bookmarks"
