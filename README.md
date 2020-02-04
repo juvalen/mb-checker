@@ -17,7 +17,7 @@ There is one script that crawls all entries included in the bookmarks and queues
  - workers reach URLs and store result
  - workers write results to file
 
-A second script takes that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
+A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ Clone this repository into a directory
 
 Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory named _output_ under this.
 
-1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. Running this script may take some time depending on the number of original bookmarks.
+1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries.
 
 2. Run then `./buildJSON.py -d 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option). This can be run several times with disctinct return codes.
 
@@ -81,7 +81,7 @@ After processing all these files will be found in the _output_ subdirectory:
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 301 & 404 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
+Here scripts are used to remove URLs returning 301, 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
 
 ```
 $ ./scanJSON.py
