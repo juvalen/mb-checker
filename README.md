@@ -37,9 +37,11 @@ Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory 
 
 1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries.
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This will generate **Filtered.url** in _output_ subdirectory.
+
 2. Run then `./buildJSON.py -d 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option). This can be run several times with disctinct return codes.
 
-This last sample command will generate 6 files in _output_ subdirectory:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This last sample command will generate 7 files in _output_ subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -62,7 +64,7 @@ First backup original data !
 ```
 
 ## Input file
-Place a copy of original chrome bookmark file, which may be found for Brave browser for Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
+Place a copy of original chrome bookmark file in _output_ subdirectory, That bookmarks file may be found for Brave browser for Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 
 ## Output files
 Script crawls the bookmark file using **requests.head** method to access each site. It has a hardcoded 10" timeout. It retrieves the http return code.
