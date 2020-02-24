@@ -37,7 +37,7 @@ Copy json **Bookmarks** file in which Chrome stores bookmarks to a subdirectory 
 
 1. Run first `./scanJSON.py` to scan all present URLs in original Bookmarks and produce a Filtered.url which includes a list of URLs and their resulting return code. It scans bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This will generate **Filtered.url** in _output_ subdirectory.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This will generate **Filtered.url** in _output_ subdirectory, which contains a flat list of URLs and their status code.
 
 2. Run then `./buildJSON.py -d 301 404 406` to produce Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option). This can be run several times with disctinct return codes.
 
