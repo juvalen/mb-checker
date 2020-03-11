@@ -11,10 +11,10 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Tasks are divided between two scripts.
 
-There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these steps:
+There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
  - workers are created an listen to queue
- - main loop pushes entries to queue
- - workers reach URLs and store result
+ - main loop pushes URLs to queue
+ - workers read URLs from queue, access them and store result
  - workers write results to file
 
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.

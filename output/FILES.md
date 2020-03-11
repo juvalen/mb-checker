@@ -10,7 +10,7 @@ File to be copied here:
 Files resulting after applying scripts:
  - **XXX.url**: listing of URLs that can't be reached (corresponding to XXX on screen dump)
  - **DDD.url**: listing of duplicated URLs
- - **<code>.url**: listing of URLs returning <code>
+ - **&lt;code&gt;.url**: listing of URLs returning <code>
  - **Filtered.url**: listing of all passed entries
  - **Bookmarks.out**: Result JSON file containing Chrome bookmarks filtered
 
