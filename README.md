@@ -14,8 +14,8 @@ Tasks are divided between two scripts.
 There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
  - workers are created an listen to queue
  - main loop pushes URLs to queue
- - workers read URLs from queue, access them and store result
- - workers write results to file
+ - workers read URLs from queue and try to reach them
+ - workers write returned code to file
 
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
