@@ -59,6 +59,8 @@ Allow it finish and all result files will appear in _output_ subdirectory. Origi
 
 **Scripts deal with UTF-8 characters**
 
+**Empty folders are deleted**, this can be modified inside `buildJSON.py` 
+
 ```
 First backup original data !
 ```
