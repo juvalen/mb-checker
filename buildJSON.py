@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R3.2
+# Version: R3.3
 # Author: jvalentinpastrana at gmail
-# Date: January 2020
+# Date: April 2020
 #
 # Usage: ./buildJSON [-d] <code1> <code2> <code3>...
 #
@@ -11,6 +11,7 @@
 #           The strategy is to remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed in exception
 #           Iterating with while
+#           Uses argparse
 #
 # Input: output/Bookmarks
 #        output/Filtered.url
@@ -20,8 +21,8 @@
 #         <code>.url
 #         Bookmarks.out
 
-DELETEFOLDER = 1 # Delete folder if empty
-DELETEDUPLICATES = 0
+DELETEFOLDERS = 1 # Delete folder if empty
+DELETEDUPLICATES = 0 # Delete duplicated entries
 DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"
@@ -34,60 +35,32 @@ from pprint import pprint
 import sys
 import http.client, sys
 from que import *
+import argparse
 
 # Read input parameters and create corresponding files
-params = sys.argv[1:]
+parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads Filtered.url and Bookmarks and removes specified return codes to Bookmarks.out")
+parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
+parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
+parser.add_argument('params', metavar='code', type=int, nargs='+', help='http return code to be filtered', action='append')
+args = parser.parse_args()
+params = args.params[0]
+
 nparams = len(params)
 
 errorWatch = []
 errorVarName = []
 errorFile = []
-if nparams >= 1:
-    if params[0] == '--help':
-        print("""
-Usage:
-    ./buildJSON.py [-d] <code1> <code2> <code3>
 
-Parameters:
-    http return <code> to be removed from filtered file . Code range [100..999].
-    -d to remove duplicates (first occurrence will remain)
-
-Files:
-    Input files 'output/Filtered.url' and 'output/Bookmarks'
-    Output file will be written to 'output/Bookmarks.out'
-        """)
-        sys.exit()
-    elif params[0] == '-d':
-        DELETEDUPLICATES = 1
-        params.pop(0)
-        nparams -= 1
-    elif not params[0].isdigit():
-        print("""
-Error: code is not a valid number
-
-See ./buildJSON.py --help
-        """)
-        sys.exit()
-if nparams == 0:
-    print("""
-Usage: ./buildJSON.py [-d] <code1> <code2> <code3>
-       ./buildJSON.py --help
-    """)
-    sys.exit()
+print(params)
 
 # Parameter parsing
-for param in params:
-    if param.isdigit():
-        iparam = int(param)
-        if iparam > 99 and iparam < 1000:
-            errorWatch.append(param)
-            errorVarName.append("URL" + param)
-            errorFile.append(DIRNAME + param + '.url')
-        else:
-            print("Error: return code", param, "is out of bounds [100..999]\n")
-            sys.exit()
+for iparam in params:
+    if iparam > 99 and iparam < 1000:
+        errorWatch.append(iparam)
+        errorVarName.append("URL" + str(iparam))
+        errorFile.append(DIRNAME + str(iparam) + '.url')
     else:
-        print("Error: return code", param, "is not and integer\n")
+        print("Error: return code", iparam, "is out of bounds [100..999]\n")
         sys.exit()
 
 # Create output/ directory if not exists
@@ -191,7 +164,7 @@ def preorder(tree, depth):
 #
                 elif type == "folder":
                     print(GREEN + "  Empty folder" + NONE)
-                    if DELETEFOLDER:
+                    if DELETEFOLDERS:
                         ret = tree.pop(i); i -= 1; numitems -= 1
                 else:
                     print(BLUE + "   ???" + id + NONE)
