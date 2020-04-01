@@ -45,6 +45,9 @@ parser.add_argument('params', metavar='code', type=int, nargs='+', help='http re
 args = parser.parse_args()
 params = args.params[0]
 
+print(params)
+#exit(0)
+
 nparams = len(params)
 
 errorWatch = []
@@ -52,6 +55,7 @@ errorVarName = []
 errorFile = []
 
 print(params)
+#
 
 # Parameter parsing
 for iparam in params:
@@ -63,6 +67,11 @@ for iparam in params:
         print("Error: return code", iparam, "is out of bounds [100..999]\n")
         sys.exit()
 
+print(errorWatch)
+print(errorVarName)
+#
+
+# Parameter parsing
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
