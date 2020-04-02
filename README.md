@@ -59,13 +59,11 @@ Allow it finish and all result files will appear in _output_ subdirectory. Origi
 
 **Scripts deal with UTF-8 characters**
 
-**Empty folders are deleted**, this can be modified inside `buildJSON.py` 
-
 ```
 First backup original data !
 ```
 
-See details at `./buildJSON.py -h`
+See usage details at `./buildJSON.py -h`
 
 ## Input file
 Place a copy of original chrome bookmark file in _output_ subdirectory, That bookmarks file may be found for Brave browser for Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
@@ -133,6 +131,8 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 This sample run entails entries returning 301, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
 ## Change log
+
+* R3.3 parses command line using argparse
 
 * R3.2 remove duplicated entries option
 
