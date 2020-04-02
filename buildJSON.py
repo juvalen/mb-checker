@@ -61,12 +61,6 @@ for iparam in params:
         print("Error: return code", iparam, "is out of bounds [100..999]\n")
         sys.exit()
 
-############
-print(params)
-print(errorWatch)
-print(errorVarName)
-############
-
 # Parameter parsing
 # Create output/ directory if not exists
 try:
