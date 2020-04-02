@@ -21,8 +21,6 @@
 #         <code>.url
 #         Bookmarks.out
 
-DELETEFOLDERS = 0 # Delete folder if empty
-DELETEDUPLICATES = 0 # Delete duplicated entries
 DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
 URLXXX = DIRNAME + "XXX.url"
@@ -44,14 +42,15 @@ parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty 
 parser.add_argument('params', metavar='code', type=int, nargs='+', help='http return code to be filtered', action='append')
 args = parser.parse_args()
 params = args.params[0]
-
 nparams = len(params)
+DELETEFOLDERS = args.DELETEFOLDERS
+DELETEDUPLICATES = args.DELETEDUPLICATES
 
 errorWatch = []
 errorVarName = []
 errorFile = []
 
-# Parameter parsing
+# http codes parsing
 for iparam in params:
     if iparam > 99 and iparam < 1000:
         errorWatch.append(str(iparam))
@@ -162,9 +161,11 @@ def preorder(tree, depth):
                         print(NONE, end="")
 #
                 elif type == "folder":
-                    print(GREEN + "  Empty folder" + NONE)
+                    print(GREEN + "  Empty folder")
                     if DELETEFOLDERS:
                         ret = tree.pop(i); i -= 1; numitems -= 1
+                        print(" removed")
+                    print(NONE)
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
