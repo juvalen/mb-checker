@@ -21,7 +21,7 @@
 #         <code>.url
 #         Bookmarks.out
 
-DELETEFOLDERS = 1 # Delete folder if empty
+DELETEFOLDERS = 0 # Delete folder if empty
 DELETEDUPLICATES = 0 # Delete duplicated entries
 DIRNAME = "output/"
 URLIN = DIRNAME + "Filtered.url"
