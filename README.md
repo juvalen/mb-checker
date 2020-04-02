@@ -65,6 +65,8 @@ Allow it finish and all result files will appear in _output_ subdirectory. Origi
 First backup original data !
 ```
 
+See details at `./buildJSON.py -h`
+
 ## Input file
 Place a copy of original chrome bookmark file in _output_ subdirectory, That bookmarks file may be found for Brave browser for Ubuntu in _~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks_.
 

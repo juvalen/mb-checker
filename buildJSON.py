@@ -4,7 +4,7 @@
 # Author: jvalentinpastrana at gmail
 # Date: April 2020
 #
-# Usage: ./buildJSON [-d] <code1> <code2> <code3>...
+# Usage: ./buildJSON [-d] [-f] <code1> <code2> <code3>...
 #
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
@@ -45,31 +45,27 @@ parser.add_argument('params', metavar='code', type=int, nargs='+', help='http re
 args = parser.parse_args()
 params = args.params[0]
 
-print(params)
-#exit(0)
-
 nparams = len(params)
 
 errorWatch = []
 errorVarName = []
 errorFile = []
 
-print(params)
-#
-
 # Parameter parsing
 for iparam in params:
     if iparam > 99 and iparam < 1000:
-        errorWatch.append(iparam)
+        errorWatch.append(str(iparam))
         errorVarName.append("URL" + str(iparam))
         errorFile.append(DIRNAME + str(iparam) + '.url')
     else:
         print("Error: return code", iparam, "is out of bounds [100..999]\n")
         sys.exit()
 
+############
+print(params)
 print(errorWatch)
 print(errorVarName)
-#
+############
 
 # Parameter parsing
 # Create output/ directory if not exists
@@ -228,4 +224,3 @@ filtered = {
 # Write json list *filtered* to disk
 with open(JSONOUT, 'w') as fout:
     json.dump(filtered , fout, sort_keys=True, ensure_ascii=False, indent=4, separators=(',', ': '))
-
