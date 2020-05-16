@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R3.2
+# Version: R3.3
 # Author: jvalentinpastrana at gmail
-# Date: January 2020
+# Date: May 2020
 #
-# Usage: ./scanJSON.py
+# Usage: ./scanJSON.py [-i input_file]
 #
 # Function: Parses original chrome Bookmarks file
 #           Writes in Filtered.url URLs from:
@@ -13,59 +13,51 @@
 #            - synced
 #           tags
 #
-# Input: bookmark file in output/Bookmarks
-#        copied from ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks
-#        See file structure in output/format
+# Options:
+#   input_file: bookmark file (defaults to ~/.config/google-chrome/Default/Bookmarks)
 #
 # Output: output/Filtered.url
+#
 
 DIRNAME = "output/"
-JSONIN = DIRNAME + "Bookmarks"
 URLFILTER = DIRNAME + "Filtered.url"
 
 import json
+import os
+import argparse
 from pprint import pprint
 import sys
 import http.client
+import que
 que.urlFilter = open(URLFILTER,"w")
+from pathlib import Path
 
 # Read input parameters and create corresponding files
-params = sys.argv[1:]
-nparams = len(sys.argv)
+parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to output/Filtered.url")
+parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store", default = "~/.config/google-chrome/Default/Bookmarks")
+args = parser.parse_args()
+
+JSONIN = os.path.expanduser(args.input_file)
+# Read input parameters and create corresponding files
 errorWatch = []
 errorName = []
 errorFile = []
-if nparams > 1:
-    if params[0] == '--help':
-        print("""
-Usage:
-    ./scanJSON.py
-
-Files:
-    Input 'output/Bookmark' file
-    Output 'output/Filtered.url' (status & url) in each line
-        """)
-        sys.exit()
-    else:
-        print("""
-Usage: ./scanJSON.py
-
-See ./scanJSON.py --help
-        """)
-        sys.exit()
 
 # Create output/ directory if not exists
 try:
     os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "created ")
+    print("Directory" , DIRNAME , "created")
 except:
     print("Directory" , DIRNAME , "preserved")
 
 # Read source bookmark file
-with open(JSONIN, "r", encoding='utf-8') as f:
-    Bookmarks = json.load(f)
-
-import que
+try:
+    print("Reading bookmarks from " + JSONIN)
+    with open(JSONIN, "r", encoding='utf-8') as f:
+        Bookmarks = json.load(f)
+except FileNotFoundError:
+    print("> Input file " + JSONIN + " not found\n")
+    sys.exit()
 
 # Recurrent function
 def preorder(tree, depth):
@@ -94,6 +86,7 @@ def preorder(tree, depth):
     que.q.join()
     return tree
 
+############### Main #######################
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
 original = Bookmarks['roots']['other']['children']
