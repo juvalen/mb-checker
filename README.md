@@ -33,15 +33,13 @@ A second script reads that file output plus a list of return codes to discard, a
 
 Clone this repository into a directory
 
-You may copy json **Bookmarks** file in which Chrome stores bookmarks to a file, or use a stored one.
+1. Run first `./scanJSON.py [-i input_file]` to scan all present URLs in Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries.
 
-1. Run first `./scanJSON.py [-i input_file]` to scan all present URLs in live Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bbokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries.
-
- -i input_file: Bookmark file to use. (if not specifies defaults to `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Bookmark file to use. (if not specified defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This will generate **Filtered.url** in _output_ subdirectory, which contains a flat list of URLs and their status code.
 
-2. Run then `./buildJSON.py -d 301 404 406` to produce _output_/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option). This can be run several times with disctinct return codes.
+2. Run then `./buildJSON.py -d 301 404 406` to produce _output_/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This last sample command will generate 7 files in _output_ subdirectory:
 
@@ -68,7 +66,7 @@ First backup original bookmark file !
 See usage details at `./buildJSON.py -h`
 
 ## Input file
-Make a copy of original chrome bookmark file or use a stored one.
+Use original chrome bookmark file or use a stored one.
 
 ## Output files
 Script crawls the bookmark file using **requests.head** method to access each site. It has a hardcoded 10" timeout. It retrieves the http return code.
