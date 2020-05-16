@@ -31,13 +31,24 @@ import http.client
 import que
 que.urlFilter = open(URLFILTER,"w")
 from pathlib import Path
-
+#
+# Parse bookmark file path from .config
+for line in open(".config"):
+    li=line.strip()
+    if not li.startswith("#"):
+        pair = line.split('=')
+        if pair[0] == 'source': JSONIN = os.path.expanduser(pair[1])
+#
 # Read input parameters and create corresponding files
 parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to output/Filtered.url")
-parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store", default = "~/.config/google-chrome/Default/Bookmarks")
+parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store", default = JSONIN)
 args = parser.parse_args()
-
-JSONIN = os.path.expanduser(args.input_file)
+#
+try:
+    JSONIN = os.path.expanduser(args.input_file)
+except:
+    pass
+#
 # Read input parameters and create corresponding files
 errorWatch = []
 errorName = []
