@@ -26,8 +26,7 @@ URLFILTER = DIRNAME + "Filtered.url"
 import json
 from pprint import pprint
 import sys
-import http.client, sys
-import que
+import http.client
 que.urlFilter = open(URLFILTER,"w")
 
 # Read input parameters and create corresponding files
