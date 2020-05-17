@@ -33,7 +33,7 @@ A second script reads that file output plus a list of return codes to discard, a
 
 Clone this repository into a directory
 
-1. Run first `./scanJSON.py [-i input_file]` to scan all present URLs in Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries.
+1. Run first `./scanJSON.py [-i input_file]` to scan all present URLs in Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
 
  -i input_file: Bookmark file to use. (if not specified defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
