@@ -6,15 +6,15 @@
 #
 # Usage: ./buildJSON [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2> <code3>...
 #
-# Function: Reads Filtered.url and Bookmarks and removes URLs not in
-#           Filtered.url to Bookmarks.out
+# Function: Reads Filtered.url and input Bookmarks file and removes entries returning
+#           any of <codeN> to Bookmarks.out
 #           The strategy is to remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed in exception
 #           Iterating with while
 #           Uses argparse
 #
 # Input:
-#        input_file, defaults to 
+#        input_file, defaults to ~/config/google-chrome/Default/Bookmarks
 #        <work_dir>/Filtered.url
 #
 # Output in working_directory: 
@@ -71,14 +71,6 @@ for iparam in params:
         sys.exit()
 
 # Parameter parsing
-# Create output/ directory if not exists
-try:
-    os.mkdir(work_dir)
-    print("Directory" , work_dir , "didin't exist. Aborting.")
-    sys.exit()
-except:
-    print("Directory" , work_dir , "Preserved.")
-
 RED = '\033[31m'
 GREEN = '\033[32m'
 BLUE = '\033[34m'
@@ -93,7 +85,11 @@ f.close
 code = []
 entry = []
 nline = 0
-f = open(URLIN, "r")
+try:
+    f = open(URLIN, "r")
+except:
+    print("Error: ", URLIN, "not found\n")
+    sys.exit()
 line = f.readline()
 while line:
     nline += 1
