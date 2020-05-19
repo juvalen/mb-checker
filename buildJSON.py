@@ -4,7 +4,7 @@
 # Author: jvalentinpastrana at gmail
 # Date: May 2020
 #
-# Usage: ./buildJSON [-w dir] [-d] [-f] <code1> <code2> <code3>...
+# Usage: ./buildJSON [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2> <code3>...
 #
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
@@ -13,9 +13,9 @@
 #           Iterating with while
 #           Uses argparse
 #
-# Input in working_directory:
-#        output/Bookmarks
-#        output/Filtered.url
+# Input:
+#        input_file, defaults to 
+#        <work_dir>/Filtered.url
 #
 # Output in working_directory: 
 #         XXX.url
@@ -24,6 +24,7 @@
 #         Bookmarks.out
 
 import json
+import os
 from pprint import pprint
 import sys
 import http.client, sys
@@ -32,7 +33,8 @@ import argparse
 
 # Read input parameters and create corresponding files
 parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads Filtered.url and Bookmarks and removes specified return codes to Bookmarks.out")
-parser.add_argument("-w", "--work_dir", dest='work_dir', help="Working directory, defaults to ~/output/", action="store")
+parser.add_argument("-w", "--work-dir", dest='work_dir', help="Working directory, defaults to ./work_dir/", action="store")
+parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
 parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
 parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
 parser.add_argument('params', metavar='code', type=int, nargs='+', help='http return code to be filtered', action='append')
@@ -40,17 +42,19 @@ args = parser.parse_args()
 params = args.params[0]
 nparams = len(params)
 try:
-    work_dir = os.path.expanduser(args.work_dir)
+    work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
-    work_dir = "output/"
+    work_dir = "./work_dir/"
+try:
+    BOOK = os.path.expanduser(args.input_file)
+except:
+    BOOK = os.path.expanduser("~/.config/google-chrome/Default/Bookmarks")
 DELETEFOLDERS = args.DELETEFOLDERS
 DELETEDUPLICATES = args.DELETEDUPLICATES
 URLIN = work_dir + "Filtered.url"
 URLXXX = work_dir + "XXX.url"
 URLDDD = work_dir + "DDD.url"
-BOOK = work_dir + "Bookmarks"
 JSONOUT = work_dir + "Bookmarks.out"
-
 
 errorWatch = []
 errorVarName = []

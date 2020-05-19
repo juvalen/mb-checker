@@ -4,7 +4,7 @@
 # Author: jvalentinpastrana at gmail
 # Date: May 2020
 #
-# Usage: ./scanJSON.py [-i input_file]
+# Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
 # Function: Parses original chrome Bookmarks file
 #           Writes in Filtered.url URLs from:
@@ -15,12 +15,10 @@
 #
 # Options:
 #   input_file: bookmark file (defaults to ~/.config/google-chrome/Default/Bookmarks)
+#   work_dir: output directory (defaults to ./work_dir/)
 #
-# Output: output/Filtered.url
+# Output: <work_dir>/Filtered.url
 #
-
-DIRNAME = "output/"
-URLFILTER = DIRNAME + "Filtered.url"
 
 import json
 import os
@@ -29,11 +27,11 @@ from pprint import pprint
 import sys
 import http.client
 import que
-que.urlFilter = open(URLFILTER,"w")
 from pathlib import Path
 #
 # Read input parameters and create corresponding files
-parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to output/Filtered.url")
+parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to <work_dir>/Filtered.url")
+parser.add_argument("-w", "--work-dir", dest='work_dir', type=str, help="Output directory, defaults to ./work_dir/", action="store")
 parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
 args = parser.parse_args()
 #
@@ -41,18 +39,24 @@ try:
     JSONIN = os.path.expanduser(args.input_file)
 except:
     JSONIN = os.path.expanduser("~/.config/google-chrome/Default/Bookmarks")
+try:
+    DIRNAME = os.path.expanduser(args.work_dir) + "/"
+except:
+    DIRNAME = os.path.expanduser("./work_dir/")
 #
 # Read input parameters and create corresponding files
 errorWatch = []
 errorName = []
 errorFile = []
+URLFILTER = DIRNAME + "Filtered.url"
 
-# Create output/ directory if not exists
+# Create <work_dir> directory if not exists
 try:
     os.mkdir(DIRNAME)
     print("Directory" , DIRNAME , "created")
 except:
     print("Directory" , DIRNAME , "preserved")
+que.urlFilter = open(URLFILTER,"w")
 
 # Read source bookmark file
 try:
