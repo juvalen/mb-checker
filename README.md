@@ -33,13 +33,15 @@ A second script reads that file output plus a list of return codes to discard, a
 
 Clone this repository into a directory
 
-1. Run first `./scanJSON.py [-i input_file]` to scan all present URLs in Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
+1. Run first `./scanJSON.py [-i input_file] [-o output_folder]` to scan all present URLs in input Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
 
- -i input_file: Bookmark file to use. (if not specified defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Bookmark file to use. (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+
+ -o output_folder: Folder in which **Filtered.url** file will be stored (defaults to `output/`)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This will generate **Filtered.url** in _output_ subdirectory, which contains a flat list of URLs and their status code.
 
-2. Run then `./buildJSON.py -d 301 404 406` to produce _output_/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes.
+2. Run then `./buildJSON.py [-w working_directory] -d 301 404 406` to produce _output_/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. It expects to find **Filtered.url** and leave results in working directory (defaults to `output/`)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This last sample command will generate 7 files in _output_ subdirectory:
 
@@ -71,7 +73,7 @@ Use original chrome bookmark file or use a stored one.
 ## Output files
 Script crawls the bookmark file using **requests.head** method to access each site. It has a hardcoded 10" timeout. It retrieves the http return code.
 
-After processing all these files will be found in the _output_ subdirectory:
+After processing all these files will be found in the working directory, along the previous **Filtered.url**:
 
 * entries failing due to sundry network errors in `XXX.url`.
 
@@ -102,6 +104,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 
 $ ./buildJSON.py -d 301 404 406
+(Input from output/Filtered.url)
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm

@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R3.3
+# Version: R3.4
 # Author: jvalentinpastrana at gmail
-# Date: April 2020
+# Date: May 2020
 #
-# Usage: ./buildJSON [-d] [-f] <code1> <code2> <code3>...
+# Usage: ./buildJSON [-w dir] [-d] [-f] <code1> <code2> <code3>...
 #
 # Function: Reads Filtered.url and Bookmarks and removes URLs not in
 #           Filtered.url to Bookmarks.out
@@ -13,20 +13,15 @@
 #           Iterating with while
 #           Uses argparse
 #
-# Input: output/Bookmarks
+# Input in working_directory:
+#        output/Bookmarks
 #        output/Filtered.url
 #
-# Output: XXX.url
+# Output in working_directory: 
+#         XXX.url
 #         DDD.url
 #         <code>.url
 #         Bookmarks.out
-
-DIRNAME = "output/"
-URLIN = DIRNAME + "Filtered.url"
-URLXXX = DIRNAME + "XXX.url"
-URLDDD = DIRNAME + "DDD.url"
-BOOK = DIRNAME + "Bookmarks"
-JSONOUT = DIRNAME + "Bookmarks.out"
 
 import json
 from pprint import pprint
@@ -37,14 +32,25 @@ import argparse
 
 # Read input parameters and create corresponding files
 parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads Filtered.url and Bookmarks and removes specified return codes to Bookmarks.out")
+parser.add_argument("-w", "--work_dir", dest='work_dir', help="Working directory, defaults to ~/output/", action="store")
 parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
 parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
 parser.add_argument('params', metavar='code', type=int, nargs='+', help='http return code to be filtered', action='append')
 args = parser.parse_args()
 params = args.params[0]
 nparams = len(params)
+try:
+    work_dir = os.path.expanduser(args.work_dir)
+except:
+    work_dir = "output/"
 DELETEFOLDERS = args.DELETEFOLDERS
 DELETEDUPLICATES = args.DELETEDUPLICATES
+URLIN = work_dir + "Filtered.url"
+URLXXX = work_dir + "XXX.url"
+URLDDD = work_dir + "DDD.url"
+BOOK = work_dir + "Bookmarks"
+JSONOUT = work_dir + "Bookmarks.out"
+
 
 errorWatch = []
 errorVarName = []
@@ -55,7 +61,7 @@ for iparam in params:
     if iparam > 99 and iparam < 1000:
         errorWatch.append(str(iparam))
         errorVarName.append("URL" + str(iparam))
-        errorFile.append(DIRNAME + str(iparam) + '.url')
+        errorFile.append(work_dir + str(iparam) + '.url')
     else:
         print("Error: return code", iparam, "is out of bounds [100..999]\n")
         sys.exit()
@@ -63,11 +69,11 @@ for iparam in params:
 # Parameter parsing
 # Create output/ directory if not exists
 try:
-    os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "didin't exist. Aborting.")
+    os.mkdir(work_dir)
+    print("Directory" , work_dir , "didin't exist. Aborting.")
     sys.exit()
 except:
-    print("Directory" , DIRNAME , "Preserved.")
+    print("Directory" , work_dir , "Preserved.")
 
 RED = '\033[31m'
 GREEN = '\033[32m'
