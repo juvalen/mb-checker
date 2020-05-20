@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R3.3
+# Version: R3.4
 # Author: jvalentinpastrana at gmail
 # Date: May 2020
 #
@@ -39,32 +39,32 @@ try:
     JSONIN = os.path.expanduser(args.input_file)
 except:
     JSONIN = os.path.expanduser("~/.config/google-chrome/Default/Bookmarks")
+print("Reading bookmarks from " + JSONIN)
 try:
-    DIRNAME = os.path.expanduser(args.work_dir) + "/"
+    work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
-    DIRNAME = os.path.expanduser("./work_dir/")
+    work_dir = os.path.expanduser("./work_dir/")
 #
 # Read input parameters and create corresponding files
 errorWatch = []
 errorName = []
 errorFile = []
-URLFILTER = DIRNAME + "Filtered.url"
+URLFILTER = work_dir + "Filtered.url"
 
 # Create <work_dir> directory if not exists
 try:
-    os.mkdir(DIRNAME)
-    print("Directory" , DIRNAME , "created")
+    os.mkdir(work_dir)
+    print("Output directory", work_dir, "created")
 except:
-    print("Directory" , DIRNAME , "preserved")
+    print("Output directory", work_dir, "preserved")
 que.urlFilter = open(URLFILTER,"w")
 
 # Read source bookmark file
 try:
-    print("Reading bookmarks from " + JSONIN)
     with open(JSONIN, "r", encoding='utf-8') as f:
         Bookmarks = json.load(f)
 except FileNotFoundError:
-    print("> Input file " + JSONIN + " not found\n")
+    print("> Input file ", JSONIN, " not found\n")
     sys.exit()
 
 # Recurrent function
@@ -104,3 +104,5 @@ nodes = preorder(original, 0)
 
 # Closes error#.url files
 que.urlFilter.close()
+
+print("Writing scan to " + work_dir)

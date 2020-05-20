@@ -6,7 +6,7 @@
 #
 # Usage: ./buildJSON [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2> <code3>...
 #
-# Function: Reads Filtered.url and input Bookmarks file and removes entries returning
+# Function: Reads Filtered.url and original input Bookmarks file and removes entries returning
 #           any of <codeN> to Bookmarks.out
 #           The strategy is to remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed in exception
@@ -15,9 +15,9 @@
 #
 # Input:
 #        input_file, defaults to ~/config/google-chrome/Default/Bookmarks
-#        <work_dir>/Filtered.url
+#        work_dir, where **Filtered.url** will be stored
 #
-# Output in working_directory: 
+# Output files in working_directory: 
 #         XXX.url
 #         DDD.url
 #         <code>.url
@@ -45,10 +45,13 @@ try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
     work_dir = "./work_dir/"
+print("Reading scan results from", work_dir)
 try:
-    BOOK = os.path.expanduser(args.input_file)
+    input_file = os.path.expanduser(args.input_file)
 except:
-    BOOK = os.path.expanduser("~/.config/google-chrome/Default/Bookmarks")
+    input_file = os.path.expanduser("~/.config/google-chrome/Default/Bookmarks")
+print("Reading bookmarks from", input_file)
+#
 DELETEFOLDERS = args.DELETEFOLDERS
 DELETEDUPLICATES = args.DELETEDUPLICATES
 URLIN = work_dir + "Filtered.url"
@@ -78,7 +81,7 @@ YELLOW = '\033[33m'
 NONE = '\033[0m' # No Color
 
 # Read source Bookmark file
-with open(BOOK, "r") as f:
+with open(input_file, "r") as f:
     Bookmarks = json.load(f)
 f.close
 # Read Filtered.url to entry & code lists

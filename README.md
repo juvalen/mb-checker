@@ -33,21 +33,33 @@ A second script reads that file output plus a list of return codes to discard, a
 
 Clone this repository into a directory
 
-1. Run first `./scanJSON.py [-i input_file] [-w work_dir]` to scan all present URLs in input Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
+1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
 
- -i input_file: Bookmark file to use. (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
-
- -o work_dir: Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This will generate **Filtered.url** in _work_dir_ subdirectory, which contains a flat list of URLs and their status code.
-
-2. Run then `./buildJSON.py [-i input_file] [-w work_dir] -d 301 404 406` to produce <work_dir>/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. In input_file must be the original bookmark file. In working directory it expects to find input_file with original bookmarks and **Filtered.url**, and will leave results .
-
- -i input_file: Bookmark file to use. (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
  -o work_dir: Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This last sample command will generate 7 files in _work_dir subdirectory:
+For instance:
+
+  `./scanJSON`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **_work_dir_ /Filtered.url**, which contains a flat list of URLs and their status code.
+
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. In input_file must point to the original bookmark file and will also read **_work_dir_/Filtered.url**.
+
+  `./buildJSON -h`
+
+ -i input_file: Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -o work_dir: Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
+
+ -d, --duplicates      remove duplicated bookmarks
+ -f, --folders         remove empty folders
+
+For instance:
+
+  `./buildJSON -d 301 404 406`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; will filter live bookmark file (for Ubuntu) to remove http return codes 301, 404 & 406 and removing duplicated entries and will generate 7 files in _work_dir_ subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -77,7 +89,7 @@ Use original chrome bookmark file or use a stored one.
 ## Output files
 Script crawls the bookmark file using **requests.head** method to access each site. It has a hardcoded 10" timeout. It retrieves the http return code.
 
-After processing all these files will be found in the working directory, along the previous **Filtered.url**:
+After processing all these files will be added to work_dir:
 
 * entries failing due to sundry network errors in `XXX.url`.
 
@@ -95,7 +107,7 @@ Here scripts are used to remove URLs returning 301, 404 & 406 codes. First `scan
 
 ```
 $ ./scanJSON.py
-(Input from /home/juan/.config/google-chrome/Default/Bookmarks)
+(Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
@@ -106,9 +118,11 @@ $ ./scanJSON.py
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 406 http://www.tokutek.com/
 ...
+(Scanned to ./work_dir/Filtered.url)
 
 $ ./buildJSON.py -d 301 404 406
-(Input from ./work_dir/Filtered.url)
+(Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
+(Scanned from ./work_dir/Filtered.url)
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm
@@ -127,6 +141,8 @@ $ ./buildJSON.py -d 301 404 406
     406 1350
 ...
 ```
+
+And output files will be stored in work_dir.
 
 Above, log entries for a folder and seven processed bookmarks are shown where five are filtered out:
 
