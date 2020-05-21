@@ -43,16 +43,18 @@ For instance:
 
   `./scanJSON`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **_work_dir_ /Filtered.url**, which contains a flat list of URLs and their status code.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/Filtered.url**, which contains a flat list of URLs and their status code.
 
 2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. In input_file must point to the original bookmark file and will also read **_work_dir_/Filtered.url**.
 
   `./buildJSON -h`
 
  -i input_file: Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+
  -o work_dir: Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
 
  -d, --duplicates      remove duplicated bookmarks
+
  -f, --folders         remove empty folders
 
 For instance:
@@ -155,6 +157,8 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 This sample run entails entries returning 301, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
 ## Change log
+
+* R3.4 -i input_file and -w work_dir options
 
 * R3.3 parses command line using argparse
 
