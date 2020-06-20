@@ -146,6 +146,7 @@ def preorder(tree, depth):
 # Check status code of that URL in pairs
                     try:
                         status = pairs[url]
+                        http_code = errorWatch.index(status)
 # Deleted, so next time won't be found => duplicated
                         if DELETEDUPLICATES == 1:
                             del pairs[url]
@@ -154,14 +155,14 @@ def preorder(tree, depth):
                             urlXXX.write(url + "\n")
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
-                        elif re.match(errorWatch, status):
+                        elif re.match(http_code, status):
                             pos = errorWatch.index(status)
                             f = errorVarName[pos]
                             print(RED + "    " + status + " " + id)
                             f.write(url + "\n")
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
-                        else: # looked for code not in list, entry remains
+                        else: # looked up code not in list, entry remains
                             print("    " + status, '+')
                     except:
                         status = "DDD"
@@ -169,7 +170,7 @@ def preorder(tree, depth):
                         urlDDD.write(url + "\n")
                         tree.pop(i); i -= 1; numitems -= 1
                         print(NONE, end="")
-#
+
                 elif type == "folder":
                     print(GREEN + "  Empty folder")
                     if DELETEFOLDERS:
