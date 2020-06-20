@@ -27,6 +27,7 @@ import json
 import os
 from pprint import pprint
 import sys
+import re
 import http.client, sys
 from que import *
 import argparse
@@ -37,7 +38,7 @@ parser.add_argument("-w", "--work-dir", dest='work_dir', help="Working directory
 parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
 parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
 parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
-parser.add_argument('params', metavar='code', type=int, nargs='+', help='http return code to be filtered', action='append')
+parser.add_argument('params', metavar='code', type=str, nargs='*', help='http return code to be filtered', action='append')
 args = parser.parse_args()
 params = args.params[0]
 nparams = len(params)
@@ -63,17 +64,17 @@ errorWatch = []
 errorVarName = []
 errorFile = []
 
-# http codes parsing
+# parsing http codes in params
 for iparam in params:
-    if iparam > 99 and iparam < 1000:
+    if re.match("[0-9\.]{3}", iparam):
         errorWatch.append(str(iparam))
         errorVarName.append("URL" + str(iparam))
         errorFile.append(work_dir + str(iparam) + '.url')
     else:
-        print("Error: return code", iparam, "is out of bounds [100..999]\n")
+        print("Error: return code", iparam, " must contain three digits or dots\n")
         sys.exit()
 
-# Parameter parsing
+# ASCII color codes
 RED = '\033[31m'
 GREEN = '\033[32m'
 BLUE = '\033[34m'
@@ -115,7 +116,7 @@ print()
 # For duplicated bookmark
 urlDDD = open(URLDDD,"w")
 
-# Traverse the json tree and remove entries depending on its code in Filtered.url
+# Traverse the json tree and remove entries with its code in Filtered.url
 def preorder(tree, depth):
     depth += 1
     if tree:
@@ -153,7 +154,7 @@ def preorder(tree, depth):
                             urlXXX.write(url + "\n")
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
-                        elif status in errorWatch:
+                        elif re.match(errorWatch, status):
                             pos = errorWatch.index(status)
                             f = errorVarName[pos]
                             print(RED + "    " + status + " " + id)

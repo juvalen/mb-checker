@@ -158,6 +158,8 @@ This sample run entails entries returning 30X, 404, 406, DDD & XXX being removed
 
 ## Change log
 
+* R3.5 http return codes can be specified using _._ as a character wildcard (ie 4.4 means 404, 414...)
+
 * R3.4 -i input_file and -w work_dir options
 
 * R3.3 parses command line using argparse
