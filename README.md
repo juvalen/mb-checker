@@ -61,13 +61,13 @@ For instance:
 
   `./buildJSON -d 30. 404 406`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; will filter live bookmark file (for Ubuntu) to remove http return codes 30X, 404 & 406 and removing duplicated entries. Regexp character _._ is allowed and means any caharacter, so 300..309 return codes will be filtered. This command will generate 7 files in _work_dir_ subdirectory. :
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; will filter live bookmark file (for Ubuntu) to remove http return codes 30., 404 & 406 and removing duplicated entries. Regexp character **.** is allowed and means any caharacter, so 300..309 return codes will be filtered. This command will generate 7 files in _work_dir_ subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
 * **DDD.url**: list of duplicated URLs
 
-* **30X.url**: list of 30X URLs
+* **30..url**: list of 30. URLs
 
 * **404.url**: list of 404 URLs
 
@@ -154,7 +154,7 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved or entry id if rejected.
 
-This sample run entails entries returning 30X, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
+This sample run entails entries returning 30., 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
 ## Change log
 
