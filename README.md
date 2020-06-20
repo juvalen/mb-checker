@@ -1,4 +1,4 @@
-# Bookmark cleansing R3.4
+# Bookmark cleansing R3.5
 This is a simple command line utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
@@ -59,15 +59,15 @@ For instance:
 
 For instance:
 
-  `./buildJSON -d 301 404 406`
+  `./buildJSON -d 30. 404 406`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; will filter live bookmark file (for Ubuntu) to remove http return codes 301, 404 & 406 and removing duplicated entries and will generate 7 files in _work_dir_ subdirectory:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; will filter live bookmark file (for Ubuntu) to remove http return codes 30X, 404 & 406 and removing duplicated entries. Regexp character _._ is allowed and means any caharacter, so 300..309 return codes will be filtered. This command will generate 7 files in _work_dir_ subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
 * **DDD.url**: list of duplicated URLs
 
-* **301.url**: list of 301 URLs
+* **30X.url**: list of 30X URLs
 
 * **404.url**: list of 404 URLs
 
@@ -105,7 +105,7 @@ After processing all these files will be added to work_dir:
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 301, 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
+Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
 
 ```
 $ ./scanJSON.py
@@ -122,7 +122,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/Filtered.url)
 
-$ ./buildJSON.py -d 301 404 406
+$ ./buildJSON.py -d 30. 404 406
 (Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
 (Scanned from ./work_dir/Filtered.url)
 ...
@@ -154,7 +154,7 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved or entry id if rejected.
 
-This sample run entails entries returning 301, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
+This sample run entails entries returning 30X, 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
 ## Change log
 
