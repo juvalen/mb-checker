@@ -71,7 +71,7 @@ for iparam in params:
         errorVarName.append("URL" + iparam)
         errorFile.append(work_dir + iparam + '.url')
     else:
-        print("Error: return code", iparam, " must contain three digits or dots\n")
+        print("  Error: return code", iparam, "malformed, should contain three digits or dots\n")
         sys.exit()
 
 # ASCII color codes
@@ -147,8 +147,6 @@ def preorder(tree, depth):
                     try:
                         status = pairs[url]
                         combined = "(" + ")|(".join(errorWatch) + ")"
-                        print(combined)
-                        print(status)
 # Deleted, so next time won't be found => duplicated
                         if DELETEDUPLICATES == 1:
                             del pairs[url]
@@ -162,7 +160,6 @@ def preorder(tree, depth):
                                     if re.match(http_code, status):
                                         pos = errorWatch.index(http_code)
                                         f = errorVarName[pos]
-                                        print(GREEN, "Escribiendo en ", f, NONE)
                                         print(RED + "    " + status + " " + id)
                                         f.write(url + "\n")
                                         tree.pop(i); i -= 1; numitems -= 1
