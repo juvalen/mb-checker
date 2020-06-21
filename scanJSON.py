@@ -7,7 +7,7 @@
 # Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
 # Function: Parses original chrome Bookmarks file
-#           Writes in Filtered.url URLs from:
+#           Writes in ALL.url URLs from:
 #            - bookmarks_bar
 #            - other
 #            - synced
@@ -17,7 +17,7 @@
 #   input_file: bookmark file (defaults to ~/.config/google-chrome/Default/Bookmarks)
 #   work_dir: output directory (defaults to ./work_dir/)
 #
-# Output: <work_dir>/Filtered.url
+# Output: <work_dir>/ALL.url
 #
 
 import json
@@ -30,7 +30,7 @@ import que
 from pathlib import Path
 #
 # Read input parameters and create corresponding files
-parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to <work_dir>/Filtered.url")
+parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to <work_dir>/ALL.url")
 parser.add_argument("-w", "--work-dir", dest='work_dir', type=str, help="Output directory, defaults to ./work_dir/", action="store")
 parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
 args = parser.parse_args()
@@ -49,7 +49,7 @@ except:
 errorWatch = []
 errorName = []
 errorFile = []
-URLFILTER = work_dir + "Filtered.url"
+URLFILTER = work_dir + "ALL.url"
 
 # Create <work_dir> directory if not exists
 try:

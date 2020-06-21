@@ -6,7 +6,7 @@
 #
 # Usage: ./buildJSON [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2> <code3>...
 #
-# Function: Reads Filtered.url and original input Bookmarks file and removes entries returning
+# Function: Reads ALL.url and original input Bookmarks file and removes entries returning
 #           any of <codeN> to Bookmarks.out
 #           The strategy is to remove URLs list items as they are processed,
 #           so duplicates entries won't be found and will be removed in exception
@@ -15,7 +15,7 @@
 #
 # Input:
 #        input_file, defaults to ~/config/google-chrome/Default/Bookmarks
-#        work_dir, where **Filtered.url** will be stored
+#        work_dir, where **ALL.url** will be stored
 #
 # Output files in working_directory: 
 #         XXX.url
@@ -33,7 +33,7 @@ from que import *
 import argparse
 
 # Read input parameters and create corresponding files
-parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads Filtered.url and Bookmarks and removes specified return codes to Bookmarks.out")
+parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads ALL.url and Bookmarks and removes specified return codes to Bookmarks.out")
 parser.add_argument("-w", "--work-dir", dest='work_dir', help="Working directory, defaults to ./work_dir/", action="store")
 parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
 parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
@@ -55,7 +55,7 @@ print("Reading bookmarks from", input_file)
 #
 DELETEFOLDERS = args.DELETEFOLDERS
 DELETEDUPLICATES = args.DELETEDUPLICATES
-URLIN = work_dir + "Filtered.url"
+URLIN = work_dir + "ALL.url"
 URLXXX = work_dir + "XXX.url"
 URLDDD = work_dir + "DDD.url"
 JSONOUT = work_dir + "Bookmarks.out"
@@ -88,7 +88,7 @@ NONE = '\033[0m' # No Color
 with open(input_file, "r") as f:
     Bookmarks = json.load(f)
 f.close
-# Read Filtered.url to entry & code lists
+# Read ALL.url to entry & code lists
 code = []
 entry = []
 nline = 0
@@ -119,7 +119,7 @@ print()
 # For duplicated bookmark
 urlDDD = open(URLDDD,"w")
 
-# Traverse the json tree and remove entries with its code in Filtered.url
+# Traverse the json tree and remove entries with its code in ALL.url
 def preorder(tree, depth):
     depth += 1
     if tree:

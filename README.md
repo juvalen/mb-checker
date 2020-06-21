@@ -1,4 +1,4 @@
-# Bookmark cleansing R3.5
+# Bookmark cleansing R3.6
 This is a simple command line utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
@@ -33,25 +33,25 @@ A second script reads that file output plus a list of return codes to discard, a
 
 Clone this repository into a directory
 
-1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **Filtered.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
+1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
 
  -i input_file: Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
- -o work_dir: Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
+ -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
 For instance:
 
   `./scanJSON`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/Filtered.url**, which contains a flat list of URLs and their http returned status code.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/ALL.url**, which contains a flat list of URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. Both **input_file** and **work_dir/Filtered.url** will be read.
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and ALL.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. Both **input_file** and **work_dir/ALL.url** will be read.
 
   `./buildJSON -h`
 
  -i input_file:	Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
- -o work_dir:	Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
+ -o work_dir:	Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
  -d, --duplicates:	remove duplicated bookmarks
 
@@ -103,7 +103,7 @@ After processing all these files will be added to work_dir:
 
 * valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks`.
 
-* return code and entry list in `Filtered.url`
+* return code and entry list in `ALL.url`
 
 ## Sample screen dump
 
@@ -122,11 +122,11 @@ $ ./scanJSON.py
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 406 http://www.tokutek.com/
 ...
-(Scanned to ./work_dir/Filtered.url)
+(Scanned to ./work_dir/ALL.url)
 
 $ ./buildJSON.py -d 30. 404 406
 (Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
-(Scanned from ./work_dir/Filtered.url)
+(Scanned from ./work_dir/ALL.url)
 ...
 [3] MongoDB (21)
 >>> https://www.tutorialspoint.com/mongodb/index.htm
@@ -158,7 +158,13 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 
 This sample run will filter out entries returning 30., 404, 406, DDD & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
+## Status
+
+Fully operational
+
 ## Change log
+
+* R3.6 Intermediate file with scan results renamed to ALL.url
 
 * R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet Bookmark file remains unchanged
 
@@ -177,10 +183,6 @@ This sample run will filter out entries returning 30., 404, 406, DDD & XXX. XXX 
 * R1.31 checks for valid http return codes
 
 * R1.30 takes as parameters all the http return codes to be filtered out to files named as return codes.
-
-## Status
-
-Fully operational
 
 ## TODO
 
