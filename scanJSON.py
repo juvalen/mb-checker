@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R3.4
+# Version: R3.6
 # Author: jvalentinpastrana at gmail
-# Date: May 2020
+# Date: Jun 2020
 #
 # Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
