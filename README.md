@@ -164,7 +164,7 @@ Fully operational
 
 ## Change log
 
-* R3.6 Intermediate file with scan results renamed to ALL.url
+* R3.6 Intermediate file between scan and build renamed to ALL.url
 
 * R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet Bookmark file remains unchanged
 
