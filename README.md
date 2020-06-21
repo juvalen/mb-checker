@@ -105,7 +105,7 @@ After processing all these files will be added to work_dir:
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
+Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
 ```
 $ ./scanJSON.py
@@ -152,13 +152,13 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 
 **>>> url**
 
-&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved or entry id if rejected.
+&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
-This sample run entails entries returning 30., 404, 406, DDD & XXX being removed. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
+This sample run will remove entries returning 30., 404, 406, DDD & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
 ## Change log
 
-* R3.5 http return codes can be specified using _._ as a character wildcard (ie 4.4 means 404, 414...)
+* R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...)
 
 * R3.4 -i input_file and -w work_dir options
 
