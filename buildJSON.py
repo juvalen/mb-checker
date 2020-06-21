@@ -38,7 +38,7 @@ parser.add_argument("-w", "--work-dir", dest='work_dir', help="Working directory
 parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
 parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
 parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
-parser.add_argument('params', metavar='code', type=str, nargs='*', help='http return code to be filtered', action='append')
+parser.add_argument('params', metavar='code', type=str, nargs='*', help='http return code to be filtered, if none only classifies', action='append')
 args = parser.parse_args()
 params = args.params[0]
 nparams = len(params)
@@ -65,14 +65,17 @@ errorVarName = []
 errorFile = []
 
 # parsing http codes in params
-for iparam in params:
-    if re.match("[0-9\.]{3}", iparam):
-        errorWatch.append(iparam)
-        errorVarName.append("URL" + iparam)
-        errorFile.append(work_dir + iparam + '.url')
-    else:
-        print("  Error: return code", iparam, "malformed, should contain three digits or dots\n")
-        sys.exit()
+if nparams:
+    for iparam in params:
+        if re.match("[0-9\.]{3}", iparam):
+            errorWatch.append(iparam)
+            errorVarName.append("URL" + iparam)
+            errorFile.append(work_dir + iparam + '.url')
+        else:
+            print("  Error: return code", iparam, "malformed, should contain three digits or dots\n")
+            sys.exit()
+else:
+    print("Code list is empty")
 
 # ASCII color codes
 RED = '\033[31m'
@@ -143,20 +146,24 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
+                    if nparams:
+
+
+
 # Check status code of that URL in pairs
-                    try:
-                        status = pairs[url]
-                        combined = "(" + ")|(".join(errorWatch) + ")"
+                        try:
+                            status = pairs[url]
+                            combined = "(" + ")|(".join(errorWatch) + ")"
 # Deleted, so next time won't be found => duplicated
-                        if DELETEDUPLICATES == 1:
-                            del pairs[url]
-                        if status == "XXX":
-                            print(RED + "    " + status + " " + id)
-                            urlXXX.write(url + "\n")
-                            tree.pop(i); i -= 1; numitems -= 1
-                            print(NONE, end="")
-                        elif re.match(combined, status): # if some codes to be filtered match the actual status
-                            for http_code in errorWatch:
+                            if DELETEDUPLICATES == 1:
+                                del pairs[url]
+                            if status == "XXX":
+                                print(RED + "    " + status + " " + id)
+                                urlXXX.write(url + "\n")
+                                tree.pop(i); i -= 1; numitems -= 1
+                                print(NONE, end="")
+                            elif re.match(combined, status): # look if some codes to be filtered match the actual status
+                                for http_code in errorWatch:
                                     if re.match(http_code, status):
                                         pos = errorWatch.index(http_code)
                                         f = errorVarName[pos]
@@ -164,19 +171,22 @@ def preorder(tree, depth):
                                         f.write(url + "\n")
                                         tree.pop(i); i -= 1; numitems -= 1
                                         print(NONE, end="")
-                        else: # looked up code not in list, entry remains
-                            print("    " + status, '+')
-#                    except Exception as ex:
-#                        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-#                        message = template.format(type(ex).__name__, ex.args)
-#                        print(message)
-                    except:
-                        status = "DDD"
-                        print(BLUE + "    " + status + " " + id)
-                        urlDDD.write(url + "\n")
-                        tree.pop(i); i -= 1; numitems -= 1
+                            else: # looked up code not in list, entry remains
+                                print("    " + status, '+')
+                        except:
+                            status = "DDD"
+                            print(BLUE + "    " + status + " " + id)
+                            urlDDD.write(url + "\n")
+                            tree.pop(i); i -= 1; numitems -= 1
+                            print(NONE, end="")
+                    else:
+                        status = pairs[url]
+                        ef = work_dir + status + '.url'
+                        ev = open(ef, "a+")
+                        print(GREEN + "    " + status + " " + id)
+                        ev.write(url + "\n")
+                        ev.close()
                         print(NONE, end="")
-
                 elif type == "folder":
                     print(GREEN + "  Empty folder")
                     if DELETEFOLDERS:
