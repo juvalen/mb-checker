@@ -43,19 +43,21 @@ For instance:
 
   `./scanJSON`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/Filtered.url**, which contains a flat list of URLs and their status code.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/Filtered.url**, which contains a flat list of URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. In input_file must point to the original bookmark file and will also read **_work_dir_/Filtered.url**.
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and Filtered.url, removing duplicates (-d option) and removing empty folders (-f option). This script can be run several times with disctinct return codes. Both **input_file** and **work_dir/Filtered.url** will be read.
 
   `./buildJSON -h`
 
- -i input_file: Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file:	Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
- -o work_dir: Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
+ -o work_dir:	Folder in which **Filtered.url** file will be stored (defaults to `./work_dir/`)
 
- -d, --duplicates      remove duplicated bookmarks
+ -d, --duplicates:	remove duplicated bookmarks
 
- -f, --folders         remove empty folders
+ -f, --folders:	remove empty folders
+
+ <codeN>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
 
 For instance:
 
@@ -154,11 +156,11 @@ Above, log entries for a folder and seven processed bookmarks are shown where fi
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
-This sample run will remove entries returning 30., 404, 406, DDD & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
+This sample run will filter out entries returning 30., 404, 406, DDD & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it. DDD means a duplicated entry that will be removed -first occurrence will be preserved- showing its id.
 
 ## Change log
 
-* R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...)
+* R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet Bookmark file remains unchanged
 
 * R3.4 -i input_file and -w work_dir options
 
