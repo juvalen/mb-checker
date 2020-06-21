@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R3.4
+# Version: R3.5
 # Author: jvalentinpastrana at gmail
-# Date: May 2020
+# Date: Jun 2020
 #
 # Usage: ./buildJSON [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2> <code3>...
 #
@@ -67,9 +67,9 @@ errorFile = []
 # parsing http codes in params
 for iparam in params:
     if re.match("[0-9\.]{3}", iparam):
-        errorWatch.append(str(iparam))
-        errorVarName.append("URL" + str(iparam))
-        errorFile.append(work_dir + str(iparam) + '.url')
+        errorWatch.append(iparam)
+        errorVarName.append("URL" + iparam)
+        errorFile.append(work_dir + iparam + '.url')
     else:
         print("Error: return code", iparam, " must contain three digits or dots\n")
         sys.exit()
@@ -146,7 +146,9 @@ def preorder(tree, depth):
 # Check status code of that URL in pairs
                     try:
                         status = pairs[url]
-                        http_code = errorWatch.index(status)
+                        combined = "(" + ")|(".join(errorWatch) + ")"
+                        print(combined)
+                        print(status)
 # Deleted, so next time won't be found => duplicated
                         if DELETEDUPLICATES == 1:
                             del pairs[url]
@@ -155,15 +157,22 @@ def preorder(tree, depth):
                             urlXXX.write(url + "\n")
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
-                        elif re.match(http_code, status):
-                            pos = errorWatch.index(status)
-                            f = errorVarName[pos]
-                            print(RED + "    " + status + " " + id)
-                            f.write(url + "\n")
-                            tree.pop(i); i -= 1; numitems -= 1
-                            print(NONE, end="")
+                        elif re.match(combined, status): # if some codes to be filtered match the actual status
+                            for http_code in errorWatch:
+                                    if re.match(http_code, status):
+                                        pos = errorWatch.index(http_code)
+                                        f = errorVarName[pos]
+                                        print(GREEN, "Escribiendo en ", f, NONE)
+                                        print(RED + "    " + status + " " + id)
+                                        f.write(url + "\n")
+                                        tree.pop(i); i -= 1; numitems -= 1
+                                        print(NONE, end="")
                         else: # looked up code not in list, entry remains
                             print("    " + status, '+')
+#                    except Exception as ex:
+#                        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+#                        message = template.format(type(ex).__name__, ex.args)
+#                        print(message)
                     except:
                         status = "DDD"
                         print(BLUE + "    " + status + " " + id)
