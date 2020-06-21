@@ -182,8 +182,6 @@ Fully operational
 
 ## TODO
 
-Specify http return codes using regexps, as **5..** or __5*__ so it would filter 500, 501, 502...
-
 Gather other Chrome bookmark file locations for other Linux distributions
 
 ## Author
