@@ -24,7 +24,7 @@
 #         Bookmarks.out
 
 import json
-import os
+import os, glob
 from pprint import pprint
 import sys
 import re
@@ -75,7 +75,9 @@ if nparams:
             print("  Error: return code", iparam, "malformed, should contain three digits or dots\n")
             sys.exit()
 else:
-    print("Code list is empty")
+    print("Code list is empty, return codes will be classified to files")
+    for f in glob.glob(work_dir + "[0-9][0-9][0-9].url"):
+        os.remove(f)
 
 # ASCII color codes
 RED = '\033[31m'
@@ -147,9 +149,6 @@ def preorder(tree, depth):
                     url = item["url"]
                     print(">>> " + url)
                     if nparams:
-
-
-
 # Check status code of that URL in pairs
                         try:
                             status = pairs[url]
@@ -180,6 +179,7 @@ def preorder(tree, depth):
                             tree.pop(i); i -= 1; numitems -= 1
                             print(NONE, end="")
                     else:
+# No return codes were specified
                         status = pairs[url]
                         ef = work_dir + status + '.url'
                         ev = open(ef, "a+")
