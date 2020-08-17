@@ -79,6 +79,8 @@ For instance:
 
 Allow it finish and all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
+If it is run with no return code options **buildJSON** will just classify original bookmarks in files by their return code.
+
 **Scripts deal with UTF-8 characters**
 
 ```
