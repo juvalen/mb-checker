@@ -11,7 +11,7 @@ import queue
 DIRNAME = "output/"
 TIMEOUT = 5
 
-concurrent = 32
+concurrent = 4
 
 # Threading functions
 def doWork():
