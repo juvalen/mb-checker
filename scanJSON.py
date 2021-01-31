@@ -95,10 +95,13 @@ def preorder(tree, depth):
     return tree
 
 ############### Main #######################
+print("[0] Bar")
 original = Bookmarks['roots']['bookmark_bar']['children']
 nodes = preorder(original, 0)
+print("[0] Other")
 original = Bookmarks['roots']['other']['children']
 nodes = preorder(original, 0)
+print("[0] Synced")
 original = Bookmarks['roots']['synced']['children']
 nodes = preorder(original, 0)
 
