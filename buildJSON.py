@@ -4,7 +4,7 @@
 # Author: jvalentinpastrana at gmail
 # Date: Jun 2020
 #
-# Usage: ./buildJSON [-w work_dir] [-i input_file] [-d] [-f] <code1> <code2> <code3>...
+# Usage: ./buildJSON [-w work_dir] [-i input_file] [-f] <code1> <code2> <code3>...
 #
 # Function: Reads ALL.url and original input Bookmarks file and removes entries returning
 #           any of <codeN> to Bookmarks.out
@@ -36,7 +36,6 @@ import argparse
 parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads ALL.url and Bookmarks and removes specified return codes to Bookmarks.out")
 parser.add_argument("-w", "--work-dir", dest='work_dir', help="Working directory, defaults to ./work_dir/", action="store")
 parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
-parser.add_argument("-d", "--duplicates", dest='DELETEDUPLICATES', help="remove duplicated bookmarks", action="store_true")
 parser.add_argument("-f", "--folders", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
 parser.add_argument('params', metavar='code', type=str, nargs='*', help='http return code to be filtered, if none only classifies', action='append')
 args = parser.parse_args()
@@ -54,7 +53,6 @@ except:
 print("Reading bookmarks from", input_file)
 #
 DELETEFOLDERS = args.DELETEFOLDERS
-DELETEDUPLICATES = args.DELETEDUPLICATES
 URLIN = work_dir + "ALL.url"
 URLXXX = work_dir + "XXX.url"
 URLDDD = work_dir + "DDD.url"
@@ -154,8 +152,6 @@ def preorder(tree, depth):
                             status = pairs[url]
                             combined = "(" + ")|(".join(errorWatch) + ")"
 # Deleted, so next time won't be found => duplicated
-                            if DELETEDUPLICATES == 1:
-                                del pairs[url]
                             if status == "XXX":
                                 print(RED + "    " + status + " " + id)
                                 urlXXX.write(url + "\n")
@@ -189,9 +185,6 @@ def preorder(tree, depth):
                         print(NONE, end="")
                 elif type == "folder":
                     print(GREEN + "  Empty folder")
-                    if DELETEFOLDERS:
-                        ret = tree.pop(i); i -= 1; numitems -= 1
-                        print(" removed")
                     print(NONE)
                 else:
                     print(BLUE + "   ???" + id + NONE)
