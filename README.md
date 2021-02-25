@@ -45,7 +45,7 @@ For instance:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/ALL.url**, which contains a flat list of URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-d] [-e] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and ALL.url and removing empty folders (-e option). This script can be run several times with disctinct return codes. Both **input_file** and **work_dir/ALL.url** will be read.
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and ALL.url and removing empty folders (-e option). This script can be run several times with disctinct return codes. Both **input_file** and **work_dir/ALL.url** will be read.
 
   `./buildJSON -h`
 
@@ -53,7 +53,7 @@ For instance:
 
  -o work_dir:	Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
- -e, --empty:	remove empty folders
+ -e:		remove empty folders flag
 
  <codeN>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
 
@@ -102,6 +102,8 @@ After processing all these files will be added to work_dir:
 * valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks` with.
 
 * return code and entry list in `ALL.url`
+
+Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 ## Sample screen dump
 
