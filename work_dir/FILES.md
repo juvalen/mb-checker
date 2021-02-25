@@ -7,11 +7,13 @@ File to be copied here:
 `Don't forget to backup this file first !`
 
 ## Output
-Files resulting after applying scripts:
+File resulting after applying `scanJSON.py` script:
+ - **ALL.url**: listing of all parsed entries
+
+Files resulting after applying `scanJSON.py` script:
  - **XXX.url**: listing of URLs that can't be reached (corresponding to XXX on screen dump)
- - **DDD.url**: listing of duplicated URLs
+ - **EEE.url**: listing of empty folders
  - **&lt;code&gt;.url**: list of URLs return codes
- - **Filtered.url**: listing of all passed entries
  - **Bookmarks.out**: Result JSON file containing Chrome bookmarks filtered
 
 You can copy Bookmarks.out back to Bookmark file.
