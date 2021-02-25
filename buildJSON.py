@@ -19,7 +19,7 @@
 #
 # Output files in working_directory: 
 #         XXX.url
-#         DDD.url
+#         EEE.url
 #         <code>.url
 #         Bookmarks.out
 
@@ -55,7 +55,7 @@ print("Reading bookmarks from", input_file)
 DELETEFOLDERS = args.DELETEFOLDERS
 URLIN = work_dir + "ALL.url"
 URLXXX = work_dir + "XXX.url"
-URLDDD = work_dir + "DDD.url"
+URLEEE = work_dir + "EEE.url"
 JSONOUT = work_dir + "Bookmarks.out"
 
 errorWatch = []
@@ -117,7 +117,7 @@ for i in range(0, nparams):
     print("Created", errorFile[i])
 print()
 # For duplicated bookmark
-urlDDD = open(URLDDD,"w")
+urlEEE = open(URLEEE,"w")
 
 # Traverse the json tree and remove entries with its code in ALL.url
 def preorder(tree, depth):
@@ -169,11 +169,7 @@ def preorder(tree, depth):
                             else: # looked up code not in list, entry remains
                                 print("    " + status, '+')
                         except:
-                            status = "DDD"
-                            print(BLUE + "    " + status + " " + id)
-                            urlDDD.write(url + "\n")
-                            tree.pop(i); i -= 1; numitems -= 1
-                            print(NONE, end="")
+                            pass
                     else:
 # No return codes were specified
                         status = pairs[url]
@@ -184,12 +180,15 @@ def preorder(tree, depth):
                         ev.close()
                         print(NONE, end="")
                 elif type == "folder":
-                    print(GREEN + "  Empty folder")
+                    print(BLUE + "  Empty " + name + " " + id, end="")
+                    urlEEE.write(name + "\n")
+                    if DELETEFOLDERS:
+                        tree.pop(i); i -= 1; numitems -= 1
+                        print(RED + "  Deleted ", end="")
                     print(NONE)
                 else:
                     print(BLUE + "   ???" + id + NONE)
             i += 1
-        print()
     return tree
 
 # JSON structure
