@@ -55,13 +55,13 @@ For instance:
 
  -e:		remove empty folders flag
 
- <codeN>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
+ \<codeN\>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
 
 For instance:
 
   `./buildJSON 30. 404 406`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; will filter live bookmark file (for Ubuntu) to remove http return codes 30., 404 & 406. Regexp character **.** is allowed and means any caharacter, so 300..309 return codes will be filtered. This command will generate 7 files in _work_dir_ subdirectory. :
+will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, and character **.** is allowed and means any caharacter, so `300`..`309` return codes will be actually filtered. This command will generate 7 extra files in _work_dir_ subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -75,7 +75,7 @@ For instance:
 
 Allow it finish and all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
-If it is run with no return code options **buildJSON** will just classify original bookmarks in files by their return code.
+If **uildJSON.py** is run with no return code options it will generate files for all http return codes found but original Bookmark file will remain untouched.
 
 **Scripts deal with UTF-8 characters**
 
