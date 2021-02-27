@@ -73,9 +73,9 @@ For instance:
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-If **buildJSON.py** is run with no return code options it will files generate files for all http return codes found but original Bookmark file will copied back to **Bookmarks.out**.
+If **buildJSON.py** is first run with no return code options it will populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
-Allow it finish and all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
+When it finishes all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
 **Scripts deal with UTF-8 characters**
 
