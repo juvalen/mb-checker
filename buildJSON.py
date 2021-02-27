@@ -19,7 +19,7 @@
 #
 # Output files in working_directory: 
 #         XXX.url
-#         EEE.url
+#         Empty_folders.lst
 #         <code>.url
 #         Bookmarks.out
 
@@ -55,7 +55,7 @@ print("Reading bookmarks from", input_file)
 DELETEFOLDERS = args.DELETEFOLDERS
 URLIN = work_dir + "ALL.url"
 URLXXX = work_dir + "XXX.url"
-URLEEE = work_dir + "EEE.url"
+URLEEE = work_dir + "Empty_folders.lst"
 JSONOUT = work_dir + "Bookmarks.out"
 
 errorWatch = []
@@ -181,10 +181,10 @@ def preorder(tree, depth):
                         print(NONE, end="")
                 elif type == "folder":
                     print(BLUE + "    EEE " + id, end="")
-                    urlEEE.write(name + "\n")
+                    urlEEE.write("[" + str(depth) + "] " + name + " (" + str(branches) + ")\n")
                     if DELETEFOLDERS:
                         tree.pop(i); i -= 1; numitems -= 1
-                        print(RED + " Deleted ", end="")
+                        print(RED + " Deleted ")
                     print(NONE)
                 else:
                     print(BLUE + "   ???" + id + NONE)

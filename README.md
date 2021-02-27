@@ -95,7 +95,7 @@ After processing all these files will be added to work_dir:
 
 * entries failing due to sundry network errors in `XXX.url`.
 
-* empty folders `EEE.url`.
+* empty folders `Empty_folders.lst`.
 
 * all https status codes specified will be rejected and entries logged in `<code>.url`.
 
