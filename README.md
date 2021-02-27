@@ -43,9 +43,9 @@ For instance:
 
   `./scanJSON`
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Out original boormark file (for Ubuntu) it will generate **work_dir/ALL.url**, which contains a flat list of URLs and their http returned status code.
+&emsp;Out original boormark file (for Ubuntu) it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce <work_dir>/Bookmarks.out from Bookmarks and ALL.url and removing empty folders (-e option). This script can be run several times with disctinct return codes. Both **input_file** and **work_dir/ALL.url** will be read.
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** from original Bookmarks and **ALL.url** and removing empty folders (-e option). This script can be run several times with disctinct return codes. Both **input_file** and **ALL.url** will be read.
 
   `./buildJSON -h`
 
@@ -57,11 +57,11 @@ For instance:
 
  \<codeN\>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
 
-For instance:
+&emsp;For instance:
 
-  `./buildJSON 30. 404 406`
+&emsp;  `./buildJSON 30. 404 406`
 
-will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, and character **.** is allowed and means any caharacter, so `300`..`309` return codes will be actually filtered. This command will generate 7 extra files in _work_dir_ subdirectory. :
+&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, and character **.** is allowed and means any caharacter, so `30.` will actually filter `300`..`309`. This command will generate 7 extra files in _work_dir_ subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -73,9 +73,9 @@ will filter live bookmark file (for Ubuntu) so that invocation will remove http 
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-Allow it finish and all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
+If **buildJSON.py** is run with no return code options it will files generate files for all http return codes found but original Bookmark file will copied back to **Bookmarks.out**.
 
-If **uildJSON.py** is run with no return code options it will generate files for all http return codes found but original Bookmark file will remain untouched.
+Allow it finish and all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
 **Scripts deal with UTF-8 characters**
 
