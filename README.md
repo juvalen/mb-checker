@@ -45,7 +45,7 @@ For instance:
 
 &emsp;Out original boormark file (for Ubuntu) it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** from original Bookmarks and **ALL.url** and removing empty folders (-e option). This script can be run several times with disctinct return codes. Both **input_file** and **ALL.url** will be read.
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** from original Bookmarks and **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
   `./buildJSON -h`
 
@@ -82,8 +82,6 @@ When it finishes all result files will appear in _work_dir_ subdirectory. Origin
 ```
 First backup original bookmark file !
 ```
-
-See usage details at `./buildJSON.py -h`
 
 ## Input file
 Use original chrome bookmark file or use a stored one.
@@ -124,7 +122,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/ALL.url)
 
-$ ./buildJSON.py -d 30. 404 406
+$ ./buildJSON.py -e 30. 404 406
 (Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
 (Scanned from ./work_dir/ALL.url)
 ...
