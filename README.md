@@ -61,7 +61,7 @@ For instance:
 
 &emsp;  `./buildJSON 30. 404 406`
 
-&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, and character **.** is allowed and means any caharacter, so `30.` will actually filter `300`..`309`. This command will generate 7 extra files in _work_dir_ subdirectory. :
+&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, and character **.** is allowed and means any caharacter, so `30.` will actually filter `300`..`309`. This command will generate 7 extra files in `work_dir` subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -75,7 +75,7 @@ For instance:
 
 If **buildJSON.py** is first run with no return code options it will populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
-When it finishes all result files will appear in _work_dir_ subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
+When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
 **Scripts deal with UTF-8 characters**
 
@@ -89,7 +89,7 @@ Use original chrome bookmark file or use a stored one.
 ## Output files
 Script crawls the bookmark file using **requests.head** method to access each site. It has a hardcoded 10" timeout. It retrieves the http return code.
 
-After processing all these files will be added to work_dir:
+After processing all these files will be added to `work_dir`:
 
 * entries failing due to sundry network errors in `XXX.url`.
 
@@ -144,7 +144,7 @@ $ ./buildJSON.py -e 30. 404 406
 ...
 ```
 
-And output files will be stored in work_dir.
+And output files will be stored in `work_dir`.
 
 Above, log entries for a folder and seven processed bookmarks are shown where five are filtered out:
 
