@@ -1,4 +1,4 @@
-# Bookmark cleansing R3.7
+# Bookmark cleansing R3.8
 This is a simple command line utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
@@ -165,6 +165,8 @@ Running Chrome with a registered Google account may resynchronize bookmarks back
 Fully operational
 
 ## Change log
+
+* R3.8 Fixed bug that entries yielding XXX return code are not included in Bookmarks.out
 
 * R3.7 Fixed bug about deleting empty folders option, and renamed it to -e --empty
 

@@ -146,18 +146,18 @@ def preorder(tree, depth):
                     date_added = item["date_added"]
                     url = item["url"]
                     print(">>> " + url)
+                    status = pairs[url]
+                    combined = "(" + ")|(".join(errorWatch) + ")"
+# Deleted, so next time won't be found => duplicated
+                    if status == "XXX":
+                        print(RED + "    " + status + " " + id)
+                        urlXXX.write(url + "\n")
+                        tree.pop(i); i -= 1; numitems -= 1
+                        print(NONE, end="")
                     if nparams:
 # Check status code of that URL in pairs
                         try:
-                            status = pairs[url]
-                            combined = "(" + ")|(".join(errorWatch) + ")"
-# Deleted, so next time won't be found => duplicated
-                            if status == "XXX":
-                                print(RED + "    " + status + " " + id)
-                                urlXXX.write(url + "\n")
-                                tree.pop(i); i -= 1; numitems -= 1
-                                print(NONE, end="")
-                            elif re.match(combined, status): # look if some codes to be filtered match the actual status
+                            if re.match(combined, status): # look if some codes to be filtered match the actual status
                                 for http_code in errorWatch:
                                     if re.match(http_code, status):
                                         pos = errorWatch.index(http_code)
@@ -172,13 +172,14 @@ def preorder(tree, depth):
                             pass
                     else:
 # No return codes were specified
-                        status = pairs[url]
-                        ef = work_dir + status + '.url'
-                        ev = open(ef, "a+")
-                        print(GREEN + "    " + status + " " + id)
-                        ev.write(url + "\n")
-                        ev.close()
-                        print(NONE, end="")
+                        if status != "XXX":
+                            status = pairs[url]
+                            ef = work_dir + status + '.url'
+                            ev = open(ef, "a+")
+                            print(GREEN + "    " + status + " " + id)
+                            ev.write(url + "\n")
+                            ev.close()
+                            print(NONE, end="")
                 elif type == "folder":
                     print(BLUE + "    EEE " + id, end="")
                     urlEEE.write("[" + str(depth) + "] " + name + " (" + str(branches) + ")\n")
