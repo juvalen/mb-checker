@@ -19,6 +19,10 @@ There is one script that crawls all entries included in the bookmarks and queues
 
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
+```
+Make sure bookmarks don't change between tha launching of both scripts, if you are working with live bookmark file.
+```
+
 ## Requirements
 
 * python 3
@@ -73,7 +77,7 @@ For instance:
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-If **buildJSON.py** is first run with no return code options it will populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
+If **buildJSON.py** is run with no return code options it will populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
