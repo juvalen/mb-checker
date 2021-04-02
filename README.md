@@ -7,7 +7,7 @@ Feed this python scripts with a Chrome bookmark file and a list of http return c
 
 Empty bookmark folders can be optionally removed.
 
-Due to the large number of agents involved in Internet traffic, results achieved have not been as reliable as to think about complete automation. It means that two consecutive runs with the same few thousands of bookmarks won't yield the exact same results. So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the rejected entries for yet valuable ones. This is for the time being.
+Due to the large number of agents involved in Internet traffic, results achieved have not fully fully reliable as to think about complete automation. Results may be inexact due to different redirect strategies, moved to https... So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the excluded entries for yet valuable ones.
 
 Tasks are divided between two scripts.
 
