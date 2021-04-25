@@ -20,7 +20,7 @@ There is one script that crawls all entries included in the bookmarks and queues
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
 ```
-Make sure bookmarks don't change between tha launching of both scripts, if you are working with live bookmark file.
+Make sure bookmarks don't change between tha launching of both scripts, that may happen when you are working with live bookmark input file.
 ```
 
 ## Requirements
@@ -162,7 +162,7 @@ This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code 
 
 ## Caveats
 
-Running Chrome with a registered Google account may resynchronize bookmarks back.
+Running Chrome with a registered Google account may resynchronize bookmarks back, so applying this script to purge them won't show results.
 
 ## Status
 
@@ -170,7 +170,7 @@ Fully operational
 
 ## Change log
 
-* R3.8 Fixed bug that entries yielding XXX return code are not included in Bookmarks.out
+* R3.8 Fixed bug so entries yielding XXX return code are not included in Bookmarks.out now
 
 * R3.7 Fixed bug about deleting empty folders option, and renamed it to -e --empty
 
