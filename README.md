@@ -20,7 +20,7 @@ There is one script that crawls all entries included in the bookmarks and queues
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
 ```
-Make sure bookmarks don't change between tha launching of both scripts, that may happen when you are working with live bookmark input file.
+Make sure bookmarks don't change between launching both scripts, that may happen when you are working with live bookmark input file.
 ```
 
 ## Requirements
@@ -47,13 +47,13 @@ For instance:
 
   `./scanJSON`
 
-&emsp;Out original boormark file (for Ubuntu) it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
+&emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
 2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** from original Bookmarks and **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
   `./buildJSON -h`
 
- -i input_file:	Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file:	Original bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
  -o work_dir:	Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
@@ -206,7 +206,7 @@ Send feedback if you wish.
 
 ## License
 
-This project is licensed under the MIT License 
+This project is licensed under the MIT License
 
 ## Acknowledgments
 
@@ -215,4 +215,3 @@ This project is licensed under the MIT License
 * Mario & Iñaki who are back to programming
 
 * Antonio's hosting
- 
