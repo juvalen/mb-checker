@@ -65,7 +65,7 @@ For instance:
 
 &emsp;  `./buildJSON 30. 404 406`
 
-&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, and character **.** is allowed and means any caharacter, so `30.` will actually filter `300`..`309`. This command will generate 7 extra files in `work_dir` subdirectory. :
+&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -77,7 +77,7 @@ For instance:
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-If **buildJSON.py** is run with no return code options it will populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
+If **buildJSON.py** is run without parameters it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
