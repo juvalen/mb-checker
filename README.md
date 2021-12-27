@@ -91,7 +91,7 @@ First backup original bookmark file !
 Use original chrome bookmark file or use a stored one.
 
 ## Output files
-Script crawls the bookmark file using **requests.head** method to access each site. It has a hardcoded 10" timeout. It retrieves the http return code.
+Script crawls the bookmark file using **requests.head** method to access each site and retrieve http return code. It has a hardcoded 10" timeout.
 
 After processing all these files will be added to `work_dir`:
 
