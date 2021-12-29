@@ -32,7 +32,7 @@ from pathlib import Path
 # Read input parameters and create corresponding files
 parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to <work_dir>/ALL.url")
 parser.add_argument("-w", "--work-dir", dest='work_dir', type=str, help="Output directory, defaults to ./work_dir/", action="store")
-parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
+parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/.config/google-chrome/Default/Bookmarks", action="store")
 args = parser.parse_args()
 #
 try:
