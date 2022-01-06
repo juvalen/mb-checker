@@ -170,6 +170,8 @@ Fully operational
 
 ## Change log
 
+* R3.9 Edited with PyCharm
+
 * R3.8 Fixed bug so entries yielding XXX return code are not included in Bookmarks.out now
 
 * R3.7 Fixed bug about deleting empty folders option, and renamed it to -e --empty
