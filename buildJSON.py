@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R3.6
+# Version: R3.9
 # Author: jvalentinpastrana at gmail
-# Date: Jun 2020
+# Date: Jan 2021
 #
 # Usage: ./buildJSON [-w work_dir] [-i input_file] [-e] <code1> <code2> <code3>...
 #
@@ -25,17 +25,14 @@
 
 import json
 import os, glob
-from pprint import pprint
-import sys
 import re
-import http.client, sys
-from que import *
+import sys
 import argparse
 
 # Read input parameters and create corresponding files
-parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads ALL.url and Bookmarks and removes specified return codes to Bookmarks.out")
+parser = argparse.ArgumentParser(prog='./buildJSON.py', description="Reads ALL.url and Bookmarks to removes specific return codes to Bookmarks.out")
 parser.add_argument("-w", "--work-dir", dest='work_dir', help="Working directory, defaults to ./work_dir/", action="store")
-parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/config/google-chrome/Default/Bookmarks", action="store")
+parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/.config/google-chrome/Default/Bookmarks", action="store")
 parser.add_argument("-e", "--empty", dest='DELETEFOLDERS', help="remove empty folders", action="store_true")
 parser.add_argument('params', metavar='code', type=str, nargs='*', help='http return code to be filtered, if none only classifies', action='append')
 args = parser.parse_args()

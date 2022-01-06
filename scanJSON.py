@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R3.6
+# Version: R3.9
 # Author: jvalentinpastrana at gmail
-# Date: Jun 2020
+# Date: Jan 2021
 #
 # Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
@@ -19,20 +19,19 @@
 #
 # Output: <work_dir>/ALL.url
 #
-
 import json
 import os
 import argparse
-from pprint import pprint
 import sys
-import http.client
 import que
-from pathlib import Path
-#
+
 # Read input parameters and create corresponding files
-parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Tries to reach each Bookmarks entry and stores return code to <work_dir>/ALL.url")
-parser.add_argument("-w", "--work-dir", dest='work_dir', type=str, help="Output directory, defaults to ./work_dir/", action="store")
-parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bookmark file, defaults to ~/.config/google-chrome/Default/Bookmarks", action="store")
+parser = argparse.ArgumentParser(prog='./scanJSON.py',
+                                 description="Reaches each Bookmark entry and stores return code to <work_dir>/ALL.url")
+parser.add_argument("-w", "--work-dir", dest='work_dir', type=str, help="Output directory, defaults to ./work_dir/",
+                    action="store")
+parser.add_argument("-i", "--input", dest='input_file', type=str,
+                    help="Input bookmark file, defaults to ~/.config/google-chrome/Default/Bookmarks", action="store")
 args = parser.parse_args()
 #
 try:
@@ -44,7 +43,7 @@ try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
     work_dir = os.path.expanduser("./work_dir/")
-#
+
 # Read input parameters and create corresponding files
 errorWatch = []
 errorName = []
@@ -57,7 +56,7 @@ try:
     print("Output directory", work_dir, "created")
 except:
     print("Output directory", work_dir, "preserved")
-que.urlFilter = open(URLFILTER,"w")
+que.urlFilter = open(URLFILTER, "w")
 
 # Read source bookmark file
 try:
@@ -66,6 +65,7 @@ try:
 except FileNotFoundError:
     print("> Input file ", JSONIN, " not found\n")
     sys.exit()
+
 
 # Recurrent function
 def preorder(tree, depth):
@@ -86,24 +86,25 @@ def preorder(tree, depth):
                 type = item["type"]
                 id = item["id"]
                 if type == "url":
-# list element being checked
+                    # list element being checked
                     url = item["url"]
-# To paralelize
-# Send request to queue
+                    # To parallelize
+                    # Send request to queue
                     que.q.put(url.strip())
     que.q.join()
     return tree
 
-############### Main #######################
+
+# Main #####################################
 print("[0] Bar")
 original = Bookmarks['roots']['bookmark_bar']['children']
-nodes = preorder(original, 0)
+preorder(original, 0)
 print("[0] Other")
 original = Bookmarks['roots']['other']['children']
-nodes = preorder(original, 0)
+preorder(original, 0)
 print("[0] Synced")
 original = Bookmarks['roots']['synced']['children']
-nodes = preorder(original, 0)
+preorder(original, 0)
 
 # Closes error#.url files
 que.urlFilter.close()
