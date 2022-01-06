@@ -62,7 +62,7 @@ errorFile = []
 # parsing http codes in params
 if nparams:
     for iparam in params:
-        if re.match("[0-9\.]{3}", iparam):
+        if re.match("[0-9.]{3}", iparam):
             errorWatch.append(iparam)
             errorVarName.append("URL" + iparam)
             errorFile.append(work_dir + iparam + '.url')
