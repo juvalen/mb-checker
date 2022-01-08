@@ -84,7 +84,6 @@ def preorder(tree, depth):
                 preorder(subtree, depth)
             else:
                 type = item["type"]
-                id = item["id"]
                 if type == "url":
                     # list element being checked
                     url = item["url"]
