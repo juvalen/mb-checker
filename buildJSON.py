@@ -84,7 +84,7 @@ NONE = '\033[0m' # No Color
 # Read source Bookmark file
 with open(input_file, "r") as f:
     Bookmarks = json.load(f)
-f.close
+f.close()
 # Read ALL.url to entry & code lists
 code = []
 entry = []
@@ -102,7 +102,7 @@ while line:
     code.append(status)
     entry.append(url)
     line = f.readline()
-f.close
+f.close()
 #Create dictionay of URLs from entry & code
 pairs = dict(zip(entry, code))
 
