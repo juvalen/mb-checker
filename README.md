@@ -39,7 +39,7 @@ Clone this repository into a directory
 
 1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
 
- -i input_file: Bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Bookmark file to use (defaults to live `/home/$USER/.config/google-chrome/Default/Bookmarks`)
 
  -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
@@ -49,7 +49,7 @@ For instance:
 
 &emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** from original Bookmarks and **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
+2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
   `./buildJSON -h`
 
@@ -200,6 +200,8 @@ Fully operational
 
 Gather other Chrome bookmark file locations for other Linux distributions
 
+Provide it the format a Chrome extension, like "Bookmarks clean up" one
+
 ## Author
 
 * **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
@@ -217,3 +219,4 @@ This project is licensed under the MIT License
 * Mario & Iñaki who are back to programming
 
 * Antonio's hosting
+
