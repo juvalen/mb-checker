@@ -119,7 +119,6 @@ $ ./scanJSON.py
 200 https://www.tutorialspoint.com/mongodb/index.htm
 301 http://php.net/manual/en/mongo.tutorial.php
 200 http://www.mongodb.org/display/DOCS/Querying
-200 http://www.mongodb.org/display/DOCS/Querying
 404 http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
 XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 406 http://www.tokutek.com/
@@ -137,8 +136,6 @@ $ ./buildJSON.py -e 30. 404 406
     301 1345
 >>> http://www.mongodb.org/display/DOCS/Querying
     200 +
->>> http://www.mongodb.org/display/DOCS/Querying
-    302 1347
 >>> http://devzone.zend.com/1730/getting-started-with-mongodb-and-php/fake.html
     404 1348
 >>> https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
