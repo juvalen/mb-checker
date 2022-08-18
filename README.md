@@ -147,7 +147,7 @@ $ ./buildJSON.py -e 30. 404 406
 
 And output files will be stored in `work_dir`.
 
-Above, log entries for a folder and seven processed bookmarks are shown where five are filtered out:
+Above, log entries for a folder and six processed bookmarks are shown where four are filtered out:
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
