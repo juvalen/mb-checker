@@ -21,7 +21,7 @@ A second script reads that file output plus a list of return codes to discard, a
 
 | :warning: WARNING          |
 |:---------------------------|
-| Make sure bookmarks don't change between running both scripts, that may happen when you are working with live bookmark input file |
+| Make sure bookmarks don't change between running both scripts, that may happen when it conflicts with some running bookmark synchronizer |
 
 ## Requirements
 
