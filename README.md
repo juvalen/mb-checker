@@ -19,9 +19,9 @@ There is one script that crawls all entries included in the bookmarks and queues
 
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
-```
-Make sure bookmarks don't change between launching both scripts, that may happen when you are working with live bookmark input file.
-```
+| :warning: WARNING          |
+|:---------------------------|
+| Make sure bookmarks don't change between running both scripts, that may happen when you are working with live bookmark input file |
 
 ## Requirements
 
@@ -216,4 +216,3 @@ This project is licensed under the MIT License
 * Mario & Iñaki who are back to programming
 
 * Antonio's hosting
-
