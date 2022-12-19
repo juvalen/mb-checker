@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R3.9
+# Version: R4.0
 # Author: jvalentinpastrana at gmail
-# Date: Jan 2021
+# Date: Dec 2022
 #
 # Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
@@ -14,7 +14,7 @@
 #           tags
 #
 # Options:
-#   input_file: bookmark file (defaults to ~/.config/google-chrome/Default/Bookmarks)
+#   input_file: bookmark file (defaults to ~/Bookmarks)
 #   work_dir: output directory (defaults to ./work_dir/)
 #
 # Output: <work_dir>/ALL.url

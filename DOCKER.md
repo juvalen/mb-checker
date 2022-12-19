@@ -17,11 +17,18 @@ Build image has been created with:
 
 `$ docker build -f Dockerfile.build -t juvalen/buildjson .`
 
+Create a variable with the http codes to purge:
+
+`$ export CODES="403 404"`
+
+Run then docker image:
+
+`$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir juvalen/buildjson`
 
 
 
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
+`./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
   `./buildJSON -h`
 
