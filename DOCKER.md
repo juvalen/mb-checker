@@ -1,53 +1,21 @@
 # Bookmark cleansing R4.0
 This is a simple command line utility to weed your good old bookmark file.
 
-It runs in docker
+It has been created with:
 
-```Docker run -v .:/app/work_dir mb-docker:latest```
+```$ docker build -t juvalen/scanjson .```
 
-Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
+To run it create a folder and cd to it, the run docker:
 
-Empty bookmark folders can be optionally removed.
+```$ docker run --rm -v "$(pwd)/work_dir:/app/work_dir" juvalen/scanjson```
 
-Due to the large number of agents involved in Internet traffic, results achieved have not fully fully reliable as to think about complete automation. Results may be inexact due to different redirect strategies, moved to https... So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the excluded entries for yet valuable ones.
+ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
-Tasks are divided between two scripts.
-
-There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
- - workers are created an listen to queue
- - main loop pushes URLs to queue
- - workers read URLs from queue and try to reach them
- - workers write returned code to file
-
-A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
-
-| :warning: WARNING          |
-|:---------------------------|
-| Make sure bookmarks don't change between running both scripts, that may happen when it conflicts with some running bookmark synchronizer |
-
-## Requirements
-
-* python 3
-
-* *requests* module installed: `python3 -m pip install requests`
-
-* *queue* module installed: `python3 -m pip install queue`
-
-* *threading* module installed: `python3 -m pip install threading`
-
-## Usage
-
-* Create a directory and move to it
-
-* Copy Bookmarks file there
-
-* Issue then ```docker run -v work_dir:/app/work_dir mb-checker:latest```
+A second script removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
 
 
 
 
-
-&emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
 2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
