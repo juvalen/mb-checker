@@ -1,69 +1,33 @@
-# Bookmark cleansing R3.9
-This is a simple command line utility to weed your good old bookmark file.
+# Bookmark cleansing R4.0
+his is a simple docker image to weed your good old bookmark file. See code details in README.md.
 
-After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
+Scan image has been created with:
 
-Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
+`$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
-Empty bookmark folders can be optionally removed.
+To run it create an empty directory and copy there Bookmarks file, also create there work_dir/. Then run docker:
 
-Due to the large number of agents involved in Internet traffic, results achieved have not fully fully reliable as to think about complete automation. Results may be inexact due to different redirect strategies, moved to https... So far, the suggestion is to keep the original bookmark file for some time, load the clean one in your browser, and review the excluded entries for yet valuable ones.
+`$ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson`
 
-Tasks are divided between two scripts.
+ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
-There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
- - workers are created an listen to queue
- - main loop pushes URLs to queue
- - workers read URLs from queue and try to reach them
- - workers write returned code to file
+A second image removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
 
-A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
+Build image has been created with:
 
-| :warning: WARNING          |
-|:---------------------------|
-| Make sure bookmarks don't change between running both scripts, that may happen when it conflicts with some running bookmark synchronizer |
+`$ docker build -f Dockerfile.build -t solarix/buildjson .`
 
-## Requirements
+Create a variable with the http codes to purge:
 
-* python 3
+`$ export CODES="403 404"`
 
-* *requests* module installed: `python3 -m pip install requests`
+Run then docker image:
 
-* *queue* module installed: `python3 -m pip install queue`
+`$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson`
 
-* *threading* module installed: `python3 -m pip install threading`
+That will produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmrks** and **ALL.url** will be used as input.
 
-## Usage
-
-Clone this repository into a directory
-
-1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
-
- -i input_file: Bookmark file to use (defaults to live `/home/$USER/.config/google-chrome/Default/Bookmarks`)
-
- -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
-
-For instance:
-
-  `./scanJSON`
-
-&emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
-
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
-
-  `./buildJSON -h`
-
- -i input_file:	Original bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
-
- -o work_dir:	Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
-
- -e:		remove empty folders flag
-
- \<codeN\>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
-
-&emsp;For instance:
-
-&emsp;  `./buildJSON 30. 404 406`
+&emsp;  `$ export CODES="30. 404 406"`
 
 &emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
@@ -112,8 +76,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
 ```
-$ ./scanJSON.py
-(Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
+$ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
@@ -125,8 +88,10 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/ALL.url)
 
-$ ./buildJSON.py -e 30. 404 406
-(Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
+$ export CODES="30. 404 406"
+
+$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson
+(Bookmarks from Bookmarks)
 (Scanned from ./work_dir/ALL.url)
 ...
 [3] MongoDB (21)
@@ -167,7 +132,7 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run a docker image, see DOCKER.md
+* R4.0 To run in docker
 
 * R3.9 Edited with PyCharm
 
