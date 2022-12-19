@@ -1,7 +1,9 @@
-# Bookmark cleansing R3.9
+# Bookmark cleansing R4.0
 This is a simple command line utility to weed your good old bookmark file.
 
-After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
+It runs in docker
+
+```Docker run -v .:/app/work_dir mb-docker:latest```
 
 Feed this python scripts with a Chrome bookmark file and a list of http return codes to be pruned and it will crawl through them and try to reach each entry. All successfull bookmarks will be copied to a _cleaner_ json file, and failing URLs will be copied to additional files named as the specified return code.
 
@@ -35,17 +37,15 @@ A second script reads that file output plus a list of return codes to discard, a
 
 ## Usage
 
-Clone this repository into a directory
+* Create a directory and move to it
 
-1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
+* Copy Bookmarks file there
 
- -i input_file: Bookmark file to use (defaults to live `/home/$USER/.config/google-chrome/Default/Bookmarks`)
+* Issue then ```docker run -v work_dir:/app/work_dir mb-checker:latest```
 
- -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
-For instance:
 
-  `./scanJSON`
+
 
 &emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
@@ -167,7 +167,7 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run in docker, see DOCKER.md
+* R4.0 To run in docker
 
 * R3.9 Edited with PyCharm
 
