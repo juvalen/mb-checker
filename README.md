@@ -167,7 +167,7 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run in docker, see DOCKER.md
+* R4.0 To run a docker image, see DOCKER.md
 
 * R3.9 Edited with PyCharm
 

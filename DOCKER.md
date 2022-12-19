@@ -1,13 +1,13 @@
 # Bookmark cleansing R4.0
-This is a simple command line utility to weed your good old bookmark file.
+his is a simple docker image to weed your good old bookmark file. See code details in README.md.
 
 Scan image has been created with:
 
-`$ docker build -f Dockerfile.scan -t juvalen/scanjson .`
+`$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
 To run it create an empty directory and copy there Bookmarks file, also create there work_dir/. Then run docker:
 
-`$ docker run --rm -v $(pwd)/work_dir:/app/work_dir juvalen/scanjson`
+`$ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson`
 
 ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
@@ -15,7 +15,7 @@ A second image removes unwanted URLs from Bookmarks and will compose a new bookm
 
 Build image has been created with:
 
-`$ docker build -f Dockerfile.build -t juvalen/buildjson .`
+`$ docker build -f Dockerfile.build -t solarix/buildjson .`
 
 Create a variable with the http codes to purge:
 
@@ -23,26 +23,11 @@ Create a variable with the http codes to purge:
 
 Run then docker image:
 
-`$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir juvalen/buildjson`
+`$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson`
 
+That will produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmrks** and **ALL.url** will be used as input.
 
-
-
-`./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
-
-  `./buildJSON -h`
-
- -i input_file:	Original bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
-
- -o work_dir:	Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
-
- -e:		remove empty folders flag
-
- \<codeN\>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
-
-&emsp;For instance:
-
-&emsp;  `./buildJSON 30. 404 406`
+&emsp;  `$ export CODES="30. 404 406"`
 
 &emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
@@ -91,8 +76,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
 ```
-$ ./scanJSON.py
-(Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
+$ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
@@ -104,8 +88,10 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/ALL.url)
 
-$ ./buildJSON.py -e 30. 404 406
-(Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
+$ export CODES="30. 404 406"
+
+$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson
+(Bookmarks from Bookmarks)
 (Scanned from ./work_dir/ALL.url)
 ...
 [3] MongoDB (21)
