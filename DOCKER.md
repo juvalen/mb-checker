@@ -1,17 +1,21 @@
 # Bookmark cleansing R4.0
 This is a simple command line utility to weed your good old bookmark file.
 
-It has been created with:
+Scan image has been created with:
 
-```$ docker build -t juvalen/scanjson .```
+`$ docker build -f Dockerfile.scan -t juvalen/scanjson .`
 
-To run it create a folder and cd to it, the run docker:
+To run it create an empty directory and copy there Bookmarks file, also create there work_dir/. Then run docker:
 
-```$ docker run --rm -v "$(pwd)/work_dir:/app/work_dir" juvalen/scanjson```
+`$ docker run --rm -v $(pwd)/work_dir:/app/work_dir juvalen/scanjson`
 
 ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
-A second script removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
+A second image removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
+
+Build image has been created with:
+
+`$ docker build -f Dockerfile.build -t juvalen/buildjson .`
 
 
 
