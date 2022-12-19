@@ -41,7 +41,7 @@ That will produce **Bookmarks.out** with Bookmarks format with entries gleaned f
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-If **buildJSON.py** is run without parameters it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
+If **buildjson** is run without http CODES it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
@@ -73,7 +73,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
+Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
 ```
 $ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson
@@ -132,7 +132,7 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run in docker
+* R4.0 Available as docker images
 
 * R3.9 Edited with PyCharm
 

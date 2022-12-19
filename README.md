@@ -1,4 +1,4 @@
-# Bookmark cleansing R3.9
+# Bookmark cleansing R4.0
 This is a simple command line utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
@@ -167,7 +167,7 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run a docker image, see DOCKER.md
+* R4.0 To run as docker images, see DOCKER.md
 
 * R3.9 Edited with PyCharm
 
