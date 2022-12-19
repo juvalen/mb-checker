@@ -47,7 +47,7 @@ When it finishes all result files will appear in `work_dir` subdirectory. Origin
 
 **Scripts deal with UTF-8 characters**
 
-Images available from [hub.docker.com](https://hub.docker.com/repository/docker/solarix).
+Images available from [hub.docker.com](https://hub.docker.com).
 
 ```
 First backup original bookmark file !
