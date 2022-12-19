@@ -1,5 +1,5 @@
 # Bookmark cleansing R4.0
-his is a simple docker image to weed your good old bookmark file. See code details in README.md.
+This are two simple docker images to weed your good old bookmark file. See code details in README.md.
 
 Scan image has been created with:
 
@@ -46,6 +46,8 @@ If **buildjson** is run without http CODES it will just populate files for all h
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
 **Scripts deal with UTF-8 characters**
+
+Images available from [hub.docker.com](https://hub.docker.com/repository/docker/solarix).
 
 ```
 First backup original bookmark file !
