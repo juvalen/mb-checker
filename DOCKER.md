@@ -1,5 +1,5 @@
 # Bookmark cleansing R4.0
-This are two simple docker images to weed your good old bookmark file. See code details in README.md.
+This are two simple docker images to weed your good old bookmark file. See code details in [README.md](README.md).
 
 Scan image has been created with:
 
