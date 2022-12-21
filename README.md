@@ -1,5 +1,5 @@
 # Bookmark cleansing R4.0
-This is a simple command line utility to weed your good old bookmark file.
+This is a simple **python** script utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
 
