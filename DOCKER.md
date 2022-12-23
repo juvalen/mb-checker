@@ -19,7 +19,7 @@ Build image has been created with:
 
 Create a variable with the http codes to purge:
 
-`$ export CODES="403 404"`
+`$ export CODES="30. 404 406"`
 
 Run then docker image:
 
