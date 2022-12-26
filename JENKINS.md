@@ -1,0 +1,5 @@
+ssh-keygen -f ~/.ssh/jenkins_agent_key
+
+docker run -d --rm --name=agent1 -p 22:22 \
+-e "JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClGJE/YIEKAvrazfD6ioRv9u02vqtUEf6rCylUXnGF3IRjc3L2zf9498HFAfXk2AyIaDydZLpG58LMbUDigoFoQcj+cjCxy3g7FkwJm5uZQ41jvIK3nn3B517WKqziwTMCWM1ugM1i0V01rFJ8TZoHoTLg6pjlvHkh3FLo1ZcRpT1eMW0wUeK3KmQqmGX09DlQhe/QryHlTQwDgDnlcRHlMRyTb3D1K1mdKWW7OXMevHGZsXzQKlu5Y5U/2TnyQi6XZ3B5xzaDUGxH5dB2kltMx5a4PZ1iQJZPzGdrOgvwS83SZZXkn5emqeXFO+ka9Li6NFkD9H+keRIsL+7w7RdWU5UEd0epBfFJIowqIb3ckN1WS98QdPyc8ZQjlLRq2uojRBGsdFp2qHn2lt+wywJbRM52H62CX+MQX0S8h/h11R0G89DuVd+Tt8TMr8236fBUV+b4mHU+kdcebrcVCr86I9ks4ExELevJv4gACgIE3hjNWhW7qV5mgA1UlbaaXFU= juan@smetana" \
+jenkins/ssh-agent:alpine
