@@ -2,14 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build scanjson') {
             steps {
-                echo "Building $BUILD_ID"
+                echo "Build ID $BUILD_ID"
+                docker build -f Dockerfile.scan -t solarix/scanjson .
             }
         }
-        stage('Test') {
+        stage('Build buildjson') {
             steps {
-                echo 'Testing...'
+                echo "Build ID $BUILD_ID"
+                docker build -f Dockerfile.build -t solarix/buildjson .
             }
         }
         stage('Deploy') {
