@@ -5,13 +5,13 @@ pipeline {
         stage('Build scanjson') {
             steps {
                 echo "Build ID $BUILD_ID"
-                docker build -f Dockerfile.scan -t solarix/scanjson .
+                bash "docker build -f Dockerfile.scan -t solarix/scanjson ."
             }
         }
         stage('Build buildjson') {
             steps {
                 echo "Build ID $BUILD_ID"
-                docker build -f Dockerfile.build -t solarix/buildjson .
+                bash "docker build -f Dockerfile.build -t solarix/buildjson ."
             }
         }
         stage('Deploy') {
