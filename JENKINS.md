@@ -16,7 +16,7 @@ Create a VBox machine (CentOS), in which:
 * Install git
 * Install docker daemon and enable it
 
-ach time VM is started:
+Each time VM is started:
 
 `sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
 `sudo chmod o+rw /var/run/docker.sock`
