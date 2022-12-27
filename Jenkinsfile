@@ -1,5 +1,5 @@
 pipeline {
-    agent jenkinsagent
+    agent any
 
     stages {
         stage('Build scanjson') {
