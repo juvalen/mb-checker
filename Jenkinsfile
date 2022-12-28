@@ -5,7 +5,7 @@ pipeline {
         stage('Build scanjson') {
             steps {
                 echo "Build ID $BUILD_ID"
-                sh "docker build -f Dockerfile.scan -t solarix/scanjson ."
+                app = docker.build("solarix/scanjson",  "Dockerfile.scan")
             }
         }
         stage('Build buildjson') {
