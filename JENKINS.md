@@ -23,6 +23,13 @@ Then copy it to the worker using `ssh-copy-id`
 
 Install following packages in VBOX
 
+Each time VM is started:
+
+`sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
+`sudo chmod o+rw /var/run/docker.sock`
+
+:exclamation: To be included in the VM boot process
+
 ## Operation
 
 Jenkinsfile is kept in repo and is then run when executing a pipeline assiciated with that repo.
