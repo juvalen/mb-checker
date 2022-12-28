@@ -11,4 +11,6 @@ tmp
 *.lst
 *.out
 *.url
+*.tmp
+*.tm
 .idea
