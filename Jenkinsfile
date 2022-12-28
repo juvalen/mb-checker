@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "My name is $NODE_NAME"
+                echo "My nodename is $NODE_NAME"
             }
         }
     }
