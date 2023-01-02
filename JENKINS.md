@@ -1,6 +1,6 @@
 # Jenkins pipelines
 
-This pipeline builds __scanjson__ and __buildjson__ images using Jenkins.
+This dclarative pipeline builds __scanjson__ and __buildjson__ images using Jenkins and pushes images to dockerhub.
 
 The agent is hosted in a VBox machine.
 
@@ -32,8 +32,10 @@ Each time VM is started:
 
 ## Operation
 
-Jenkinsfile is kept in repo and is then run when executing a pipeline assiciated with that repo.
+Jenkinsfile is kept in repo and is then run when executing a pipeline associated with that repo.
+
+Add git & dockerhub ceredentials
 
 ## Result
 
-Generated images remain in agent docker. They should be pushed to the apropriate registry in a following stage.
+After being generated images are pushed to dockerhub.
