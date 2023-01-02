@@ -167,7 +167,7 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run as docker images, see [DOCKER.md](DOCKER.md)
+* R4.0 To run as docker images, see [DOCKER.md](DOCKER.md) or [JENKINS.md](JENKINS.md)
 
 * R3.9 Edited with PyCharm
 
