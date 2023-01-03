@@ -1,6 +1,8 @@
-# Jenkins pipelines
+# Bookmark cleansing R4.0
 
-This dclarative pipeline builds __scanjson__ and __buildjson__ images using Jenkins and pushes images to dockerhub.
+## Building with Jenkins pipelines
+
+This declarative pipeline builds __scanjson__ and __buildjson__ images using Jenkins and pushes images to dockerhub.
 
 The agent is hosted in a VBox machine.
 
@@ -13,7 +15,7 @@ Create a VBox machine (CentOS), in which:
 * Associate jenkins user to former key
 * Install JDK 11
 * Install git
-* Install docker daemon (change socket permissions there with `chmod o+rw /var/run/docker.sock`)
+* Install docker daemon
 
 Create a rsa key in host:
 
@@ -26,9 +28,10 @@ Install following packages in VBOX
 Each time VM is started:
 
 `sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
+
 `sudo chmod o+rw /var/run/docker.sock`
 
-:exclamation: To be included in the VM boot process
+**warning** To be included in the VM boot process
 
 ## Operation
 
