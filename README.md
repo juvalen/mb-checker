@@ -158,7 +158,7 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
->>> **url**
+&gt;&gt;&gt; **url**
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
