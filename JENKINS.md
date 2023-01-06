@@ -8,7 +8,7 @@ The agent is hosted in a VBox machine.
 
 ## Usage
 
-Create a VBox machine (CentOS), in which:
+Create a VBox machine (CentOS) for a Jenkins worker, in which:
 
 * Set an IP address
 * Create jenkins user
@@ -31,7 +31,8 @@ Each time VM is started:
 
 `sudo chmod o+rw /var/run/docker.sock`
 
-**warning** To be included in the VM boot process
+__Warning__
+To be included in the VM boot process
 
 ## Operation
 

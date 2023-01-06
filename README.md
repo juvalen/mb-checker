@@ -1,4 +1,5 @@
 # Bookmark cleansing R4.0
+
 This is a simple **python** script utility to weed your good old bookmark file.
 
 After gathering and classifying bookmarks for more than 20 years one may hit dead URLs just when expecting them work. In order to keep the bookmark list current I created this script.
@@ -12,10 +13,14 @@ Due to the large number of agents involved in Internet traffic, results achieved
 Tasks are divided between two scripts.
 
 There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
- - workers are created an listen to queue
- - main loop pushes URLs to queue
- - workers read URLs from queue and try to reach them
- - workers write returned code to file
+
+- workers are created an listen to queue
+
+- main loop pushes URLs to queue
+
+- workers read URLs from queue and try to reach them
+
+- workers write returned code to file
 
 A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
 
@@ -25,21 +30,21 @@ A second script reads that file output plus a list of return codes to discard, a
 
 ## Requirements
 
-* python 3
+- python 3
 
-* *requests* module installed: `python3 -m pip install requests`
+- _requests_ module installed: `python3 -m pip install requests`
 
-* *queue* module installed: `python3 -m pip install queue`
+- _queue_ module installed: `python3 -m pip install queue`
 
-* *threading* module installed: `python3 -m pip install threading`
+- _threading_ module installed: `python3 -m pip install threading`
 
 ## Usage
 
 Clone this repository into a directory
 
-1. Run first `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. *concurrent* (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
+1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
 
- -i input_file: Bookmark file to use (defaults to live `/home/$USER/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Bookmark file to use (defaults to live `./Bookmarks`)
 
  -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
@@ -49,17 +54,17 @@ For instance:
 
 &emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
-2. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
+1. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
   `./buildJSON -h`
 
- -i input_file:	Original bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Original bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
 
- -o work_dir:	Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
+ -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
- -e:		remove empty folders flag
+ -e: remove empty folders flag
 
- \<codeN\>:	list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
+ \<codeN\>: list of http return codes to filter out. If no codes are provided script will just classify all bookmarks to their code named file, and copy original Bookmarks unchanged. It is allowed the use of **dot** as a digit wildcard.
 
 &emsp;For instance:
 
@@ -67,43 +72,45 @@ For instance:
 
 &emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
-* **XXX.url**: list of inaccessible URLs
+- **XXX.url**: list of inaccessible URLs
 
-* **30..url**: list of 30. URLs
+- **30..url**: list of 30. URLs
 
-* **404.url**: list of 404 URLs
+- **404.url**: list of 404 URLs
 
-* **406.url**: list of 406 URLs
+- **406.url**: list of 406 URLs
 
-* **Bookmarks.out**: resulting json bookmarks with lame entries removed
+- **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
 If **buildJSON.py** is run without parameters it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
-**Scripts deal with UTF-8 characters**
+**Note**
+Scripts deal with UTF-8 characters
 
-```
+**Warning**
 First backup original bookmark file !
-```
 
 ## Input file
+
 Use original chrome bookmark file or use a stored one.
 
 ## Output files
+
 Script crawls the bookmark file using **requests.head** method to access each site and retrieve http return code. It has a hardcoded 10" timeout.
 
 After processing all these files will be added to `work_dir`:
 
-* entries failing due to sundry network errors in `XXX.url`.
+- entries failing due to sundry network errors in `XXX.url`.
 
-* empty folders `Empty_folders.lst`.
+- empty folders `Empty_folders.lst`.
 
-* all https status codes specified will be rejected and entries logged in `<code>.url`.
+- all https status codes specified will be rejected and entries logged in `<code>.url`.
 
-* valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks` with.
+- valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks` with.
 
-* return code and entry list in `ALL.url`
+- return code and entry list in `ALL.url`
 
 Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
@@ -111,7 +118,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
-```
+```bash
 $ ./scanJSON.py
 (Bookmarks from /home/juan/.config/google-chrome/Default/Bookmarks)
 ...
@@ -151,7 +158,7 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**>>> url**
+>>> **url**
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
@@ -167,33 +174,33 @@ Fully operational
 
 ## Change log
 
-* R4.0 To run as docker images, see [DOCKER.md](DOCKER.md) or [JENKINS.md](JENKINS.md)
+- R4.0 To run as docker images, see [DOCKER.md](DOCKER.md) or [JENKINS.md](JENKINS.md)
 
-* R3.9 Edited with PyCharm
+- R3.9 Edited with PyCharm
 
-* R3.8 Fixed bug so entries yielding XXX return code are not included in Bookmarks.out now
+- R3.8 Fixed bug so entries yielding XXX return code are not included in Bookmarks.out now
 
-* R3.7 Fixed bug about deleting empty folders option, and renamed it to -e --empty
+- R3.7 Fixed bug about deleting empty folders option, and renamed it to -e --empty
 
-* R3.6 Intermediate file between scan and build renamed to ALL.url
+- R3.6 Intermediate file between scan and build renamed to ALL.url
 
-* R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet Bookmark file remains unchanged
+- R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet Bookmark file remains unchanged
 
-* R3.4 -i input_file and -w work_dir options
+- R3.4 -i input_file and -w work_dir options
 
-* R3.3 parses command line using argparse
+- R3.3 parses command line using argparse
 
-* R3.2 remove duplicated entries option
+- R3.2 remove duplicated entries option
 
-* R3.1 handles UTF-8 characters and processes also "other" & "synced" bookmark folders. Output file is now Bookmarks.out
+- R3.1 handles UTF-8 characters and processes also "other" & "synced" bookmark folders. Output file is now Bookmarks.out
 
-* R3 runs in two steps: scan and build
+- R3 runs in two steps: scan and build
 
-* R2 parallelization efforts
+- R2 parallelization efforts
 
-* R1.31 checks for valid http return codes
+- R1.31 checks for valid http return codes
 
-* R1.30 takes as parameters all the http return codes to be filtered out to files named as return codes.
+- R1.30 takes as parameters all the http return codes to be filtered out to files named as return codes.
 
 ## TODO
 
@@ -203,7 +210,7 @@ Provide it the format a Chrome extension, like "Bookmarks clean up" one
 
 ## Author
 
-* **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
+- **Juan Valentín-Pastrana** (jvalentinpastrana at gmail)
 
 Send feedback if you wish.
 
@@ -213,8 +220,8 @@ This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* Joefrey who put me up to play in the open source arena
+- Joefrey who put me up to play in the open source arena
 
-* Mario & Iñaki who are back to programming
+- Mario & Iñaki who are back to programming
 
-* Antonio's hosting
+- Antonio's hosting

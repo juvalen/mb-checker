@@ -63,7 +63,7 @@ try:
     with open(JSONIN, "r", encoding='utf-8') as f:
         Bookmarks = json.load(f)
 except FileNotFoundError:
-    print("> Input file ", JSONIN, " not found\n")
+    print("> Input file", JSONIN, "not found\n")
     sys.exit()
 
 
