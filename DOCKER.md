@@ -1,4 +1,5 @@
 # Bookmark cleansing R4.0
+
 This are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
 
 Scan image has been created with:
@@ -45,18 +46,21 @@ If **buildjson** is run without http CODES it will just populate files for all h
 
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
-**Scripts deal with UTF-8 characters**
+**Note**
+Scripts deal with UTF-8 characters
 
 Images available from [hub.docker.com](https://hub.docker.com).
 
-```
+```text
 First backup original bookmark file !
 ```
 
 ## Input file
+
 Use original chrome bookmark file or use a stored one.
 
 ## Output files
+
 Script crawls the bookmark file using **requests.head** method to access each site and retrieve http return code. It has a hardcoded 10" timeout.
 
 After processing all these files will be added to `work_dir`:
@@ -77,7 +81,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
-```
+```bash
 $ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson
 ...
 [3] MongoDB (21)
@@ -118,7 +122,7 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**>>> url**
+&gt;&gt;&gt; **url**
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
@@ -166,7 +170,7 @@ Fully operational
 
 Gather other Chrome bookmark file locations for other Linux distributions
 
-Provide it the format a Chrome extension, like "Bookmarks clean up" one
+Provide it the format of a Chrome extension, like "Bookmarks clean up" one
 
 ## Author
 
