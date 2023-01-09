@@ -18,7 +18,7 @@ pipeline {
                	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 	            echo 'Login Completed'
                 sh 'sudo docker push solarix/scanjson:latest'
-                echo 'Push Image scanjson Completed' 
+                echo 'Pushed Image scanjson' 
             }
         }
         stage('Build buildjson') {
@@ -33,7 +33,7 @@ pipeline {
                	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 	            echo 'Login Completed'
                 sh 'sudo docker push solarix/buildjson:latest'
-                echo 'Push Image buildjson Completed' 
+                echo 'Pushed Image buildjson' 
             }
         }
     }
