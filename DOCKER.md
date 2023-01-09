@@ -46,6 +46,9 @@ If **buildjson** is run without http CODES it will just populate files for all h
 
 When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
+| :warning: Result files will be owned by root |
+|----------------------------------------------|
+
 **Note**
 Scripts deal with UTF-8 characters
 
