@@ -17,6 +17,11 @@ Create a VBox machine (CentOS) for a Jenkins worker, in which:
 * Install git
 * Install docker daemon
 
+Change Jenkins port by `sudo systemctl edit jenkins`:
+
+    [Service]
+    Environment="JENKINS_PORT=8088"
+
 Create a rsa key in host:
 
 `ssh-keygen -f ~/.ssh/jenkins_agent_key`

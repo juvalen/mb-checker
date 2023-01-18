@@ -1,8 +1,8 @@
 # Bookmark cleansing R4.0
 
-This are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
+These are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
 
-Scan image has been created with:
+First __scanjson__ image has been created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
@@ -12,7 +12,7 @@ To run it create an empty directory and copy there Bookmarks file, also create t
 
 ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
-A second image removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
+A second __buildjson__ removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
 
 Build image has been created with:
 
@@ -28,9 +28,15 @@ Run then docker image:
 
 That will produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmrks** and **ALL.url** will be used as input.
 
+## Usage ##
+
+First create an empty directory and place there a copy of your bookmarks.
+
+&emsp;   `docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
+
 &emsp;  `$ export CODES="30. 404 406"`
 
-&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
+&emsp;   Then run `docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson` to filter bookmark file, so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -54,13 +60,13 @@ Scripts deal with UTF-8 characters
 
 Images available from [hub.docker.com](https://hub.docker.com).
 
-```text
-First backup original bookmark file !
-```
+| :exclamation: First backup original bookmark file |
+|---------------------------------------------------|
+
 
 ## Input file
 
-Use original chrome bookmark file or use a stored one.
+A copy of live chrome bookmark file or a stored one.
 
 ## Output files
 

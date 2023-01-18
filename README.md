@@ -204,9 +204,7 @@ Fully operational
 
 ## TODO
 
-Gather other Chrome bookmark file locations for other Linux distributions
-
-Provide it the format of a Chrome extension, like "Bookmarks clean up" one
+Use it as the core for developing a Chrome extension, like "Bookmarks clean up" one
 
 ## Author
 
