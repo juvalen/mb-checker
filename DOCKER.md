@@ -30,7 +30,7 @@ That will produce **Bookmarks.out** with Bookmarks format with entries gleaned f
 
 ## Usage ##
 
-First create an empty directory and place there a copy of your bookmarks.
+First create an empty directory and place there a copy of your Chrome bookmark file.
 
 &emsp;   `docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
 
@@ -59,10 +59,6 @@ When it finishes all result files will appear in `work_dir` subdirectory. Origin
 Scripts deal with UTF-8 characters
 
 Images available from [hub.docker.com](https://hub.docker.com).
-
-| :exclamation: First backup original bookmark file |
-|---------------------------------------------------|
-
 
 ## Input file
 

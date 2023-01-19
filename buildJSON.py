@@ -103,7 +103,7 @@ while line:
     entry.append(url)
     line = f.readline()
 f.close()
-#Create dictionay of URLs from entry & code
+# Create dictionay of URLs from entry & code
 pairs = dict(zip(entry, code))
 
 # Create output files
