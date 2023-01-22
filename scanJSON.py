@@ -48,7 +48,7 @@ except:
 errorWatch = []
 errorName = []
 errorFile = []
-URLFILTER = work_dir + "ALL.url"
+URLTAGGEDFILE = work_dir + "ALL.url"
 
 # Create <work_dir> directory if not exists
 try:
@@ -56,7 +56,7 @@ try:
     print("Output directory", work_dir, "created")
 except:
     print("Output directory", work_dir, "preserved")
-que.urlFilter = open(URLFILTER, "w")
+que.urlFilter = open(URLTAGGEDFILE, "w")
 
 # Read source bookmark file
 try:

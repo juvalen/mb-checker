@@ -26,17 +26,19 @@ Run then docker image:
 
 `$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson`
 
-That will produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmrks** and **ALL.url** will be used as input.
+You can push images to your repository.
 
 ## Usage ##
 
-First create an empty directory and place there a copy of your bookmarks.
+First create an empty directory and copy into it your Chrome *Bookmark** file.
 
 &emsp;   `docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
 
+&emsp;   Will create **ALL.url** will be used next. Then define a system variable with the return codes you want to weed:
+
 &emsp;  `$ export CODES="30. 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson` to filter bookmark file, so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
+&emsp;   Then run `docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson` to filter bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -48,9 +50,11 @@ First create an empty directory and place there a copy of your bookmarks.
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
+**Bookmarks.out** containes the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
+
 If **buildjson** is run without http CODES it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
-When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
+Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
 | :warning: Result files will be owned by root |
 |----------------------------------------------|
@@ -59,10 +63,6 @@ When it finishes all result files will appear in `work_dir` subdirectory. Origin
 Scripts deal with UTF-8 characters
 
 Images available from [hub.docker.com](https://hub.docker.com).
-
-| :exclamation: First backup original bookmark file |
-|---------------------------------------------------|
-
 
 ## Input file
 
