@@ -2,7 +2,7 @@
 
 These are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
 
-First __scanjson__ image has been created with:
+First **scanjson** image has been created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
@@ -12,7 +12,7 @@ To run it create an empty directory and copy there Bookmarks file, also create t
 
 ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
-A second __buildjson__ removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
+A second **buildjson** removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
 
 Build image has been created with:
 
@@ -28,7 +28,7 @@ Run then docker image:
 
 You can push images to your repository.
 
-## Usage ##
+## Usage
 
 First create an empty directory and copy into it your Chrome *Bookmark** file.
 

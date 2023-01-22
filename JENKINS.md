@@ -30,7 +30,7 @@ Then copy it to the worker using `ssh-copy-id`
 
 Install following packages in VBOX
 
-Each time VM is started:
+Each time VM is started it has to be run:
 
 `sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
 
