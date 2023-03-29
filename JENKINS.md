@@ -17,7 +17,7 @@ Create a VBox machine (CentOS) for a Jenkins worker, in which:
 * Install git
 * Install docker daemon
 
-Change Jenkins port by `sudo systemctl edit jenkins`:
+Change Jenkins port in host by `sudo systemctl edit jenkins`:
 
     [Service]
     Environment="JENKINS_PORT=8088"
@@ -30,20 +30,19 @@ Then copy it to the worker using `ssh-copy-id`
 
 Install following packages in VBOX
 
-Each time VM is started it has to be run:
+First time VM is started it has to be run:
 
 `sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
 
 `sudo chmod o+rw /var/run/docker.sock`
 
-__Warning__
-To be included in the VM boot process
-
 ## Operation
 
 Jenkinsfile is kept in repo and is then run when executing a pipeline associated with that repo.
 
-Add git & dockerhub ceredentials
+Add git & dockerhub credentials (used in Jenkinsfile)
+
+* Manage Jenkins￼> Credentials
 
 ## Result
 
