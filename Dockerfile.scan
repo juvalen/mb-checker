@@ -4,4 +4,4 @@ COPY requirements.txt /tmp/requirements.txt
 RUN [ "pip", "install",  "-r", "/tmp/requirements.txt" ]
 RUN [ "mkdir", "./work_dir" ]
 COPY . ./
-ENTRYPOINT [ "python", "./scanJSON.py" ]
+ENTRYPOINT [ "python", "/app/scanJSON.py" ]
