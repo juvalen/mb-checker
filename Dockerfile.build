@@ -4,4 +4,4 @@ COPY requirements.txt requirements.txt
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 COPY . .
 RUN chmod a+x buildcodes.sh
-ENTRYPOINT [ "./buildcodes.sh" ]
+CMD [ "./buildcodes.sh" ]

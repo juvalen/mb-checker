@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo "Trying to log to dockerhub from $NODE_NAME"
                	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        echo 'Login Completed'
+	            echo 'Login Completed'
                 sh 'sudo docker push solarix/scanjson:latest'
                 echo 'Pushed Image scanjson' 
             }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo "Trying to log to dockerhub from $NODE_NAME"
                	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        echo 'Login Completed'
+	            echo 'Login Completed'
                 sh 'sudo docker push solarix/buildjson:latest'
                 echo 'Pushed Image buildjson' 
             }
