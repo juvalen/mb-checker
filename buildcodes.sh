@@ -1,2 +1,2 @@
 #!/bin/bash
-python ./buildJSON.py $CODES
+python /app/buildJSON.py $CODES
