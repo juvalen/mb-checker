@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Push scanjson to hub.docker') {
             steps {
-                echo "Trying to log to dockerhub from $NODE_NAME"
-               	sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo -S docker login -u $DOCKERHUB_CREDENTIALS_USR"
+                echo 'Trying to log to dockerhub from $NODE_NAME'
+               	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 	            echo 'Login Completed'
                 sh 'sudo docker push solarix/scanjson:latest'
                 echo 'Pushed Image scanjson' 
@@ -24,17 +24,23 @@ pipeline {
         stage('Build buildjson') {
             steps {
                 echo "Build ID $BUILD_ID"
-                sh "docker build -f Dockerfile.build -t solarix/buildjson ."
+                sh 'docker build -f Dockerfile.build -t solarix/buildjson .'
             }
         }
         stage('Push buildjson to hub.docker') {
             steps {
-                echo "Trying to log to dockerhub from $NODE_NAME"
-               	sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo -S docker login -u $DOCKERHUB_CREDENTIALS_USR"
+                echo 'Trying to log to dockerhub from $NODE_NAME'
+               	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 	            echo 'Login Completed'
                 sh 'sudo docker push solarix/buildjson:latest'
                 echo 'Pushed Image buildjson' 
             }
         }
+    }
+
+    post{
+        always {  
+            sh 'docker logout'           
+        }      
     }
 }
