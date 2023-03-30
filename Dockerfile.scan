@@ -1,5 +1,6 @@
 FROM python:3.9
 WORKDIR /home/jenkins/workspace/pipeline/
+COPY requirements.txt .
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 RUN [ "mkdir", "work_dir" ]
 #CMD [ "pwd" ] /mb-checker
