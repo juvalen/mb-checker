@@ -38,7 +38,7 @@ try:
     JSONIN = os.path.expanduser(args.input_file)
 except:
     JSONIN = os.path.expanduser("Bookmarks")
-print("Reading bookmarks from " + JSONIN)
+print("Using bookmarks from " + JSONIN)
 try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
