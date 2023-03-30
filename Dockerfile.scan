@@ -1,6 +1,6 @@
 FROM python:3.9
-WORKDIR /mb-checker
+WORKDIR /app
 ADD requirements.txt .
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 RUN [ "mkdir", "work_dir" ]
-CMD [ "python", "/mb-checker/scanJSON.py" ]
+CMD [ "python", "scanJSON.py" ]
