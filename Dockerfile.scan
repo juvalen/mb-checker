@@ -1,5 +1,6 @@
 FROM python:3
-WORKDIR /usr/src/app
+ENV PROJECT_DIR=/usr/src/app
+WORKDIR $PROJECT_DIR
 COPY requirements.txt .
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 RUN [ "mkdir", "work_dir" ]
