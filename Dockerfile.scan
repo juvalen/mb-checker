@@ -4,5 +4,5 @@ WORKDIR $PROJECT_DIR
 COPY requirements.txt .
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 RUN [ "mkdir", "work_dir" ]
-COPY . .
+COPY ./work_dir ./work_dir
 CMD [ "python", "scanJSON.py" ]
