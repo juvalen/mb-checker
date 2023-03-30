@@ -13,12 +13,12 @@ pipeline {
             }
         }
         stage('Push scanjson to hub.docker') {
-            steps {
-                echo 'Trying to log to dockerhub from $NODE_NAME'
-               	sh 'echo ${DOCKERHUB_CREDENTIALS_PSW}| sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'
-	            echo 'Login Completed'
-                sh 'sudo docker push solarix/scanjson:latest'
-                echo 'Pushed Image scanjson' 
+            steps { 
+                script { 
+                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) { 
+                        dockerImage.push() 
+                    }
+                } 
             }
         }
         stage('Build buildjson') {
