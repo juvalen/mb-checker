@@ -8,7 +8,7 @@ First **scanjson** image has been created with:
 
 To run it create an empty directory and copy there Bookmarks file, also create there work_dir/. Then run docker:
 
-`$ docker run --rm -v $PWD:/mb-checker solarix/scanjson`
+`$ docker run --rm -v "Bookmarks:/mb-checker/Bookmarks" solarix/scanjson`
 
 ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
 
