@@ -8,18 +8,18 @@ pipeline {
     stages {
         stage('Build scanjson') {
             steps {
-                echo "Build ID $BUILD_ID"
                 git url: 'https://github.com/juvalen/mb-checker'
                 sh "docker build -f Dockerfile.scan -t solarix/scanjson ."
             }
         }
+        stage('Login to dockerhub') {
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
         stage('Push scanjson to hub.docker') {
             steps { 
-                script { 
-                    docker.withRegistry('', DOCKERHUB_CREDENTIALS) { 
-                        dockerImage.push() 
-                    }
-                } 
+                sh 'sudo docker push solarix/scanjson:latest'
             }
         }
         stage('Build buildjson') {
@@ -30,11 +30,7 @@ pipeline {
         }
         stage('Push buildjson to hub.docker') {
             steps {
-                echo 'Trying to log to dockerhub from $NODE_NAME'
-               	sh 'echo ${DOCKERHUB_CREDENTIALS_PSW}| sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'
-	            echo 'Login Completed'
                 sh 'sudo docker push solarix/buildjson:latest'
-                echo 'Pushed Image buildjson' 
             }
         }
     }
