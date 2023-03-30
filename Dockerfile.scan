@@ -4,5 +4,4 @@ WORKDIR $PROJECT_DIR
 COPY requirements.txt .
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 RUN [ "mkdir", "work_dir" ]
-ADD Bookmarks .
 CMD [ "python", "scanJSON.py" ]
