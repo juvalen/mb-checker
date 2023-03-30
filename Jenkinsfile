@@ -9,6 +9,7 @@ pipeline {
         stage('Build scanjson') {
             steps {
                 echo "Build ID $BUILD_ID"
+                git url: 'https://github.com/juvalen/mb-checker'
                 sh "docker build -f Dockerfile.scan -t solarix/scanjson ."
             }
         }
