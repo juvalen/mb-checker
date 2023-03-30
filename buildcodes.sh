@@ -1,2 +1,2 @@
 #!/bin/bash
-python /app/buildJSON.py $CODES
+python /mb-checker/buildJSON.py $CODES
