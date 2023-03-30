@@ -15,7 +15,7 @@ pipeline {
         stage('Push scanjson to hub.docker') {
             steps {
                 echo "Trying to log to dockerhub from $NODE_NAME"
-               	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+               	sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 	            echo 'Login Completed'
                 sh 'sudo docker push solarix/scanjson:latest'
                 echo 'Pushed Image scanjson' 
@@ -30,7 +30,7 @@ pipeline {
         stage('Push buildjson to hub.docker') {
             steps {
                 echo "Trying to log to dockerhub from $NODE_NAME"
-               	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+               	sh "echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 	            echo 'Login Completed'
                 sh 'sudo docker push solarix/buildjson:latest'
                 echo 'Pushed Image buildjson' 
