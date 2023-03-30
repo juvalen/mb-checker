@@ -12,14 +12,10 @@ pipeline {
                 sh "docker build -f Dockerfile.scan -t solarix/scanjson ."
             }
         }
-        stage('Login to dockerhub') {
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
         stage('Push scanjson to hub.docker') {
             steps { 
-                sh 'sudo docker push solarix/scanjson:latest'
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker push solarix/scanjson:latest'
             }
         }
         stage('Build buildjson') {
@@ -30,7 +26,8 @@ pipeline {
         }
         stage('Push buildjson to hub.docker') {
             steps {
-                sh 'sudo docker push solarix/buildjson:latest'
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker push solarix/buildjson:latest'
             }
         }
     }
