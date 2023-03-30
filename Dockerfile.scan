@@ -1,8 +1,7 @@
 FROM python:3.9
-WORKDIR /mb-checker
-ADD requirements.txt .
+WORKDIR /home/jenkins/workspace/pipeline/
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 RUN [ "mkdir", "work_dir" ]
-#CMD [ "pwd" ]
+#CMD [ "pwd" ] /mb-checker
 CMD [ "ls", "-l" ]
 #CMD [ "python", "/mb-checker/scanJSON.py" ]
