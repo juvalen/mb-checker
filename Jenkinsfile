@@ -8,12 +8,8 @@ pipeline {
     stages {
         stage('Build scanjson') {
             steps {
-                checkout([$class: 'GitSCM', 
-                    branches: [[name: '*/docker']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'CleanCheckout']],
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/juvalen/mb-checker']]])
+                git branch: '*/docker',
+                    url: 'https://github.com/juvalen/mb-checker'
                 sh "ls -ltr"
                 sh "docker build -f Dockerfile.scan -t solarix/scanjson ."
             }
