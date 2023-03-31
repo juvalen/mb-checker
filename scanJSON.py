@@ -65,12 +65,12 @@ try:
         Bookmarks = json.load(f)
 except FileNotFoundError:
     try:
-        print("> JSONIN, "not found, looking in /data\n")
-        JSONIN = "/data/Bookmarks"
+        print(">", JSONIN, " not found, looking in /tmp\n")
+        JSONIN = "/tmp/Bookmarks"
         with open(JSONIN, "r", encoding='utf-8') as f:
             Bookmarks = json.load(f)
     except FileNotFoundError:
-        print("> Input file", JSONIN, "not found either case\n")
+        print("> Input file", JSONIN, "not found either /tmp\n")
         sys.exit()
 
 # Recurrent function

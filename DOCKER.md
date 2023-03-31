@@ -6,11 +6,7 @@ First **scanjson** image has been created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
-To run it create an empty directory and copy there Bookmarks file, also create there work_dir/. Then run docker:
-
-`$ docker run --rm -v "Bookmarks:/usr/src/app/Bookmarks" solarix/scanjson`
-
-ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
+As th result ALL.urk will appear in /tmp/work_dir/, which contains a flat list of original URLs and their http returned status code.
 
 A second **buildjson** removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
 
@@ -18,15 +14,7 @@ Build image has been created with:
 
 `$ docker build -f Dockerfile.build -t solarix/buildjson .`
 
-Create a variable with the http codes to purge:
-
-`$ export CODES="30. 404 406"`
-
-Run then docker image:
-
-`$ docker run -e CODES="$CODES" --rm -v $PWD:/usr/src/app solarix/buildjson`
-
-You can push images to your repository.
+You can push images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
 
 ## Usage
 
@@ -91,7 +79,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
 ```bash
-$ docker run --rm -v $PWD:/data solarix/scanjson
+$ docker run --rm -v $PWD:/tmp solarix/scanjson
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
@@ -105,7 +93,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 
 $ export CODES="30. 404 406"
 
-$ docker run -e CODES="$CODES" --rm -v $PWD:/data solarix/buildjson
+$ docker run -e CODES="$CODES" --rm -v $PWD:/tmp solarix/buildjson
 (Bookmarks from Bookmarks)
 (Scanned from ./work_dir/ALL.url)
 ...
