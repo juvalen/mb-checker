@@ -2,7 +2,7 @@
 # Name: scanJSON.py
 # Version: R4.1
 # Author: jvalentinpastrana at gmail
-# Date: Dec 2022
+# Date: Mar 2023
 #
 # Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
