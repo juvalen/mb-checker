@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Name: scanJSON.py
-# Version: R4.0
+# Version: R4.1
 # Author: jvalentinpastrana at gmail
 # Date: Dec 2022
 #
@@ -69,7 +69,7 @@ except FileNotFoundError:
         with open(JSONIN, "r", encoding='utf-8') as f:
             Bookmarks = json.load(f)
     except FileNotFoundError:
-        print("> Input file", JSONIN, "not found\n")
+        print("> Input file", JSONIN, "not found either\n")
         sys.exit()
 
 # Recurrent function
