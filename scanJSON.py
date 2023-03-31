@@ -38,7 +38,7 @@ try:
     JSONIN = os.path.expanduser(args.input_file)
 except:
     JSONIN = os.path.expanduser("Bookmarks")
-print("Using bookmarks from " + JSONIN)
+print("Using bookmarks name " + JSONIN)
 try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
@@ -58,14 +58,19 @@ except:
     print("Output directory", work_dir, "preserved")
 que.urlFilter = open(URLTAGGEDFILE, "w")
 
-# Read source bookmark file
+# Read source bookmark file (paramater, Bookmarks, /data/Bookmarks)
 try:
     with open(JSONIN, "r", encoding='utf-8') as f:
         Bookmarks = json.load(f)
 except FileNotFoundError:
-    print("> Input file", JSONIN, "not found\n")
-    sys.exit()
-
+    try:
+        print("> Input file", JSONIN, "not found, looking in /data\n")
+        JSONIN = "/data/Bookmarks"
+        with open(JSONIN, "r", encoding='utf-8') as f:
+            Bookmarks = json.load(f)
+    except FileNotFoundError:
+        print("> Input file", JSONIN, "not found\n")
+        sys.exit()
 
 # Recurrent function
 def preorder(tree, depth):
