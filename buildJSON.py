@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Name: buildJSON.py
-# Version: R4.0
+# Version: R4.1
 # Author: jvalentinpastrana at gmail
 # Date: Dec 2022
 #
