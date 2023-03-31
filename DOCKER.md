@@ -32,13 +32,13 @@ You can push images to your repository.
 
 First create an empty directory and copy into it your Chrome *Bookmark** file.
 
-&emsp;   `docker run --rm -v "$PWD:/usr/src/app" solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
+&emsp;   `docker run --rm -v "$PWD:/data" solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
 
 &emsp;   Will create **ALL.url** will be used next. Then define a system variable with the return codes you want to weed:
 
 &emsp;  `$ export CODES="30. 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" --rm -v "$PWD:/mb-checker" solarix/buildjson` to filter bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory:
+&emsp;   Then run `docker run -e CODES="$CODES" --rm -v "$PWD:/data" solarix/buildjson` to filter bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -91,7 +91,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
 
 ```bash
-$ docker run --rm -v $PWD:/usr/src/app solarix/scanjson
+$ docker run --rm -v $PWD:/data solarix/scanjson
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
@@ -105,7 +105,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 
 $ export CODES="30. 404 406"
 
-$ docker run -e CODES="$CODES" --rm -v $PWD:/mb-checker solarix/buildjson
+$ docker run -e CODES="$CODES" --rm -v $PWD:/data solarix/buildjson
 (Bookmarks from Bookmarks)
 (Scanned from ./work_dir/ALL.url)
 ...
@@ -146,6 +146,7 @@ Running Chrome with a registered Google account may resynchronize bookmarks back
 Fully operational
 
 ## Change log
+* R4.1 Using /data in container
 
 * R4.0 Available as docker images
 
