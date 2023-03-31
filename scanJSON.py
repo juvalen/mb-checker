@@ -60,7 +60,7 @@ que.urlFilter = open(URLTAGGEDFILE, "w")
 
 # Read source bookmark file (paramater, Bookmarks, /data/Bookmarks)
 try:
-    print("> Trying input file", JSONIN\n")
+    print("> Trying input file", JSONIN, "\n")
     with open(JSONIN, "r", encoding='utf-8') as f:
         Bookmarks = json.load(f)
 except FileNotFoundError:
