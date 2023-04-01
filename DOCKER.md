@@ -24,7 +24,7 @@ First create an empty directory and copy into it your Chrome *Bookmark** file. W
 
 * /var/lib/jenkins/workspace/mb-checker/work_dir in our local ./work_dir to get results.
 
-&emsp;   `docker run --rm -v "$PWD:/var/lib/jenkins/workspace/mb-checker" solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
+&emsp;   `docker run --rm -v "$PWD:/tmp" solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
 
 &emsp;   Will create **ALL.url** will be used next. Then define a system variable with the return codes you want to weed:
 
