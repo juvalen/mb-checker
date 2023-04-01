@@ -24,13 +24,13 @@ First create an empty directory and copy into it your Chrome *Bookmark** file. W
 
 * /var/lib/jenkins/workspace/mb-checker/work_dir in our local ./work_dir to get results.
 
-&emsp;   `docker run --rm -v "$PWD:/tmp" -v "$PWD:/app" solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
+&emsp;   `docker run --rm -v "$PWD:/var/lib/jenkins/workspace/mb-checker" solarix/scanjson` will access all URLs in Bookmark file and attach their return code. Next define the http return codes you want to purge:
 
 &emsp;   Will create **ALL.url** will be used next. Then define a system variable with the return codes you want to weed:
 
 &emsp;  `$ export CODES="30. 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" --rm -v "$PWD:/app" solarix/buildjson` to filter bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory:
+&emsp;   Then run `docker run -e CODES="$CODES" --rm -v "$PWD:/var/lib/jenkins/workspace/mb-checker" solarix/buildjson` to filter bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory:
 
 * **XXX.url**: list of inaccessible URLs
 
