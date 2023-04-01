@@ -8,12 +8,13 @@ pipeline {
     stages {
         stage('Build scanjson') {
             steps {
+                echo "Build ID $BUILD_ID"
                 git branch: 'docker',
                     url: 'https://github.com/juvalen/mb-checker.git'
                 script {
                     sh "ls -ltr"
+                    sh "pwd"
                     sh "docker build -f Dockerfile.scan -t solarix/scanjson ."
-                    docker.build "solaris/scanjson:${env.BUILD_ID} -f Dockerfile.scan ./dockerfiles"
                 }
             }
         }
@@ -26,7 +27,10 @@ pipeline {
         stage('Build buildjson') {
             steps {
                 echo "Build ID $BUILD_ID"
-                sh 'docker build -f Dockerfile.build -t solarix/buildjson .'
+                script {
+                    sh "pwd"
+                    sh 'docker build -f Dockerfile.build -t solarix/buildjson .'
+                }
             }
         }
         stage('Push buildjson to hub.docker') {

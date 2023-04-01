@@ -65,7 +65,7 @@ try:
         Bookmarks = json.load(f)
 except FileNotFoundError:
     try:
-        print(">", JSONIN, " not found, looking in /tmp\n")
+        print(">", JSONIN, "not found, looking for /tmp/Bookmarks\n")
         JSONIN = "/tmp/Bookmarks"
         with open(JSONIN, "r", encoding='utf-8') as f:
             Bookmarks = json.load(f)

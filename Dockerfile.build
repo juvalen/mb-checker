@@ -1,7 +1,7 @@
 FROM python:3
-#WORKDIR /data
-COPY requirements.txt .
+WORKDIR /var/lib/jenkins/workspace/mb-checker
+COPY requirements.txt requirements
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
-COPY . ./
+COPY . .
 RUN chmod a+x buildcodes.sh
 CMD [ "buildcodes.sh" ]
