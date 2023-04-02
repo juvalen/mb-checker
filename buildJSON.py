@@ -86,29 +86,24 @@ with open(input_file, "r") as f:
     Bookmarks = json.load(f)
 f.close()
 # Read ALL.url to entry & code lists
+print("Read ", URLIN, "\n")
 code = []
 entry = []
-nline = 0
 try:
     f = open(URLIN, "r")
 except:
     print("Error: ", URLIN, "not found\n")
     sys.exit()
-line = f.readline()
-while line:
-    print(line)
-    nline += 1
+for line in f:
+    line = line.strip('\n')
     status, url = line.split(" ")
-    url = url.strip('\n')
     code.append(status)
     entry.append(url)
-    line = f.readline()
 f.close()
 # Create dictionay of URLs from entry & code
 pairs = dict(zip(entry, code))
 
-# Create output files
-# For network error
+# Create output files for network error
 urlXXX = open(URLXXX,"w")
 for i in range(0, nparams):
     errorVarName[i] = open(errorFile[i], "w")
