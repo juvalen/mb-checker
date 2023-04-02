@@ -5,4 +5,4 @@ COPY buildcodes.sh buildcodes.sh
 RUN [ "pip", "install",  "-r", "requirements.txt" ]
 COPY . .
 RUN chmod a+x buildcodes.sh
-CMD [ "buildcodes.sh" ]
+CMD [ "./buildcodes.sh" ]
