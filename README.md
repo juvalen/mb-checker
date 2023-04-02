@@ -68,7 +68,7 @@ For instance:
 
 &emsp;For instance:
 
-&emsp;  `./buildJSON 30. 404 406`
+&emsp;  `./buildJSON.py 30. 404 406`
 
 &emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
