@@ -24,10 +24,7 @@ First create an empty directory and copy into it your Chrome *Bookmark** file. W
 
 * /var/lib/jenkins/workspace/mb-checker/work_dir in our local ./work_dir to get results.
 
-&emsp;   First create volume _mb-checker_, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
-
-
-
+&emsp;   First create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
 
 &emsp;   You can get the work_dir/ALL.url back with `docker cp <containerId>:/var/lib/jenkins/workspace/mb-checker/work_dir/ .`
 

@@ -96,6 +96,7 @@ except:
     sys.exit()
 line = f.readline()
 while line:
+    print(line)
     nline += 1
     status, url = line.split(" ")
     url = url.strip('\n')
