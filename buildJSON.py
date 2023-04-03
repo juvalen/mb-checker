@@ -38,16 +38,17 @@ parser.add_argument('params', metavar='code', type=str, nargs='*', help='http re
 args = parser.parse_args()
 params = args.params[0]
 nparams = len(params)
+#
+try:
+    JSONIN = os.path.expanduser(args.input_file)
+except:
+    JSONIN = os.path.expanduser("Bookmarks")
+print("Using bookmarks name " + JSONIN)
 try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
     work_dir = "./work_dir/"
 print("Reading scan results from", work_dir)
-try:
-    input_file = os.path.expanduser(args.input_file)
-except:
-    input_file = os.path.expanduser("Bookmarks")
-print("Reading bookmarks from", input_file)
 #
 DELETEFOLDERS = args.DELETEFOLDERS
 URLIN = work_dir + "ALL.url"
@@ -81,10 +82,22 @@ BLUE = '\033[34m'
 YELLOW = '\033[33m'
 NONE = '\033[0m' # No Color
 
-# Read source Bookmark file
-with open(input_file, "r") as f:
-    Bookmarks = json.load(f)
+# Read source bookmark file (paramater, Bookmarks, /data/Bookmarks)
+try:
+    print("> Trying input file", JSONIN, "\n")
+    with open(JSONIN, "r", encoding='utf-8') as f:
+        Bookmarks = json.load(f)
+except FileNotFoundError:
+    try:
+        print(">", JSONIN, "not found, looking for /tmp/Bookmarks\n")
+        JSONIN = "/tmp/Bookmarks"
+        with open(JSONIN, "r", encoding='utf-8') as f:
+            Bookmarks = json.load(f)
+    except FileNotFoundError:
+        print("> Input file", JSONIN, "not found either /tmp\n")
+        sys.exit()
 f.close()
+
 # Read ALL.url to entry & code lists
 print("Read ", URLIN, "\n")
 code = []
