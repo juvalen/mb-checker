@@ -6,7 +6,7 @@ First **scanjson** image has been created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
-All scanned Bookmark entries ALL.urk will appear in /tmp/work_dir/, which contains a flat list of original URLs and their http returned status code.
+All scanned Bookmark entries ALL.url will appear in **/tmp/work_dir/**, which contains a flat list of original URLs and their http returned status code.
 
 A second **buildjson** removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
 
