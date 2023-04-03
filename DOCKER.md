@@ -28,11 +28,11 @@ First create any empty directory and copy into it your Chrome *Bookmark** file. 
 
 &emsp;   You can get the work_dir with ALL.url in it back with `sudo cp /var/lib/docker/volumes/mb-checker/_data/ALL.url .`
 
-&emsp;   That **ALL.url** that will be used next. Then define a system variable with the return codes you want to weed:
+&emsp;   File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
 
 &emsp;  `$ export CODES="30. 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Whereas those codes are parsed as Regexp, character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 result files in `/var/lib/docker/volumes/mb-checker/_data/`:
+&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Whereas those codes are parsed as Regexp, character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -44,7 +44,7 @@ First create any empty directory and copy into it your Chrome *Bookmark** file. 
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-**Bookmarks.out** containes the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
+**Bookmarks.out** contains the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
 
 If **buildjson** is run without http CODES it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
