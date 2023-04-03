@@ -1,4 +1,4 @@
-# Bookmark cleansing R4.0
+# Bookmark cleansing R4.1
 
 ## Building with Jenkins pipelines
 
@@ -40,7 +40,7 @@ First time VM is started it has to be run:
 
 Jenkinsfile is kept in repo and is then run when executing a pipeline associated with that repo.
 
-Add git & dockerhub credentials (used in Jenkinsfile)
+Add dockerhub credentials (used in Jenkinsfile)
 
 * Manage Jenkins￼> Credentials
 

@@ -1,4 +1,4 @@
-# Bookmark cleansing R4.0
+# Bookmark cleansing R4.1
 
 These are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
 
