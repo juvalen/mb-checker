@@ -1,4 +1,4 @@
-# Bookmark cleansing R4.0
+# Bookmark cleansing R4.1
 
 This is a simple **python** script utility to weed your good old bookmark file.
 
@@ -173,6 +173,8 @@ Running Chrome with a registered Google account may resynchronize bookmarks back
 Fully operational
 
 ## Change log
+
+- R4.1 docker images generated with Jenkins
 
 - R4.0 To run as docker images, see [DOCKER.md](DOCKER.md) or [JENKINS.md](JENKINS.md)
 
