@@ -28,6 +28,8 @@ A second script reads that file output plus a list of return codes to discard, a
 |:---------------------------|
 | Make sure bookmarks don't change between running both scripts, that may happen when it conflicts with some running bookmark synchronizer |
 
+To like run them in containers, check [DOCKER](DOCKER.md).
+
 ## Requirements
 
 - python 3
@@ -176,7 +178,7 @@ Fully operational
 
 - R4.1 docker images generated with Jenkins
 
-- R4.0 To run as docker images, see [DOCKER.md](DOCKER.md) or [JENKINS.md](JENKINS.md)
+- R4.0 To run as docker images, see [DOCKER](DOCKER.md) and [JENKINS](JENKINS.md)
 
 - R3.9 Edited with PyCharm
 

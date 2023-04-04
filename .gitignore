@@ -1,6 +1,7 @@
 __pycache__
 Bookmarks*
 tmp
+*.token
 *.swp
 *.log
 *.html
@@ -12,5 +13,3 @@ tmp
 *.out
 *.url
 *.tmp
-*.tm
-.idea

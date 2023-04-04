@@ -2,9 +2,9 @@
 
 ## Building with Jenkins pipelines
 
-This declarative pipeline builds __scanjson__ and __buildjson__ images using Jenkins and pushes images to dockerhub.
+This declarative pipeline builds __scanjson__ and __buildjson__ images using Jenkins and pushes images to dockerhub. Image building is described in [DOCKER](DOCKER.md).
 
-The agent is hosted in a VBox machine.
+The agent is hosted in a VBox machine called **jenkinsagent**.
 
 ## Usage
 
@@ -46,4 +46,4 @@ Add dockerhub credentials (used in Jenkinsfile)
 
 ## Result
 
-After being generated images are pushed to dockerhub.
+After being generated images are pushed to dockerhub. Configure it for your own repository.

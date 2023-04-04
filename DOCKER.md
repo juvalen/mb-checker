@@ -2,17 +2,19 @@
 
 These are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
 
-First **scanjson** image has been created with:
+## Image creation
+
+**scanjson** image is created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
-All scanned Bookmark entries ALL.url will appear in **/tmp/work_dir/**, which contains a flat list of original URLs and their http returned status code.
-
-A second **buildjson** removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
-
-Build image has been created with:
+**buildjson** image with:
 
 `$ docker build -f Dockerfile.build -t solarix/buildjson .`
+
+| :warning: WARNING          |
+|:---------------------------|
+| Jenkins file is configured to user **jenkinsfile** agent. Change it to mach your setup. |
 
 You can push images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
 
@@ -22,7 +24,7 @@ First create any empty directory and copy into it your Chrome *Bookmark** file. 
 
 * /tmp in the current host directory, containing *Bookmarks*
 
-* /var/lib/jenkins/workspace/mb-checker/work_dir in our local ./work_dir to get results.
+* /var/lib/jenkins/workspace/mb-checker/work_dir in host directory ./work_dir to get results.
 
 &emsp;   Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
 
