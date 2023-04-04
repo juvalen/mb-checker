@@ -13,7 +13,7 @@ pipeline {
         stage('Build scanjson') {
             steps {
                 echo "Build ID $BUILD_ID"
-                git branch: 'docker',
+                git branch: 'master',
                     url: 'https://github.com/juvalen/mb-checker.git'
                 script {
                     sh "ls -ltr"
