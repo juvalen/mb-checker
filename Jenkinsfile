@@ -39,13 +39,5 @@ pipeline {
                 sh 'docker push solarix/buildjson:latest'
             }
         }
-    }
-
-    post {
-        always {
-            script {
-                sh 'docker logout'           
-            }
-        }
-    }      
+    }    
 }
