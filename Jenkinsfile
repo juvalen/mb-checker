@@ -1,8 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'jenkinsagent'
+        }
+    }
 
     environment {     
-        DOCKERHUB_CREDENTIALS= credentials('746b3360-da21-49eb-90c8-d5751fe24c45')
+        DOCKERHUB_CREDENTIALS= credentials('docker')
     }
 
     stages {
@@ -39,5 +43,11 @@ pipeline {
                 sh 'docker push solarix/buildjson:latest'
             }
         }
-    }    
+    }
+
+    post {
+        always {  
+	        sh 'docker logout'
+        }      
+    }  
 }
