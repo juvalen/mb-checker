@@ -1,5 +1,4 @@
 node {
-pipeline {
     agent any
 
     environment {     
@@ -53,5 +52,4 @@ pipeline {
             }
         }      
     }
-}
 }
