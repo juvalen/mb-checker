@@ -1,3 +1,4 @@
+node {
 pipeline {
     agent any
 
@@ -42,8 +43,13 @@ pipeline {
     }
 
     post {
-        always {  
-            sh 'docker logout'           
+        always {
+            script {
+                sh 'docker logout'           
+                //skip the step if context is missing
+                if (getContext(hudson.FilePath)) {
+                    echo "It works"
         }      
     }
+}
 }
