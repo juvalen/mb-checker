@@ -1,5 +1,4 @@
 node {
-
 pipeline {
     agent any
 
@@ -50,6 +49,8 @@ pipeline {
                 //skip the step if context is missing
                 if (getContext(hudson.FilePath)) {
                     echo "It works"
+                }
+            }
         }      
     }
 }
