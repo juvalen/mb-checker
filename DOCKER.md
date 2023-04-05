@@ -14,7 +14,7 @@ These are two simple **docker** images to weed your good old bookmark file. See 
 
 | :warning: WARNING          |
 |:---------------------------|
-| Jenkins file is configured to user **jenkinsfile** agent. Change it to mach your setup. |
+| Jenkins file is configured as to use **jenkinsfile** agent. Change it to match your setup. |
 
 You can push images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
 
