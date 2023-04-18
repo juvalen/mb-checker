@@ -2,41 +2,43 @@
 
 These are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
 
-First **scanjson** image has been created with:
+## Image creation
+
+**scanjson** image is created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
-As th result ALL.urk will appear in /tmp/work_dir/, which contains a flat list of original URLs and their http returned status code.
-
-A second **buildjson** removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
-
-Build image has been created with:
+**buildjson** image with:
 
 `$ docker build -f Dockerfile.build -t solarix/buildjson .`
+
+| :warning: WARNING          |
+|:---------------------------|
+| Jenkins file is configured as to use **jenkinsfile** agent. Change it to match your setup. |
 
 You can push images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
 
 ## Usage
 
-First create an empty directory and copy into it your Chrome *Bookmark** file. We mount the container directories:
+First create any empty directory and copy into it your Chrome *Bookmark** file. We mount the container directories:
 
 * /tmp in the current host directory, containing *Bookmarks*
 
-* /var/lib/jenkins/workspace/mb-checker/work_dir in our local ./work_dir to get results.
+* /var/lib/jenkins/workspace/mb-checker/work_dir in host directory ./work_dir to get results.
 
-&emsp;   First create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
+&emsp;   Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
 
-&emsp;   You can get the work_dir/ALL.url back with `docker cp <containerId>:/var/lib/jenkins/workspace/mb-checker/work_dir/ .`
+&emsp;   You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`
 
-&emsp;   Will create **ALL.url** that will be used next. Then define a system variable with the return codes you want to weed:
+&emsp;   File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
 
-&emsp;  `$ export CODES="30. 404 406"`
+&emsp;  `$ export CODES="301 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory:
+&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
 
 * **XXX.url**: list of inaccessible URLs
 
-* **30..url**: list of 30. URLs
+* **301.url**: list of 301 URLs
 
 * **404.url**: list of 404 URLs
 
@@ -44,7 +46,7 @@ First create an empty directory and copy into it your Chrome *Bookmark** file. W
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
-**Bookmarks.out** containes the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
+**Bookmarks.out** contains the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
 
 If **buildjson** is run without http CODES it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 

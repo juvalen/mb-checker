@@ -1,4 +1,4 @@
-# Bookmark cleansing R4.0
+# Bookmark cleansing R4.1
 
 This is a simple **python** script utility to weed your good old bookmark file.
 
@@ -22,11 +22,13 @@ There is one script that crawls all entries included in the bookmarks and queues
 
 - workers write returned code to file
 
-A second script reads that file output plus a list of return codes to discard, and composes a new bookmarks new file, excluding those entries returning those codes.
+A second script reads that file output plus a list of return codes to discard, and composes a new Bookmarks.out new file, excluding those entries returning those codes.
 
 | :warning: WARNING          |
 |:---------------------------|
 | Make sure bookmarks don't change between running both scripts, that may happen when it conflicts with some running bookmark synchronizer |
+
+To run them in containers, check [DOCKER](DOCKER.md).
 
 ## Requirements
 
@@ -42,9 +44,9 @@ A second script reads that file output plus a list of return codes to discard, a
 
 Clone this repository into a directory
 
-1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from bookmarks_bar, other and synced top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the amount of original entries, about 10 entries per second.
+1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from **bookmarks_bar**, **other** and **synced** top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the connection speed and amount of original entries, featuring about 10 entries per second.
 
- -i input_file: Bookmark file to use (defaults to live `./Bookmarks`)
+ -i input_file: Bookmark file to use (defaults to `./Bookmarks`)
 
  -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
@@ -58,7 +60,7 @@ For instance:
 
   `./buildJSON -h`
 
- -i input_file: Original bookmark file to use (defaults to live `/home/<user>/.config/google-chrome/Default/Bookmarks`)
+ -i input_file: Original bookmark file to use (defaults to `./Bookmarks`)
 
  -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
@@ -70,7 +72,7 @@ For instance:
 
 &emsp;  `./buildJSON.py 30. 404 406`
 
-&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
+&emsp;will filter bookmark file so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
 
 - **XXX.url**: list of inaccessible URLs
 
@@ -94,7 +96,7 @@ First backup original bookmark file !
 
 ## Input file
 
-Use original chrome bookmark file or use a stored one.
+Copy of chrome Bookmarks file.
 
 ## Output files
 
@@ -116,7 +118,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
+Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanJSON.py` launches parallel head requests to bookmarked sites. Next `buildJSON.py` builds the json structure of the bookmark file and generates a replacement of original Bookmarks file filtered specified return codes (30., 404 & 406 in this example)
 
 ```bash
 $ ./scanJSON.py
@@ -174,7 +176,9 @@ Fully operational
 
 ## Change log
 
-- R4.0 To run as docker images, see [DOCKER.md](DOCKER.md) or [JENKINS.md](JENKINS.md)
+- R4.1 docker images generated with Jenkins
+
+- R4.0 To run as docker images, see [DOCKER](DOCKER.md) and [JENKINS](JENKINS.md)
 
 - R3.9 Edited with PyCharm
 
@@ -184,7 +188,7 @@ Fully operational
 
 - R3.6 Intermediate file between scan and build renamed to ALL.url
 
-- R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet Bookmark file remains unchanged
+- R3.5 http return codes can be specified using **dot** as a character wildcard (ie 4.4 means 404, 414...), codes allow dot wildcard and if no code is provided only classifies all bookmarks, yet output Bookmarks file remains unchanged
 
 - R3.4 -i input_file and -w work_dir options
 
