@@ -166,6 +166,12 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
 
+## Sample recording
+
+Here a sample screen recording, an i5 with 16 GB and 300 Mb/s scans at 5 entries/s.
+
+https://user-images.githubusercontent.com/7460694/232870465-e9ffa254-8cee-4173-b4eb-c5bd4073f273.mp4
+
 ## Caveats
 
 Running Chrome with a registered Google account may resynchronize bookmarks back, so applying this script to purge them won't show results.
