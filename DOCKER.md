@@ -84,7 +84,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
+Here scripts are used to remove URLs returning 301, 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
 
 ```bash
 $ docker run --rm -v $PWD:/tmp solarix/scanjson
@@ -99,7 +99,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/ALL.url)
 
-$ export CODES="30. 404 406"
+$ export CODES="301 404 406"
 
 $ docker run -e CODES="$CODES" --rm -v $PWD:/tmp solarix/buildjson
 (Bookmarks from Bookmarks)
@@ -131,7 +131,7 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
-This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
+This sample run will filter out entries returning 301, 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
 
 ## Caveats
 
