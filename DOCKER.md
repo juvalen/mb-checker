@@ -28,17 +28,17 @@ First create any empty directory and copy into it your Chrome *Bookmark** file. 
 
 &emsp;   Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
 
-&emsp;   You can get the work_dir with ALL.url in it back with `sudo cp /var/lib/docker/volumes/mb-checker/_data/ALL.url .`
+&emsp;   You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`
 
 &emsp;   File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
 
-&emsp;  `$ export CODES="30. 404 406"`
+&emsp;  `$ export CODES="301 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `30.`, `404` & `406`. Whereas those codes are parsed as Regexp, character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
+&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
 
 * **XXX.url**: list of inaccessible URLs
 
-* **30..url**: list of 30. URLs
+* **301.url**: list of 301 URLs
 
 * **404.url**: list of 404 URLs
 

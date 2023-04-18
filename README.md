@@ -44,7 +44,7 @@ To run them in containers, check [DOCKER](DOCKER.md).
 
 Clone this repository into a directory
 
-1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from __bookmarks_bar__, __other__ and __synced__ top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the connection speed and amount of original entries, featuring about 10 entries per second.
+1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from **bookmarks_bar**, **other** and **synced** top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the connection speed and amount of original entries, featuring about 10 entries per second.
 
  -i input_file: Bookmark file to use (defaults to `./Bookmarks`)
 
