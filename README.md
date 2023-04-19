@@ -168,9 +168,9 @@ This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code 
 
 ## Sample recording
 
-Here a sample screen recording, an i5 with 16 GB and 300 Mb/s scans at 5 entries/s.
+Here is a sample screen recording, an i5 box with 16 GB and 300 Mb/s scans at 5 entries/s.
 
-https://user-images.githubusercontent.com/7460694/232870465-e9ffa254-8cee-4173-b4eb-c5bd4073f273.mp4
+https://user-images.githubusercontent.com/7460694/233157006-b294ed35-dc25-427f-a3a4-6807fafe9897.mp4
 
 ## Caveats
 
