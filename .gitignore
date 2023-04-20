@@ -1,5 +1,5 @@
 __pycache__
-Bookmarks
+Bookmarks*
 tmp
 *.token
 *.swp
@@ -13,3 +13,4 @@ tmp
 *.out
 *.url
 *.tmp
+*.mp4

@@ -1,39 +1,42 @@
-# Bookmark cleansing R4.0
-This are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
+# Bookmark cleansing R4.1
 
-Scan image has been created with:
+These are two simple **docker** images to weed your good old bookmark file. See code details in [README.md](README.md).
+
+## Image creation
+
+**scanjson** image is created with:
 
 `$ docker build -f Dockerfile.scan -t solarix/scanjson .`
 
-To run it create an empty directory and copy there Bookmarks file, also create there work_dir/. Then run docker:
-
-`$ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson`
-
-ALL.urk will appear in work_dir/ in same folder, which contains a flat list of original URLs and their http returned status code.
-
-A second image removes unwanted URLs from Bookmarks and will compose a new bookmarks new file, excluding those entries returning those codes.
-
-Build image has been created with:
+**buildjson** image with:
 
 `$ docker build -f Dockerfile.build -t solarix/buildjson .`
 
-Create a variable with the http codes to purge:
+| :warning: WARNING          |
+|:---------------------------|
+| Jenkins file is configured as to use **jenkinsfile** agent. Change it to match your setup. |
 
-`$ export CODES="30. 404 406"`
+You can push images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
 
-Run then docker image:
+## Usage
 
-`$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson`
+First create any empty directory and copy into it your Chrome *Bookmark** file. We mount the container directories:
 
-That will produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmrks** and **ALL.url** will be used as input.
+* /tmp in the current host directory, containing *Bookmarks*
 
-&emsp;  `$ export CODES="30. 404 406"`
+* /var/lib/jenkins/workspace/mb-checker/work_dir in host directory ./work_dir to get results.
 
-&emsp;will filter live bookmark file (for Ubuntu) so that invocation will remove http return codes `30.`, `404` & `406`. Those codes are parsed as Regexp, so character **.**  means any caharacter, so `30.` will actually filter `300`..`309`. This sample command will generate these 5 extra files in `work_dir` subdirectory. :
+Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
+
+You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`. File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
+
+&emsp;  `$ export CODES="301 404 406"`
+
+Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
 
 * **XXX.url**: list of inaccessible URLs
 
-* **30..url**: list of 30. URLs
+* **301.url**: list of 301 URLs
 
 * **404.url**: list of 404 URLs
 
@@ -41,22 +44,26 @@ That will produce **Bookmarks.out** with Bookmarks format with entries gleaned f
 
 * **Bookmarks.out**: resulting json bookmarks with lame entries removed
 
+**Bookmarks.out** contains the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
+
 If **buildjson** is run without http CODES it will just populate files for all http return codes found, and **Bookmarks.out** will hold original Bookmark file with no modifications. That dry run enables reviewing urls in files of specific return codes and decide whether actually removing them in next runs.
 
-When it finishes all result files will appear in `work_dir` subdirectory. Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
+Original **Bookmarks** file can now be replaced with **Bookmarks.out**. Restart browser to reload them.
 
-**Scripts deal with UTF-8 characters**
+| :warning: Result files will be owned by root |
+|----------------------------------------------|
+
+**Note**
+Scripts deal with UTF-8 characters
 
 Images available from [hub.docker.com](https://hub.docker.com).
 
-```
-First backup original bookmark file !
-```
-
 ## Input file
-Use original chrome bookmark file or use a stored one.
+
+A copy of live chrome bookmark file or a stored one.
 
 ## Output files
+
 Script crawls the bookmark file using **requests.head** method to access each site and retrieve http return code. It has a hardcoded 10" timeout.
 
 After processing all these files will be added to `work_dir`:
@@ -75,10 +82,10 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
+Here scripts are used to remove URLs returning 301, 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
 
-```
-$ docker run --rm -v $(pwd)/work_dir:/app/work_dir solarix/scanjson
+```bash
+$ docker run --rm -v $PWD:/tmp solarix/scanjson
 ...
 [3] MongoDB (21)
 200 https://www.tutorialspoint.com/mongodb/index.htm
@@ -90,9 +97,9 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/ALL.url)
 
-$ export CODES="30. 404 406"
+$ export CODES="301 404 406"
 
-$ docker run -e CODES="$CODES" --rm -v $(pwd)/work_dir:/app/work_dir solarix/buildjson
+$ docker run -e CODES="$CODES" --rm -v $PWD:/tmp solarix/buildjson
 (Bookmarks from Bookmarks)
 (Scanned from ./work_dir/ALL.url)
 ...
@@ -118,11 +125,11 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 **[depth] Folder name (entries)**  indicates the folder name, depth and number of entries in it
 
-**>>> url**
+&gt;&gt;&gt; **url**
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
-This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
+This sample run will filter out entries returning 301, 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
 
 ## Caveats
 
@@ -133,6 +140,8 @@ Running Chrome with a registered Google account may resynchronize bookmarks back
 Fully operational
 
 ## Change log
+
+* R4.1 Using /data in container
 
 * R4.0 Available as docker images
 
@@ -166,7 +175,7 @@ Fully operational
 
 Gather other Chrome bookmark file locations for other Linux distributions
 
-Provide it the format a Chrome extension, like "Bookmarks clean up" one
+Provide it the format of a Chrome extension, like "Bookmarks clean up" one
 
 ## Author
 
