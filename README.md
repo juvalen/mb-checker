@@ -162,9 +162,15 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 &gt;&gt;&gt; **url**
 
-&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
+&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 shown in this sample run), + if preserved, entry id if rejected.
 
 This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
+
+## Sample recording
+
+Here is a sample screen recording, an i5 box with 16 GB and 300 Mb/s scans at 5 entries/s.
+
+https://user-images.githubusercontent.com/7460694/233157006-b294ed35-dc25-427f-a3a4-6807fafe9897.mp4
 
 ## Caveats
 
