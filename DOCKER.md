@@ -26,15 +26,13 @@ First create any empty directory and copy into it your Chrome *Bookmark** file. 
 
 * /var/lib/jenkins/workspace/mb-checker/work_dir in host directory ./work_dir to get results.
 
-&emsp;   Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
+Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
 
-&emsp;   You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`
-
-&emsp;   File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
+You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`. File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
 
 &emsp;  `$ export CODES="301 404 406"`
 
-&emsp;   Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
+Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
 
 * **XXX.url**: list of inaccessible URLs
 
@@ -84,7 +82,7 @@ Find here more information [about files](work_dir/FILES.md) in `work_dir`.
 
 ## Sample screen dump
 
-Here scripts are used to remove URLs returning 30., 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (30., 404 & 406 in this example)
+Here scripts are used to remove URLs returning 301, 404 & 406 codes. First `scanjson` launches parallel head requests to bookmarked sites. Next `buildjson` builds the json structure of the bookmark file and generates a replacement of original bookmark file filtered specified return codes (301, 404 & 406 in this example)
 
 ```bash
 $ docker run --rm -v $PWD:/tmp solarix/scanjson
@@ -99,7 +97,7 @@ XXX https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 ...
 (Scanned to ./work_dir/ALL.url)
 
-$ export CODES="30. 404 406"
+$ export CODES="301 404 406"
 
 $ docker run -e CODES="$CODES" --rm -v $PWD:/tmp solarix/buildjson
 (Bookmarks from Bookmarks)
@@ -131,7 +129,7 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 &nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
 
-This sample run will filter out entries returning 30., 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
+This sample run will filter out entries returning 301, 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
 
 ## Sample recording
 
