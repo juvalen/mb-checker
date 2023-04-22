@@ -133,7 +133,7 @@ This sample run will filter out entries returning 301, 404, 406 & XXX. XXX code 
 
 ## Sample recording
 
-This looks the docker image operation
+Docker sample run
 
 https://user-images.githubusercontent.com/7460694/233339959-57de0bcd-203e-43df-844d-0e070cfea17a.mp4
 
