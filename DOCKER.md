@@ -139,7 +139,7 @@ https://user-images.githubusercontent.com/7460694/233339959-57de0bcd-203e-43df-8
 
 ## Caveats
 
-Running Chrome with a registered Google account may resynchronize bookmarks back, so applying this script to purge them won't show results.
+Running Chrome with a registered Google account may resynchronize back bookmarks after replacing original Bookmarks.
 
 ## Status
 
