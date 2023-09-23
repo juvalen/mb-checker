@@ -71,7 +71,7 @@ if nparams:
             print("  Error: return code", iparam, "malformed, should contain three digits or dots\n")
             sys.exit()
 else:
-    print("Code list is empty, return codes will be kust classified to files")
+    print("Code list is empty, return codes will be just classified to files")
     for f in glob.glob(work_dir + "[0-9][0-9][0-9].url"):
         os.remove(f)
 
