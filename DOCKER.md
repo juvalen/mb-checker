@@ -16,23 +16,33 @@ These are two simple **docker** images to weed your good old bookmark file. See 
 |:---------------------------|
 | Jenkins file is configured as to use **jenkinsfile** agent. Change it to match your setup. |
 
-You can push images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
+You can push resulting images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
 
 ## Usage
 
-First create any empty directory and copy into it your Chrome *Bookmark** file. We mount the container directories:
+First create any empty directory and copy into it your Chrome *Bookmark** file. Then we mount the container directories to the host ones:
 
-* /tmp in the current host directory, containing *Bookmarks*
+* /tmp in the current host directory (the one that contains *Bookmarks* file)
 
-* /var/lib/jenkins/workspace/mb-checker/work_dir in host directory ./work_dir to get results.
+* /var/lib/jenkins/workspace/mb-checker/work_dir in host directory ./work_dir (where results will be)
 
-Create volume *mb-checker*, `docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson` will access all URLs in Bookmark file and attach their return code. In next step you will define the http return codes you want to purge.
+Create volume *mb-checker*
+
+`docker run -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/scanjson`
+
+will access all URLs in Bookmark file and attach their return code.
 
 You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`. File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
 
-&emsp;  `$ export CODES="301 404 406"`
+Next step we define the http return codes to purge:
 
-Then run `docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson` to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
+`$ export CODES="301 404 406"`
+
+Then run
+
+`docker run -e CODES="$CODES" -v "$PWD:/tmp" --mount src=mb-checker,dst=/var/lib/jenkins/workspace/mb-checker/work_dir solarix/buildjson`
+
+to filter Bookmark file, so this invocation will remove http return codes `301`, `404` & `406`. **Those codes are not parsed as Regexp**. This sample command will generate these 5 result files in volume **mb_checker** (`/var/lib/docker/volumes/mb-checker/_data/`):
 
 * **XXX.url**: list of inaccessible URLs
 
