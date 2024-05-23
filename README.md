@@ -12,7 +12,7 @@ Due to the large number of agents involved in Internet traffic, results achieved
 
 Tasks are divided between two scripts.
 
-There is one script that crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
+There is one script that runs on-line and crawls all entries included in the bookmarks and queues requests to workers that grab URLs in parallel performing these four steps:
 
 - workers are created an listen to queue
 
@@ -22,7 +22,7 @@ There is one script that crawls all entries included in the bookmarks and queues
 
 - workers write returned code to file
 
-A second script reads that file output plus a list of return codes to discard, and composes a new Bookmarks.out new file, excluding those entries returning those codes.
+A second script may be run off-line that reads the previous script output plus and a list of return codes to discard, and composes a new **Bookmarks.out** new file, excluding those entries returning those codes.
 
 | :warning: WARNING          |
 |:---------------------------|
@@ -44,7 +44,7 @@ To run them in containers, check [DOCKER](DOCKER.md).
 
 Clone this repository into a directory
 
-1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from **bookmarks_bar**, **other** and **synced** top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it may take some time depending on the connection speed and amount of original entries, featuring about 10 entries per second.
+1. First copy your Bookmarks file to the directory and run `./scanJSON.py [-w work_dir] [-i input_file]` to scan all present URLs in input Bookmarks file and produce **ALL.url** which includes a list of URLs and their resulting return code. It scans bokmarks from **bookmarks_bar**, **other** and **synced** top folders. _concurrent_ (32) parameter in que.py script defines the number of paralel threads. As this script crawls all bookmarks, it is run on-line and may take some time depending on the connection speed and amount of original entries, typically about 10 entries per second.
 
  -i input_file: Bookmark file to use (defaults to `./Bookmarks`)
 
@@ -56,7 +56,7 @@ For instance:
 
 &emsp;Out of original boormark file it will generate **ALL.url**, which contains a flat list of original URLs and their http returned status code.
 
-1. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
+1. Run then `./buildJSON.py [-w work_dir] [-i input_file] [-e] <code1> <code2>...` to produce **Bookmarks.out** with Bookmarks format with entries gleaned from **ALL.url**. This script can be run off-line and several times using disctinct return codes. Both **input_file** and **ALL.url** will be used as input.
 
   `./buildJSON -h`
 
@@ -110,7 +110,7 @@ After processing all these files will be added to `work_dir`:
 
 - all https status codes specified will be rejected and entries logged in `<code>.url`.
 
-- valid bookmarks in `Bookmarks.out`, to replace original `Bookmarks` with.
+- valid bookmarks in **Bookmarks.out**, to replace original `Bookmarks` with.
 
 - return code and entry list in `ALL.url`
 
