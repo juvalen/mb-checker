@@ -30,7 +30,7 @@ Then copy it to the worker using `ssh-copy-id`
 
 Install following packages in VBOX
 
-First time VM is started it has to be run:
+First time VM is started you must run:
 
 `sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
 
@@ -42,7 +42,7 @@ Jenkinsfile is kept in repo and is then run when executing a pipeline associated
 
 Add dockerhub credentials (used in Jenkinsfile)
 
-* Manage Jenkins￼&gt; Credentials
+* Manage Jenkins&gt;Credentials
 
 ## Result
 
