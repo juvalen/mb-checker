@@ -42,7 +42,7 @@ Jenkinsfile is kept in repo and is then run when executing a pipeline associated
 
 Add dockerhub credentials (used in Jenkinsfile)
 
-* Manage Jenkins￼> Credentials
+* Manage Jenkins￼&gt; Credentials
 
 ## Result
 
