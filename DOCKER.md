@@ -16,7 +16,7 @@ These are two simple **docker** images to weed your good old bookmark file. See 
 |:---------------------------|
 | Jenkins file is configured as to use **jenkinsfile** agent. Change it to match your setup. |
 
-You can push resulting images to your repository. Read de [Jenkins](JENKINS.md) guide to do it automatically.
+You can push resulting images to your repository. Read [JENKINS](JENKINS.md) guide to do it automatically.
 
 ## Usage
 
@@ -32,7 +32,7 @@ Create volume *mb-checker*
 
 will access all URLs in Bookmark file and attach their return code.
 
-You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`. File **ALL.url** will be used by next image. ow define a system variable with the return codes you want to weed:
+You can get the work_dir with ALL.url in it back in `/var/lib/docker/volumes/mb-checker/_data/ALL.url`. File **ALL.url** will be used by next image. Now we must define a system variable with the return codes you want to weed:
 
 Next step we define the http return codes to purge:
 
