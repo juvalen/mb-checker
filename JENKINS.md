@@ -28,9 +28,7 @@ Create a rsa key in host:
 
 Then copy it to the worker using `ssh-copy-id`
 
-Install following packages in VBOX
-
-First time VM is started you must run:
+First time VM is started you must connect with ssh and run:
 
 `sudo setfacl --modify user:jenkins:rw /var/run/docker.sock`
 
