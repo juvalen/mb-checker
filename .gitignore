@@ -4,7 +4,6 @@ tmp
 *.token
 *.swp
 *.log
-*.html
 *.gz
 *.tar
 *.png

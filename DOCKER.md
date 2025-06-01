@@ -16,7 +16,7 @@ These are two simple **docker** images to weed your good old bookmark file. See 
 |:---------------------------|
 | Jenkins file is configured as to use **jenkinsfile** agent. Change it to match your setup. |
 
-You can push resulting images to your repository. Read [JENKINS](JENKINS.md) guide to do it automatically.
+You can push resulting images to your own repository. Read [JENKINS](JENKINS.md) guide to do it automatically.
 
 ## Usage
 
@@ -52,7 +52,7 @@ to filter Bookmark file, so this invocation will remove http return codes `301`,
 
 * **406.url**: list of 406 URLs
 
-* **Bookmarks.out**: resulting json bookmarks with lame entries removed
+* **Bookmarks.out**: resulting json bookmarks with 301, 404 & 406 plus lame entries removed
 
 **Bookmarks.out** contains the new **Bookmarks** file with entries gleaned from **ALL.url**. This script can be run several times using disctinct return codes. Both **Bookmarks** and **ALL.url** will be used as input.
 
@@ -137,7 +137,7 @@ Above, log entries for a folder and six processed bookmarks are shown where four
 
 &gt;&gt;&gt; **url**
 
-&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 in this sample run), + if preserved, entry id if rejected.
+&nbsp;&nbsp;&nbsp;**return code** (200, 301, 404 & 406 shown in this sample run), + if preserved, entry id if rejected.
 
 This sample run will filter out entries returning 301, 404, 406 & XXX. XXX code is caused by network errors and entry id is shown. These XXX entries are always removed, there is no need to specify it.
 
@@ -191,7 +191,7 @@ Fully operational
 
 Gather other Chrome bookmark file locations for other Linux distributions
 
-Provide it the format of a Chrome extension, like "Bookmarks clean up" one
+Code it as a Chrome extension, like "Bookmarks clean up" one
 
 ## Author
 
