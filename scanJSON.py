@@ -32,19 +32,16 @@ parser.add_argument("-i", "--input", dest='input_file', type=str, help="Input bo
 args = parser.parse_args()
 #
 try:
-    JSONIN = os.path.expanduser(args.input_file)
-except:
-    JSONIN = os.path.expanduser("Bookmarks")
-print("Using bookmarks name " + JSONIN)
+    jsonin = os.path.expanduser(args.input_file)
+except (AttributeError, TypeError):
+    jsonin = os.path.expanduser("Bookmarks")
+print("Using bookmarks name " + jsonin)
 try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
     work_dir = os.path.expanduser("./work_dir/")
 # Read input parameters and create corresponding files
-errorWatch = []
-errorName = []
-errorFile = []
-URLTAGGEDFILE = work_dir + "ALL.url"
+url_tagged_file = work_dir + "ALL.url"
 
 # Create <work_dir> directory if not exists
 try:
@@ -52,21 +49,21 @@ try:
     print("Output directory", work_dir, "created")
 except:
     print("Output directory", work_dir, "preserved")
-que.urlFilter = open(URLTAGGEDFILE, "w")
+que.urlFilter = open(url_tagged_file, "w")
 
 # Read source bookmark file (paramater, Bookmarks, /data/Bookmarks)
 try:
-    print("> Trying input file", JSONIN, "\n")
-    with open(JSONIN, "r", encoding='utf-8') as f:
+    print("> Trying input file", jsonin, "\n")
+    with open(jsonin, "r", encoding='utf-8') as f:
         Bookmarks = json.load(f)
 except FileNotFoundError:
     try:
-        print(">", JSONIN, "not found, looking for /tmp/Bookmarks\n")
-        JSONIN = "/tmp/Bookmarks"
-        with open(JSONIN, "r", encoding='utf-8') as f:
+        print(">", jsonin, "not found, looking for /tmp/Bookmarks\n")
+        jsonin = "/tmp/Bookmarks"
+        with open(jsonin, "r", encoding='utf-8') as f:
             Bookmarks = json.load(f)
     except FileNotFoundError:
-        print("> Input file", JSONIN, "not found either /tmp\n")
+        print("> Input file", jsonin, "not found either /tmp\n")
         sys.exit()
 
 # Recurrent function
@@ -97,17 +94,18 @@ def preorder(tree, depth):
 
 
 # Main #####################################
-print("[0] Bar")
-original = Bookmarks['roots']['bookmark_bar']['children']
-preorder(original, 0)
-print("[0] Other")
-original = Bookmarks['roots']['other']['children']
-preorder(original, 0)
-print("[0] Synced")
-original = Bookmarks['roots']['synced']['children']
-preorder(original, 0)
+if __name__ == "__main__":
+    print("[0] Bar")
+    original = Bookmarks['roots']['bookmark_bar']['children']
+    preorder(original, 0)
+    print("[0] Other")
+    original = Bookmarks['roots']['other']['children']
+    preorder(original, 0)
+    print("[0] Synced")
+    original = Bookmarks['roots']['synced']['children']
+    preorder(original, 0)
 
-# Closes error#.url files
-que.urlFilter.close()
+    # Closes error#.url files
+    que.urlFilter.close()
 
-print("Writing scan to " + work_dir)
+    print("Writing scan to " + work_dir)

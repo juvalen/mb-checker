@@ -9,8 +9,7 @@ import requests
 from threading import Thread
 import queue
 
-DIRNAME = "output/"
-TIMEOUT = 5
+timeout = 5
 concurrent = 4
 
 # Threading functions
@@ -23,7 +22,7 @@ def do_work():
 
 def get_status(ourl):
     try:
-        req = requests.head(ourl, timeout=TIMEOUT, proxies={'http':'','https':''})
+        req = requests.head(ourl, timeout=timeout, proxies={'http':'','https':''})
         status = str(req.status_code)
         return status, ourl
     except:

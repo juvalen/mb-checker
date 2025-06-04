@@ -37,35 +37,36 @@ parser.add_argument("-e", "--empty", dest='DELETEFOLDERS', help="remove empty fo
 parser.add_argument('params', metavar='code', type=str, nargs='*', help='http return code to be filtered, if none only classifies', action='append')
 args = parser.parse_args()
 params = args.params[0]
-nparams = len(params)
+number_of_params = len(params)
 #
 try:
-    JSONIN = os.path.expanduser(args.input_file)
+    jsonin = os.path.expanduser(args.input_file)
 except:
-    JSONIN = os.path.expanduser("Bookmarks")
-print("Using bookmarks name " + JSONIN)
+    jsonin = os.path.expanduser("Bookmarks")
+print(f"Using bookmarks name {jsonin}")
+
 try:
     work_dir = os.path.expanduser(args.work_dir) + "/"
 except:
     work_dir = "./work_dir/"
-print("Reading scan results from", work_dir)
+print(f"Reading scan results from {work_dir}")
 #
 DELETEFOLDERS = args.DELETEFOLDERS
 URLIN = work_dir + "ALL.url"
 URLXXX = work_dir + "XXX.url"
 URLEEE = work_dir + "Empty_folders.lst"
-JSONOUT = work_dir + "Bookmarks.out"
+jsonout = work_dir + "Bookmarks.out"
 
-errorWatch = []
-errorVarName = []
+error_watch = []
+error_var_name = []
 errorFile = []
 
 # parsing http codes in params
-if nparams:
+if number_of_params:
     for iparam in params:
         if re.match("[0-9.]{3}", iparam):
-            errorWatch.append(iparam)
-            errorVarName.append("URL" + iparam)
+            error_watch.append(iparam)
+            error_var_name.append("URL" + iparam)
             errorFile.append(work_dir + iparam + '.url')
         else:
             print("  Error: return code", iparam, "malformed, should contain three digits or dots\n")
@@ -84,17 +85,17 @@ NONE = '\033[0m' # No Color
 
 # Read source bookmark file (paramater, Bookmarks, /data/Bookmarks)
 try:
-    print("> Trying input file", JSONIN, "\n")
-    with open(JSONIN, "r", encoding='utf-8') as f:
+    print("> Trying input file", jsonin, "\n")
+    with open(jsonin, "r", encoding='utf-8') as f:
         Bookmarks = json.load(f)
 except FileNotFoundError:
     try:
-        print(">", JSONIN, "not found, looking for /tmp/Bookmarks\n")
-        JSONIN = "/tmp/Bookmarks"
-        with open(JSONIN, "r", encoding='utf-8') as f:
+        print(">", jsonin, "not found, looking for /tmp/Bookmarks\n")
+        jsonin = "/tmp/Bookmarks"
+        with open(jsonin, "r", encoding='utf-8') as f:
             Bookmarks = json.load(f)
     except FileNotFoundError:
-        print("> Input file", JSONIN, "not found either /tmp\n")
+        print("> Input file", jsonin, "not found either /tmp\n")
         sys.exit()
 f.close()
 
@@ -118,8 +119,8 @@ pairs = dict(zip(entry, code))
 
 # Create output files for network error
 urlXXX = open(URLXXX,"w")
-for i in range(0, nparams):
-    errorVarName[i] = open(errorFile[i], "w")
+for i in range(0, number_of_params):
+    error_var_name[i] = open(errorFile[i], "w")
     print("Created", errorFile[i])
 print()
 # For duplicated bookmark
@@ -138,7 +139,7 @@ def preorder(tree, depth):
             try:
                 branches = len(item["children"])
                 subtree = item["children"]
-                print("[" + str(depth) + "] " + name + " (" + str(branches) + ")")
+                print(f"[{depth}] {name} ({branches})")
             except:
                 branches = 0
             if branches > 0:
@@ -153,21 +154,21 @@ def preorder(tree, depth):
                     url = item["url"]
                     print(">>> " + url)
                     status = pairs[url]
-                    combined = "(" + ")|(".join(errorWatch) + ")"
+                    combined = "(" + ")|(".join(error_watch) + ")"
 # Deleted, so next time won't be found => duplicated
                     if status == "XXX":
                         print(RED + "    " + status + " " + id)
                         urlXXX.write(url + "\n")
                         tree.pop(i); i -= 1; numitems -= 1
                         print(NONE, end="")
-                    if nparams:
+                    if number_of_params:
 # Check status code of that URL in pairs
                         try:
                             if re.match(combined, status): # look if some codes to be filtered match the actual status
-                                for http_code in errorWatch:
+                                for http_code in error_watch:
                                     if re.match(http_code, status):
-                                        pos = errorWatch.index(http_code)
-                                        f = errorVarName[pos]
+                                        pos = error_watch.index(http_code)
+                                        f = error_var_name[pos]
                                         print(RED + "    " + status + " " + id)
                                         f.write(url + "\n")
                                         tree.pop(i); i -= 1; numitems -= 1
@@ -243,5 +244,5 @@ filtered = {
 }
 
 # Write json list *filtered* to disk
-with open(JSONOUT, 'w') as fout:
+with open(jsonout, 'w') as fout:
     json.dump(filtered , fout, sort_keys=True, ensure_ascii=False, indent=4, separators=(',', ': '))

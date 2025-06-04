@@ -3,6 +3,7 @@ Bookmarks*
 tmp
 *.token
 *.swp
+*.html
 *.log
 *.gz
 *.tar
