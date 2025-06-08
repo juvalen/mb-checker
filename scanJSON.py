@@ -2,7 +2,7 @@
 # Name: scanJSON.py
 # Version: R4.1
 # Author: jvalentinpastrana at gmail
-# Date: Mar 2023
+# Date: June 2025
 #
 # Usage: ./scanJSON.py [-w work_dir] [-i input_file]
 #
@@ -19,11 +19,11 @@
 #
 # Output: <work_dir>/ALL.url
 #
+import argparse
 import json
 import os
-import argparse
-import sys
 import que
+import sys
 
 # Read input parameters and create corresponding files
 parser = argparse.ArgumentParser(prog='./scanJSON.py', description="Reaches each Bookmark entry and stores return code to <work_dir>/ALL.url")

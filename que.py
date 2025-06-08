@@ -2,12 +2,12 @@
 # Name: que.py
 # Version: R3.1
 # Author: jvalentinpastrana at gmail
-# Date: Jan 2021
+# Date: June 2025
 # Function: Includes threading with queue
 #
+import queue
 import requests
 from threading import Thread
-import queue
 
 timeout = 5
 concurrent = 4
