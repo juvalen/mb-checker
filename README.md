@@ -48,7 +48,7 @@ Clone this repository into a directory
 
  -i input_file: Bookmark file to use (defaults to `./Bookmarks`)
 
- -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
+ -w work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
 For instance:
 
@@ -62,7 +62,7 @@ For instance:
 
  -i input_file: Original bookmark file to use (defaults to `./Bookmarks`)
 
- -o work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
+ -w work_dir: Folder in which **ALL.url** file will be stored (defaults to `./work_dir/`)
 
  -e: remove empty folders flag
 
